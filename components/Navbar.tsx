@@ -48,6 +48,7 @@ function Navbar() {
             color: "black",
             width: 24,
             height: 24,
+            size: "body-large",
             padding: "px-4 py-2",
           }}
         />
@@ -59,9 +60,9 @@ function Navbar() {
             rightIcon: "",
             type: "outlined",
             disabled: false,
-            textColor: "primary-shades-80",
-            hoverColor: "btn-primary-bg-hover",
-            pressedColor: "btn-primary-bg-pressed",
+            size:"body-large",
+            color:"black",
+            padding:"p-2",
             width: 24,
             height: 24,
           }}
