@@ -28,7 +28,8 @@ function ApplyBanner() {
               color: "red",
               width: 20,
               height: 20,
-              padding:"px-8 py-4",
+              size: "body-large",
+              padding: "px-8 py-4",
             }}
           />
         </div>
