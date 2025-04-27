@@ -6,7 +6,7 @@ import Button from "./Button";
 
 function Navbar() {
   return (
-    <div className="flex items-center justify-between py-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-between py-3 grid-system-level0">
       {/* left-side -> logo and nav */}
       <div className="flex items-center gap-10">
         {/* logo */}
@@ -20,7 +20,7 @@ function Navbar() {
         </Link>
 
         {/* nav */}
-        <ul className="flex items-center gap-6 text-on_surface-light">
+        <ul className="flex items-center gap-9 text-on_surface-light">
           <Link href="/programs">
             <li>Progrmas</li>
           </Link>

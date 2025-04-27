@@ -61,16 +61,16 @@
 @layer utilities {
   /* grid system */
   .grid-system-level0 {
-    @apply mx-16 gap-6;
+    @apply max-w-[90rem] mx-auto px-16 gap-6;
   }
   .grid-system-level1 {
-    @apply mx-32 gap-6;
+    @apply max-w-[90rem] mx-auto px-32 gap-6;
   }
   .grid-system-level2 {
-    @apply mx-64 gap-6;
+    @apply max-w-[90rem] mx-auto px-64 gap-6;
   }
   .grid-system-level3 {
-    @apply mx-96 gap-6;
+    @apply max-w-[90rem] mx-auto px-96 gap-6;
   }
 
   /* text style */
@@ -301,7 +301,6 @@ body {
 
 .hero {
   position: relative;
-  margin-top: 5rem;
   text-align: center;
   background-color: var(--color-primary-tints-30);
 }
@@ -320,7 +319,6 @@ body {
 
 .hero2 {
   position: relative;
-  margin-top: 5rem;
   text-align: center;
   background-color: var(--primary_shades_90);
 }

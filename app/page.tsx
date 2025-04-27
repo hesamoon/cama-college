@@ -9,22 +9,24 @@ import CredentialInquiry from "@/components/CredentialInquiry";
 
 export default function Home() {
   return (
-    <div>
+    <div className="space-y-14">
       {/* header */}
-      <section className="space-y-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="display-large max-w-xl">
-          With CAMA college, shape your future!
-        </h1>
-        <p className="max-w-3xl body-large">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
-        </p>
+      <section className="mt-14 space-y-12 grid-system-level0">
+        <div className="space-y-6">
+          <h1 className="display-large max-w-xl">
+            With CAMA college, shape your future!
+          </h1>
+          <p className="max-w-3xl body-large">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
+          </p>
+        </div>
 
-        <section className="space-y-2 mt-10">
+        <section className="space-y-3 mt-10">
           {/* searchbox */}
           <Searchbox />
 
-          <div className="flex items-center gap-2 ml-6">
+          <div className="flex items-center gap-1 ml-7">
             <Image src="/star.svg" alt="star" width={16} height={16} />
             <span className="label-medium-db text-on_surface-light">
               12034 students enrolled
@@ -33,11 +35,11 @@ export default function Home() {
         </section>
       </section>
 
-      {/* new courses */}
-      <section className="mt-20 space-y-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-2">
+      {/* new programs */}
+      <section className="space-y-8 grid-system-level0">
+        <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="title-small">New Courses</h2>
+            <h2 className="title-small">New Programs</h2>
             <Button
               props={{
                 value: "View all",
@@ -53,50 +55,56 @@ export default function Home() {
               }}
             />
           </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {["c1", "c2", "c3", "c4"].map((item) => (
-              <div key={item}>
+              <div key={item} className="space-y-2">
                 <Image
                   src={`/${item}.png`}
-                  alt={`Course ${item}`}
+                  alt={`Program ${item}`}
                   className="rounded-sm aspect-16-9 object-cover"
                   width={310}
                   height={174}
                 />
-                <div className="space-y-1">
-                  <h3 className="body-large">Name of Course</h3>
-                  <div className="label-medium text-shades-light-50 flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <Image
-                        src="/chart.svg"
-                        alt="chart"
-                        width={12}
-                        height={12}
-                      />
-                      <span>Beginner</span>
+
+                <div className="space-y-3">
+                  <h3 className="body-large">Name of Program</h3>
+
+                  <div className="space-y-1.5">
+                    <div className="label-medium text-shades-light-50 flex items-center gap-3">
+                      <div className="flex items-center gap-1">
+                        <Image
+                          src="/chart.svg"
+                          alt="chart"
+                          width={12}
+                          height={12}
+                        />
+                        <span>Beginner</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Image
+                          src="/monitor-mobbile.svg"
+                          alt="monitor-mobbile"
+                          width={12}
+                          height={12}
+                        />
+                        <span>Online</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Image
+                          src="/timer.svg"
+                          alt="timer"
+                          width={12}
+                          height={12}
+                        />
+                        <span>8 hours</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Image
-                        src="/monitor-mobbile.svg"
-                        alt="monitor-mobbile"
-                        width={12}
-                        height={12}
-                      />
-                      <span>Online</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Image
-                        src="/timer.svg"
-                        alt="timer"
-                        width={12}
-                        height={12}
-                      />
-                      <span>8 hours</span>
-                    </div>
+
+                    <p className="label-large-db text-on_surface-light">
+                      $850 (CAD)
+                    </p>
                   </div>
-                  <p className="label-large-db text-primary-shades-90">
-                    $850 (CAD)
-                  </p>
                 </div>
               </div>
             ))}
@@ -130,7 +138,7 @@ export default function Home() {
       </section>
 
       <section className="hero">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6 grid-system-level0">
           <div className="header-small">
             <span className="display-large block">326</span> Students
           </div>
@@ -148,9 +156,10 @@ export default function Home() {
       </section>
 
       {/* new events */}
-      <section className="mt-20 space-y-2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="space-y-4 grid-system-level0">
         <div className="flex items-center justify-between">
           <h2 className="title-medium">New Events</h2>
+
           <Button
             props={{
               value: "View all",
@@ -162,13 +171,14 @@ export default function Home() {
               width: 20,
               height: 20,
               size: "body-medium",
-              padding: "px-4 py-1"
+              padding: "px-4 py-1",
             }}
           />
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {["e1", "e2", "e3", "e4"].map((item) => (
-            <div key={item}>
+            <div key={item} className="space-y-2">
               <Image
                 src={`/${item}.png`}
                 alt={`Course ${item}`}
@@ -176,8 +186,10 @@ export default function Home() {
                 width={310}
                 height={174}
               />
-              <div className="space-y-1">
+
+              <div className="space-y-3">
                 <h3 className="body-large">Name of Event</h3>
+
                 <div className="flex items-center gap-4">
                   <span className="label-large-db text-background-primary-light">
                     SEP 17
@@ -194,14 +206,15 @@ export default function Home() {
       </section>
 
       {/* admissions */}
-      <section className="mt-20 flex items-center justify-center max-w-7xl mx-auto px-8 sm:px-12 lg:px-28">
+      <section className="flex items-center justify-center grid-system-level1">
         <ApplyBanner />
       </section>
 
       {/* news and posts */}
-      <section className="mt-20 space-y-2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="space-y-4 grid-system-level0">
         <div className="flex items-center justify-between">
           <h2 className="title-medium">News and Posts</h2>
+
           <Button
             props={{
               value: "View all",
@@ -213,21 +226,23 @@ export default function Home() {
               width: 20,
               height: 20,
               size: "body-medium",
-              padding: "px-4 py-1"
+              padding: "px-4 py-1",
             }}
           />
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {["np1", "np2", "np3", "np4"].map((item) => (
-            <div key={item}>
-              <Image
-                src={`/${item}.png`}
-                alt={`Course ${item}`}
-                className="rounded-sm aspect-16-9 object-cover"
-                width={310}
-                height={174}
-              />
-              <div className="mt-2 space-y-2">
+            <div key={item} className="space-y-3">
+              <div className="space-y-2">
+                <Image
+                  src={`/${item}.png`}
+                  alt={`Course ${item}`}
+                  className="rounded-sm aspect-16-9 object-cover"
+                  width={310}
+                  height={174}
+                />
+
                 <div>
                   <div className="flex items-center gap-1">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#206F12]" />
@@ -235,21 +250,23 @@ export default function Home() {
                       NEWS
                     </span>
                   </div>
+
                   <h3 className="body-large text-on_surface-light">
                     Name of Event
                   </h3>
                 </div>
-                <p className="label-small text-txt-on-surface-terriary-light">
-                  Aug 06, 2024
-                </p>
               </div>
+
+              <p className="label-small text-txt-on-surface-terriary-light">
+                Aug 06, 2024
+              </p>
             </div>
           ))}
         </div>
       </section>
 
       {/* instructor */}
-      <section className="grid items-center grid-cols-2 gap-8 mt-20 space-y-2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="grid items-center grid-cols-2 gap-8 space-y-2 grid-system-level0">
         <div className="col-span-1 space-y-4">
           <h1 className="header-large text-on_surface-light">
             Be an instructor
@@ -272,7 +289,7 @@ export default function Home() {
               width: 24,
               height: 24,
               size: "body-large",
-              padding: "px-8 py-2"
+              padding: "px-8 py-2",
             }}
           />
         </div>
@@ -300,7 +317,7 @@ export default function Home() {
       </section>
 
       <section className="hero2">
-        <div className="flex items-center justify-between text-white font-bold text-xl py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between text-white font-bold text-xl py-24 grid-system-level0">
           <div className="flex flex-col items-start gap-4 z-[999]">
             <h3 className="title-medium text-primary-shades-90">
               Credential inquiry
