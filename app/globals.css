@@ -1,5 +1,53 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "DylanCopperplate";
+  src: url("/fonts/dylancopperplate_normal_macroman/Dylan-CopperplateNormal-webfont.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DylanCopperplate";
+  src: url("/fonts/dylancopperplate_light_macroman/Dylan-CopperplateLight-webfont.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DylanCopperplate";
+  src: url("/fonts/dylancopperplate_medium_macroman/Dylan-CopperplateMedium-webfont.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DylanCopperplate";
+  src: url("/fonts/dylancopperplate_bold_macroman/Dylan-CopperplateBold-webfont.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DylanCopperplate";
+  src: url("/fonts/dylancopperplate_xbold_macroman/Dylan-CopperplateXBOLD-webfont.woff2")
+    format("woff2");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DylanCopperplate";
+  src: url("/fonts/dylancopperplate_xlight_macroman/Dylan-CopperplateXLight-webfont.woff2")
+    format("woff2");
+  font-weight: 200;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -105,13 +153,13 @@
   }
 
   .body-large {
-    @apply text-[1.125rem]/normal font-light;
-  }
-  .body-medium {
     @apply text-[1rem]/normal font-light;
   }
-  .body-small {
+  .body-medium {
     @apply text-[0.875rem]/normal font-light;
+  }
+  .body-small {
+    @apply text-[0.750rem]/normal font-light;
   }
 
   .label-large-db {
@@ -297,6 +345,7 @@
 }
 
 body {
+  font-family: "DylanCopperplate";
 }
 
 .hero {
@@ -326,6 +375,7 @@ body {
 .hero2::before {
   content: "";
   background-image: url("/bg-ptrn2.png");
+  background-size: 48px;
   position: absolute;
   top: 0px;
   right: 0px;

@@ -10,7 +10,7 @@ function ApplyBanner() {
         <h2 className="header-large text-on_surface-light">
           Apply for admissions
         </h2>
-        <p className="mt-2 text-txt-on-surface-secondary-light body-large">
+        <p className="mt-2 text-txt-on-surface-secondary-light body-large text-justify">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
           purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris

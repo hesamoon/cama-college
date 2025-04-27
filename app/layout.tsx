@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description: "Shape your future",
 };
 
+
+
+
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -272,7 +272,7 @@ export default function Home() {
             <h1 className="header-large text-on_surface-light">
               Be an instructor
             </h1>
-            <p className="body-large text-txt-on-surface-secondary-light">
+            <p className="body-large text-txt-on-surface-secondary-light text-justify">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
@@ -319,7 +319,7 @@ export default function Home() {
       </section>
 
       <section className="hero2">
-        <div className="flex items-center justify-between text-white font-bold text-xl py-24 grid-system-level0">
+        <div className="flex items-center justify-between text-white font-bold text-xl py-9 grid-system-level0">
           <div className="flex flex-col items-start gap-3 z-[999]">
             <h3 className="title-medium text-primary-shades-90">
               Credential inquiry
