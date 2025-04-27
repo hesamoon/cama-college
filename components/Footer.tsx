@@ -20,10 +20,10 @@ function Footer() {
             </Link>
 
             {/* about section */}
-            <div className="space-y-5">
+            <div className="space-y-6">
               <h4 className="title-medium text-on_surface-light">About</h4>
 
-              <ul className="body-large text-txt-on-surface-secondary-light space-y-3">
+              <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
                 <li>About Us</li>
                 <li>Contact</li>
                 <li>Tagline</li>
@@ -34,12 +34,12 @@ function Footer() {
             </div>
 
             {/* stay informed section */}
-            <div className="space-y-5">
+            <div className="space-y-6">
               <h4 className="title-medium text-on_surface-light">
                 Stay Informed
               </h4>
 
-              <ul className="body-large text-txt-on-surface-secondary-light space-y-3">
+              <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
                 <li>News & Blog</li>
                 <li>Courses</li>
                 <li>Events</li>
@@ -48,10 +48,10 @@ function Footer() {
             </div>
 
             {/* hot links section */}
-            <div className="space-y-5">
+            <div className="space-y-6">
               <h4 className="title-medium text-on_surface-light">Hot Links</h4>
 
-              <ul className="body-large text-txt-on-surface-secondary-light space-y-3">
+              <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
                 <li>FAQ</li>
                 <li>Careers</li>
                 <li>Partners</li>

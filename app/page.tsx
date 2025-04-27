@@ -267,16 +267,18 @@ export default function Home() {
 
       {/* instructor */}
       <section className="grid items-center grid-cols-2 gap-8 space-y-2 grid-system-level0">
-        <div className="col-span-1 space-y-4">
-          <h1 className="header-large text-on_surface-light">
-            Be an instructor
-          </h1>
-          <p className="body-large text-txt-on-surface-secondary-light">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
-            purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
-            rhoncus aenean vel elit scelerisque. In egestas erat
-          </p>
+        <div className="col-span-1 space-y-6">
+          <div className="space-y-4">
+            <h1 className="header-large text-on_surface-light">
+              Be an instructor
+            </h1>
+            <p className="body-large text-txt-on-surface-secondary-light">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+              congue mauris rhoncus aenean vel elit scelerisque. In egestas erat
+            </p>
+          </div>
 
           <Button
             props={{
@@ -318,7 +320,7 @@ export default function Home() {
 
       <section className="hero2">
         <div className="flex items-center justify-between text-white font-bold text-xl py-24 grid-system-level0">
-          <div className="flex flex-col items-start gap-4 z-[999]">
+          <div className="flex flex-col items-start gap-3 z-[999]">
             <h3 className="title-medium text-primary-shades-90">
               Credential inquiry
             </h3>

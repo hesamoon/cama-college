@@ -9,7 +9,7 @@ function CredentialInquiry() {
   const [credentialID, setCredentialID] = useState("");
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-3">
       <input
         className="outline-none border border-outline1 rounded-sm p-3 body-large w-96"
         value={credentialID}
