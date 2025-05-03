@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 // components
@@ -12,11 +14,29 @@ import CredentialInquiry from "@/components/CredentialInquiry";
 
 // data
 import { events, posts, programs } from "../constants/data.js";
+import { useState } from "react";
 
 export default function Home() {
-  const logged = true;
+  const [logged, setLogged] = useState(true);
   return (
     <div className="space-y-14">
+      <div className="absolute top-6 right-75">
+        <Button
+          props={{
+            value: logged ? "logout" : "login",
+            clickHandler: () => setLogged((prev) => !prev),
+            leftIcon: "",
+            rightIcon: "",
+            color: "",
+            type: "outlined",
+            disabled: false,
+            height: 20,
+            width: 20,
+            padding: "py-1 px-6",
+            size: "body-large",
+          }}
+        />
+      </div>
       {/* header */}
       {logged ? (
         <section className="mt-14 space-y-12 ">
