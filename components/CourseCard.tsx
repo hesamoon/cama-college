@@ -1,7 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function CourseCard({ data, type }: { type: string }) {
+type CourseCardProps = {
+  type: string;
+  data: {
+    id: number;
+    coverImg: string;
+    name: string;
+    level: string;
+    type: string;
+    duration: number;
+    price: number;
+    status: string;
+    publishDate: string;
+    category: string;
+  };
+};
+
+function CourseCard({ type, data }: CourseCardProps) {
   return type === "post" ? (
     <div className="space-y-3">
       <div className="space-y-2">
