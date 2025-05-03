@@ -89,6 +89,9 @@
   --shades_light_70: #d7d5d6;
   --shades_light_80: #eaeaea;
   --shades_light_90: #f3f3f3;
+
+  --green: #34c759;
+
   --btn_primary_bg_enable: #ffcb05;
   --btn_primary_bg_enable_4percentage: #ffcb050a;
   --btn_primary_bg_hover: #ffcb0514;
@@ -110,6 +113,9 @@
   /* grid system */
   .grid-system-level0 {
     @apply max-w-[90rem] mx-auto px-16 gap-6;
+  }
+  .grid-system-level00 {
+    @apply max-w-[90rem] mx-auto pr-16 gap-6;
   }
   .grid-system-level1 {
     @apply max-w-[90rem] mx-auto px-32 gap-6;
@@ -153,13 +159,13 @@
   }
 
   .body-large {
-    @apply text-[1rem]/normal font-light;
+    @apply text-[1rem] leading-[1.8] font-light;
   }
   .body-medium {
-    @apply text-[0.875rem]/normal font-light;
+    @apply text-[0.875rem] leading-[1.8] font-light;
   }
   .body-small {
-    @apply text-[0.750rem]/normal font-light;
+    @apply text-[0.750rem] leading-[1.8] font-light;
   }
 
   .label-large-db {
@@ -334,9 +340,14 @@
   --color-on-surface-secondary: var(--on-surface-secondary);
   --color-txt-on-surface-secondary-light: var(--shades_light_10);
   --color-txt-on-surface-terriary-light: var(--shades_light_50);
+  --color-txt-on-primary-dark: var(--shades_light_90);
+  --color-txt-on-surface-secondary: var(--text-on-surface-secondary);
+
+  --color-green: var(--green);
 
   --color-outline-level0: var(--shades_light_80);
   --color-outline1: var(--outline1);
+  --color-outline-level1: var(--shades_light_70);
   --color-outline-level2: var(--shades_light_60);
 
   /* fonts */
@@ -357,7 +368,6 @@ body {
 .hero::before {
   content: "";
   background-image: url("/bg-ptrn1.png");
-  /* background-size: cover; */
   position: absolute;
   top: 0px;
   right: 0px;

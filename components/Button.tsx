@@ -13,6 +13,7 @@ type Props = {
   height: number;
   size: string;
   padding: string;
+  clickHandler: () => void;
 };
 
 function Button({
@@ -27,13 +28,14 @@ function Button({
     height = 24,
     size = "body-large",
     padding = "p-2",
+    clickHandler = () => {},
   },
 }: {
   props: Props;
 }) {
   return (
     <button
-      className={`flex items-center gap-1 rounded-full transition-all duration-300 hover:bg-primary-opacity-40 focus:bg-primary-opacity-12  ${padding} ${size} ${
+      className={`flex items-center justify-center gap-1 rounded-full transition-all duration-300 hover:bg-primary-opacity-40 focus:bg-primary-opacity-12 ${padding} ${size} ${
         disabled ? "opacity-40 hover:bg-transparent" : "cursor-pointer"
       } text-primary-shades-80 ${
         type === "filled"
@@ -51,7 +53,7 @@ function Button({
           : null
       }`}
       disabled={disabled}
-      onClick={() => console.log("clicked")}
+      onClick={clickHandler}
     >
       {leftIcon ? (
         <Image

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
 // components
+import Button from "./Button";
 
 function Searchbox() {
   const [search, setSearch] = useState("");
@@ -27,9 +27,20 @@ function Searchbox() {
           </select>
         </div>
 
-        <div className="bg-primary-shades-10 p-2 rounded-full">
-          <Image src="/search-normal.svg" alt="search" height={20} width={20} />
-        </div>
+        <Button
+          props={{
+            value: "",
+            type: "filled",
+            color: "red",
+            disabled: false,
+            leftIcon: "search-normal",
+            rightIcon: "",
+            padding: "p-2",
+            size: "body-large",
+            height: 20,
+            width: 20,
+          }}
+        />
       </div>
     </div>
   );

@@ -4,110 +4,70 @@ import Image from "next/image";
 import Chips from "@/components/Chips";
 import Button from "@/components/Button";
 import Searchbox from "@/components/Searchbox";
+import CourseCard from "@/components/CourseCard";
 import ApplyBanner from "@/components/ApplyBanner";
+import SectionTitle from "@/components/SectionTitle";
+import CourseSlider from "@/components/CourseSlider";
 import CredentialInquiry from "@/components/CredentialInquiry";
 
+// data
+import { events, posts, programs } from "../constants/data.js";
+
 export default function Home() {
+  const logged = true;
   return (
     <div className="space-y-14">
       {/* header */}
-      <section className="mt-14 space-y-12 grid-system-level0">
-        <div className="space-y-6">
-          <h1 className="display-large max-w-xl">
-            With CAMA college, shape your future!
-          </h1>
-          <p className="max-w-3xl body-large">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
-          </p>
-        </div>
-
-        <section className="space-y-3 mt-10">
+      {logged ? (
+        <section className="mt-14 space-y-12 ">
           {/* searchbox */}
-          <Searchbox />
+          <div className="flex items-center justify-center grid-system-level0">
+            <Searchbox />
+          </div>
 
-          <div className="flex items-center gap-1 ml-7">
-            <Image src="/star.svg" alt="star" width={16} height={16} />
-            <span className="label-medium-db text-on_surface-light">
-              12034 students enrolled
-            </span>
+          {/* banner */}
+          <div className="">
+            <CourseSlider />
           </div>
         </section>
-      </section>
+      ) : (
+        <section className="mt-14 space-y-12 grid-system-level0">
+          <div className="space-y-6">
+            <h1 className="display-large max-w-xl">
+              With CAMA college, shape your future!
+            </h1>
+            <p className="max-w-3xl body-large">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Egestas
+            </p>
+          </div>
+
+          <section className="space-y-3 mt-10">
+            {/* searchbox */}
+            <Searchbox />
+
+            <div className="flex items-center gap-1 ml-7">
+              <Image src="/star.svg" alt="star" width={16} height={16} />
+              <span className="label-medium-db text-on_surface-light">
+                12034 students enrolled
+              </span>
+            </div>
+          </section>
+        </section>
+      )}
 
       {/* new programs */}
       <section className="space-y-8 grid-system-level0">
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="title-small">New Programs</h2>
-            <Button
-              props={{
-                value: "View all",
-                disabled: false,
-                leftIcon: "",
-                rightIcon: "arrow-right",
-                type: "text",
-                color: "red",
-                width: 20,
-                height: 20,
-                size: "body-medium",
-                padding: "px-4 py-1",
-              }}
-            />
-          </div>
+          <SectionTitle title="New Programs" path="/programs" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {["c1", "c2", "c3", "c4"].map((item) => (
-              <div key={item} className="space-y-2">
-                <Image
-                  src={`/${item}.png`}
-                  alt={`Program ${item}`}
-                  className="rounded-sm aspect-16-9 object-cover"
-                  width={310}
-                  height={174}
-                />
-
-                <div className="space-y-3">
-                  <h3 className="body-large">Name of Program</h3>
-
-                  <div className="space-y-1.5">
-                    <div className="label-medium text-shades-light-50 flex items-center gap-3">
-                      <div className="flex items-center gap-1">
-                        <Image
-                          src="/chart.svg"
-                          alt="chart"
-                          width={12}
-                          height={12}
-                        />
-                        <span>Beginner</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Image
-                          src="/monitor-mobbile.svg"
-                          alt="monitor-mobbile"
-                          width={12}
-                          height={12}
-                        />
-                        <span>Online</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Image
-                          src="/timer.svg"
-                          alt="timer"
-                          width={12}
-                          height={12}
-                        />
-                        <span>8 hours</span>
-                      </div>
-                    </div>
-
-                    <p className="label-large-db text-on_surface-light">
-                      $850 (CAD)
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
+            {programs
+              .filter((program) => program.id <= 4)
+              .map((program) => (
+                <CourseCard key={program.id} data={program} type="programs" />
+              ))}
           </div>
         </div>
 
@@ -157,50 +117,11 @@ export default function Home() {
 
       {/* new events */}
       <section className="space-y-4 grid-system-level0">
-        <div className="flex items-center justify-between">
-          <h2 className="title-medium">New Events</h2>
-
-          <Button
-            props={{
-              value: "View all",
-              color: "red",
-              disabled: false,
-              leftIcon: "",
-              rightIcon: "arrow-right",
-              type: "text",
-              width: 20,
-              height: 20,
-              size: "body-medium",
-              padding: "px-4 py-1",
-            }}
-          />
-        </div>
+        <SectionTitle title="New Events" path="/events" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {["e1", "e2", "e3", "e4"].map((item) => (
-            <div key={item} className="space-y-2">
-              <Image
-                src={`/${item}.png`}
-                alt={`Course ${item}`}
-                className="rounded-sm aspect-16-9 object-cover"
-                width={310}
-                height={174}
-              />
-
-              <div className="space-y-3">
-                <h3 className="body-large">Name of Event</h3>
-
-                <div className="flex items-center gap-4">
-                  <span className="label-large-db text-background-primary-light">
-                    SEP 17
-                  </span>
-                  <div className="border-[0.8px] border-dashed border-outline-level0 flex-1" />
-                  <span className="label-medium-db text-txt-on-surface-secondary-light">
-                    10:00 - 12:00
-                  </span>
-                </div>
-              </div>
-            </div>
+          {events.map((event) => (
+            <CourseCard key={event.id} data={event} type="events" />
           ))}
         </div>
       </section>
@@ -232,35 +153,8 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {["np1", "np2", "np3", "np4"].map((item) => (
-            <div key={item} className="space-y-3">
-              <div className="space-y-2">
-                <Image
-                  src={`/${item}.png`}
-                  alt={`Course ${item}`}
-                  className="rounded-sm aspect-16-9 object-cover"
-                  width={310}
-                  height={174}
-                />
-
-                <div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#206F12]" />
-                    <span className="label-small text-txt-on-surface-secondary-light">
-                      NEWS
-                    </span>
-                  </div>
-
-                  <h3 className="body-large text-on_surface-light">
-                    Name of Event
-                  </h3>
-                </div>
-              </div>
-
-              <p className="label-small text-txt-on-surface-terriary-light">
-                Aug 06, 2024
-              </p>
-            </div>
+          {posts.map((post) => (
+            <CourseCard key={post.id} data={post} type="post" />
           ))}
         </div>
       </section>

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
+// global styles
 import "./globals.css";
 
 // components
@@ -10,9 +13,6 @@ export const metadata: Metadata = {
   description: "Shape your future",
 };
 
-
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-background">
-        <Navbar />
-        {children}
-        <Footer />
+        <NuqsAdapter>
+          <Navbar />
+          {children}
+          <Footer />
+        </NuqsAdapter>
       </body>
     </html>
   );

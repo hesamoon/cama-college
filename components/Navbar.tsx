@@ -3,10 +3,11 @@ import Link from "next/link";
 
 // components
 import Button from "./Button";
+import SearchBoxContainer from "./SearchBoxContainer";
 
 function Navbar() {
   return (
-    <div className="flex items-center justify-between py-3 grid-system-level0">
+    <div className="flex items-center justify-between py-3 max-w-[90rem] mx-auto px-16">
       {/* left-side -> logo and nav */}
       <div className="flex items-center gap-10">
         {/* logo */}
@@ -22,7 +23,7 @@ function Navbar() {
         {/* nav */}
         <ul className="flex items-center gap-9 text-on_surface-light">
           <Link href="/programs">
-            <li>Progrmas</li>
+            <li>Programs</li>
           </Link>
           <Link href="/events">
             <li>Events</li>
@@ -35,6 +36,8 @@ function Navbar() {
           </Link>
         </ul>
       </div>
+
+      <SearchBoxContainer />
 
       {/* right-side -> login and shopping cart buttons */}
       <div className="flex items-center gap-2">
@@ -60,9 +63,9 @@ function Navbar() {
             rightIcon: "",
             type: "outlined",
             disabled: false,
-            size:"body-large",
-            color:"black",
-            padding:"p-2",
+            size: "body-large",
+            color: "black",
+            padding: "p-2",
             width: 24,
             height: 24,
           }}
