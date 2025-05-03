@@ -1,4 +1,4 @@
-function Pagination({ size, currPage, setCurrPage }) {
+function Pagination() {
   return <div>Pagination</div>;
 }
 
