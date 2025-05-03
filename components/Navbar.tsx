@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -37,7 +38,9 @@ function Navbar() {
         </ul>
       </div>
 
-      <SearchBoxContainer />
+      <Suspense fallback={<p>Loading search info...</p>}>
+        <SearchBoxContainer />
+      </Suspense>
 
       {/* right-side -> login and shopping cart buttons */}
       <div className="flex items-center gap-2">

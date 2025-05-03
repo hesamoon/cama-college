@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body className="bg-background">
         <NuqsAdapter>
           <Navbar />
-          {children}
+          <Suspense fallback={<p>Loading search info...</p>}>
+            {children}
+          </Suspense>
           <Footer />
         </NuqsAdapter>
       </body>
