@@ -8,12 +8,12 @@ type Props = {
   rightIcon: string;
   type: string;
   disabled: boolean;
-  color: string;
-  width: number;
-  height: number;
-  size: string;
-  padding: string;
-  clickHandler: () => void;
+  color?: string;
+  width?: number;
+  height?: number;
+  size?: string;
+  padding?: string;
+  clickHandler?: () => void;
 };
 
 function Button({
