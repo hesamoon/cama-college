@@ -19,6 +19,8 @@ type Program = {
   duration: number;
   price: number;
   status: string;
+  publishDate: string;
+  category: string;
 };
 
 function Page() {
