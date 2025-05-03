@@ -42,7 +42,11 @@ function CourseCard({ type, data }: CourseCardProps) {
       </div>
 
       <p className="label-small text-txt-on-surface-terriary-light">
-        {data.date}
+        {new Date(data.publishDate).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+        })}
       </p>
     </div>
   ) : (
@@ -96,11 +100,16 @@ function CourseCard({ type, data }: CourseCardProps) {
         ) : type === "events" ? (
           <div className="flex items-center gap-4">
             <span className="label-large-db text-background-primary-light">
-              {data.date}
+              {new Date(data.publishDate)
+                .toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "2-digit",
+                })
+                .toUpperCase()}
             </span>
             <div className="border-[0.8px] border-dashed border-outline-level0 flex-1" />
             <span className="label-medium-db text-txt-on-surface-secondary-light">
-              {data.time}
+              10:00 - 12:00
             </span>
           </div>
         ) : null}
