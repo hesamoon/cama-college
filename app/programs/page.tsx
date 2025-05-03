@@ -47,8 +47,10 @@ function Page() {
       programs
         .sort((a, b) =>
           sortVal === "Newest"
-            ? new Date(b.publishDate) - new Date(a.publishDate)
-            : new Date(a.publishDate) - new Date(b.publishDate)
+            ? new Date(b.publishDate ?? "").getTime() -
+              new Date(a.publishDate ?? "").getTime()
+            : new Date(a.publishDate ?? "").getTime() -
+              new Date(b.publishDate ?? "").getTime()
         )
         .sort((a, b) => a.status.localeCompare(b.status))
         .filter(
