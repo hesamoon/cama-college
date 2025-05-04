@@ -1,20 +1,29 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+
+// components
+import Button from "@/components/Button";
+import ContentSection from "@/components/ContentSection";
+import CommentsSection from "@/components/CommentsSection";
+import DescriptionSection from "@/components/DescriptionSection";
 
 // fake data
 import { programs } from "@/constants/data";
-import Image from "next/image";
-import Button from "@/components/Button";
+import CourseCard from "@/components/CourseCard";
 
 function Page() {
   const pathname = usePathname();
   const programDetails = programs.find(
     (p) => p.name === decodeURIComponent(pathname.split("/")[2])
   );
+  const tabs = ["Description", "Content", "Comments", "Related Programs"];
+  const [activeTab, setActiveTab] = useState("Description");
 
   return (
-    <div className="grid-system-level1">
+    <div className="grid-system-level1 space-y-6">
       {/* top section */}
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2">
@@ -187,7 +196,45 @@ function Page() {
       {/* more details of program */}
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2">
-          
+          {/* tabs */}
+          <div className="flex gap-4 border-b border-outline-level0">
+            {tabs.map((tab) => (
+              <div key={tab} className="relative">
+                <button
+                  className={`py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-100 ${
+                    activeTab === tab
+                      ? "text-background-primary-light"
+                      : "text-txt-on-surface-terriary-light"
+                  }`}
+                  onClick={() =>
+                    tab === "Comments" || tab === "Related Programs"
+                      ? console.log("later")
+                      : setActiveTab(tab)
+                  }
+                >
+                  {tab}
+                </button>
+                {activeTab === tab ? (
+                  <div
+                    className={`transition-all duration-300 border-b border-background-primary-light w-full absolute -bottom-1.5`}
+                  />
+                ) : null}
+              </div>
+            ))}
+          </div>
+
+          {activeTab === "Content" && <ContentSection />}
+          {activeTab === "Comments" && <CommentsSection />}
+          {activeTab === "Description" && <DescriptionSection />}
+          {activeTab === "Related Programs" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {programs
+                .filter((p) => p.id <= 6)
+                .map((program) => (
+                  <CourseCard key={program.id} data={program} type="programs" />
+                ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
