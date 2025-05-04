@@ -75,7 +75,7 @@ function DescriptionSection() {
         <div className="flex items-center gap-[9px]">
           <Image src="/verify.svg" alt="verify" width={20} height={20} />
           <h4 className="title-medium text-txt-on-surface-secondary-light">
-            What you'll learn?
+            What you&apos;ll learn?
           </h4>
         </div>
 
