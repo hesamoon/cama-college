@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { cookies } from "next/headers.js";
 
 // components
 import Chips from "@/components/Chips";
