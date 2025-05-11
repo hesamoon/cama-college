@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 // components
 import Button from "./Button";
 
-function CourseSlider() {
+function CourseSlider({ type }: { type?: string }) {
   const router = useRouter();
 
   return (
@@ -25,7 +25,7 @@ function CourseSlider() {
 
         <Button
           props={{
-            value: "See Program",
+            value: `See ${type}`,
             type: "filled",
             color: "red",
             disabled: false,
@@ -35,7 +35,7 @@ function CourseSlider() {
             size: "body-large",
             height: 20,
             width: 20,
-            clickHandler: () => router.push("/programs"),
+            clickHandler: () => router.push(`/${type==="Programs"?"programs":"events"}`),
           }}
         />
       </div>

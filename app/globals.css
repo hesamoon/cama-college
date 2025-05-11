@@ -52,6 +52,7 @@
   --background: #ffffff;
   --foreground: #171717;
   --primary: #cd151d;
+  --secondary: #424242;
   --primary_second: #312f30;
   --primary_shades_10: #a91418;
   --primary_shades_20: #971217;
@@ -90,6 +91,8 @@
   --shades_light_80: #eaeaea;
   --shades_light_90: #f3f3f3;
 
+  --low-important: #757575;
+
   --green: #34c759;
 
   --btn_primary_bg_enable: #ffcb05;
@@ -111,20 +114,23 @@
 
 @layer utilities {
   /* grid system */
+  .grid-system-level {
+    @apply max-w-[120rem] mx-auto;
+  }
   .grid-system-level0 {
-    @apply max-w-[90rem] mx-auto px-16 gap-6;
+    @apply max-w-[120rem] mx-auto px-16 gap-6;
   }
   .grid-system-level00 {
-    @apply max-w-[90rem] mx-auto pr-16 gap-6;
+    @apply max-w-[120rem] mx-auto pr-16 gap-6;
   }
   .grid-system-level1 {
-    @apply max-w-[90rem] mx-auto px-32 gap-6;
+    @apply max-w-[120rem] mx-auto px-32 gap-6;
   }
   .grid-system-level2 {
-    @apply max-w-[90rem] mx-auto px-64 gap-6;
+    @apply max-w-[120rem] mx-auto px-64 gap-6;
   }
   .grid-system-level3 {
-    @apply max-w-[90rem] mx-auto px-96 gap-6;
+    @apply max-w-[120rem] mx-auto px-96 gap-6;
   }
 
   /* text style */
@@ -159,13 +165,13 @@
   }
 
   .body-large {
-    @apply text-[1rem] leading-[1.8] font-light;
+    @apply text-[1rem]/normal font-light;
   }
   .body-medium {
-    @apply text-[0.875rem] leading-[1.8] font-light;
+    @apply text-[0.875rem]/normal font-light;
   }
   .body-small {
-    @apply text-[0.750rem] leading-[1.8] font-light;
+    @apply text-[0.750rem]/normal font-light;
   }
 
   .label-large-db {
@@ -342,6 +348,8 @@
   --color-txt-on-surface-terriary-light: var(--shades_light_50);
   --color-txt-on-primary-dark: var(--shades_light_90);
   --color-txt-on-surface-secondary: var(--text-on-surface-secondary);
+  --color-txt-low-important: var(--low-important);
+  --color-txt-secondary: var(--secondary);
 
   --color-green: var(--green);
 
@@ -353,6 +361,10 @@
   /* fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

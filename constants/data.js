@@ -401,11 +401,11 @@ const events = [
   {
     id: 1,
     coverImg: "e1",
-    name: "Name of Event",
+    name: "Name of Event1",
     level: "Beginner",
     type: "Event",
     duration: 2, // example: 2 hours
-    price: 0,    // assuming free
+    price: 650, // assuming free
     status: "Scheduled",
     publishDate: "2024-09-17",
     category: "General",
@@ -413,37 +413,37 @@ const events = [
   {
     id: 2,
     coverImg: "e2",
-    name: "Name of Event",
+    name: "Name of Event2",
     level: "Beginner",
     type: "Event",
     duration: 2,
-    price: 0,
+    price: 650,
     status: "Scheduled",
-    publishDate: "2024-09-17",
+    publishDate: "2025-04-25",
     category: "General",
   },
   {
     id: 3,
     coverImg: "e3",
-    name: "Name of Event",
+    name: "Name of Event3",
     level: "Beginner",
     type: "Event",
     duration: 2,
-    price: 0,
+    price: 650,
     status: "Scheduled",
-    publishDate: "2024-09-17",
+    publishDate: "2025-04-20",
     category: "General",
   },
   {
     id: 4,
     coverImg: "e4",
-    name: "Name of Event",
+    name: "Web Search",
     level: "Beginner",
     type: "Event",
     duration: 2,
-    price: 0,
+    price: 650,
     status: "Scheduled",
-    publishDate: "2024-09-17",
+    publishDate: "2025-05-08",
     category: "General",
   },
 ];
@@ -498,7 +498,6 @@ const posts = [
     category: "Blog",
   },
 ];
-
 
 const categories = [
   { id: 1, label: "IT & AI" },

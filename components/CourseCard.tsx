@@ -57,7 +57,7 @@ function CourseCard({ type, data }: CourseCardProps) {
       <Image
         src={`/${data.coverImg}.png`}
         alt={`${type} ${data.id}`}
-        className="rounded-sm aspect-16-9 object-cover"
+        className="rounded-sm aspect-16-9 object-cover w-full"
         width={310}
         height={174}
       />
@@ -107,7 +107,9 @@ function CourseCard({ type, data }: CourseCardProps) {
                 })
                 .toUpperCase()}
             </span>
+
             <div className="border-[0.8px] border-dashed border-outline-level0 flex-1" />
+
             <span className="label-medium-db text-txt-on-surface-secondary-light">
               10:00 - 12:00
             </span>

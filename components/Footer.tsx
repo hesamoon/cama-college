@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer>
+    <footer className="bg-shades-light-90">
       <div className="grid grid-cols-7 gap-4 grid-system-level0 pt-8 sm:pt-12 lg:pt-16">
         {/* left section */}
         <div className="col-span-5">

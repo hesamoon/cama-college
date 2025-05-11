@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function DescriptionSection() {
   return (
-    <div className="space-y-8 pt-8">
+    <div id="Description" className="space-y-8 pt-8">
       {/* title */}
       <div className="space-y-3">
         <h2 className="title-medium text-txt-on-surface-secondary-light">

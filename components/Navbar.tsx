@@ -3,12 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 // components
-import Button from "./Button";
+import LoginButtons from "./LoginButtons";
 import SearchBoxContainer from "./SearchBoxContainer";
+
+// utils
+import { userAttr } from "@/utilities/userAttr";
 
 function Navbar() {
   return (
-    <div className="flex items-center justify-between py-3 max-w-[90rem] mx-auto px-16">
+    <div className="sticky top-0 z-[99999] bg-white flex items-center justify-between py-3 grid-system-level0 !gap-20">
       {/* left-side -> logo and nav */}
       <div className="flex items-center gap-10">
         {/* logo */}
@@ -42,38 +45,31 @@ function Navbar() {
         <SearchBoxContainer />
       </Suspense>
 
-      {/* right-side -> login and shopping cart buttons */}
-      <div className="flex items-center gap-2">
-        <Button
-          props={{
-            value: "Login | Signup",
-            leftIcon: "login",
-            rightIcon: "",
-            type: "outlined",
-            disabled: false,
-            color: "black",
-            width: 24,
-            height: 24,
-            size: "body-large",
-            padding: "px-4 py-2",
-          }}
-        />
+      {/* right-side -> unAuth -> login and shopping cart buttons, auth -> profile button */}
+      {userAttr().role === "ADMIN" ? (
+        <Link
+          href="/profile"
+          className="rounded-full flex items-center gap-2 p-1 pr-2 cursor-pointer border border-outline1"
+        >
+          <Image
+            className="rounded-full"
+            src="/profile.jpg"
+            alt="profile"
+            width={40}
+            height={40}
+          />
 
-        <Button
-          props={{
-            value: "",
-            leftIcon: "bag",
-            rightIcon: "",
-            type: "outlined",
-            disabled: false,
-            size: "body-large",
-            color: "black",
-            padding: "p-2",
-            width: 24,
-            height: 24,
-          }}
-        />
-      </div>
+          <Image
+            className="rounded-full"
+            src="/arrow-down.svg"
+            alt="arrow-down"
+            width={20}
+            height={20}
+          />
+        </Link>
+      ) : (
+        <LoginButtons />
+      )}
     </div>
   );
 }

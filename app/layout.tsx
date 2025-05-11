@@ -21,12 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-background">
+      <body className="bg-background h-screen flex flex-col justify-between">
         <NuqsAdapter>
-          <Navbar />
-          <Suspense fallback={<p>Loading search info...</p>}>
-            {children}
-          </Suspense>
+          <div>
+            <Navbar />
+            <Suspense fallback={<p>Loading search info...</p>}>
+              {children}
+            </Suspense>
+          </div>
           <Footer />
         </NuqsAdapter>
       </body>

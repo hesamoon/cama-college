@@ -3,7 +3,7 @@ import Button from "./Button";
 
 function ContentSection() {
   return (
-    <div className="space-y-4 pt-8">
+    <div id="Content" className="space-y-4 pt-8">
       <div className="space-y-2">
         {/* hours */}
         <div className="grid grid-cols-4 gap-6">
@@ -81,7 +81,7 @@ function ContentSection() {
       </div>
 
       {/* Instructor */}
-      <div className="relative overflow-hidden grid grid-cols-2 gap-6 border border-outline-level1 rounded space-y-6">
+      <div className="relative overflow-hidden grid grid-cols-2 gap-6 border border-outline-level1 rounded">
         <div className="p-6 space-y-3 col-span-1">
           <h3 className="title-medium text-on_surface-light">Credential</h3>
 
@@ -92,7 +92,7 @@ function ContentSection() {
           </p>
         </div>
 
-        <div className="col-span-1 flex items-center justify-center z-[999]">
+        <div className="p-4 col-span-1 flex items-center justify-center z-[999]">
           <Image
             src="/credential.png"
             alt="credential"

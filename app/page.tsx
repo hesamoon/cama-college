@@ -1,6 +1,5 @@
-"use client";
-
 import Image from "next/image";
+import { cookies } from "next/headers.js";
 
 // components
 import Chips from "@/components/Chips";
@@ -14,32 +13,16 @@ import CredentialInquiry from "@/components/CredentialInquiry";
 
 // data
 import { events, posts, programs } from "../constants/data.js";
-import { useState } from "react";
+
+// utils
+import { userAttr } from "../utilities/userAttr.js";
 
 export default function Home() {
-  const [logged, setLogged] = useState(true);
   return (
     <div className="space-y-14">
-      <div className="absolute top-6 right-75">
-        <Button
-          props={{
-            value: logged ? "logout" : "login",
-            clickHandler: () => setLogged((prev) => !prev),
-            leftIcon: "",
-            rightIcon: "",
-            color: "",
-            type: "outlined",
-            disabled: false,
-            height: 20,
-            width: 20,
-            padding: "py-1 px-6",
-            size: "body-large",
-          }}
-        />
-      </div>
       {/* header */}
-      {logged ? (
-        <section className="mt-14 space-y-12 ">
+      {userAttr()?.role === "ADMIN" ? (
+        <section className="mt-14 space-y-12">
           {/* searchbox */}
           <div className="flex items-center justify-center grid-system-level0">
             <Searchbox />
@@ -47,7 +30,7 @@ export default function Home() {
 
           {/* banner */}
           <div className="">
-            <CourseSlider />
+            <CourseSlider type="Programs" />
           </div>
         </section>
       ) : (
@@ -117,8 +100,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="hero">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6 grid-system-level0">
+      <section className="hero grid-system-level0">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6">
           <div className="header-small">
             <span className="display-large block">326</span> Students
           </div>
@@ -232,8 +215,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="hero2">
-        <div className="flex items-center justify-between text-white font-bold text-xl py-9 grid-system-level0">
+      <section className="hero2 grid-system-level0">
+        <div className="flex items-center justify-between text-white font-bold text-xl py-9">
           <div className="flex flex-col items-start gap-3 z-[999]">
             <h3 className="title-medium text-primary-shades-90">
               Credential inquiry

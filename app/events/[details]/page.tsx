@@ -7,19 +7,26 @@ import { usePathname } from "next/navigation";
 // components
 import Button from "@/components/Button";
 import CourseCard from "@/components/CourseCard";
-import ContentSection from "@/components/ContentSection";
 import CommentsSection from "@/components/CommentsSection";
+import SpeakersSection from "@/components/SpeakersSection";
+import LocationSection from "@/components/LocationSection";
 import DescriptionSection from "@/components/DescriptionSection";
 
 // fake data
-import { programs } from "@/constants/data";
+import { events } from "@/constants/data";
 
 function Page() {
   const pathname = usePathname();
-  const programDetails = programs.find(
-    (p) => p.name === decodeURIComponent(pathname.split("/")[2])
+  const eventDetails = events.find(
+    (e) => e.name === decodeURIComponent(pathname.split("/")[2])
   );
-  const tabs = ["Description", "Content", "Comments", "Related Programs"];
+  const tabs = [
+    "Description",
+    "Location",
+    "Speakers",
+    "Comments",
+    "Related Events",
+  ];
   const [activeTab, setActiveTab] = useState("Description");
 
   useEffect(() => {
@@ -49,14 +56,14 @@ function Page() {
           <div className="space-y-8">
             <Image
               className="rounded-sm aspect-16-9 object-cover"
-              src={`/${programDetails?.coverImg}.png`}
-              alt={`${programDetails?.coverImg}`}
+              src={`/${eventDetails?.coverImg}.png`}
+              alt={`${eventDetails?.coverImg}`}
               width={781}
               height={438}
             />
 
             <h1 className="display-medium text-color-on_surface-light">
-              {programDetails?.name}
+              {eventDetails?.name}
             </h1>
           </div>
         </div>
@@ -65,26 +72,26 @@ function Page() {
         <div className="sticky top-[6.5rem] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
           {/* price */}
           <h3 className="header-medium text-txt-on-surface-secondary-light">
-            ${programDetails?.price} (CAD)
+            ${eventDetails?.price} (CAD)
           </h3>
 
           {/* important details */}
           <div className="grid grid-cols-2 gap-2">
             {/* labels */}
             <div className="col-span-1 space-y-2">
-              {/* level */}
+              {/* event date */}
               <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
                 <Image src="/chart.svg" alt="chart" width={16} height={16} />
-                <span>Level</span>
+                <span>Event Date</span>
               </div>
 
-              {/* duration */}
+              {/* event time */}
               <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
                 <Image src="/timer.svg" alt="timer" width={16} height={16} />
-                <span>Duration</span>
+                <span>Event Time</span>
               </div>
 
-              {/* subject */}
+              {/* rating */}
               <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
                 <Image
                   src="/monitor-mobbile.svg"
@@ -92,62 +99,58 @@ function Page() {
                   width={16}
                   height={16}
                 />
-                <span>Subject</span>
+                <span>Rating</span>
               </div>
 
-              {/* language */}
-              <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
-                <Image
-                  src="/monitor-mobbile.svg"
-                  alt="monitor-mobbile"
-                  width={16}
-                  height={16}
-                />
-                <span>Language</span>
-              </div>
+              {/* location */}
+              <div className="space-y-2">
+                {/* location */}
+                <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
+                  <Image
+                    src="/monitor-mobbile.svg"
+                    alt="monitor-mobbile"
+                    width={16}
+                    height={16}
+                  />
+                  <span>Location</span>
+                </div>
 
-              {/* credential type */}
-              <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
-                <Image
-                  src="/monitor-mobbile.svg"
-                  alt="monitor-mobbile"
-                  width={16}
-                  height={16}
-                />
-                <span>Credential Type</span>
-              </div>
-
-              {/* AP - number */}
-              <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
-                <Image
-                  src="/monitor-mobbile.svg"
-                  alt="monitor-mobbile"
-                  width={16}
-                  height={16}
-                />
-                <span>AP - Number</span>
+                {/* location */}
+                <h5>Province, City, Street</h5>
               </div>
             </div>
 
             {/* values */}
             <div className="col-span-1 body-large text-txt-on-surface-secondary-light space-y-2">
-              {/* level */}
-              <h5>{programDetails?.level}</h5>
+              {/* event date */}
+              <h5>{eventDetails?.level}</h5>
 
-              {/* duration */}
-              <h5>{programDetails?.duration}h</h5>
+              {/* event time */}
+              <h5>{eventDetails?.duration}h</h5>
 
-              {/* subject */}
-              <h5>{programDetails?.category}</h5>
+              {/* rating */}
+              <h5>{eventDetails?.category}</h5>
+            </div>
+          </div>
 
-              {/* language */}
-              <h5>English/ Persian</h5>
+          {/* social media */}
+          <div className="flex items-center gap-3">
+            <div className="border border-outline-level1 p-3 rounded-full">
+              <Image
+                src="/telegram.svg"
+                alt="telegram"
+                width={24}
+                height={24}
+              />
+            </div>
 
-              {/* credential type */}
-              <h5>Diploma</h5>
-
-              {/* AP - number */}
-              <h5>0</h5>
+            <div className="border border-outline-level1 p-3 rounded-full">
+              <Image
+                src="/instagram.svg"
+                alt="instagram"
+                width={24}
+                height={24}
+              />
             </div>
           </div>
 
@@ -170,42 +173,21 @@ function Page() {
             </div>
 
             {/* button */}
-            <div className="flex items-center gap-2">
+            <div className="">
               <Button
                 props={{
-                  value: "Get Course",
+                  value: "Get Ticket",
                   type: "filled",
                   color: "red",
                   disabled: false,
-                  leftIcon: "shopping-cart",
+                  leftIcon: "",
                   rightIcon: "",
-                  padding: "py-2 pr-6 pl-4 w-full",
+                  padding: "py-2 px-6 w-full",
                   size: "body-large",
                   height: 24,
                   width: 24,
                 }}
               />
-
-              <Button
-                props={{
-                  value: "",
-                  type: "outlined",
-                  color: "",
-                  disabled: false,
-                  leftIcon: "archive-add",
-                  rightIcon: "",
-                  padding: "p-3",
-                  size: "body-large",
-                  height: 24,
-                  width: 24,
-                }}
-              />
-            </div>
-
-            {/* enrolled validity */}
-            <div className="flex items-center justify-center label-medium-db text-txt-on-surface-terriary-light">
-              Enrollment Validity:{" "}
-              <span className="text-on_surface-light">30 days</span>
             </div>
           </div>
         </div>
@@ -243,12 +225,15 @@ function Page() {
       </div>
 
       <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
-        <div className="col-span-2">
+        <div className="col-span-2 space-y-6">
           {/* description */}
           <DescriptionSection />
 
-          {/* content */}
-          <ContentSection />
+          {/* location */}
+          <LocationSection />
+
+          {/* speakers */}
+          <SpeakersSection />
         </div>
       </div>
 
@@ -260,15 +245,15 @@ function Page() {
       </div>
 
       <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
-        {/* programs */}
+        {/* event */}
         <div
-          id="Related Programs"
+          id="Related Events"
           className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
         >
-          {programs
-            .filter((p) => p.id <= 6)
-            .map((program) => (
-              <CourseCard key={program.id} data={program} type="programs" />
+          {events
+            .filter((e) => e.id <= 6)
+            .map((event) => (
+              <CourseCard key={event.id} data={event} type="events" />
             ))}
         </div>
       </div>
