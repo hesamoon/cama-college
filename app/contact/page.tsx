@@ -18,11 +18,11 @@ import { Job } from "../types/types";
 function page() {
   const [jobList, setJobList] = useState<Job[]>([]);
 
-  const [search, setSearch] = useQueryState("search", { defaultValue: "" });
-  const [jobGroup, setJobGroup] = useQueryState("job-group", {
+  const [search] = useQueryState("search", { defaultValue: "" });
+  const [jobGroup] = useQueryState("job-group", {
     defaultValue: "",
   });
-  const [city, setCity] = useQueryState("city", { defaultValue: "" });
+  const [city] = useQueryState("city", { defaultValue: "" });
 
   const [sortVal, setSortVal] = useState("Newest");
 

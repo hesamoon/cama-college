@@ -19,7 +19,7 @@ export default function Pagination({
     const range = [];
     const maxVisible = 5;
     let start = Math.max(1, currentPage - 2); // -> 1
-    let end = Math.min(totalPages, start + maxVisible - 1); // -> 2
+    const end = Math.min(totalPages, start + maxVisible - 1); // -> 2
     if (end - start < maxVisible - 1) start = Math.max(1, end - maxVisible + 1);
     for (let i = start; i <= end; i++) range.push(i);
     console.log(range)
