@@ -10,7 +10,13 @@ type Transaction = {
   transactionId: string;
 };
 
-function TransactionsTable({ transactions }: { transactions: Transaction[] }) {
+function TransactionsTable({
+  title,
+  transactions,
+}: {
+  title: string;
+  transactions: Transaction[];
+}) {
   const handleCopy = (transactionId: string) => {
     navigator.clipboard.writeText(transactionId).then(() => {
       toast.success("Transaction ID copied!");
@@ -22,7 +28,7 @@ function TransactionsTable({ transactions }: { transactions: Transaction[] }) {
       <table className="min-w-full text-left">
         <thead className="bg-[#F3F3F3] text-on_surface-light label-large-db">
           <tr className="grid grid-cols-8">
-            <th className="px-4 py-3 col-span-2">Program</th>
+            <th className="px-4 py-3 col-span-2">{title}</th>
             <th className="px-4 py-3 col-span-1">Date</th>
             <th className="px-4 py-3 col-span-1">Amount</th>
             <th className="px-4 py-3 col-span-1">Pay Type</th>

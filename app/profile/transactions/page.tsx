@@ -155,7 +155,7 @@ function page() {
         </div>
 
         {/* transactions list */}
-        <TransactionsTable transactions={transactionList.slice(0, 7)} />
+        <TransactionsTable title={activeTab} transactions={transactionList.slice(0, 7)} />
 
         {/* pagination */}
         {(transactionList.length >= 7 || currentPage > 1) && (
