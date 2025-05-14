@@ -14,6 +14,7 @@ import DescriptionSection from "@/components/DescriptionSection";
 
 // fake data
 import { events } from "@/constants/data";
+import RatingCard from "@/components/RatingCard";
 
 function Page() {
   const pathname = usePathname();
@@ -49,7 +50,7 @@ function Page() {
 
   return (
     <div className="space-y-6">
-      {/* top section -> cover, title / tabs / description, content section / cart */}
+      {/* top section -> cover, title / cart */}
       <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
         <div className="col-span-2 space-y-6">
           {/* cover, title */}
@@ -193,34 +194,81 @@ function Page() {
         </div>
       </div>
 
+      {/* tabs */}
       <div className="sticky top-[5.6rem] bg-white z-[9999] grid-system-level1">
         {/* tabs */}
-        <div className="flex gap-4 border-b border-outline-level0">
-          {tabs.map((tab) => (
-            <div key={tab}>
-              <button
-                className={`py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
-                  activeTab === tab
-                    ? "text-background-primary-light border-b border-background-primary-light"
-                    : "text-txt-on-surface-terriary-light"
-                }`}
-                onClick={() => {
-                  const element = document.getElementById(tab);
-                  if (element) {
-                    const yOffset = -117; // scroll 117px *above* the element
-                    const y =
-                      element.getBoundingClientRect().top +
-                      window.pageYOffset +
-                      yOffset;
+        <div
+          className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
+            activeTab === "Comments" || activeTab === "Related Events"
+              ? "w-full"
+              : "w-2/3"
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            {tabs.map((tab) => (
+              <div key={tab}>
+                <button
+                  className={`py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
+                    activeTab === tab
+                      ? "text-background-primary-light border-b border-background-primary-light"
+                      : "text-txt-on-surface-terriary-light"
+                  }`}
+                  onClick={() => {
+                    const element = document.getElementById(tab);
+                    if (element) {
+                      const yOffset = -117; // scroll 117px *above* the element
+                      const y =
+                        element.getBoundingClientRect().top +
+                        window.pageYOffset +
+                        yOffset;
 
-                    window.scrollTo({ top: y, behavior: "smooth" });
-                  }
-                }}
-              >
-                {tab}
-              </button>
-            </div>
-          ))}
+                      window.scrollTo({ top: y, behavior: "smooth" });
+                    }
+                  }}
+                >
+                  {tab}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className={`transition-all duration-300 ease-linear overflow-hidden ${
+              activeTab === "Comments" || activeTab === "Related Events"
+                ? "opacity-100 pointer-events-auto"
+                : "opacity-0 pointer-events-none"
+            } flex items-center gap-1`}
+          >
+            <Button
+              props={{
+                value: "Get Course",
+                type: "filled",
+                color: "red",
+                disabled: false,
+                leftIcon: "shopping-cart",
+                rightIcon: "",
+                padding: "py-2 pr-6 pl-4 w-full",
+                size: "body-large",
+                height: 20,
+                width: 20,
+              }}
+            />
+
+            <Button
+              props={{
+                value: "",
+                type: "outlined",
+                color: "",
+                disabled: false,
+                leftIcon: "archive-add",
+                rightIcon: "",
+                padding: "p-3",
+                size: "body-large",
+                height: 20,
+                width: 20,
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -237,13 +285,24 @@ function Page() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+      {/* comments */}
+      <div
+        id="Comments"
+        className="grid grid-cols-3 grid-system-level1 space-y-6 pt-8"
+      >
+        {/* comments */}
         <div className="col-span-2">
           {/* comments */}
           <CommentsSection />
         </div>
+
+        {/* rating card */}
+        <div className="col-span-1">
+          <RatingCard />
+        </div>
       </div>
 
+      {/* event */}
       <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
         {/* event */}
         <div

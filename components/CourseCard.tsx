@@ -1,21 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type CourseCardProps = {
-  type: string;
-  data: {
-    id: number;
-    coverImg: string;
-    name: string;
-    level: string;
-    type: string;
-    duration: number;
-    price: number;
-    status: string;
-    publishDate: string;
-    category: string;
-  };
-};
+// types
+import { CourseCardProps } from "@/app/types/types";
 
 function CourseCard({ type, data }: CourseCardProps) {
   return type === "post" ? (
@@ -24,7 +11,7 @@ function CourseCard({ type, data }: CourseCardProps) {
         <Image
           src={`/${data.coverImg}.png`}
           alt={`${data.type} ${data.id}`}
-          className="rounded-sm aspect-16-9 object-cover"
+          className="rounded-sm aspect-16-9 object-cover w-full"
           width={310}
           height={174}
         />

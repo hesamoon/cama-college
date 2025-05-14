@@ -21,9 +21,11 @@ function SearchBoxContainer() {
   };
 
   if (
-    pathname !== "/programs" &&
-    pathname !== "/profile" &&
-    pathname !== "/events"
+    (pathname !== "/programs" &&
+      pathname.includes("/profile/transaction") &&
+      pathname !== "/events") ||
+    pathname === "/" ||
+    pathname === "/contact"
   )
     return null;
   return (

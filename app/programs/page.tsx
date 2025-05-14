@@ -10,18 +10,8 @@ import CourseCard from "@/components/CourseCard";
 // data
 import { categories, programs } from "@/constants/data";
 
-type Program = {
-  id: number;
-  coverImg: string;
-  name: string;
-  level: string;
-  type: string;
-  duration: number;
-  price: number;
-  status: string;
-  publishDate: string;
-  category: string;
-};
+// types
+import { Program } from "../types/types";
 
 function Page() {
   // const [pageNum, setPageNum] = useState(1);
@@ -137,7 +127,7 @@ function Page() {
       </div>
 
       {/* programs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 grid-system-level0 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 grid-system-level0 pb-14">
         {programList.length > 0 ? (
           programList.map((program) => (
             <CourseCard key={program.id} data={program} type="programs" />

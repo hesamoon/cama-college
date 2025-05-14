@@ -8,6 +8,7 @@ import "./globals.css";
 // components
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "CAMA College",
@@ -28,6 +29,7 @@ export default function RootLayout({
             <Suspense fallback={<p>Loading search info...</p>}>
               {children}
             </Suspense>
+            <Toaster position="bottom-center" />
           </div>
           <Footer />
         </NuqsAdapter>

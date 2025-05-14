@@ -12,18 +12,8 @@ import CourseSlider from "@/components/CourseSlider";
 // data
 import { events } from "@/constants/data";
 
-type Events = {
-  id: number;
-  coverImg: string;
-  name: string;
-  level: string;
-  type: string;
-  duration: number;
-  price: number;
-  status: string;
-  publishDate: string;
-  category: string;
-};
+// types
+import { Events } from "../types/types";
 
 function page() {
   const [sortVal, setSortVal] = useState("Newest");
