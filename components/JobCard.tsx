@@ -11,7 +11,7 @@ import { Job } from "@/app/types/types";
 
 export default function JobCard({ job }: { job: Job }) {
   return (
-    <div className="rounded border border-outline-level1 p-3">
+    <div className="rounded border border-outline-level1 p-3 cursor-pointer">
       <div className="flex justify-between items-start">
         <div className="flex gap-2">
           <Image
