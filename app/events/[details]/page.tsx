@@ -241,28 +241,13 @@ function Page() {
           >
             <Button
               props={{
-                value: "Get Course",
+                value: "Get Ticket",
                 type: "filled",
                 color: "red",
                 disabled: false,
-                leftIcon: "shopping-cart",
+                leftIcon: "",
                 rightIcon: "",
-                padding: "py-2 pr-6 pl-4 w-full",
-                size: "body-large",
-                height: 20,
-                width: 20,
-              }}
-            />
-
-            <Button
-              props={{
-                value: "",
-                type: "outlined",
-                color: "",
-                disabled: false,
-                leftIcon: "archive-add",
-                rightIcon: "",
-                padding: "p-3",
+                padding: "py-2 px-4 w-full",
                 size: "body-large",
                 height: 20,
                 width: 20,
