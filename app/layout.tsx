@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 // global styles
@@ -8,7 +9,7 @@ import "./globals.css";
 // components
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Toaster } from "react-hot-toast";
+import DisableInteractions from "@/components/DisableInteractions";
 
 export const metadata: Metadata = {
   title: "CAMA College",
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-background h-screen flex flex-col justify-between">
+        <DisableInteractions />
         <NuqsAdapter>
           <div>
             <Navbar />

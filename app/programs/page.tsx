@@ -70,11 +70,15 @@ function Page() {
       {/* categories - sort and filtring */}
       <div className="flex items-center justify-between w-full border-y border-outline-level0 grid-system-level0">
         {/* categories */}
-        <div className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 pt-6 pb-2">
+        <div className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
           {categories.map((ctgry) => (
             <div
               key={ctgry.id}
-              className="relative flex flex-col items-center justify-center transition-all duration-300 gap-1 cursor-pointer px-2"
+              className={`flex flex-col items-center justify-center transition-all duration-300 gap-1 cursor-pointer px-2 pt-6 pb-2 ${
+                category === ctgry.label
+                  ? "border-b border-background-primary-light"
+                  : null
+              }`}
               onClick={() => setCategory(ctgry.label)}
             >
               <Image
@@ -87,12 +91,6 @@ function Page() {
               <h5 className="body-large text-on_surface-light">
                 {ctgry.label}
               </h5>
-
-              <div
-                className={`${
-                  category === ctgry.label ? "block" : "hidden"
-                } transition-all duration-300 border-b border-background-primary-light w-full absolute -bottom-3`}
-              />
             </div>
           ))}
         </div>

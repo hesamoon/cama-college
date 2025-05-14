@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 // components
 import Chips from "@/components/Chips";
@@ -83,18 +84,22 @@ export default function Home() {
             "Marketing & Sales",
             "Other",
           ].map((item) => (
-            <Chips
+            <Link
+              href={`/programs?category=${encodeURIComponent(item)}`}
               key={item}
-              props={{
-                lable: `${item}`,
-                leftIcon: "",
-                rightIcon: "",
-                disabled: false,
-                type: "tonal",
-                width: 0,
-                height: 0,
-              }}
-            />
+            >
+              <Chips
+                chips={{
+                  lable: `${item}`,
+                  leftIcon: "",
+                  rightIcon: "",
+                  disabled: false,
+                  type: "tonal",
+                  width: 0,
+                  height: 0,
+                }}
+              />
+            </Link>
           ))}
         </div>
       </section>

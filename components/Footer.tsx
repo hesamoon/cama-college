@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+
+import StaticMap from "./StaticMap";
+
 function Footer() {
   return (
     <footer className="bg-shades-light-90">
@@ -82,7 +85,7 @@ function Footer() {
             <h4 className="title-medium text-on_surface-light">Contact Us</h4>
 
             {/* location */}
-            <div className="w-[275px] h-[143px] rounded-sm bg-[#F3F3F3]"></div>
+            <StaticMap />
 
             <ul className="body-large text-black space-y-3">
               <li>Phone</li>

@@ -369,6 +369,8 @@ html {
 
 body {
   font-family: "DylanCopperplate";
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .hero {

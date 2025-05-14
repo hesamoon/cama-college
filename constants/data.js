@@ -695,4 +695,65 @@ const jobOffers = [
   },
 ];
 
-export { programs, events, posts, categories, transactions, jobOffers };
+const comments = [
+  {
+    id: 1,
+    title: "Title of comment",
+    author: "Biran amri",
+    date: "2025-05-08",
+    text: "Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis.",
+    rating: 4,
+    likes: 12,
+    disLike: 2,
+  },
+  {
+    id: 2,
+    title: "Title of comment",
+    author: "Biran amri",
+    date: "2025-05-08",
+    text: "Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis.",
+    rating: 4,
+    likes: 12,
+    disLike: 2,
+  },
+  {
+    id: 3,
+    title: "Title of comment",
+    author: "Biran amri",
+    date: "2025-05-08",
+    text: "Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis.",
+    rating: 4,
+    likes: 12,
+    disLike: 2,
+  },
+  {
+    id: 4,
+    title: "Title of comment",
+    author: "Biran amri",
+    date: "2025-05-08",
+    text: "Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis.",
+    rating: 4,
+    likes: 12,
+    disLike: 2,
+  },
+  {
+    id: 5,
+    title: "Title of comment",
+    author: "Biran amri",
+    date: "2025-05-08",
+    text: "Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis.",
+    rating: 4,
+    likes: 12,
+    disLike: 2,
+  },
+];
+
+export {
+  programs,
+  events,
+  posts,
+  categories,
+  transactions,
+  jobOffers,
+  comments,
+};

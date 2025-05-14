@@ -1,17 +1,10 @@
 import Image from "next/image";
 
-type Props = {
-  lable: string;
-  leftIcon: string;
-  rightIcon: string;
-  type: string;
-  disabled: boolean;
-  width: number;
-  height: number;
-};
+// types
+import { Chip } from "@/app/types/types";
 
 function Chips({
-  props: {
+  chips: {
     lable = "label",
     leftIcon,
     rightIcon,
@@ -21,7 +14,7 @@ function Chips({
     height = 24,
   },
 }: {
-  props: Props;
+  chips: Chip;
 }) {
   return (
     <div

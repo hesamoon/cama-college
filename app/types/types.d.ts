@@ -60,3 +60,24 @@ export interface Events {
   publishDate: string;
   category: string;
 }
+
+export interface Chip {
+  lable: string;
+  leftIcon: string;
+  rightIcon: string;
+  type: string;
+  disabled: boolean;
+  width: number;
+  height: number;
+}
+
+export interface CommentT {
+  id: number;
+  title: string;
+  author: string;
+  date: string;
+  text: string;
+  rating: number;
+  likes: number;
+  disLike: number;
+}
