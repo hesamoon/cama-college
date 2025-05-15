@@ -6,7 +6,7 @@ function LocationSection() {
       <div className="border border-outline-level1 p-4 rounded-sm space-y-4">
         <h3 className="title-medium text-on_surface-light">Location</h3>
 
-        <StaticMap />
+        <StaticMap paddingPer="50%" />
       </div>
     </div>
   );

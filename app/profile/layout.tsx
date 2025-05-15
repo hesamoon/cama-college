@@ -10,7 +10,7 @@ export default function layout({
   return (
     <div className="grid-system-level grid grid-cols-5 border rounded-t-sm border-outline-level0 divide-x divide-outline-level0">
       {/* left side */}
-      <div className="sticky top-[5.6rem] h-fit col-span-1 py-7 px-4 space-y-6">
+      <div className="h-fit col-span-1 py-7 px-4 space-y-6">
         {/* profile, number, name, apply button */}
         <UserProfile />
 

@@ -85,7 +85,7 @@ function Footer() {
             <h4 className="title-medium text-on_surface-light">Contact Us</h4>
 
             {/* location */}
-            <StaticMap />
+            <StaticMap paddingPer="75%" />
 
             <ul className="body-large text-black space-y-3">
               <li>Phone</li>

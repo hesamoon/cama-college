@@ -1,7 +1,10 @@
-export default function StaticMap() {
+export default function StaticMap({ paddingPer }: { paddingPer: string }) {
   return (
     <div className="relative rounded-sm">
-      <div className="relative pb-[50%] h-0 overflow-hidden">
+      <div
+        className={`relative h-0 overflow-hidden`}
+        style={{ paddingBottom: paddingPer }}
+      >
         <iframe
           className="absolute top-0 left-0 w-full h-full rounded-sm"
           loading="lazy"
