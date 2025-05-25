@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 // components
 import Button from "@/components/Button";
 import CourseCard from "@/components/CourseCard";
+import RatingCard from "@/components/RatingCard";
 import CommentsSection from "@/components/CommentsSection";
 import SpeakersSection from "@/components/SpeakersSection";
 import LocationSection from "@/components/LocationSection";
@@ -14,7 +15,6 @@ import DescriptionSection from "@/components/DescriptionSection";
 
 // fake data
 import { events } from "@/constants/data";
-import RatingCard from "@/components/RatingCard";
 
 function Page() {
   const pathname = usePathname();

@@ -13,7 +13,7 @@ import { jobOffers } from "@/constants/data";
 import { getRelativeTime } from "@/utilities/utils";
 import JobCard from "@/components/JobCard";
 
-function page() {
+function Page() {
   const pathname = usePathname();
   const jobDetails = jobOffers.find(
     (job) => job.title === decodeURIComponent(pathname.split("/")[2])
@@ -289,4 +289,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
