@@ -12,7 +12,7 @@ function SearchBoxContainer() {
   const [type, setType] = useQueryState("type", { defaultValue: "" });
 
   const pathname = usePathname();
-  const [typVal, setTypeVal] = useState(type);
+  const [typVal] = useState(type);
   const [searchVal, setSearchVal] = useState(search);
 
   const handleKeyDown = (e) => {

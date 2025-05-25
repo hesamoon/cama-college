@@ -10,7 +10,7 @@ import Button from "@/components/Button";
 // data
 import { policiesMenu } from "@/constants/data";
 
-function page() {
+function Page() {
   const pathname = usePathname();
   const [like, setLike] = useState(12);
   const [dislike, setDislike] = useState(2);
@@ -169,4 +169,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
