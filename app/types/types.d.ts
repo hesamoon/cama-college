@@ -81,3 +81,28 @@ export interface CommentT {
   likes: number;
   disLike: number;
 }
+
+type MenuDesc = {
+  title: string;
+  content: string;
+} | null;
+
+export interface SubMenu {
+  id: number;
+  href: string;
+  name: string;
+  desc?: MenuDesc;
+};
+
+export interface HeaderNav {
+  id: number;
+  href: string;
+  name: string;
+  subMenus?: SubMenu[]; // optional or can be an empty array
+}
+
+export interface HeaderNavProps {
+  selNav: HeaderNav | null;
+  setSelNav: React.Dispatch<React.SetStateAction<HeaderNav | null>>;
+  hmnu: HeaderNav;
+}
