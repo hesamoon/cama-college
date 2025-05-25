@@ -15,9 +15,9 @@ function SearchBoxContainer() {
   const [typVal] = useState(type);
   const [searchVal, setSearchVal] = useState(search);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Optional: prevent default Enter behavior
+      e.preventDefault();
       searchClickHandler();
     }
   };
