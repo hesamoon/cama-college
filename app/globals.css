@@ -408,3 +408,8 @@ body {
   left: 0px;
   opacity: 0.16;
 }
+
+.blurred {
+  filter: blur(10px);
+  pointer-events: none;
+}
