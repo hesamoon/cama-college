@@ -75,11 +75,13 @@ function Page() {
             <div
               key={ctgry.id}
               className={`flex flex-col items-center justify-center transition-all duration-300 gap-1 cursor-pointer px-2 pt-6 pb-2 ${
-                category === ctgry.label
+                category === ctgry.label || (ctgry.id === 0 && !category)
                   ? "border-b border-background-primary-light"
                   : null
               }`}
-              onClick={() => setCategory(ctgry.label)}
+              onClick={() =>
+                ctgry.id === 0 ? setCategory(null) : setCategory(ctgry.label)
+              }
             >
               <Image
                 src="/monitor-mobbile-black.svg"

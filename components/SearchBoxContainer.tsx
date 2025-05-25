@@ -15,6 +15,13 @@ function SearchBoxContainer() {
   const [typVal, setTypeVal] = useState(type);
   const [searchVal, setSearchVal] = useState(search);
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Optional: prevent default Enter behavior
+      searchClickHandler();
+    }
+  };
+
   const searchClickHandler = () => {
     setSearch(searchVal.trim().replace(/\s+/g, " ").trim());
     setType(typVal);
@@ -25,12 +32,15 @@ function SearchBoxContainer() {
       pathname.includes("/profile/transaction") &&
       pathname !== "/events") ||
     pathname === "/" ||
-    pathname === "/contact"
+    pathname === "/job-offers"
   )
     return null;
   return (
     <div className="flex-1">
-      <div className="bg-shades-light-90 rounded-full p-1 flex items-center justify-between gap-2">
+      <div
+        className="bg-shades-light-90 rounded-full p-1 flex items-center justify-between gap-2"
+        onKeyDown={handleKeyDown}
+      >
         <input
           type="text"
           placeholder={
@@ -38,30 +48,35 @@ function SearchBoxContainer() {
               ? "Search in Events..."
               : pathname === "/programs"
               ? "Search in Programs..."
+              : pathname.includes("/job-offers/")
+              ? "Search in Job Offers"
               : "What you want to learn?"
           }
           value={searchVal}
           onChange={(e) => setSearchVal(e.target.value)}
-          className="px-4 py-2 outline-none flex-1"
+          className="px-4 py-2 outline-none flex-1 body-medium"
         />
         <div className="flex items-center justify-between gap-4">
-          {pathname !== "/events" && (
-            <div className="flex items-center">
-              <div className="w-[1px] h-[32px] bg-[#CECECE]" />
-              <select
-                className="px-4 py-2 outline-none"
-                value={typVal}
-                onChange={(e) => {
-                  setTypeVal(e.target.value);
-                }}
-              >
-                <option value="">Select Type</option>
-                <option value="Online">Online</option>
-                <option value="Webinar">Webinar</option>
-                <option value="Self Study">Self Study</option>
-              </select>
-            </div>
-          )}
+          {/* {pathname !== "/events" &&
+            !pathname.includes("/job-offers/") &&
+            pathname !== "/identity-chart" &&
+            pathname !== "/our-legality-and-legitimacy" && (
+              <div className="flex items-center">
+                <div className="w-[1px] h-[32px] bg-[#CECECE]" />
+                <select
+                  className="px-4 py-2 outline-none"
+                  value={typVal}
+                  onChange={(e) => {
+                    setTypeVal(e.target.value);
+                  }}
+                >
+                  <option value="">Select Type</option>
+                  <option value="Online">Online</option>
+                  <option value="Webinar">Webinar</option>
+                  <option value="Self Study">Self Study</option>
+                </select>
+              </div>
+            )} */}
 
           <Button
             props={{

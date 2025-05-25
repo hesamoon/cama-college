@@ -31,7 +31,7 @@ function LoginButtons() {
         }}
       />
 
-      <Button
+      {/* <Button
         props={{
           value: "",
           leftIcon: "bag",
@@ -44,7 +44,7 @@ function LoginButtons() {
           width: 24,
           height: 24,
         }}
-      />
+      /> */}
     </div>
   );
 }

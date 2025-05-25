@@ -350,6 +350,7 @@
   --color-txt-on-surface-secondary: var(--text-on-surface-secondary);
   --color-txt-low-important: var(--low-important);
   --color-txt-secondary: var(--secondary);
+  --color-surface0-light: var(--shades_light_90);
 
   --color-green: var(--green);
 
@@ -407,10 +408,3 @@ body {
   left: 0px;
   opacity: 0.16;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */

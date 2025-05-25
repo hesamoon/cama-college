@@ -4,7 +4,7 @@ const programs = [
     coverImg: "c1",
     name: "Name of Program1",
     level: "Beginner",
-    type: "Online",
+    type: "Self Study",
     duration: 20,
     price: 850,
     status: "Available",
@@ -499,13 +499,81 @@ const posts = [
   },
 ];
 
+const news = [
+  {
+    id: 1,
+    coverImg: "n1",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    category: "NEWS",
+    like: 253,
+    comments: 26,
+    author: "Reza Bidari",
+    publishDate: "2024-12-01",
+    description1: [
+      {
+        id: 11,
+        title: "Title Of Lesson",
+        content:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
+        cover: "c1",
+      },
+      {
+        id: 12,
+        title: "Title Of Lesson",
+        content:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
+        cover: "c1",
+      },
+    ],
+  },
+  {
+    id: 2,
+    coverImg: "n1",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    category: "NEWS",
+    like: 253,
+    comments: 26,
+    author: "Reza Bidari",
+    publishDate: "2024-12-01",
+    description1: [
+      {
+        id: 21,
+        title: "Title Of Lesson",
+        content:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
+        cover: "c1",
+      },
+      {
+        id: 22,
+        title: "Title Of Lesson",
+        content:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
+        cover: "c1",
+      },
+    ],
+  },
+];
+
 const categories = [
+  { id: 0, label: "All" },
   { id: 1, label: "IT & AI" },
   { id: 2, label: "Branding" },
   { id: 3, label: "Business" },
   { id: 4, label: "Management & Leadership" },
   { id: 5, label: "Marketing & Sales" },
   { id: 6, label: "Other" },
+];
+
+const newsCategories = [
+  { id: 0, label: "All" },
+  { id: 1, label: "Group1" },
+  { id: 2, label: "Group2" },
+  { id: 3, label: "Group3" },
+  { id: 4, label: "Group4" },
+  { id: 5, label: "Group5" },
+  { id: 6, label: "Group6" },
+  { id: 7, label: "Group7" },
+  { id: 8, label: "Group8" },
 ];
 
 const transactions = [
@@ -640,7 +708,7 @@ const jobOffers = [
   },
   {
     id: 3,
-    title: "UI/UX Designer",
+    title: "UI-UX Designer",
     company: "Designify",
     location: "Montreal, QC",
     isRemote: true,
@@ -748,12 +816,220 @@ const comments = [
   },
 ];
 
+const headerMenus = [
+  {
+    id: 1,
+    href: "/programs",
+    name: "Programs",
+    subMenus: [
+      {
+        id: 11,
+        href: "/programs",
+        name: "All Courses",
+        desc: null,
+      },
+      {
+        id: 12,
+        href: `/programs?type=${encodeURIComponent("Attendance")}`,
+        name: "Attendance Courses",
+        desc: null,
+      },
+      {
+        id: 13,
+        href: `/programs?type=${encodeURIComponent("Online")}`,
+        name: "Online Courses",
+        desc: null,
+      },
+      {
+        id: 14,
+        href: `/programs?type=${encodeURIComponent("Self Study")}`,
+        name: "Self-Study Courses",
+        desc: null,
+      },
+    ],
+  },
+  {
+    id: 2,
+    href: "/apply",
+    name: "Apply",
+    subMenus: [],
+  },
+  {
+    id: 3,
+    href: "/extra-educational",
+    name: "Extra Educational",
+    subMenus: [
+      {
+        id: 31,
+        href: "/#",
+        name: "Communication Crossroad",
+        desc: {
+          title: "Title1",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra",
+        },
+      },
+      {
+        id: 32,
+        href: "/#",
+        name: "Facilitation Freeway",
+        desc: {
+          title: "Title2",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra",
+        },
+      },
+      {
+        id: 33,
+        href: "/job-offers",
+        name: "Job Offers",
+        desc: {
+          title: "Title3",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra",
+        },
+      },
+      {
+        id: 34,
+        href: "/events",
+        name: "Events",
+        desc: {
+          title: "Title4",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra",
+        },
+      },
+    ],
+  },
+  {
+    id: 4,
+    href: "/tuum",
+    name: "TUUM",
+    subMenus: [
+      {
+        id: 41,
+        href: "/#",
+        name: "Professor TUUM",
+        desc: {
+          title: "Title",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra",
+        },
+      },
+      {
+        id: 42,
+        href: "/#",
+        name: "Tagline",
+        desc: {
+          title: "Title",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra",
+        },
+      },
+    ],
+  },
+  {
+    id: 5,
+    href: "/publications",
+    name: "Publications",
+    subMenus: [
+      {
+        id: 51,
+        href: "/#",
+        name: "Essays and Articles",
+        desc: null,
+      },
+      {
+        id: 52,
+        href: "/identity-chart",
+        name: "Identity Chart",
+        desc: null,
+      },
+      {
+        id: 53,
+        href: "/#",
+        name: "News",
+        desc: null,
+      },
+      {
+        id: 54,
+        href: "/#",
+        name: "Library",
+        desc: null,
+      },
+    ],
+  },
+  {
+    id: 6,
+    href: "/about",
+    name: "About",
+    subMenus: [
+      {
+        id: 61,
+        href: "/#",
+        name: "Brand Story",
+        desc: null,
+      },
+      {
+        id: 62,
+        href: "/#",
+        name: "Vision & Mission",
+        desc: null,
+      },
+      {
+        id: 63,
+        href: "/our-legality-and-legitimacy",
+        name: "Our Legality and Legitimacy",
+        desc: null,
+      },
+      {
+        id: 64,
+        href: "/policies-and-regulations",
+        name: "Policies and Regulations",
+        desc: null,
+      },
+    ],
+  },
+];
+
+const policiesMenu = [
+  {
+    id: 1,
+    title: "Total Title 1",
+    path: "/policies-and-regulations/total-title-1",
+  },
+  {
+    id: 2,
+    title: "Total Title 2",
+    path: "/policies-and-regulations/total-title-2",
+  },
+  {
+    id: 3,
+    title: "Total Title 3",
+    path: "/policies-and-regulations/total-title-3",
+  },
+  {
+    id: 4,
+    title: "Total Title 4",
+    path: "/policies-and-regulations/total-title-4",
+  },
+  {
+    id: 5,
+    title: "Total Title 5",
+    path: "/policies-and-regulations/total-title-5",
+  },
+];
+
 export {
-  programs,
-  events,
+  news,
   posts,
-  categories,
-  transactions,
-  jobOffers,
+  events,
   comments,
+  programs,
+  jobOffers,
+  categories,
+  headerMenus,
+  policiesMenu,
+  transactions,
+  newsCategories,
 };

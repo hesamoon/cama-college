@@ -15,6 +15,13 @@ function JobSearcher() {
   const [cityVal, setCityVal] = useState(city);
   const [searchVal, setSearchVal] = useState(search);
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Optional: prevent default Enter behavior
+      searchClickHandler();
+    }
+  };
+
   const searchClickHandler = () => {
     setSearch(searchVal.trim().replace(/\s+/g, " ").trim());
     setJob(jobVal);
@@ -22,7 +29,10 @@ function JobSearcher() {
   };
 
   return (
-    <div className="bg-shades-light-90 rounded-full p-1 flex items-center justify-between gap-2">
+    <div
+      className="bg-shades-light-90 rounded-full p-1 flex items-center justify-between gap-2"
+      onKeyDown={handleKeyDown}
+    >
       <input
         type="text"
         placeholder="Job or Company title..."

@@ -51,7 +51,7 @@ function Page() {
           {/* cover, title */}
           <div className="space-y-8">
             <Image
-              className="rounded-sm aspect-16-9 object-cover"
+              className="rounded-sm aspect-16-9 object-cover w-full"
               src={`/${programDetails?.coverImg}.png`}
               alt={`${programDetails?.coverImg}`}
               width={781}
@@ -64,7 +64,7 @@ function Page() {
           </div>
         </div>
 
-        {/* right side / card */}
+        {/* card */}
         <div className="sticky top-[6.5rem] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
           {/* price */}
           <h3 className="header-medium text-txt-on-surface-secondary-light">
@@ -206,8 +206,8 @@ function Page() {
             </div>
 
             {/* enrolled validity */}
-            <div className="flex items-center justify-center label-medium-db text-txt-on-surface-terriary-light">
-              Enrollment Validity:{" "}
+            <div className="flex items-center justify-center gap-1 label-medium-db text-txt-on-surface-terriary-light">
+              Enrollment Validity:
               <span className="text-on_surface-light">30 days</span>
             </div>
           </div>
@@ -305,7 +305,10 @@ function Page() {
       </div>
 
       {/* comments */}
-      <div id="Comments" className="grid grid-cols-3 grid-system-level1 space-y-6 pt-8">
+      <div
+        id="Comments"
+        className="grid grid-cols-3 grid-system-level1 space-y-6 pt-8"
+      >
         {/* comments */}
         <div className="col-span-2">
           {/* comments */}

@@ -7,7 +7,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 
 // components
-import Navbar from "../components/Navbar";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import DisableInteractions from "@/components/DisableInteractions";
 
@@ -27,7 +27,7 @@ export default function RootLayout({
         <DisableInteractions />
         <NuqsAdapter>
           <div>
-            <Navbar />
+            <Header />
             <Suspense fallback={<p>Loading search info...</p>}>
               {children}
             </Suspense>
