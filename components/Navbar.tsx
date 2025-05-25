@@ -41,18 +41,19 @@ const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
   const [thisSubMenusHovered, setThisSubMenusHovered] =
     useState<SubMenu | null>(null);
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement | null>(null);
 
   // handle click outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         setSelNav(null);
       }
     };
-    document.addEventListener("click", handleClickOutside, true);
+
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
