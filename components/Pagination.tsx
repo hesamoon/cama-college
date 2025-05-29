@@ -22,7 +22,7 @@ export default function Pagination({
     const end = Math.min(totalPages, start + maxVisible - 1); // -> 2
     if (end - start < maxVisible - 1) start = Math.max(1, end - maxVisible + 1);
     for (let i = start; i <= end; i++) range.push(i);
-    console.log(range);
+
     return range;
   };
 

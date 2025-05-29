@@ -382,13 +382,12 @@ body {
 
 .hero::before {
   content: "";
-  background-image: url("/bg-ptrn1.png");
+  background-image: url("/ptrn2.png");
   position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.05;
 }
 
 .hero2 {
@@ -399,14 +398,12 @@ body {
 
 .hero2::before {
   content: "";
-  background-image: url("/bg-ptrn2.png");
-  background-size: 48px;
+  background-image: url("/ptrn3.png");
   position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.16;
 }
 
 .blurred {

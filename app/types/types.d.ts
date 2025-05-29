@@ -82,6 +82,26 @@ export interface CommentT {
   disLike: number;
 }
 
+type DescriptionItem = {
+  id: number;
+  title: string;
+  content: string;
+  cover: string;
+};
+
+type News = {
+  id: number;
+  coverImg: string;
+  title: string;
+  mainDesc: string;
+  category: string;
+  like: number;
+  comments: number;
+  author: string;
+  publishDate: string;
+  description1: DescriptionItem[];
+};
+
 type MenuDesc = {
   title: string;
   content: string;
@@ -92,7 +112,7 @@ export interface SubMenu {
   href: string;
   name: string;
   desc?: MenuDesc;
-};
+}
 
 export interface HeaderNav {
   id: number;
