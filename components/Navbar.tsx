@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <div>
-      <ul className="flex items-center gap-2">
+      <ul className="flex items-center gap-1">
         {headerMenus.map((hmnu) => (
           <Nav
             key={hmnu.id}
@@ -68,48 +68,67 @@ const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
         // setThisSubMenusHovered(null);
       }}
     >
-      <div className="flex items-center gap-1 rounded-sm hover:bg-surface0-light py-2.5 px-2">
-        <span
-          className={`body-medium ${
-            selNav?.id === hmnu.id
-              ? "text-background-primary-light"
-              : isHovered
-              ? "text-on_surface-light"
-              : "text-txt-on-surface-secondary-light"
-          }`}
-        >
-          {hmnu.name}
-        </span>
-
-        <div
-          className={`transition-all ease-linear duration-300 ${
-            isHovered || selNav?.id === hmnu.id ? "rotate-180" : null
-          }`}
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+      {hmnu.id !== 2 ? (
+        <div className="flex items-center gap-1 rounded-sm hover:bg-surface0-light py-2.5 px-2">
+          <span
+            className={`body-medium ${
+              selNav?.id === hmnu.id
+                ? "text-background-primary-light"
+                : isHovered
+                ? "text-on_surface-light"
+                : "text-txt-on-surface-secondary-light"
+            }`}
           >
-            <path
-              d="M16.6004 7.45833L11.1671 12.8917C10.5254 13.5333 9.47539 13.5333 8.83372 12.8917L3.40039 7.45833"
-              stroke={
-                selNav?.id === hmnu.id
-                  ? "#A91418"
-                  : isHovered
-                  ? "#170304"
-                  : "#9B9798"
-              }
-              strokeWidth="1.5"
-              strokeMiterlimit="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+            {hmnu.name}
+          </span>
+
+          <div
+            className={`transition-all ease-linear duration-300 ${
+              isHovered || selNav?.id === hmnu.id ? "rotate-180" : null
+            }`}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.6004 7.45833L11.1671 12.8917C10.5254 13.5333 9.47539 13.5333 8.83372 12.8917L3.40039 7.45833"
+                stroke={
+                  selNav?.id === hmnu.id
+                    ? "#A91418"
+                    : isHovered
+                    ? "#170304"
+                    : "#9B9798"
+                }
+                strokeWidth="1.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </div>
-      </div>
+      ) : (
+        <Link
+          href={hmnu.href}
+          className="flex items-center gap-1 rounded-sm hover:bg-surface0-light py-2.5 px-2"
+        >
+          <span
+            className={`body-medium ${
+              selNav?.id === hmnu.id
+                ? "text-background-primary-light"
+                : isHovered
+                ? "text-on_surface-light"
+                : "text-txt-on-surface-secondary-light"
+            }`}
+          >
+            {hmnu.name}
+          </span>
+        </Link>
+      )}
 
       {hmnu.subMenus ? (
         hmnu.subMenus.length > 0 ? (

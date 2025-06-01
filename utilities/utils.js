@@ -1,3 +1,4 @@
+import React from "react";
 import {
   differenceInDays,
   differenceInHours,
@@ -50,4 +51,41 @@ const getRelativeTime = (ISODate) => {
   return relativeTime;
 };
 
-export { getRelativeTime };
+function parseStyledText(text) {
+  const regex = /@\(\*(.*?)\*\)@/g;
+  const parts = [];
+
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    const [fullMatch, highlighted] = match;
+    const index = match.index;
+
+    // Push normal text before the match
+    if (index > lastIndex) {
+      parts.push(text.slice(lastIndex, index));
+    }
+
+    // Push styled span
+    parts.push(
+      <span
+        key={index}
+        className="relative text-[#A91418] before:content-[''] before:absolute before:bottom-0.5 before:left-0 before:right-0 before:h-[0.5em] before:bg-[#A9141829] before:-z-10"
+      >
+        {highlighted}
+      </span>
+    );
+
+    lastIndex = index + fullMatch.length;
+  }
+
+  // Push remaining text
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+}
+
+export { getRelativeTime, parseStyledText };

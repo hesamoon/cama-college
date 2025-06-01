@@ -12,7 +12,7 @@ import { userAttr } from "@/utilities/userAttr";
 
 function Header() {
   return (
-    <div className="sticky top-0 z-[99999] bg-white flex items-center justify-between py-3 grid-system-level0">
+    <div className="sticky top-0 z-[99999] bg-white flex items-center justify-between py-3 grid-system-level0 border-b border-outline-level0 h-[3.75rem]">
       {/* left-side -> logo and nav */}
       <div className="flex items-center gap-10">
         {/* logo */}
@@ -20,8 +20,8 @@ function Header() {
           <Image
             src="/cama-college-logo.png"
             alt="logo"
-            width="60"
-            height="66"
+            width={43}
+            height={48}
           />
         </Link>
 

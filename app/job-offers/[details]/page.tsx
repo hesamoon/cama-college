@@ -23,11 +23,11 @@ function Page() {
 
   return (
     <div className="grid-system-level">
-      <div className="border border-outline-level0 divide-x divide-outline-level0 grid grid-cols-4">
+      <div className="border border-outline-level0 divide-x divide-outline-level0 grid grid-cols-4 h-screen">
         {/* related jobs */}
-        <div className="col-span-1">
+        <div className="col-span-1 overflow-y-auto no-scrollbar">
           {/* title */}
-          <h5 className="sticky top-[5rem] p-6 bg-white">Related Jobs</h5>
+          <h5 className="sticky top-0 p-6 bg-white">Related Jobs</h5>
 
           {/* jobs */}
           <div>
@@ -50,7 +50,7 @@ function Page() {
           </div>
         </div>
 
-        <div className="col-span-3 p-4 grid grid-cols-3 gap-6">
+        <div className="col-span-3 p-4 grid grid-cols-3 gap-6 overflow-y-auto no-scrollbar">
           <div className="col-span-2 space-y-12">
             {/* header section */}
             <div>
@@ -193,14 +193,74 @@ function Page() {
                 cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
                 In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
                 vel elit scelerisque. In egestas erat. Arcu
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+                congue mauris rhoncus aenean vel elit scelerisque. In egestas
+                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
+                vitae congue mauris rhoncus aenean vel elit In egestas
+                erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod ut labore et dolore magna aliqua. Egestas purus
+                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
+                rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
+                cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
+                In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
+                vel elit scelerisque. In egestas erat. Arcu
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+                congue mauris rhoncus aenean vel elit scelerisque. In egestas
+                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
+                vitae congue mauris rhoncus aenean vel elit In egestas
+                erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod ut labore et dolore magna aliqua. Egestas purus
+                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
+                rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
+                cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
+                In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
+                vel elit scelerisque. In egestas erat. Arcu
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+                congue mauris rhoncus aenean vel elit scelerisque. In egestas
+                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
+                vitae congue mauris rhoncus aenean vel elit In egestas
+                erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod ut labore et dolore magna aliqua. Egestas purus
+                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
+                rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
+                cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
+                In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
+                vel elit scelerisque. In egestas erat. Arcu
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+                congue mauris rhoncus aenean vel elit scelerisque. In egestas
+                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
+                vitae congue mauris rhoncus aenean vel elit In egestas
+                erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod ut labore et dolore magna aliqua. Egestas purus
+                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
+                rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
+                cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
+                In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
+                vel elit scelerisque. In egestas erat. Arcu
               </p>
             </div>
           </div>
 
           {/* card */}
-          <div className="col-span-1">
+          <div className="relative col-span-1">
             {/* card */}
-            <div className="sticky top-[6.5rem] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 space-y-6 h-fit min-w-80 max-w-fit">
+            <div className="sticky top-0 col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 space-y-6 h-fit min-w-80 max-w-fit">
               {/* Prerequisites */}
               <h3 className="title-medium text-on_surface-light px-6">
                 Prerequisites

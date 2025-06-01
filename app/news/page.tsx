@@ -126,8 +126,11 @@ function Page() {
 
       {/* slider section */}
       <div className="grid grid-cols-4 !gap-6 items-center grid-system-level0">
-        <div className="col-span-1 space-y-3">
-          <div className="relative rounded overflow-hidden">
+        <div className="col-span-1 flex flex-col gap-3">
+          <Link
+            href={`/news/This is a title for slider`}
+            className="relative rounded overflow-hidden"
+          >
             {/* Image */}
             <Image
               className="object-cover w-full"
@@ -143,9 +146,12 @@ function Page() {
 
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#2A030500] to-[#0D000166] z-10" />
-          </div>
+          </Link>
 
-          <div className="relative rounded overflow-hidden">
+          <Link
+            href={`/news/This is a title for slider`}
+            className="relative rounded overflow-hidden"
+          >
             {/* Image */}
             <Image
               className="object-cover w-full"
@@ -161,10 +167,13 @@ function Page() {
 
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#2A030500] to-[#0D000166] z-10" />
-          </div>
+          </Link>
         </div>
 
-        <div className="col-span-2 relative rounded overflow-hidden">
+        <Link
+          href={`/news/This is a title for slider`}
+          className="col-span-2 relative rounded overflow-hidden"
+        >
           {/* Image */}
           <Image
             className="object-cover w-full"
@@ -304,10 +313,13 @@ function Page() {
 
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#2A030500] to-[#0D000166] z-10" />
-        </div>
+        </Link>
 
-        <div className="col-span-1 space-y-3">
-          <div className="relative rounded overflow-hidden">
+        <div className="col-span-1 flex flex-col gap-3">
+          <Link
+            href={`/news/This is a title for slider`}
+            className="relative rounded overflow-hidden"
+          >
             {/* Image */}
             <Image
               className="object-cover w-full"
@@ -323,9 +335,12 @@ function Page() {
 
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#2A030500] to-[#0D000166] z-10" />
-          </div>
+          </Link>
 
-          <div className="relative rounded overflow-hidden">
+          <Link
+            href={`/news/This is a title for slider`}
+            className="relative rounded overflow-hidden"
+          >
             {/* Image */}
             <Image
               className="object-cover w-full"
@@ -341,7 +356,7 @@ function Page() {
 
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#2A030500] to-[#0D000166] z-10" />
-          </div>
+          </Link>
         </div>
       </div>
 

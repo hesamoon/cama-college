@@ -126,3 +126,8 @@ export interface HeaderNavProps {
   setSelNav: React.Dispatch<React.SetStateAction<HeaderNav | null>>;
   hmnu: HeaderNav;
 }
+
+export interface Node {
+  name: string;
+  children?: Node[];
+}

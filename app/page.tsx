@@ -24,8 +24,10 @@ export default function Home() {
       {userAttr()?.role === "ADMIN" ? (
         <section className="mt-14 space-y-12">
           {/* searchbox */}
-          <div className="flex items-center justify-center grid-system-level0">
-            <Searchbox />
+          <div className="w-full flex items-center justify-center">
+            <div className="w-3xl">
+              <Searchbox />
+            </div>
           </div>
 
           {/* banner */}
@@ -46,11 +48,11 @@ export default function Home() {
             </p>
           </div>
 
-          <section className="space-y-3 mt-10">
+          <section className="space-y-3 mt-10 max-w-3xl pr-4">
             {/* searchbox */}
             <Searchbox />
 
-            <div className="flex items-center gap-1 ml-7">
+            <div className="flex items-center gap-1 ml-6">
               <Image src="/star.svg" alt="star" width={16} height={16} />
               <span className="label-medium-db text-on_surface-light">
                 12034 students enrolled

@@ -9,12 +9,9 @@ import Comment from "./Comment";
 // data
 import { comments } from "@/constants/data";
 
-function CommentsSection() {
-  
-
+function CommentsSection({ stars = true }: { stars?: boolean }) {
   const [sortVal, setSortVal] = useState("Most Helpful");
   const [visibleCount, setVisibleCount] = useState(3);
-  
 
   const handleShowMore = () => {
     setVisibleCount((prev) => prev + 3);
@@ -41,7 +38,7 @@ function CommentsSection() {
       </div>
 
       {comments.slice(0, visibleCount).map((comment) => (
-        <Comment key={comment.id} comment={comment} />
+        <Comment key={comment.id} comment={comment} stars={stars} />
       ))}
 
       {visibleCount < comments.length && (
