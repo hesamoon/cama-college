@@ -38,7 +38,7 @@ function SearchBoxContainer() {
   return (
     <div className="flex-1">
       <div
-        className="bg-shades-light-90 rounded-full p-1 flex items-center justify-between gap-2"
+        className="bg-shades-light-90 hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200 p-1 flex items-center justify-between gap-2"
         onKeyDown={handleKeyDown}
       >
         <input

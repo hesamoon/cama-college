@@ -70,7 +70,7 @@ function Page() {
         </div>
 
         {/* right side / card */}
-        <div className="sticky top-[6.5rem] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
+        <div className="sticky top-[4.5rem] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
           {/* price */}
           <h3 className="header-medium text-txt-on-surface-secondary-light">
             ${eventDetails?.price} (CAD)
@@ -195,7 +195,7 @@ function Page() {
       </div>
 
       {/* tabs */}
-      <div className="sticky top-[5.6rem] bg-white z-[9999] grid-system-level1">
+      <div className="sticky top-[3.75rem] bg-white z-[9999] grid-system-level1">
         {/* tabs */}
         <div
           className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
