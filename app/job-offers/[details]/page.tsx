@@ -19,8 +19,6 @@ function Page() {
     (job) => job.title === decodeURIComponent(pathname.split("/")[2])
   );
 
-  console.log(jobDetails);
-
   return (
     <div className="grid-system-level">
       <div className="border border-outline-level0 divide-x divide-outline-level0 grid grid-cols-4 h-screen">

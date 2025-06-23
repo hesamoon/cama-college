@@ -13,6 +13,7 @@ type Props = {
   height?: number;
   size?: string;
   padding?: string;
+  hover?: string;
   clickHandler?: () => void;
 };
 
@@ -28,6 +29,7 @@ function Button({
     height = 24,
     size = "body-large",
     padding = "p-2",
+    hover = "hover:bg-primary-opacity-40 focus:bg-primary-opacity-12",
     clickHandler = () => {},
   },
 }: {
@@ -35,7 +37,7 @@ function Button({
 }) {
   return (
     <button
-      className={`flex items-center justify-center gap-1 rounded-full transition-all duration-300 hover:bg-primary-opacity-40 focus:bg-primary-opacity-12 ${padding} ${size} ${
+      className={`flex items-center justify-center gap-1 rounded-full transition-all duration-300 ${hover} ${padding} ${size} ${
         disabled ? "opacity-40 hover:bg-transparent" : "cursor-pointer"
       } text-primary-shades-80 ${
         type === "filled"

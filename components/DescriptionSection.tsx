@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+// data
+import { days } from "@/constants/data";
+
 function DescriptionSection() {
   return (
     <div id="Description" className="space-y-8 pt-8">
@@ -93,6 +96,45 @@ function DescriptionSection() {
                   Lorem ipsum dolor sit amet, consectetur.
                 </span>
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* schedule */}
+      <div className="space-y-3">
+        {/* title */}
+
+        <h4 className="title-medium text-txt-on-surface-secondary-light">
+          Schedule
+        </h4>
+
+        <div className="grid grid-cols-7 items-center gap-6">
+          {days.slice(0, 7).map((day) => (
+            <div
+              key={day.id}
+              className={`relative h-full border border-outline-level1 py-4 rounded flex flex-col items-center justify-center ${
+                day.haveClass
+                  ? "bg-background-primary-light text-txt-on-primary-dark"
+                  : "bg-transparent text-txt-on-surface-secondary-light"
+              }`}
+            >
+              <h5 className="uppercase label-medium">
+                {new Date(day.date).toLocaleString("en-us", {
+                  weekday: "short",
+                })}
+              </h5>
+              {day.id === 5 || day.id === 8 ? (
+                <h5 className="label-large-db whitespace-nowrap">12:00 - 14:00</h5>
+              ) : null}
+
+              {day.newEvents.length > 0 ? (
+                <div className="absolute top-1 right-1 flex items-center gap-0.5">
+                  {day.newEvents.map((e) => (
+                    <div key={e} className="w-2 h-2 rounded-full bg-green" />
+                  ))}
+                </div>
+              ) : null}
             </div>
           ))}
         </div>

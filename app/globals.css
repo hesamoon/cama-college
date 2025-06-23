@@ -91,6 +91,8 @@
   --shades_light_80: #eaeaea;
   --shades_light_90: #f3f3f3;
 
+  --on-surface: #18191b;
+
   --low-important: #757575;
 
   --green: #34c759;
@@ -279,7 +281,7 @@
     @apply aspect-[6/7];
   }
 
-   /* Hide scrollbar for Chrome, Safari and Opera */
+  /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -361,6 +363,7 @@
   --color-txt-low-important: var(--low-important);
   --color-txt-secondary: var(--secondary);
   --color-surface0-light: var(--shades_light_90);
+  --color-on-surface: var(--on-surface);
 
   --color-green: var(--green);
 

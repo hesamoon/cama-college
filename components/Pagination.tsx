@@ -16,14 +16,26 @@ export default function Pagination({
   };
 
   const getPageNumbers = () => {
-    const range = [];
-    const maxVisible = 5;
-    let start = Math.max(1, currentPage - 2); // -> 1
-    const end = Math.min(totalPages, start + maxVisible - 1); // -> 2
-    if (end - start < maxVisible - 1) start = Math.max(1, end - maxVisible + 1);
-    for (let i = start; i <= end; i++) range.push(i);
+    const pages: (number | string)[] = [];
 
-    return range;
+    if (totalPages <= 6) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+      return pages;
+    }
+
+    // Always include first 3 pages
+    pages.push(1, 2, 3);
+
+    if (currentPage >= 4 && currentPage <= totalPages - 3) {
+      pages.push(currentPage);
+    } else {
+      pages.push("...");
+    }
+
+    // Always include last 3 pages
+    pages.push(totalPages - 2, totalPages - 1, totalPages);
+
+    return pages;
   };
 
   return (
@@ -74,7 +86,18 @@ export default function Pagination({
                 : "text-[#9B9798]"
             }`}
           >
-            {page}
+            {page === "..." ? (
+              <div className=" flex items-center gap-1">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-1 h-1 rounded-full bg-outline-level1"
+                  />
+                ))}
+              </div>
+            ) : (
+              page
+            )}
           </button>
         ))}
       </div>

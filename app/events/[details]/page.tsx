@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { act, use, useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -48,6 +48,10 @@ function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  console.log(
+    document.getElementById("Comments")?.getBoundingClientRect().width
+  );
+
   return (
     <div className="space-y-6">
       {/* top section -> cover, title / cart */}
@@ -56,7 +60,7 @@ function Page() {
           {/* cover, title */}
           <div className="space-y-8">
             <Image
-              className="rounded-sm aspect-16-9 object-cover"
+              className="rounded-sm aspect-16-9 object-cover w-full"
               src={`/${eventDetails?.coverImg}.png`}
               alt={`${eventDetails?.coverImg}`}
               width={781}
@@ -67,6 +71,93 @@ function Page() {
               {eventDetails?.name}
             </h1>
           </div>
+
+          {/* tabs */}
+          {/* <div
+            className={`${
+              activeTab === "Comments" || activeTab === "Related Events"
+                ? "fixed"
+                : "sticky"
+            } top-[3.75rem] z-[9999] grid-system-level1 bg-red-100`}
+          > */}
+          {/* tabs */}
+          <div
+            className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out bg-white ${
+              activeTab === "Comments" || activeTab === "Related Events"
+                ? "fixed"
+                : "sticky"
+            } top-[3.7rem] z-[9999]`}
+            style={{
+              width:
+                document.getElementById("Comments")?.getBoundingClientRect()
+                  .width - 235,
+            }}
+          >
+            <div className="flex items-center gap-2">
+              {tabs.map((tab) => (
+                <div key={tab}>
+                  <button
+                    className={`whitespace-nowrap py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
+                      activeTab === tab
+                        ? "text-background-primary-light border-b border-background-primary-light"
+                        : "text-txt-on-surface-terriary-light"
+                    }`}
+                    onClick={() => {
+                      const element = document.getElementById(tab);
+                      if (element) {
+                        const yOffset = -117; // scroll 117px *above* the element
+                        const y =
+                          element.getBoundingClientRect().top +
+                          window.pageYOffset +
+                          yOffset;
+
+                        window.scrollTo({ top: y, behavior: "smooth" });
+                      }
+                    }}
+                  >
+                    {tab}
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div
+              className={`transition-all duration-300 ease-linear overflow-hidden ${
+                activeTab === "Comments" || activeTab === "Related Events"
+                  ? "opacity-100 pointer-events-auto"
+                  : "opacity-0 pointer-events-none"
+              } flex items-center gap-1`}
+            >
+              <Button
+                props={{
+                  value: "Get Ticket",
+                  type: "filled",
+                  color: "red",
+                  disabled: false,
+                  leftIcon: "",
+                  rightIcon: "",
+                  padding: "py-2 px-4 w-full",
+                  size: "body-large",
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            </div>
+          </div>
+          {/* </div> */}
+
+          {/* <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4"> */}
+          <div className="col-span-2 space-y-6">
+            {/* description */}
+            <DescriptionSection />
+
+            {/* location */}
+            <LocationSection />
+
+            {/* speakers */}
+            <SpeakersSection />
+          </div>
+          {/* </div> */}
         </div>
 
         {/* right side / card */}
@@ -191,82 +282,6 @@ function Page() {
               />
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* tabs */}
-      <div className="sticky top-[3.75rem] bg-white z-[9999] grid-system-level1">
-        {/* tabs */}
-        <div
-          className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
-            activeTab === "Comments" || activeTab === "Related Events"
-              ? "w-full"
-              : "w-2/3"
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {tabs.map((tab) => (
-              <div key={tab}>
-                <button
-                  className={`py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
-                    activeTab === tab
-                      ? "text-background-primary-light border-b border-background-primary-light"
-                      : "text-txt-on-surface-terriary-light"
-                  }`}
-                  onClick={() => {
-                    const element = document.getElementById(tab);
-                    if (element) {
-                      const yOffset = -117; // scroll 117px *above* the element
-                      const y =
-                        element.getBoundingClientRect().top +
-                        window.pageYOffset +
-                        yOffset;
-
-                      window.scrollTo({ top: y, behavior: "smooth" });
-                    }
-                  }}
-                >
-                  {tab}
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div
-            className={`transition-all duration-300 ease-linear overflow-hidden ${
-              activeTab === "Comments" || activeTab === "Related Events"
-                ? "opacity-100 pointer-events-auto"
-                : "opacity-0 pointer-events-none"
-            } flex items-center gap-1`}
-          >
-            <Button
-              props={{
-                value: "Get Ticket",
-                type: "filled",
-                color: "red",
-                disabled: false,
-                leftIcon: "",
-                rightIcon: "",
-                padding: "py-2 px-4 w-full",
-                size: "body-large",
-                height: 20,
-                width: 20,
-              }}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
-        <div className="col-span-2 space-y-6">
-          {/* description */}
-          <DescriptionSection />
-
-          {/* location */}
-          <LocationSection />
-
-          {/* speakers */}
-          <SpeakersSection />
         </div>
       </div>
 

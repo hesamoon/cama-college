@@ -86,7 +86,7 @@ function ProfileNavs() {
         ))}
       </ul>
 
-      <div className="flex items-center justify-center py-32">
+      <div className="flex items-center justify-center py-16">
         <Button
           props={{
             value: "Logout",

@@ -32,6 +32,34 @@ export interface Program {
   category: string;
 }
 
+type Lesson = {
+  id: number;
+  title: string;
+  type: string;
+  content: string;
+  passed: number;
+};
+
+type Content = {
+  id: number;
+  title: string;
+  lessons: Lesson[];
+};
+
+export interface ProgramInProgress {
+  id: number;
+  coverImg: string;
+  name: string;
+  level: string;
+  type: string;
+  type2: string;
+  duration: number;
+  progress: number;
+  publishDate: string;
+  category: string;
+  contents: Content[];
+}
+
 export interface CourseCardProps {
   type: string;
   data: {
@@ -100,6 +128,23 @@ type News = {
   author: string;
   publishDate: string;
   description1: DescriptionItem[];
+};
+
+type Article = {
+  id: number;
+  type: string;
+  title: string;
+  desc: string;
+  year: number;
+  author: string;
+  open: boolean;
+};
+
+type Member = {
+  id: number;
+  name: string;
+  role: string;
+  desc: string;
 };
 
 type MenuDesc = {

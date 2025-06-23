@@ -7,10 +7,13 @@ export default function layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
+
   return (
-    <div className="grid-system-level grid grid-cols-5 border rounded-t-sm border-outline-level0 divide-x divide-outline-level0">
+    <div className="h-screen grid-system-level grid grid-cols-5 border rounded-t-sm border-outline-level0 divide-x divide-outline-level0">
       {/* left side */}
-      <div className="h-fit col-span-1 py-7 px-4 space-y-6">
+      <div className="col-span-1 py-7 px-4 space-y-6 overflow-y-auto no-scrollbar">
         {/* profile, number, name, apply button */}
         <UserProfile />
 
@@ -22,7 +25,7 @@ export default function layout({
       </div>
 
       {/* right side / details */}
-      <div className="col-span-4 w-full py-7 space-y-12">
+      <div className="col-span-4 w-full py-7 space-y-12 overflow-y-auto no-scrollbar">
         {children}
       </div>
     </div>

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Button from "./Button";
+// import Button from "./Button";
 
 function ContentSection() {
   return (
-    <div id="Content" className="space-y-4 pt-8">
+    <div id="Content" className="space-y-4 pt-20">
       <div className="space-y-2">
         {/* hours */}
         <div className="grid grid-cols-4 gap-6">
@@ -21,7 +21,7 @@ function ContentSection() {
         </div>
 
         {/* subjects */}
-        <div className="border border-outline-level1 rounded p-6 space-y-6">
+        {/* <div className="border border-outline-level1 rounded p-6 space-y-6">
           <h3 className="title-medium text-on_surface-light">Subjects</h3>
 
           <div className="space-y-10">
@@ -77,7 +77,7 @@ function ContentSection() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Instructor */}

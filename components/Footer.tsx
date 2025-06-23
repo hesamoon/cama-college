@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-
+// components
 import StaticMap from "./StaticMap";
+import MoreDetailsP from "./MoreDetailsP";
 
 function Footer() {
   return (
@@ -27,8 +28,10 @@ function Footer() {
               <h4 className="title-medium text-on_surface-light">About</h4>
 
               <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
-                <li>About Us</li>
-                <li>Contact</li>
+                <li>
+                  <Link href="/team">About Us</Link>
+                </li>
+                <li><Link href="/contact-us">Contact</Link></li>
                 <li>Tagline</li>
                 <li>Professor TUUM</li>
                 <li>Identity Chart</li>
@@ -68,13 +71,12 @@ function Footer() {
           {/* about us description*/}
           <div className="space-y-2 mt-16">
             <h4 className="title-medium text-on_surface-light">About Us</h4>
-            <p className="body-large text-txt-on-surface-secondary-light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-              congue mauris. In{" "}
-              <span className="text-background-primary-light">more...</span>
-            </p>
+
+            <MoreDetailsP
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In"
+              textStyle="body-large text-txt-on-surface-secondary-light"
+              href="/team"
+            />
           </div>
         </div>
 

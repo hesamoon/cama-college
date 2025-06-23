@@ -337,7 +337,7 @@ function Page() {
       </div>
 
       {/* apply */}
-      <section className="flex items-center justify-center">
+      <section className="flex items-center justify-center mt-20">
         <div className="grid-system-level1 relative bg-primary-tints-90 grid grid-cols-2 gap-8 overflow-hidden py-10">
           <div className="col-span-1 z-[999] space-y-4">
             <div className="space-y-3">

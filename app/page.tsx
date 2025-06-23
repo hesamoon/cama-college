@@ -68,11 +68,9 @@ export default function Home() {
           <SectionTitle title="New Programs" path="/programs" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {programs
-              .filter((program) => program.id <= 4)
-              .map((program) => (
-                <CourseCard key={program.id} data={program} type="programs" />
-              ))}
+            {programs.slice(0, 4).map((program) => (
+              <CourseCard key={program.id} data={program} type="programs" />
+            ))}
           </div>
         </div>
 
@@ -129,7 +127,7 @@ export default function Home() {
         <SectionTitle title="New Events" path="/events" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {events.map((event) => (
+          {events.slice(0, 4).map((event) => (
             <CourseCard key={event.id} data={event} type="events" />
           ))}
         </div>
@@ -183,20 +181,22 @@ export default function Home() {
             </p>
           </div>
 
-          <Button
-            props={{
-              value: "View Conditions",
-              color: "red",
-              disabled: false,
-              leftIcon: "",
-              rightIcon: "arrow-right-red",
-              type: "outlined",
-              width: 24,
-              height: 24,
-              size: "body-large",
-              padding: "px-8 py-2",
-            }}
-          />
+          <Link href="/work-with-us">
+            <Button
+              props={{
+                value: "View Conditions",
+                color: "red",
+                disabled: false,
+                leftIcon: "",
+                rightIcon: "arrow-right-red",
+                type: "outlined",
+                width: 24,
+                height: 24,
+                size: "body-large",
+                padding: "px-8 py-2",
+              }}
+            />
+          </Link>
         </div>
 
         <div className="col-span-1 flex items-center justify-center gap-6">

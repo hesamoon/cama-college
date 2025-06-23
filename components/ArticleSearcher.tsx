@@ -6,13 +6,11 @@ import { useQueryState } from "nuqs";
 // components
 import Button from "./Button";
 
-function JobSearcher() {
+function ArticleSearcher() {
   const [search, setSearch] = useQueryState("search", { defaultValue: "" });
-  const [job, setJob] = useQueryState("job-group", { defaultValue: "" });
-  const [city, setCity] = useQueryState("city", { defaultValue: "" });
+  const [since, setSince] = useQueryState("since", { defaultValue: "" });
 
-  const [jobVal, setJobVal] = useState(job);
-  const [cityVal, setCityVal] = useState(city);
+  const [sinceVal, setSinceVal] = useState(since);
   const [searchVal, setSearchVal] = useState(search);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -24,8 +22,7 @@ function JobSearcher() {
 
   const searchClickHandler = () => {
     setSearch(searchVal.trim().replace(/\s+/g, " ").trim());
-    setJob(jobVal);
-    setCity(cityVal.trim().replace(/\s+/g, " ").trim());
+    setSince(sinceVal.trim().replace(/\s+/g, " ").trim());
   };
 
   return (
@@ -36,39 +33,21 @@ function JobSearcher() {
       {/* title */}
       <input
         type="text"
-        placeholder="Job or Company title..."
+        placeholder="Search in articles..."
         value={searchVal}
         onChange={(e) => setSearchVal(e.target.value)}
         className="px-4 py-4 outline-none hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200"
       />
 
-      <div className="w-[1px] h-[32px] bg-[#CECECE]" />
-
-      {/* select options */}
-      <div className="flex items-center pr-4 hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200">
-        <select
-          className="px-4 py-4 outline-none"
-          value={jobVal}
-          onChange={(e) => {
-            setJobVal(e.target.value);
-          }}
-        >
-          <option value="">Select Job Group</option>
-          <option value="IT">IT</option>
-          <option value="Crypto">Crypto</option>
-          <option value="Remote">Remote</option>
-        </select>
-      </div>
-
-      <div className="w-[1px] h-[32px] bg-[#CECECE]" />
+      <div className="w-[1px] h-[16px] bg-[#EAEAEA]" />
 
       <div className="flex items-center p-1 justify-between gap-1 hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200">
-        {/* city */}
+        {/* since when */}
         <input
           type="text"
-          placeholder="City..."
-          value={cityVal}
-          onChange={(e) => setCityVal(e.target.value)}
+          placeholder="since when?"
+          value={sinceVal}
+          onChange={(e) => setSinceVal(e.target.value)}
           className="px-4 py-3 outline-none"
         />
 
@@ -93,4 +72,4 @@ function JobSearcher() {
   );
 }
 
-export default JobSearcher;
+export default ArticleSearcher;

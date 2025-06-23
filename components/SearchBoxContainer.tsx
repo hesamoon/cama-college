@@ -7,7 +7,13 @@ import { usePathname } from "next/navigation";
 // components
 import Button from "./Button";
 
-function SearchBoxContainer() {
+function SearchBoxContainer({
+  placeholder,
+  isSearchCourse = false,
+}: {
+  placeholder?: string;
+  isSearchCourse?: boolean;
+}) {
   const [search, setSearch] = useQueryState("search", { defaultValue: "" });
   const [type, setType] = useQueryState("type", { defaultValue: "" });
 
@@ -28,11 +34,13 @@ function SearchBoxContainer() {
   };
 
   if (
-    (pathname !== "/programs" &&
-      pathname.includes("/profile/transaction") &&
-      pathname !== "/events") ||
-    pathname === "/" ||
-    pathname === "/job-offers"
+    !isSearchCourse &&
+    ((pathname !== "/programs" && pathname.includes("/profile/programs")) ||
+      (pathname.includes("/profile/transaction") && pathname !== "/events") ||
+      pathname.includes("/profile/events") ||
+      pathname === "/" ||
+      pathname === "/job-offers" ||
+      pathname.includes("/articles"))
   )
     return null;
   return (
@@ -44,7 +52,9 @@ function SearchBoxContainer() {
         <input
           type="text"
           placeholder={
-            pathname === "/events"
+            placeholder
+              ? placeholder
+              : pathname === "/events"
               ? "Search in Events..."
               : pathname === "/programs"
               ? "Search in Programs..."
