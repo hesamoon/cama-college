@@ -242,7 +242,7 @@ function Page() {
 
           <div className="flex flex-col gap-1">
             <h6 className="pl-4 body-medium text-txt-on-surface-secondary">
-              Please let us know what's on your mind. Have a question for us?
+              Please let us know what&#39;s on your mind. Have a question for us?
               Ask away. <span className="text-background-primary-light">*</span>
             </h6>
 
