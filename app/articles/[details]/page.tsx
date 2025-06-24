@@ -10,7 +10,7 @@ import { parseStyledText } from "@/utilities/utils";
 
 function Page() {
   const pathname = usePathname();
-  const { type, title, desc, year, author, open } = articles.find(
+  const { title, year, author, open } = articles.find(
     (article) => article.title === decodeURIComponent(pathname.split("/")[2])
   );
 
