@@ -87,11 +87,11 @@ function Page() {
                 ? "fixed"
                 : "sticky"
             } top-[3.7rem] z-[9999]`}
-            style={{
-              width:
-                document.getElementById("Comments")?.getBoundingClientRect()
-                  .width - 235,
-            }}
+            // style={{
+            //   width:
+            //     document.getElementById("Comments")?.getBoundingClientRect()
+            //       .width - 235,
+            // }}
           >
             <div className="flex items-center gap-2">
               {tabs.map((tab) => (
