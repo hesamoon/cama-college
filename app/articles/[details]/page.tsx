@@ -10,9 +10,10 @@ import { parseStyledText } from "@/utilities/utils";
 
 function Page() {
   const pathname = usePathname();
-  const { title, year, author, open } = articles.find(
+  const articleDetails = articles.find(
     (article) => article.title === decodeURIComponent(pathname.split("/")[2])
   );
+  const { title, year, author, open } = articleDetails!;
 
   return (
     <div className="grid-system-level3 space-y-10 py-10">
