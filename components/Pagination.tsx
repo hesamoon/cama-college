@@ -79,7 +79,7 @@ export default function Pagination({
         {getPageNumbers().map((page) => (
           <button
             key={page}
-            onClick={() => goToPage(page)}
+            onClick={() => goToPage(+page)}
             className={`px-3 py-1 rounded-xs cursor-pointer ${
               page === currentPage
                 ? "bg-[#FCE8E9] text-[#A91418]"
