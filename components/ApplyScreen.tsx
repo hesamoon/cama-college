@@ -76,7 +76,7 @@ export default function ApplyScreen() {
   }, []);
 
   useEffect(() => {
-    const scroll = new LocomotiveScroll();
+    new LocomotiveScroll();
   }, []);
 
   return (
