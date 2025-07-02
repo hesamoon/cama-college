@@ -6,7 +6,7 @@ import Button from "./Button";
 function ApplyBanner() {
   return (
     <div className="relative bg-primary-tints-90 rounded-lg grid grid-cols-2 pt-12 pb-2 gap-8 overflow-hidden">
-      <div className="col-span-1 z-[999] pl-20">
+      <div className="col-span-1 z-30 pl-20">
         <h2 className="header-large text-on_surface-light">
           Apply for admissions
         </h2>

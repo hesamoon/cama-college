@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-background h-screen flex flex-col justify-between">
+      <body className="bg-background h-screen flex flex-col justify-between overflow-x-hidden">
         <DisableInteractions />
         <NuqsAdapter>
           <div>

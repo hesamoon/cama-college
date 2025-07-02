@@ -92,7 +92,7 @@ function ContentSection() {
           </p>
         </div>
 
-        <div className="p-4 col-span-1 flex items-center justify-center z-[999]">
+        <div className="p-4 col-span-1 flex items-center justify-center z-30">
           <Image
             src="/credential.png"
             alt="credential"

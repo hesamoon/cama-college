@@ -1,13 +1,22 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+
 // components
 import Button from "./Button";
 
 // utils
 import { setCookie } from "@/utilities/cookie";
 
-function LoginButtons() {
+function LoginButtons({
+  color = "black",
+  type = "outlined",
+  icon = "login",
+}: {
+  color?: string;
+  type?: string;
+  icon?: string;
+}) {
   const router = useRouter();
 
   return (
@@ -15,11 +24,11 @@ function LoginButtons() {
       <Button
         props={{
           value: "Login | Signup",
-          leftIcon: "login",
+          leftIcon: icon,
           rightIcon: "",
-          type: "outlined",
+          type: type,
           disabled: false,
-          color: "black",
+          color: color,
           width: 24,
           height: 24,
           size: "body-large",

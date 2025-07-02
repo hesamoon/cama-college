@@ -215,7 +215,7 @@ function Page() {
       </div>
 
       {/* tabs */}
-      <div className="sticky top-[3.75rem] bg-white z-[9999] grid-system-level1">
+      <div className="sticky top-[3.75rem] bg-white z-[35] grid-system-level1">
         {/* tabs */}
         <div
           className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
@@ -339,7 +339,7 @@ function Page() {
       {/* apply */}
       <section className="flex items-center justify-center mt-20">
         <div className="grid-system-level1 relative bg-primary-tints-90 grid grid-cols-2 gap-8 overflow-hidden py-10">
-          <div className="col-span-1 z-[999] space-y-4">
+          <div className="col-span-1 z-30 space-y-4">
             <div className="space-y-3">
               <h2 className="title-large text-on_surface-light">
                 Apply to easy access to Programs

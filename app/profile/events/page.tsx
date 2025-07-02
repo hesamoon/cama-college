@@ -93,9 +93,19 @@ function Page() {
 
             {/* courses */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {controlledList.map((item) => (
-                <CourseCard key={item.id} data={item} type="events" />
-              ))}
+              {controlledList.length > 0 ? (
+                controlledList.map((item) => (
+                  <CourseCard key={item.id} data={item} type="events" />
+                ))
+              ) : filter || search ? (
+                <h5 className="col-span-8 p-3 text-center">
+                  Event not found!
+                </h5>
+              ) : (
+                <h5 className="col-span-8 p-3 text-center">
+                  You don&#39;t have any event yet!
+                </h5>
+              )}
             </div>
           </div>
         </div>

@@ -25,6 +25,13 @@ function page() {
 
   const [transactionList, setTransactionList] = useState<Transaction[]>([]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setSearch(searchVal.trim().replace(/\s+/g, " ").trim());
+    }
+  };
+
   useEffect(() => {
     setTransactionList(
       transactions.filter((transaction) =>
@@ -94,7 +101,10 @@ function page() {
         {/* search, sort, filter */}
         <div className="flex items-center justify-between">
           {/* search */}
-          <div className="bg-shades-light-90 flex items-center justify-between gap-2 w-1/3 rounded-full p-1">
+          <div
+            className="bg-shades-light-90 flex items-center justify-between gap-2 w-1/3 rounded-full p-1"
+            onKeyDown={handleKeyDown}
+          >
             <input
               type="text"
               placeholder="Search in Transactions..."

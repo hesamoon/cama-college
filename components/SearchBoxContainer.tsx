@@ -39,6 +39,7 @@ function SearchBoxContainer({
       (pathname.includes("/profile/transaction") && pathname !== "/events") ||
       pathname.includes("/profile/events") ||
       pathname === "/" ||
+      pathname === "/apply" ||
       pathname === "/job-offers" ||
       pathname.includes("/articles"))
   )

@@ -177,7 +177,7 @@ function page() {
             <div
               ref={containerRef}
               onScroll={handleScroll}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-auto h-screen no-scrollbar py-14"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-auto h-screen no-scrollbar"
             >
               {eventList.map((event) => (
                 <CourseCard key={event.id} data={event} type="events" />
@@ -195,7 +195,7 @@ function page() {
             <div
               aria-label="Loading..."
               role="status"
-              className="flex items-center justify-center pb-14"
+              className="flex items-center justify-center py-14"
             >
               <svg
                 className="h-12 w-12 animate-spin stroke-[#a91418]"

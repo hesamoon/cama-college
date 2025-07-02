@@ -89,9 +89,19 @@ function Page() {
 
             {/* courses */}
             <div className="space-y-3">
-              {controlledList.map((pIP) => (
-                <CourseInProgress key={pIP.id} courseDetails={pIP} />
-              ))}
+              {controlledList.length > 0 ? (
+                controlledList.map((pIP) => (
+                  <CourseInProgress key={pIP.id} courseDetails={pIP} />
+                ))
+              ) : filter || search ? (
+                <h5 className="col-span-8 p-3 text-center">
+                  Program not found!
+                </h5>
+              ) : (
+                <h5 className="col-span-8 p-3 text-center">
+                  You don&#39;t have any program yet!
+                </h5>
+              )}
             </div>
           </div>
         </div>

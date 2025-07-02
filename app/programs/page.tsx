@@ -199,7 +199,7 @@ function Page() {
           </div>
         ) : (
           <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center">
-            <h3 className="body-large text-txt-on-surface-terriary-light">
+            <h3 className="body-large text-txt-on-surface-terriary-light py-10">
               {search || type ? "Program not found" : "No Programs"}
             </h3>
           </div>

@@ -86,7 +86,7 @@ function Page() {
               activeTab === "Comments" || activeTab === "Related Events"
                 ? "fixed"
                 : "sticky"
-            } top-[3.7rem] z-[9999]`}
+            } top-[3.7rem] z-[35]`}
             // style={{
             //   width:
             //     document.getElementById("Comments")?.getBoundingClientRect()
@@ -320,7 +320,7 @@ function Page() {
       {/* apply */}
       <section className="flex items-center justify-center">
         <div className="grid-system-level1 relative bg-primary-tints-90 grid grid-cols-2 gap-8 overflow-hidden py-10">
-          <div className="col-span-1 z-[999] space-y-4">
+          <div className="col-span-1 z-30 space-y-4">
             <div className="space-y-3">
               <h2 className="title-large text-on_surface-light">
                 Apply to easy access to Programs

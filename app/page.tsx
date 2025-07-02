@@ -223,7 +223,7 @@ export default function Home() {
 
       <section className="hero2 grid-system-level0">
         <div className="flex items-center justify-between text-white font-bold text-xl py-9">
-          <div className="flex flex-col items-start gap-3 z-[999]">
+          <div className="flex flex-col items-start gap-3 z-30">
             <h3 className="title-medium text-primary-shades-90">
               Credential inquiry
             </h3>
@@ -233,7 +233,7 @@ export default function Home() {
           </div>
 
           {/* credential inquiry */}
-          <div className="z-[999]">
+          <div className="z-30">
             <CredentialInquiry />
           </div>
         </div>
