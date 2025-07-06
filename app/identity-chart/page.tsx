@@ -64,7 +64,7 @@ function OrgChart() {
 function TreeNode({ node }: { node: Node }) {
   const hasChildren = node.children && node.children.length > 0;
 
-  const nodeRef = useRef(null);
+  const nodeRef = useRef<HTMLDivElement | null>(null);
 
   const [size, setSize] = useState(0);
 
