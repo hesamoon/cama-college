@@ -1307,6 +1307,7 @@ const orgChart = {
       name: "Professional Identity",
       children: [{ name: "Consultative / Advisory Arm" }],
     },
+    
   ],
 };
 
@@ -1324,7 +1325,7 @@ const articles = [
     id: 2,
     type: "Review",
     title: "AI Security Continuum: Concept and Challenges 2",
-    desc: "Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis. Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat",
+    desc: "Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis. Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placeratLorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat duis. Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac enim. Pellentesque volutpat sagittis ullamcorper orci viverra dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper cursus auctor habitasse malesuada vel faucibus urna placerat",
     year: 2025,
     author: "Rachael L. Fleurence, Xiaoyan Wang, Jagpreet Chhatwal",
     open: false,

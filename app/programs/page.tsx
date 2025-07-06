@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
 
@@ -21,16 +21,16 @@ import {
 import { Program } from "../types/types";
 
 function Page() {
-  const [sortVal, setSortVal] = useState("Newest");
-  const [programList, setProgramList] = useState<Program[]>([]);
-  const [search] = useQueryState("search", { defaultValue: "" });
-  const [type] = useQueryState("type", { defaultValue: "" });
   const [category, setCategory] = useQueryState("category");
+  const [type] = useQueryState("type", { defaultValue: "" });
+  const [search] = useQueryState("search", { defaultValue: "" });
+
+  const [sortVal, setSortVal] = useState("Newest");
   const [numOfScroll, setNumOfScroll] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [programList, setProgramList] = useState<Program[]>([]);
 
   const [loading, setLoading] = useState(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const loadMore = () => {
     setLoading(true);
@@ -41,25 +41,13 @@ function Page() {
           0,
           numOfScroll === LIMITNUMBEROFSCROLL
             ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
-            : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
+            : LIMITOfLOADEDLIST * (numOfScroll === 0 ? 1 : numOfScroll) +
+                LIMITOfLOADEDLIST
         )
       );
       setNumOfScroll((prev) => prev + 1);
       setLoading(false);
     }, 1000); // simulate loading
-  };
-
-  const handleScroll = () => {
-    const container = containerRef.current;
-    if (!container || loading) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = container;
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
-      if (numOfScroll === LIMITNUMBEROFSCROLL + 1) return;
-      else {
-        loadMore();
-      }
-    }
   };
 
   useEffect(() => {
@@ -122,7 +110,22 @@ function Page() {
     );
   }, []);
 
-  console.log(programList);
+  useEffect(() => {
+    const handleWindowScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.body.scrollHeight;
+
+      if (scrollTop + windowHeight >= documentHeight - 600 && !loading) {
+        if (numOfScroll <= LIMITNUMBEROFSCROLL) {
+          loadMore();
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleWindowScroll);
+    return () => window.removeEventListener("scroll", handleWindowScroll);
+  }, [loading, numOfScroll]);
 
   return (
     <div className="">
@@ -188,11 +191,7 @@ function Page() {
       {/* programs */}
       <div className="grid-system-level0">
         {programList.length > 0 ? (
-          <div
-            ref={containerRef}
-            onScroll={handleScroll}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-auto h-screen no-scrollbar py-14"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-14">
             {programList.map((program) => (
               <CourseCard key={program.id} data={program} type="programs" />
             ))}

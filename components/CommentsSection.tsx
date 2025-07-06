@@ -18,7 +18,7 @@ function CommentsSection({ stars = true }: { stars?: boolean }) {
   };
 
   return (
-    <div className="space-y-8">
+    <div id="Comments" className="space-y-8">
       {/* sort */}
       <div className="flex items-center w-fit border border-outline1 rounded py-0.5 pl-3 pr-4">
         <span className="body-large text-txt-on-surface-terriary-light">

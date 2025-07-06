@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
 
@@ -30,7 +30,6 @@ function page() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [loading, setLoading] = useState(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const loadMore = () => {
     setLoading(true);
@@ -41,7 +40,8 @@ function page() {
           0,
           numOfScroll === LIMITNUMBEROFSCROLL
             ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
-            : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
+            : LIMITOfLOADEDLIST * (numOfScroll === 0 ? 1 : numOfScroll) +
+                LIMITOfLOADEDLIST
         )
       );
       setNumOfScroll((prev) => prev + 1);
@@ -49,18 +49,22 @@ function page() {
     }, 1000); // simulate loading
   };
 
-  const handleScroll = () => {
-    const container = containerRef.current;
-    if (!container || loading) return;
+  useEffect(() => {
+    const handleWindowScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.body.scrollHeight;
 
-    const { scrollTop, scrollHeight, clientHeight } = container;
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
-      if (numOfScroll === LIMITNUMBEROFSCROLL + 1) return;
-      else {
-        loadMore();
+      if (scrollTop + windowHeight >= documentHeight - 600 && !loading) {
+        if (numOfScroll <= LIMITNUMBEROFSCROLL) {
+          loadMore();
+        }
       }
-    }
-  };
+    };
+
+    window.addEventListener("scroll", handleWindowScroll);
+    return () => window.removeEventListener("scroll", handleWindowScroll);
+  }, [loading, numOfScroll]);
 
   useEffect(() => {
     setEventList(
@@ -174,11 +178,7 @@ function page() {
         {/* events */}
         <div className="grid-system-level0">
           {eventList.length > 0 ? (
-            <div
-              ref={containerRef}
-              onScroll={handleScroll}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-auto h-screen no-scrollbar"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {eventList.map((event) => (
                 <CourseCard key={event.id} data={event} type="events" />
               ))}

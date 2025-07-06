@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 // types
@@ -5,10 +8,11 @@ import { Article } from "@/app/types/types";
 
 // components
 import Button from "./Button";
-import MoreDetailsP from "./MoreDetailsP";
 
 function ArticlePreview({ data }: { data: Article }) {
   const { type, title, desc, year, author, open } = data;
+
+  const [moreClicked, setMoreClicked] = useState(false);
 
   return (
     <div className="space-y-4 py-2">
@@ -18,15 +22,34 @@ function ArticlePreview({ data }: { data: Article }) {
           <h2 className="title-medium text-on_surface-light">{title}</h2>
         </Link>
 
-        <div className="bg-[#FCE8E95C] border-l-2 border-background-primary-light rounded p-5.5">
+        <div
+          className="bg-[#FCE8E95C] border-l-2 border-background-primary-light rounded p-5.5 cursor-pointer"
+          onClick={() => setMoreClicked((prev) => !prev)}
+        >
           {desc.length <= 523 ? (
             <p className="text-justify body-large text-txt-secondary">{desc}</p>
           ) : (
-            <MoreDetailsP
-              text={desc.slice(0, 523)}
-              textStyle="text-justify body-large text-txt-secondary"
-              href={`/articles/${title}`}
-            />
+            <div className="">
+              <p
+                className={`inline text-justify body-large text-txt-secondary`}
+              >
+                {moreClicked ? desc : `${desc.slice(0, 523)}...`}
+              </p>
+
+              <Button
+                props={{
+                  value: moreClicked ? "less" : "more",
+                  disabled: false,
+                  leftIcon: "",
+                  rightIcon: "",
+                  type: "text",
+                  color: "red",
+                  size: "body-large !inline",
+                  padding: "px-3 py-0",
+                  clickHandler: () => setMoreClicked((prev) => !prev),
+                }}
+              />
+            </div>
           )}
         </div>
       </div>

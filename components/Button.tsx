@@ -55,7 +55,10 @@ function Button({
           : null
       }`}
       disabled={disabled}
-      onClick={clickHandler}
+      onClick={(e) => {
+        e.stopPropagation();
+        clickHandler();
+      }}
     >
       {leftIcon ? (
         <Image

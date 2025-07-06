@@ -1,15 +1,18 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 // components
 import Button from "@/components/Button";
+import CourseCard from "@/components/CourseCard";
 import CommentsSection from "@/components/CommentsSection";
 
 // data
 import { news, posts } from "@/constants/data";
-import CourseCard from "@/components/CourseCard";
+
+// utils
 import { parseStyledText } from "@/utilities/utils";
 
 function Page() {
@@ -17,6 +20,23 @@ function Page() {
   const newsDetails = news.find(
     (n) => n.title.trim() === decodeURIComponent(pathname.split("/")[2])
   );
+
+  const [like1, setLike1] = useState(253);
+  const [like2, setLike2] = useState(253);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const scrollToComments = () => {
+    const element = document.getElementById("Comments");
+    if (element) {
+      const yOffset = -80; // scroll 80px *above* the element
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      inputRef.current?.focus();
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="grid-system-level3 space-y-16 py-10">
@@ -115,65 +135,41 @@ function Page() {
             {/* likes, comments count */}
             <div className="flex items-center gap-4 label-large text-on_surface-light">
               {/* like */}
-              <div className="flex items-center gap-4 pl-4">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.48047 18.35L10.5805 20.75C10.9805 21.15 11.8805 21.35 12.4805 21.35H16.2805C17.4805 21.35 18.7805 20.45 19.0805 19.25L21.4805 11.95C21.9805 10.55 21.0805 9.35003 19.5805 9.35003H15.5805C14.9805 9.35003 14.4805 8.85003 14.5805 8.15003L15.0805 4.95003C15.2805 4.05003 14.6805 3.05003 13.7805 2.75003C12.9805 2.45003 11.9805 2.85003 11.5805 3.45003L7.48047 9.55003"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                  />
-                  <path
-                    d="M2.38086 18.35V8.55002C2.38086 7.15002 2.98086 6.65002 4.38086 6.65002H5.38086C6.78086 6.65002 7.38086 7.15002 7.38086 8.55002V18.35C7.38086 19.75 6.78086 20.25 5.38086 20.25H4.38086C2.98086 20.25 2.38086 19.75 2.38086 18.35Z"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+              <div className="flex items-center gap-1 pl-4">
+                <Button
+                  props={{
+                    value: "",
+                    type: "text",
+                    color: "red",
+                    leftIcon: "",
+                    rightIcon: "like",
+                    disabled: false,
+                    padding: "p-3",
+                    width: 24,
+                    height: 24,
+                    clickHandler: () => setLike1((prev) => prev + 1),
+                  }}
+                />
 
-                <span>{newsDetails?.like}</span>
+                <span>{like1}</span>
               </div>
 
               {/* count of comments */}
-              <div className="flex items-center gap-4">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M16 2H8C4 2 2 4 2 8V21C2 21.55 2.45 22 3 22H16C20 22 22 20 22 16V8C22 4 20 2 16 2Z"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M7 9.5H17"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M7 14.5H14"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+              <div className="flex items-center gap-1">
+                <Button
+                  props={{
+                    value: "",
+                    type: "text",
+                    color: "red",
+                    leftIcon: "",
+                    rightIcon: "message-text",
+                    disabled: false,
+                    padding: "p-3",
+                    width: 24,
+                    height: 24,
+                    clickHandler: () => scrollToComments(),
+                  }}
+                />
 
                 <span>{newsDetails?.comments}</span>
               </div>
@@ -261,65 +257,41 @@ function Page() {
             {/* likes, comments count */}
             <div className="flex items-center gap-4 label-large text-on_surface-light">
               {/* like */}
-              <div className="flex items-center gap-4 pl-4">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.48047 18.35L10.5805 20.75C10.9805 21.15 11.8805 21.35 12.4805 21.35H16.2805C17.4805 21.35 18.7805 20.45 19.0805 19.25L21.4805 11.95C21.9805 10.55 21.0805 9.35003 19.5805 9.35003H15.5805C14.9805 9.35003 14.4805 8.85003 14.5805 8.15003L15.0805 4.95003C15.2805 4.05003 14.6805 3.05003 13.7805 2.75003C12.9805 2.45003 11.9805 2.85003 11.5805 3.45003L7.48047 9.55003"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                  />
-                  <path
-                    d="M2.38086 18.35V8.55002C2.38086 7.15002 2.98086 6.65002 4.38086 6.65002H5.38086C6.78086 6.65002 7.38086 7.15002 7.38086 8.55002V18.35C7.38086 19.75 6.78086 20.25 5.38086 20.25H4.38086C2.98086 20.25 2.38086 19.75 2.38086 18.35Z"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+              <div className="flex items-center gap-1 pl-4">
+                <Button
+                  props={{
+                    value: "",
+                    type: "text",
+                    color: "red",
+                    leftIcon: "",
+                    rightIcon: "like",
+                    disabled: false,
+                    padding: "p-3",
+                    width: 24,
+                    height: 24,
+                    clickHandler: () => setLike2((prev) => prev + 1),
+                  }}
+                />
 
-                <span>{newsDetails?.like}</span>
+                <span>{like2}</span>
               </div>
 
               {/* count of comments */}
-              <div className="flex items-center gap-4">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M16 2H8C4 2 2 4 2 8V21C2 21.55 2.45 22 3 22H16C20 22 22 20 22 16V8C22 4 20 2 16 2Z"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M7 9.5H17"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M7 14.5H14"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+              <div className="flex items-center gap-1">
+                <Button
+                  props={{
+                    value: "",
+                    type: "text",
+                    color: "red",
+                    leftIcon: "",
+                    rightIcon: "message-text",
+                    disabled: false,
+                    padding: "p-3",
+                    width: 24,
+                    height: 24,
+                    clickHandler: () => scrollToComments(),
+                  }}
+                />
 
                 <span>{newsDetails?.comments}</span>
               </div>
@@ -360,12 +332,13 @@ function Page() {
       </div>
 
       {/* comments */}
-      <div className="space-y-9">
+      <div id="Comments" className="space-y-9">
         <div className="space-y-6">
           <h4>Comments ({newsDetails?.comments})</h4>
 
           <div className="p-3 bg-surface0-light rounded">
             <input
+              ref={inputRef}
               className="p-3 bg-white rounded outline-none body-large placeholder:text-txt-on-surface-terriary-light text-on_surface-light w-full"
               type="text"
               placeholder="What do you think?"

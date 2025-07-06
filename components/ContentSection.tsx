@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function ContentSection() {
   return (
-    <div id="Content" className="space-y-4 pt-20">
+    <div id="Content" className="space-y-4 pt-10">
       <div className="space-y-2">
         {/* hours */}
         <div className="grid grid-cols-4 gap-6">

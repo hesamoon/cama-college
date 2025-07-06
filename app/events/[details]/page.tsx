@@ -48,56 +48,44 @@ function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  console.log(
-    document.getElementById("Comments")?.getBoundingClientRect().width
-  );
-
   return (
     <div className="space-y-6">
-      {/* top section -> cover, title / cart */}
-      <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
-        <div className="col-span-2 space-y-6">
-          {/* cover, title */}
-          <div className="space-y-8">
-            <Image
-              className="rounded-sm aspect-16-9 object-cover w-full"
-              src={`/${eventDetails?.coverImg}.png`}
-              alt={`${eventDetails?.coverImg}`}
-              width={781}
-              height={438}
-            />
+      <div className="space-y-6">
+        {/* top section -> cover, title*/}
+        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+          <div className="col-span-3 space-y-6">
+            {/* cover, title */}
+            <div className="space-y-8">
+              <Image
+                className="rounded-sm aspect-16-9 object-cover w-full max-h-[438px]"
+                src={`/${eventDetails?.coverImg}.png`}
+                alt={`${eventDetails?.coverImg}`}
+                width={781}
+                height={438}
+              />
 
-            <h1 className="display-medium text-color-on_surface-light">
-              {eventDetails?.name}
-            </h1>
+              <h1 className="display-medium text-color-on_surface-light">
+                {eventDetails?.name}
+              </h1>
+            </div>
           </div>
+        </div>
 
-          {/* tabs */}
-          {/* <div
-            className={`${
-              activeTab === "Comments" || activeTab === "Related Events"
-                ? "fixed"
-                : "sticky"
-            } top-[3.75rem] z-[9999] grid-system-level1 bg-red-100`}
-          > */}
+        {/* tabs */}
+        <div className="sticky top-[3.75rem] bg-white z-[35] grid-system-level1">
           {/* tabs */}
           <div
-            className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out bg-white ${
+            className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
               activeTab === "Comments" || activeTab === "Related Events"
-                ? "fixed"
-                : "sticky"
-            } top-[3.7rem] z-[35]`}
-            // style={{
-            //   width:
-            //     document.getElementById("Comments")?.getBoundingClientRect()
-            //       .width - 235,
-            // }}
+                ? "w-full"
+                : "w-2/3"
+            }`}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               {tabs.map((tab) => (
                 <div key={tab}>
                   <button
-                    className={`whitespace-nowrap py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
+                    className={`py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
                       activeTab === tab
                         ? "text-background-primary-light border-b border-background-primary-light"
                         : "text-txt-on-surface-terriary-light"
@@ -105,7 +93,7 @@ function Page() {
                     onClick={() => {
                       const element = document.getElementById(tab);
                       if (element) {
-                        const yOffset = -117; // scroll 117px *above* the element
+                        const yOffset = -100; // scroll 117px *above* the element
                         const y =
                           element.getBoundingClientRect().top +
                           window.pageYOffset +
@@ -130,13 +118,28 @@ function Page() {
             >
               <Button
                 props={{
-                  value: "Get Ticket",
+                  value: "Get Course",
                   type: "filled",
                   color: "red",
                   disabled: false,
-                  leftIcon: "",
+                  leftIcon: "shopping-cart",
                   rightIcon: "",
-                  padding: "py-2 px-4 w-full",
+                  padding: "py-2 pr-6 pl-4 w-full",
+                  size: "body-large",
+                  height: 20,
+                  width: 20,
+                }}
+              />
+
+              <Button
+                props={{
+                  value: "",
+                  type: "outlined",
+                  color: "",
+                  disabled: false,
+                  leftIcon: "archive-add",
+                  rightIcon: "",
+                  padding: "p-3",
                   size: "body-large",
                   height: 20,
                   width: 20,
@@ -144,9 +147,9 @@ function Page() {
               />
             </div>
           </div>
-          {/* </div> */}
+        </div>
 
-          {/* <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4"> */}
+        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
           <div className="col-span-2 space-y-6">
             {/* description */}
             <DescriptionSection />
@@ -157,46 +160,31 @@ function Page() {
             {/* speakers */}
             <SpeakersSection />
           </div>
-          {/* </div> */}
-        </div>
 
-        {/* right side / card */}
-        <div className="sticky top-[4.5rem] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
-          {/* price */}
-          <h3 className="header-medium text-txt-on-surface-secondary-light">
-            ${eventDetails?.price} (CAD)
-          </h3>
+          {/* right side / card */}
+          <div className="sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
+            {/* price */}
+            <h3 className="header-medium text-txt-on-surface-secondary-light">
+              ${eventDetails?.price} (CAD)
+            </h3>
 
-          {/* important details */}
-          <div className="grid grid-cols-2 gap-2">
-            {/* labels */}
-            <div className="col-span-1 space-y-2">
-              {/* event date */}
-              <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
-                <Image src="/chart.svg" alt="chart" width={16} height={16} />
-                <span>Event Date</span>
-              </div>
+            {/* important details */}
+            <div className="grid grid-cols-2 gap-2">
+              {/* labels */}
+              <div className="col-span-1 space-y-2">
+                {/* event date */}
+                <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
+                  <Image src="/chart.svg" alt="chart" width={16} height={16} />
+                  <span>Event Date</span>
+                </div>
 
-              {/* event time */}
-              <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
-                <Image src="/timer.svg" alt="timer" width={16} height={16} />
-                <span>Event Time</span>
-              </div>
+                {/* event time */}
+                <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
+                  <Image src="/timer.svg" alt="timer" width={16} height={16} />
+                  <span>Event Time</span>
+                </div>
 
-              {/* rating */}
-              <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
-                <Image
-                  src="/monitor-mobbile.svg"
-                  alt="monitor-mobbile"
-                  width={16}
-                  height={16}
-                />
-                <span>Rating</span>
-              </div>
-
-              {/* location */}
-              <div className="space-y-2">
-                {/* location */}
+                {/* rating */}
                 <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
                   <Image
                     src="/monitor-mobbile.svg"
@@ -204,116 +192,130 @@ function Page() {
                     width={16}
                     height={16}
                   />
-                  <span>Location</span>
+                  <span>Rating</span>
                 </div>
 
                 {/* location */}
-                <h5>Province, City, Street</h5>
+                <div className="space-y-2">
+                  {/* location */}
+                  <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
+                    <Image
+                      src="/monitor-mobbile.svg"
+                      alt="monitor-mobbile"
+                      width={16}
+                      height={16}
+                    />
+                    <span>Location</span>
+                  </div>
+
+                  {/* location */}
+                  <h5>Province, City, Street</h5>
+                </div>
+              </div>
+
+              {/* values */}
+              <div className="col-span-1 body-large text-txt-on-surface-secondary-light space-y-2">
+                {/* event date */}
+                <h5>{eventDetails?.level}</h5>
+
+                {/* event time */}
+                <h5>{eventDetails?.duration}h</h5>
+
+                {/* rating */}
+                <h5>{eventDetails?.category}</h5>
               </div>
             </div>
 
-            {/* values */}
-            <div className="col-span-1 body-large text-txt-on-surface-secondary-light space-y-2">
-              {/* event date */}
-              <h5>{eventDetails?.level}</h5>
+            {/* social media */}
+            <div className="flex items-center gap-3">
+              <div className="border border-outline-level1 p-3 rounded-full">
+                <Image
+                  src="/telegram.svg"
+                  alt="telegram"
+                  width={24}
+                  height={24}
+                />
+              </div>
 
-              {/* event time */}
-              <h5>{eventDetails?.duration}h</h5>
-
-              {/* rating */}
-              <h5>{eventDetails?.category}</h5>
-            </div>
-          </div>
-
-          {/* social media */}
-          <div className="flex items-center gap-3">
-            <div className="border border-outline-level1 p-3 rounded-full">
-              <Image
-                src="/telegram.svg"
-                alt="telegram"
-                width={24}
-                height={24}
-              />
+              <div className="border border-outline-level1 p-3 rounded-full">
+                <Image
+                  src="/instagram.svg"
+                  alt="instagram"
+                  width={24}
+                  height={24}
+                />
+              </div>
             </div>
 
-            <div className="border border-outline-level1 p-3 rounded-full">
-              <Image
-                src="/instagram.svg"
-                alt="instagram"
-                width={24}
-                height={24}
-              />
-            </div>
-          </div>
+            {/* divider */}
+            <div className="border border-outline-level1" />
 
-          {/* divider */}
-          <div className="border border-outline-level1" />
+            {/* get course btn */}
+            <div className="space-y-2">
+              {/* count of student enrolled */}
+              <div className="flex items-center gap-1">
+                <Image
+                  src="/like-shapes.svg"
+                  alt="like-shapes"
+                  width={20}
+                  height={20}
+                />
+                <span className="label-medium-db text-green">
+                  1220 Students enrolled
+                </span>
+              </div>
 
-          {/* get course btn */}
-          <div className="space-y-2">
-            {/* count of student enrolled */}
-            <div className="flex items-center gap-1">
-              <Image
-                src="/like-shapes.svg"
-                alt="like-shapes"
-                width={20}
-                height={20}
-              />
-              <span className="label-medium-db text-green">
-                1220 Students enrolled
-              </span>
-            </div>
-
-            {/* button */}
-            <div className="">
-              <Button
-                props={{
-                  value: "Get Ticket",
-                  type: "filled",
-                  color: "red",
-                  disabled: false,
-                  leftIcon: "",
-                  rightIcon: "",
-                  padding: "py-2 px-6 w-full",
-                  size: "body-large",
-                  height: 24,
-                  width: 24,
-                }}
-              />
+              {/* button */}
+              <div className="">
+                <Button
+                  props={{
+                    value: "Get Ticket",
+                    type: "filled",
+                    color: "red",
+                    disabled: false,
+                    leftIcon: "",
+                    rightIcon: "",
+                    padding: "py-2 px-6 w-full",
+                    size: "body-large",
+                    height: 24,
+                    width: 24,
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* comments */}
-      <div
-        id="Comments"
-        className="grid grid-cols-3 grid-system-level1 space-y-6 pt-8"
-      >
         {/* comments */}
-        <div className="col-span-2">
-          {/* comments */}
-          <CommentsSection />
-        </div>
-
-        {/* rating card */}
-        <div className="col-span-1">
-          <RatingCard />
-        </div>
-      </div>
-
-      {/* event */}
-      <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
-        {/* event */}
         <div
-          id="Related Events"
-          className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+          id="Comments"
+          className="grid grid-cols-3 grid-system-level1 space-y-6 pt-8"
         >
-          {events
-            .filter((e) => e.id <= 6)
-            .map((event) => (
-              <CourseCard key={event.id} data={event} type="events" />
-            ))}
+          {/* comments */}
+          <div className="col-span-2">
+            {/* comments */}
+            <CommentsSection />
+          </div>
+
+          {/* rating card */}
+          <div className="col-span-1">
+            <RatingCard />
+          </div>
+        </div>
+
+        {/* event */}
+        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+          {/* event */}
+          <div
+            id="Related Events"
+            className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+          >
+            {events
+              .filter((e) => e.id <= 6)
+              .map((event) => (
+                <CourseCard key={event.id} data={event} type="events" />
+              ))}
+          </div>
         </div>
       </div>
 
