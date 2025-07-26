@@ -2,17 +2,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useQueryState } from "nuqs";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import Pagination from "@/components/Pagination";
 import CourseCard from "@/components/CourseCard";
+import ListHeader from "@/components/ListHeader";
 import CourseSlider from "@/components/CourseSlider";
 
 // data
 import {
-  events,
   LIMITOfLOADEDLIST,
   LIMITNUMBEROFSCROLL,
   LIMITOfLOADEDLISTINONEPAGE,
@@ -21,7 +21,22 @@ import {
 // types
 import { Events } from "../types/types";
 
+// api - events
+import { getEvents } from "@/lib/api/events";
+import CourseCardSkeleton from "@/components/skeletons/CourseCardSkeleton";
+
 function page() {
+  const {
+    data: eventsData,
+    isLoading: isLoadingEvents,
+    error: errorEvents,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: getEvents,
+  });
+
+  console.log(eventsData);
+
   const [sortVal, setSortVal] = useState("Newest");
   const [eventList, setEventList] = useState<Events[]>([]);
   const [search] = useQueryState("search", { defaultValue: "" });
@@ -34,7 +49,7 @@ function page() {
   const loadMore = () => {
     setLoading(true);
     setTimeout(() => {
-      const newItems = events;
+      const newItems = eventsData?.data.data;
       setEventList((prev) =>
         [...prev, ...newItems].slice(
           0,
@@ -57,7 +72,10 @@ function page() {
 
       if (scrollTop + windowHeight >= documentHeight - 600 && !loading) {
         if (numOfScroll <= LIMITNUMBEROFSCROLL) {
-          loadMore();
+          if (eventsData?.data.data.length > 0) {
+            if (eventsData?.data.data.length > LIMITOfLOADEDLISTINONEPAGE)
+              loadMore();
+          }
         }
       }
     };
@@ -68,9 +86,9 @@ function page() {
 
   useEffect(() => {
     setEventList(
-      events
-        .sort((a, b) => a.status.localeCompare(b.status))
-        .filter((event) =>
+      eventsData?.data.data
+        .sort((a: Events, b: Events) => a.status.localeCompare(b.status))
+        .filter((event: Events) =>
           event.name
             .toLowerCase()
             .replace(/\s+/g, " ")
@@ -88,16 +106,16 @@ function page() {
 
   useEffect(() => {
     setEventList(
-      events
-        .sort((a, b) =>
+      eventsData?.data.data
+        .sort((a: Events, b: Events) =>
           sortVal === "Newest"
             ? new Date(b.publishDate ?? "").getTime() -
               new Date(a.publishDate ?? "").getTime()
             : new Date(a.publishDate ?? "").getTime() -
               new Date(b.publishDate ?? "").getTime()
         )
-        .sort((a, b) => a.status.localeCompare(b.status))
-        .filter((event) =>
+        .sort((a: Events, b: Events) => a.status.localeCompare(b.status))
+        .filter((event: Events) =>
           event.name
             .toLowerCase()
             .replace(/\s+/g, " ")
@@ -114,70 +132,49 @@ function page() {
   }, [sortVal]);
 
   useEffect(() => {
-    setEventList(
-      events
-        .sort((a, b) => a.status.localeCompare(b.status))
-        .filter((event) =>
-          event.name
-            .toLowerCase()
-            .replace(/\s+/g, " ")
-            .trim()
-            .includes(search.toLowerCase())
-        )
-        .slice(
-          0,
-          numOfScroll === LIMITNUMBEROFSCROLL
-            ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
-            : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
-        )
-    );
-  }, []);
+    if (eventsData?.data.data.length > 0) {
+      setEventList(
+        eventsData?.data.data
+          .sort((a: Events, b: Events) => a.status.localeCompare(b.status))
+          .filter((event: Events) =>
+            event.name
+              .toLowerCase()
+              .replace(/\s+/g, " ")
+              .trim()
+              .includes(search.toLowerCase())
+          )
+          .slice(
+            0,
+            numOfScroll === LIMITNUMBEROFSCROLL
+              ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
+              : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
+          )
+      );
+    }
+  }, [eventsData]);
 
   return (
-    <div className="space-y-14 pb-14">
+    <div className="space-y-7 md:space-y-14 pb-14">
       {/* banner */}
       <section className="">
         <CourseSlider type="Events" />
       </section>
 
-      <section className="space-y-9">
+      <section className="space-y-5 md:space-y-9">
         {/* title - sort and filtring */}
-        <div className="flex items-center justify-between w-full grid-system-level0">
-          {/* title */}
-          <h2 className="title-large text-shadow-on_surface-light">Events</h2>
-
-          {/* sort and filtring */}
-          <div className="flex items-center gap-1">
-            {/* sort */}
-            <div className="flex items-center border border-outline1 rounded py-0.5 pl-3 pr-4">
-              <span className="body-large text-txt-on-surface-terriary-light">
-                Sort By:
-              </span>
-              <select
-                className="px-4 py-2 outline-none body-large text-txt-on-surface-secondary"
-                value={sortVal}
-                onChange={(e) => {
-                  setSortVal(e.target.value);
-                }}
-              >
-                <option value="Newest">Newest</option>
-                <option value="Oldest">Oldest</option>
-              </select>
-            </div>
-
-            {/* filtring */}
-            <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2.5 pl-3 pr-4 cursor-pointer">
-              <Image src="/filter.svg" alt="filter" width={20} height={20} />
-              <span className="body-large text-txt-on-surface-secondary">
-                Filters
-              </span>
-            </div>
-          </div>
+        <div className="mobile-grid-system-level0 md:grid-system-level0">
+          <ListHeader title="Events" />
         </div>
 
         {/* events */}
-        <div className="grid-system-level0">
-          {eventList.length > 0 ? (
+        <div className="mobile-grid-system-level0 md:grid-system-level0">
+          {isLoadingEvents ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {Array.from({ length: 4 }).map((_, index) => (
+                <CourseCardSkeleton key={index} type="events" />
+              ))}
+            </div>
+          ) : eventList?.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {eventList.map((event) => (
                 <CourseCard key={event.id} data={event} type="events" />

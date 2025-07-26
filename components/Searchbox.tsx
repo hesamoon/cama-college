@@ -35,17 +35,17 @@ function Searchbox() {
         placeholder="What you want to learn?"
         value={searchVal}
         onChange={(e) => setSearchVal(e.target.value)}
-        className="px-4 py-3.5 outline-none w-[60%] hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200"
+        className="px-4 py-3.5 mobile-body-medium md:body-medium outline-none md:w-[60%] hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200"
       />
 
       <div className="w-[1px] h-[32px] bg-[#CECECE]" />
 
       <div
-        className={`flex items-center justify-between gap-2 w-[40%] hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200 p-1`}
+        className={`flex items-center justify-between gap-4 md:gap-2 md:w-[40%] hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200 p-1`}
       >
-        <div className="flex items-center">
+        <div className="flex items-center mobile-body-medium md:body-medium">
           <select
-            className="px-4 py-2 outline-none"
+            className="outline-none"
             value={typVal === "" ? "Select Type" : typVal}
             onChange={(e) =>
               e.target.value === "Select Type"
@@ -68,7 +68,7 @@ function Searchbox() {
             disabled: false,
             leftIcon: "search-normal",
             rightIcon: "",
-            padding: "p-3",
+            padding: "p-2 md:p-3",
             size: "body-large",
             height: 20,
             width: 20,

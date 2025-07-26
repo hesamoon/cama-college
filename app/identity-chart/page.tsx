@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 // types
 import { Node } from "../types/types";
 
@@ -8,19 +10,22 @@ import { parseStyledText } from "@/utilities/utils";
 
 // data
 import { orgChart } from "@/constants/data";
-import { useEffect, useRef, useState } from "react";
 
 function page() {
   return (
-    <div className="space-y-10 py-10">
-      <div className="grid-system-level3 space-y-10">
+    <div className="space-y-10 py-4 md:py-10">
+      <div className="mobile-grid-system-level0 md:grid-system-level3 space-y-10">
         {/* title */}
-        <h2 className="title-large text-on_surface-light">Title</h2>
+        <h2 className="mobile-title-large md:title-large text-on_surface-light">
+          Title
+        </h2>
 
         {/* title & description 1 */}
         <div className="space-y-3">
-          <h4 className="title-medium text-on_surface-light">Title</h4>
-          <p className="body-large text-txt-on-surface-secondary-light text-justify">
+          <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
+            Title
+          </h4>
+          <p className="mobile-body-large md:body-large text-txt-on-surface-secondary-light text-justify">
             {parseStyledText(
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. @(*Ullamcorper*)@ velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed "
             )}
@@ -29,8 +34,10 @@ function page() {
 
         {/* title & description 2 */}
         <div className="space-y-3">
-          <h4 className="title-medium text-on_surface-light">Title</h4>
-          <div className="body-large text-txt-on-surface-secondary-light space-y-2 text-justify">
+          <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
+            Title
+          </h4>
+          <div className="mobile-body-large md:body-large text-txt-on-surface-secondary-light space-y-2 text-justify">
             <p>
               {parseStyledText(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed "
@@ -55,7 +62,7 @@ export default page;
 
 function OrgChart() {
   return (
-    <div className="grid-system-level1 overflow-auto px-4">
+    <div className="md:grid-system-level1 overflow-auto px-4">
       <TreeNode node={orgChart} />
     </div>
   );
@@ -71,7 +78,6 @@ function TreeNode({ node }: { node: Node }) {
   useEffect(() => {
     if (nodeRef.current) {
       const { width } = nodeRef.current.getBoundingClientRect();
-      console.log(width);
       setSize(width - (40 / 100) * width);
     }
   }, []);
@@ -82,7 +88,7 @@ function TreeNode({ node }: { node: Node }) {
       className="flex flex-col items-center relative px-2 mt-2"
     >
       {/* Node box */}
-      <div className="flex items-center justify-center border border-gray-300 rounded text-center px-4 py-2 w-40 h-16">
+      <div className="mobile-label-large-db md:label-large-db flex items-center justify-center border border-gray-300 rounded text-center px-4 py-2 w-40 h-16">
         {node.name}
       </div>
 

@@ -2,8 +2,8 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const applySteps = [
   {
@@ -76,8 +76,8 @@ export default function ApplyScreen() {
       <div className="sticky top-0 h-screen" ref={stickyRef}>
         <Background />
         <div className="relative z-10 flex h-full items-center justify-center">
-          <div className="text-center grid grid-cols-3 w-full items-center px-8 grid-system-level1">
-            <div className="col-span-1" />
+          <div className="text-center md:grid md:grid-cols-3 w-full items-center mobile-grid-system-level0 md:grid-system-level1">
+            <div className="hidden md:block col-span-1" />
             <Content content={currStep} />
             <StepIndicator currentStep={currStep} />
           </div>
@@ -142,16 +142,22 @@ function Content({
 
   return (
     <div ref={contentRef} className="relative col-span-1 space-y-4 text-white">
-      <h3 className="underline text-start display-small">{content.id}.</h3>
-      <h2 className="text-center header-large">{content.title}</h2>
-      <p className="body-large text-center">{content.desc}</p>
+      <h3 className="underline text-start mobile-display-small md:display-small">
+        {content.id}.
+      </h3>
+      <h2 className="text-center mobile-header-large md:header-large">
+        {content.title}
+      </h2>
+      <p className="mobile-body-large md:body-large text-center">
+        {content.desc}
+      </p>
     </div>
   );
 }
 
 function StepIndicator({ currentStep }: { currentStep: { id: number } }) {
   return (
-    <div className="relative col-span-1 flex items-center justify-end">
+    <div className="absolute bottom-5 right-10 md:bottom-0 md:right-0 md:relative col-span-1 flex items-center justify-end">
       <div className="flex flex-col items-center gap-2">
         {currentStep.id !== 1 && (
           <Image

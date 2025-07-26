@@ -35,10 +35,12 @@ function Page() {
   }, []);
 
   return (
-    <div className="grid-system-level0 w-full space-y-9">
+    <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9">
       {/* schedule */}
       <div className="space-y-4">
-        <h2 className="title-large text-on_surface-light">Events Schedule</h2>
+        <h2 className="mobile-title-large md:title-large text-on_surface-light">
+          Events Schedule
+        </h2>
 
         <ScheduleView />
       </div>
@@ -47,12 +49,20 @@ function Page() {
       <div className="space-y-9">
         {/* upcoming events section */}
         <div className="space-y-4">
-          <h2 className="title-large text-on_surface-light">Upcoming Events</h2>
+          <h2 className="mobile-title-large md:title-large text-on_surface-light">
+            Upcoming Events
+          </h2>
 
-          <div className="flex items-center gap-6 justify-between">
-            <CourseCard data={events[0]} type="events" />
-            <CourseCard data={events[1]} type="events" />
-            <CourseCard data={events[2]} type="events" />
+          <div className="flex items-center gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth">
+            <div className="min-w-[267px]">
+              <CourseCard data={events[0]} type="events" />
+            </div>
+            <div className="min-w-[267px]">
+              <CourseCard data={events[1]} type="events" />
+            </div>
+            <div className="min-w-[267px]">
+              <CourseCard data={events[2]} type="events" />
+            </div>
           </div>
         </div>
 
@@ -63,21 +73,21 @@ function Page() {
             isSearchCourse={true}
           />
 
-          <div className="space-y-4">
+          <div className="space-y-4 pb-10 md:pb-0">
             {/* title, filter box */}
             <div className="flex items-center justify-between">
-              <h2 className="title-large text-on_surface-light">
+              <h2 className="mobile-title-large md:title-large text-on_surface-light">
                 Events History
               </h2>
 
               {/* filter */}
-              <div className="flex items-center border border-outline1 rounded py-0.5 pl-3 pr-4">
-                <span className="body-large text-txt-on-surface-terriary-light">
+              <div className="flex items-center border border-outline1 rounded px-2 md:pl-3 md:pr-4 mobile-body-large md:body-large">
+                <span className="text-txt-on-surface-terriary-light">
                   Filter:
                 </span>
 
                 <select
-                  className="px-1 py-2 outline-none body-large text-txt-on-surface-secondary cursor-pointer"
+                  className="md:px-1 py-2 outline-none text-txt-on-surface-secondary cursor-pointer"
                   value={filter === "" ? "All Programs" : filter}
                   onChange={(e) =>
                     e.target.value === "All Events"
@@ -92,15 +102,13 @@ function Page() {
             </div>
 
             {/* courses */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
               {controlledList.length > 0 ? (
                 controlledList.map((item) => (
                   <CourseCard key={item.id} data={item} type="events" />
                 ))
               ) : filter || search ? (
-                <h5 className="col-span-8 p-3 text-center">
-                  Event not found!
-                </h5>
+                <h5 className="col-span-8 p-3 text-center">Event not found!</h5>
               ) : (
                 <h5 className="col-span-8 p-3 text-center">
                   You don&#39;t have any event yet!

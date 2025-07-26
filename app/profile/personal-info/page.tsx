@@ -7,7 +7,7 @@ import GeneralInformation from "@/components/GeneralInformation";
 
 function page() {
   return (
-    <div className="grid-system-level0 w-full py-7 space-y-12">
+    <div className="mobile-grid-system-level0 md:grid-system-level0 w-full py-7 space-y-12">
       {/* profile picture */}
       <div className="grid grid-cols-3">
         {/* title */}

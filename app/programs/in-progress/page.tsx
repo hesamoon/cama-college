@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 
 // data
 import { articles, programsInProgress } from "@/constants/data";
+import { parseStyledText } from "@/utilities/utils";
 
 function Page() {
   const [program] = useQueryState("program", { defaultValue: "" });
@@ -36,7 +37,7 @@ function Page() {
         <div className="space-y-8">
           {/* title */}
           <div className="flex items-center justify-between">
-            <h2 className="title-large text-on_surface-light">
+            <h2 className="mobile-title-large md:title-large text-on_surface-light">
               {lessonDetails
                 ? lessonDetails?.passed === -1
                   ? "unavailable!"
@@ -44,37 +45,32 @@ function Page() {
                 : "not found!"}
             </h2>
 
-            <Button
-              props={{
-                value: "",
-                type: "text",
-                color: "red",
-                leftIcon: "",
-                rightIcon: "flag",
-                disabled: false,
-              }}
-            />
+            <div className="hidden md:block">
+              <Button
+                props={{
+                  value: "",
+                  type: "text",
+                  color: "red",
+                  leftIcon: "",
+                  rightIcon: "flag",
+                  disabled: false,
+                }}
+              />
+            </div>
           </div>
 
           {/* descriptions */}
           <div className="space-y-6">
             {/* title / description 1 */}
             <div className="space-y-3">
-              <h4 className="title-medium text-on_surface-light">Title</h4>
+              <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
+                Title
+              </h4>
 
-              <p className="text-justify body-large text-txt-on-surface-secondary-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-                congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat imperdiet sed euismod nisi porta lorem mollis. Morbi
-                tristique senectus et netus. Mattis pellentesque id nibh tortor
-                id aliquet lectus proin. Sapien faucibus et molestie ac feugiat
-                sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi
-                tincidunt ornare massa eget. Dictum varius duis at consectetur
-                lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed
-                enim. Velit ut tortor pretium viverra suspendisse potenti
-                nullam. Et molestie ac feugiat sed
+              <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
+                {parseStyledText(
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. @(*Ullamcorper*)@ velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed "
+                )}
               </p>
             </div>
 
@@ -110,17 +106,19 @@ function Page() {
                 />
               </svg>
 
-              <p className="body-large text-[#2C3003]">
+              <p className="mobile-body-large md:body-large text-[#2C3003]">
                 Velit ut tortor pretium viverra suspendisse potenti nullam
               </p>
             </div>
 
             {/* title / description 2 */}
             <div className="space-y-3">
-              <h4 className="title-medium text-on_surface-light">Title</h4>
+              <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
+                Title
+              </h4>
 
               <div className="space-y-2">
-                <p className="text-justify body-large text-txt-on-surface-secondary-light">
+                <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
@@ -135,7 +133,7 @@ function Page() {
                   suspendisse potenti nullam. Et molestie ac feugiat sed
                 </p>
 
-                <p className="text-justify body-large text-txt-on-surface-secondary-light">
+                <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
@@ -157,21 +155,23 @@ function Page() {
         {/* article */}
         <div className="relative space-y-4 border border-outline-level1 rounded py-3 px-4">
           <div className="space-y-1.5">
-            <h4 className="title-small text-txt-on-surface-terriary-light">
+            <h4 className="mobile-title-small md:title-small text-txt-on-surface-terriary-light">
               For Further Reading
             </h4>
-            <h3 className="title-medium text-on_surface-light">{title}</h3>
+            <h3 className="mobile-title-medium md:title-medium text-on_surface-light">
+              {title}
+            </h3>
           </div>
 
           {/* year, author, open acccess */}
-          <div className="flex items-center gap-3">
-            <span className="body-medium text-txt-on-surface-secondary-light">
+          <div className="flex flex-wrap items-center gap-2 md:gap-3">
+            <span className="mobile-body-medium md:body-medium text-txt-on-surface-secondary-light">
               {year}
             </span>
 
             <div className="w-1 h-1 rounded-full bg-txt-on-surface-terriary-light" />
 
-            <span className="body-medium text-txt-on-surface-terriary-light">
+            <span className="mobile-body-medium md:body-medium text-txt-on-surface-terriary-light">
               {author}
             </span>
 
@@ -179,14 +179,14 @@ function Page() {
               <>
                 <div className="w-1 h-1 rounded-full bg-txt-on-surface-terriary-light" />
 
-                <span className="body-medium text-txt-on-surface-terriary-light">
+                <span className="mobile-body-medium md:body-medium text-txt-on-surface-terriary-light">
                   Open Access
                 </span>
               </>
             )}
           </div>
 
-          <div className="absolute bottom-2 right-2 -rotate-45">
+          <div className="absolute bottom-2 right-2 -rotate-45 bg-white">
             <Button
               props={{
                 value: "",
@@ -204,14 +204,14 @@ function Page() {
       </div>
 
       {/* like & dislike */}
-      <div className="flex items-center justify-end gap-12">
-        <span className="label-small text-txt-low-important">
+      <div className="flex items-center justify-end gap-6 md:gap-12">
+        <span className="mobile-label-small md:label-small text-txt-low-important">
           Is this helpful?
         </span>
 
         <div className="flex items-center gap-4">
           {/* dislike */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center md:gap-2">
             <Button
               props={{
                 value: "",
@@ -224,11 +224,13 @@ function Page() {
               }}
             />
 
-            <span className="label-large text-on_surface-light">{dislike}</span>
+            <span className="mobile-label-large md:label-large text-on_surface-light">
+              {dislike}
+            </span>
           </div>
 
           {/* like */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center md:gap-2">
             <Button
               props={{
                 value: "",
@@ -241,7 +243,9 @@ function Page() {
               }}
             />
 
-            <span className="label-large text-on_surface-light">{like}</span>
+            <span className="mobile-label-large md:label-large text-on_surface-light">
+              {like}
+            </span>
           </div>
         </div>
       </div>

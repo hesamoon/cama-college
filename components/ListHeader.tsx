@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useQueryState } from "nuqs";
 
@@ -6,26 +6,25 @@ function ListHeader({ title }: { title: string }) {
   const [sort, setSort] = useQueryState("sortBy", { defaultValue: "" });
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
       {/* title */}
-      <h2 className="title-large text-on_surface-light">{title}</h2>
+      <h2 className="mobile-title-large md:title-large text-on_surface-light">
+        {title}
+      </h2>
 
       {/* sort, filter */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 md:gap-4">
         {/* sort */}
-        <div className="flex items-center border border-outline1 rounded py-0.5 pl-3 pr-4">
-          <span className="body-large text-txt-on-surface-terriary-light">
+        <div className="flex items-center border border-outline1 rounded pl-3 pr-4">
+          <span className="mobile-body-large md:body-large text-txt-on-surface-terriary-light">
             Sort By:
           </span>
-
           <select
-            className="px-1 py-2 outline-none body-large text-txt-on-surface-secondary"
-            value={sort === "" ? "Newest" : sort}
-            onChange={(e) =>
-              e.target.value === "Newest"
-                ? setSort("")
-                : setSort(e.target.value)
-            }
+            className="md:px-4 py-2 outline-none mobile-body-large md:body-large text-txt-on-surface-secondary"
+            value={sort}
+            onChange={(e) => {
+              setSort(e.target.value);
+            }}
           >
             <option value="Newest">Newest</option>
             <option value="Oldest">Oldest</option>
@@ -33,7 +32,7 @@ function ListHeader({ title }: { title: string }) {
         </div>
 
         {/* filtring */}
-        <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2.5 pl-3 pr-4 cursor-pointer">
+        <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2 pl-3 pr-4 cursor-pointer">
           <svg
             width="20"
             height="20"
@@ -59,7 +58,7 @@ function ListHeader({ title }: { title: string }) {
             />
           </svg>
 
-          <span className="body-large text-txt-on-surface-secondary">
+          <span className="mobile-body-large md:body-large text-txt-on-surface-secondary">
             Filters
           </span>
         </div>

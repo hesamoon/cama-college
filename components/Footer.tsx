@@ -7,7 +7,7 @@ import MoreDetailsP from "./MoreDetailsP";
 
 function Footer() {
   return (
-    <footer className="bg-shades-light-90">
+    <footer className="hidden md:block bg-shades-light-90">
       <div className="grid grid-cols-7 gap-4 grid-system-level0 pt-8 sm:pt-12 lg:pt-16">
         {/* left section */}
         <div className="col-span-5">
@@ -34,8 +34,8 @@ function Footer() {
                 <li><Link href="/contact-us">Contact</Link></li>
                 <li>Tagline</li>
                 <li>Professor TUUM</li>
-                <li>Identity Chart</li>
-                <li>Our Legality and Legitimacy</li>
+                <li><Link href="/identity-chart">Identity Chart</Link></li>
+                <li><Link href="/our-legality-and-legitimacy">Our Legality and Legitimacy</Link></li>
               </ul>
             </div>
 
@@ -46,9 +46,9 @@ function Footer() {
               </h4>
 
               <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
-                <li>News & Blog</li>
+                <li><Link href="/news">News & Blog</Link></li>
                 <li>Courses</li>
-                <li>Events</li>
+                <li><Link href="/events">Events</Link></li>
                 <li>Consultant</li>
               </ul>
             </div>
@@ -60,7 +60,7 @@ function Footer() {
               <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
                 <li>FAQ</li>
                 <li>Careers</li>
-                <li>Partners</li>
+                <li><Link href="/work-with-us">Partners</Link></li>
                 <li>Instructor Registration</li>
                 <li>Representative Inquiry</li>
                 <li>Charity & Philanthropy</li>

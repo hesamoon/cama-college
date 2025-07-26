@@ -73,7 +73,7 @@ function page() {
   return (
     <div className="w-full">
       {/* tabs */}
-      <div className="grid-system-level0 !gap-0 flex border-b border-outline-level0">
+      <div className="bg-white md:grid-system-level0 !gap-0 grid grid-cols-2 text-center md:flex border-b border-outline-level0">
         {["Programs", "Events"].map((tab) => (
           <div
             key={tab}
@@ -84,7 +84,7 @@ function page() {
             }
           >
             <button
-              className={`py-3 px-4 body-large cursor-pointer transition-all ease-linear duration-200 ${
+              className={`py-3 px-4 mobile-body-large md:body-large cursor-pointer transition-all ease-linear duration-200 ${
                 activeTab === tab
                   ? "text-background-primary-light"
                   : "text-txt-on-surface-terriary-light"
@@ -97,12 +97,12 @@ function page() {
         ))}
       </div>
 
-      <div className="grid-system-level0 py-6 space-y-6">
+      <div className="mobile-grid-system-level0 md:grid-system-level0 py-6 space-y-6">
         {/* search, sort, filter */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           {/* search */}
           <div
-            className="bg-shades-light-90 flex items-center justify-between gap-2 w-1/3 rounded-full p-1"
+            className="bg-shades-light-90 flex items-center justify-between gap-2 w-full md:w-1/3 rounded-full p-1"
             onKeyDown={handleKeyDown}
           >
             <input
@@ -110,7 +110,7 @@ function page() {
               placeholder="Search in Transactions..."
               value={searchVal}
               onChange={(e) => setSearchVal(e.target.value)}
-              className="px-4 py-2 outline-none w-full"
+              className="mobile-body-medium md:body-medium px-4 py-2 outline-none w-full"
             />
 
             <Button
@@ -122,7 +122,7 @@ function page() {
                 leftIcon: "search-normal",
                 rightIcon: "",
                 padding: "p-2",
-                size: "body-large",
+                size: "mobile-body-large md:body-large",
                 height: 20,
                 width: 20,
                 clickHandler: () =>
@@ -132,15 +132,14 @@ function page() {
           </div>
 
           {/* sort, filter */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             {/* sort */}
-            <div className="flex items-center border border-outline1 rounded py-0.5 pl-3 pr-4">
-              <span className="body-large text-txt-on-surface-terriary-light">
+            <div className="flex items-center border border-outline1 rounded pl-3 pr-4">
+              <span className="mobile-body-large md:body-large text-txt-on-surface-terriary-light">
                 Sort By:
               </span>
-
               <select
-                className="px-1 py-2 outline-none body-large text-txt-on-surface-secondary"
+                className="md:px-4 py-2 outline-none mobile-body-large md:body-large text-txt-on-surface-secondary"
                 value={sortVal}
                 onChange={(e) => {
                   setSortVal(e.target.value);
@@ -152,10 +151,9 @@ function page() {
             </div>
 
             {/* filtring */}
-            <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2.5 pl-3 pr-4 cursor-pointer">
+            <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2 pl-3 pr-4 cursor-pointer">
               <Image src="/filter.svg" alt="filter" width={20} height={20} />
-
-              <span className="body-large text-txt-on-surface-secondary">
+              <span className="mobile-body-large md:body-large text-txt-on-surface-secondary">
                 Filters
               </span>
             </div>

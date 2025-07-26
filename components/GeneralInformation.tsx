@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import {
   FormControl,
   InputLabel,
@@ -9,13 +10,39 @@ import {
   TextField,
 } from "@mui/material";
 
+// components
+import GeneralInformationSkeleton from "./skeletons/GeneralInformationSkeleton";
+
+// api
+import { getMe } from "@/lib/api/auth";
+
 function GeneralInformation() {
+  const { data: myData, isLoading: isLoadingMe } = useQuery({
+    queryKey: ["me"],
+    queryFn: () => getMe(),
+  });
+
   const [gInfo, setGInfo] = useState({
     firstName: "",
     lastName: "",
     number: "",
-    job: "Teacher",
+    job: "",
   });
+
+  useEffect(() => {
+    if (myData?.data.data) {
+      setGInfo({
+        firstName: myData?.data.data.name || "",
+        lastName: myData?.data.data.family || "",
+        number: myData?.data.data.mobile || "",
+        job: myData?.data.data?.job || "",
+      });
+    }
+  }, [myData]);
+
+  if (isLoadingMe) {
+    return <GeneralInformationSkeleton />;
+  }
 
   return (
     <div className="grid grid-cols-2 gap-6">
@@ -23,8 +50,6 @@ function GeneralInformation() {
         label="First Name"
         value={gInfo.firstName}
         onChange={(e) => setGInfo({ ...gInfo, firstName: e.target.value })}
-        // error
-        // helperText="fff"
       />
 
       <TextField

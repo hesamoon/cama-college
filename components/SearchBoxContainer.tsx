@@ -47,7 +47,7 @@ function SearchBoxContainer({
   return (
     <div className="flex-1">
       <div
-        className="bg-shades-light-90 hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200 p-1 flex items-center justify-between gap-2"
+        className="bg-shades-light-90 hover:bg-[#eaeaea] rounded-full transition-all ease-linear duration-200 p-1 flex items-center justify-between gap-2" 
         onKeyDown={handleKeyDown}
       >
         <input
@@ -65,8 +65,9 @@ function SearchBoxContainer({
           }
           value={searchVal}
           onChange={(e) => setSearchVal(e.target.value)}
-          className="px-4 py-2 outline-none flex-1 body-medium"
+          className="px-2 md:px-4 py-2 outline-none flex-1 mobile-body-medium md:body-medium"
         />
+
         <div className="flex items-center justify-between gap-4">
           {/* {pathname !== "/events" &&
             !pathname.includes("/job-offers/") &&
@@ -97,8 +98,7 @@ function SearchBoxContainer({
               disabled: false,
               leftIcon: "search-normal",
               rightIcon: "",
-              padding: "p-2",
-              size: "body-large",
+              size: "mobile-body-large md:body-large",
               height: 20,
               width: 20,
               clickHandler: searchClickHandler,

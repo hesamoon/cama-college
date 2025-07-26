@@ -20,18 +20,17 @@ function CommentsSection({ stars = true }: { stars?: boolean }) {
   return (
     <div id="Comments" className="space-y-8">
       {/* sort */}
-      <div className="flex items-center w-fit border border-outline1 rounded py-0.5 pl-3 pr-4">
-        <span className="body-large text-txt-on-surface-terriary-light">
+      <div className="w-fit flex items-center border border-outline1 rounded px-3">
+        <span className="mobile-body-large md:body-large text-txt-on-surface-terriary-light">
           Sort By:
         </span>
         <select
-          className="px-1 py-2 outline-none body-large text-txt-on-surface-secondary"
+          className="md:px-4 py-2 outline-none mobile-body-large md:body-large text-txt-on-surface-secondary"
           value={sortVal}
           onChange={(e) => {
             setSortVal(e.target.value);
           }}
         >
-          <option value="Most Helpful">Most Helpful</option>
           <option value="Newest">Newest</option>
           <option value="Oldest">Oldest</option>
         </select>
@@ -54,6 +53,7 @@ function CommentsSection({ stars = true }: { stars?: boolean }) {
               width: 24,
               height: 24,
               padding: "py-2 px-6",
+              size: "body-medium md:body-large",
               clickHandler: handleShowMore,
             }}
           />

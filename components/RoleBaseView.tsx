@@ -3,11 +3,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+// import { useQuery } from "@tanstack/react-query";
 
 // components
 import LoginButtons from "./LoginButtons";
 
+// api
+// import { getMe } from "@/lib/api/auth";
+
 function RoleBaseView({ role }: { role: string }) {
+  // const { data: myData } = useQuery({
+  //   queryKey: ["me"],
+  //   queryFn: () => getMe(),
+  // });
+
+  // console.log(myData?.data.data);
+
   const pathname = usePathname();
 
   if (pathname === "/apply") return;

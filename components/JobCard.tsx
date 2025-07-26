@@ -33,7 +33,7 @@ export default function JobCard({
       <div className="flex justify-between items-start">
         <div className="flex gap-2">
           <Image
-            className="rounded-xs object-cover"
+            className="rounded-xs object-cover w-10 md:w-12 h-10 md:h-12"
             src="/c4.png"
             alt="cover"
             width={48}
@@ -41,15 +41,17 @@ export default function JobCard({
           />
 
           <div className="space-y-1">
-            <h2 className="title-medium text-on_surface-light">{job.title}</h2>
+            <h2 className="mobile-title-medium md:title-medium text-on_surface-light">
+              {job.title}
+            </h2>
 
-            <p className="body-medium text-txt-on-surface-terriary-light">
+            <p className="mobile-body-medium md:body-medium text-txt-on-surface-terriary-light">
               {job.company}
             </p>
           </div>
         </div>
 
-        <div className="label-small text-gray-400 flex items-center gap-2.5">
+        <div className="mobile-label-small md:label-small text-gray-400 flex items-center gap-2.5">
           {archFlag && (
             <>
               <svg
@@ -94,7 +96,7 @@ export default function JobCard({
         </div>
       </div>
 
-      <div className="mt-4 pl-14 body-medium text-txt-on-surface-secondary-light space-y-1">
+      <div className="mt-4 pl-12 md:pl-14 mobile-body-medium md:body-medium text-txt-on-surface-secondary-light space-y-1">
         <p>{job.location}</p>
         <p>
           {job.isRemote ? "Remote Work" : "Fulltime Work"}
@@ -104,8 +106,8 @@ export default function JobCard({
 
       {divider && <div className="mt-6 border border-outline-level0" />}
 
-      <div className="flex justify-between items-center text-sm pt-3">
-        <span className="text-green label-medium-db">
+      <div className="flex justify-between items-center pt-3">
+        <span className="text-green mobile-label-medium-db md:label-medium-db">
           {job.ratePerhour
             .split(" - ")
             .map((v) => `$${v}`)
@@ -122,7 +124,7 @@ export default function JobCard({
               disabled: false,
               leftIcon: "",
               rightIcon: "arrow-right",
-              size: "body-medium",
+              size: "mobile-body-medium md:body-medium",
               padding: "px-4 py-1.5",
             }}
           />

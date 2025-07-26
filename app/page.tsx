@@ -2,30 +2,25 @@ import Image from "next/image";
 import Link from "next/link";
 
 // components
-import Chips from "@/components/Chips";
 import Button from "@/components/Button";
 import Searchbox from "@/components/Searchbox";
-import CourseCard from "@/components/CourseCard";
 import ApplyBanner from "@/components/ApplyBanner";
-import SectionTitle from "@/components/SectionTitle";
 import CourseSlider from "@/components/CourseSlider";
+import CoursesSection from "@/components/CoursesSection";
 import CredentialInquiry from "@/components/CredentialInquiry";
-
-// data
-import { events, posts, programs } from "../constants/data.js";
 
 // utils
 import { userAttr } from "../utilities/userAttr.js";
 
 export default function Home() {
   return (
-    <div className="space-y-14">
+    <div className="space-y-7 md:space-y-14">
       {/* header */}
       {userAttr()?.role === "ADMIN" ? (
-        <section className="mt-14 space-y-12">
+        <section className="mt-6 md:mt-12 space-y-6 md:space-y-12">
           {/* searchbox */}
           <div className="w-full flex items-center justify-center">
-            <div className="w-3xl">
+            <div className="md:w-3xl">
               <Searchbox />
             </div>
           </div>
@@ -36,25 +31,25 @@ export default function Home() {
           </div>
         </section>
       ) : (
-        <section className="mt-14 space-y-12 grid-system-level0">
+        <section className="mt-7 space-y-12 mobile-grid-system-level0 md:grid-system-level0">
           <div className="space-y-6">
-            <h1 className="display-large max-w-xl">
+            <h1 className="mobile-display-large md:display-large max-w-96 md:max-w-xl">
               With CAMA college, shape your future!
             </h1>
-            <p className="max-w-3xl body-large">
+            <p className="max-w-96 md:max-w-3xl body-large">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Egestas
             </p>
           </div>
 
-          <section className="space-y-3 mt-10 max-w-3xl pr-4">
+          <section className="space-y-3 mt-10 max-w-3xl md:pr-4">
             {/* searchbox */}
             <Searchbox />
 
             <div className="flex items-center gap-1 ml-6">
               <Image src="/star.svg" alt="star" width={16} height={16} />
-              <span className="label-medium-db text-on_surface-light">
+              <span className="mobile-label-medium-db md:label-medium-db text-on_surface-light">
                 12034 students enrolled
               </span>
             </div>
@@ -63,117 +58,56 @@ export default function Home() {
       )}
 
       {/* new programs */}
-      <section className="space-y-8 grid-system-level0">
-        <div className="space-y-4">
-          <SectionTitle title="New Programs" path="/programs" />
+      <CoursesSection courseType="programs" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {programs.slice(0, 4).map((program) => (
-              <CourseCard key={program.id} data={program} type="programs" />
-            ))}
-          </div>
-        </div>
-
-        {/* chips */}
-        <div className="flex items-center gap-2">
-          {[
-            "IT & AI",
-            "Branding",
-            "Business",
-            "Management & Leadership",
-            "Marketing & Sales",
-            "Other",
-          ].map((item) => (
-            <Link
-              href={`/programs?category=${encodeURIComponent(item)}`}
-              key={item}
-            >
-              <Chips
-                chips={{
-                  lable: `${item}`,
-                  leftIcon: "",
-                  rightIcon: "",
-                  disabled: false,
-                  type: "tonal",
-                  width: 0,
-                  height: 0,
-                }}
-              />
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="hero grid-system-level0">
+      <section className="hero mobile-grid-system-level0 md:grid-system-level0">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6">
-          <div className="header-small">
-            <span className="display-large block">326</span> Students
-          </div>
-          <div className="header-small">
-            <span className="display-large block">5</span> Nations
-          </div>
-          <div className="header-small">
-            <span className="display-large block">85%</span> International
+          <div className="mobile-title-medium md:header-small">
+            <span className="mobile-display-large md:display-large block">
+              326
+            </span>{" "}
             Students
           </div>
-          <div className="header-small">
-            <span className="display-large block">15</span> Top Instructors
+          <div className="mobile-title-medium md:header-small">
+            <span className="mobile-display-large md:display-large block">
+              5
+            </span>{" "}
+            Nations
+          </div>
+          <div className="mobile-title-medium md:header-small">
+            <span className="mobile-display-large md:display-large block">
+              85%
+            </span>{" "}
+            International Students
+          </div>
+          <div className="mobile-title-medium md:header-small">
+            <span className="mobile-display-large md:display-large block">
+              15
+            </span>{" "}
+            Top Instructors
           </div>
         </div>
       </section>
 
       {/* new events */}
-      <section className="space-y-4 grid-system-level0">
-        <SectionTitle title="New Events" path="/events" />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {events.slice(0, 4).map((event) => (
-            <CourseCard key={event.id} data={event} type="events" />
-          ))}
-        </div>
-      </section>
+      <CoursesSection courseType="events" />
 
       {/* admissions */}
-      <section className="flex items-center justify-center grid-system-level1">
+      <section className="flex items-center justify-center mobile-grid-system-level0 md:grid-system-level1">
         <ApplyBanner />
       </section>
 
-      {/* news and posts */}
-      <section className="space-y-4 grid-system-level0">
-        <div className="flex items-center justify-between">
-          <h2 className="title-medium">News and Posts</h2>
-
-          <Button
-            props={{
-              value: "View all",
-              color: "red",
-              disabled: false,
-              leftIcon: "",
-              rightIcon: "arrow-right",
-              type: "text",
-              width: 20,
-              height: 20,
-              size: "body-medium",
-              padding: "px-4 py-1",
-            }}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {posts.map((post) => (
-            <CourseCard key={post.id} data={post} type="post" />
-          ))}
-        </div>
-      </section>
+      {/* new news */}
+      <CoursesSection courseType="news" />
 
       {/* instructor */}
-      <section className="grid items-center grid-cols-2 gap-8 space-y-2 grid-system-level0">
+      <section className="flex flex-col md:grid items-center md:grid-cols-2 gap-8 space-y-2 mobile-grid-system-level0 md:grid-system-level0">
         <div className="col-span-1 space-y-6">
           <div className="space-y-4">
-            <h1 className="header-large text-on_surface-light">
+            <h1 className="mobile-header-large md:header-large text-on_surface-light">
               Be an instructor
             </h1>
-            <p className="body-large text-txt-on-surface-secondary-light text-justify">
+            <p className="mobile-body-large md:body-large text-txt-on-surface-secondary-light text-justify">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
@@ -192,8 +126,8 @@ export default function Home() {
                 type: "outlined",
                 width: 24,
                 height: 24,
-                size: "body-large",
-                padding: "px-8 py-2",
+                size: "mobile-body-large md:body-large",
+                padding: "px-6 md:px-8 py-2",
               }}
             />
           </Link>
@@ -213,7 +147,7 @@ export default function Home() {
                   height={32}
                 />
               </div>
-              <p className="body-medium text-txt-on-surface-secondary-light text-center">
+              <p className="mobile-body-medium md:body-medium text-txt-on-surface-secondary-light text-center">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit
               </p>
             </div>
@@ -221,8 +155,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="hero2 grid-system-level0">
-        <div className="flex items-center justify-between text-white font-bold text-xl py-9">
+      <section className="hero2 mobile-grid-system-level0 md:grid-system-level0">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 text-white font-bold text-xl py-9">
           <div className="flex flex-col items-start gap-3 z-30">
             <h3 className="title-medium text-primary-shades-90">
               Credential inquiry

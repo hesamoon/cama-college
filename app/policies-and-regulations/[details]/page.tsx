@@ -20,18 +20,18 @@ function Page() {
   return (
     <div className=" space-y-10">
       {/* title */}
-      <h2 className="title-large text-on_surface-light">
+      <h2 className="mobile-title-large md:title-large text-on_surface-light">
         {policeDetail?.title}
       </h2>
 
       <div className="space-y-9">
         {/* title / description 1 */}
         <div className="space-y-3">
-          <h4 className="title-medium text-on_surface-light">
+          <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
             Title Of Lesson
           </h4>
 
-          <p className="text-justify body-large text-txt-on-surface-secondary-light">
+          <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
             purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
@@ -48,7 +48,7 @@ function Page() {
 
         {/* cover picture */}
         <Image
-          className="object-cover rounded w-full"
+          className="object-cover rounded w-full h-[272px]"
           src="/c1.png"
           alt="c1"
           width={781}
@@ -57,11 +57,11 @@ function Page() {
 
         {/* title / description 2 */}
         <div className="space-y-3">
-          <h4 className="title-medium text-on_surface-light">
+          <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
             Title Of Lesson
           </h4>
 
-          <p className="text-justify body-large text-txt-on-surface-secondary-light">
+          <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
             purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
@@ -100,14 +100,14 @@ function Page() {
             />
           </svg>
 
-          <p className="body-large text-background-primary-light">
+          <p className="mobile-body-large md:body-large text-background-primary-light">
             Velit ut tortor pretium viverra suspendisse potenti nullam
           </p>
         </div>
 
         {/* description */}
         <div>
-          <p className="text-justify body-large text-txt-on-surface-secondary-light">
+          <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
             purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
@@ -124,12 +124,12 @@ function Page() {
       </div>
 
       {/* like & dislike */}
-      <div className="flex items-center justify-end gap-12">
-        <span className="label-small text-txt-low-important">
+      <div className="flex items-center justify-end gap-6 md:gap-12">
+        <span className="mobile-label-small md:label-small text-txt-low-important">
           Is this helpful?
         </span>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mobile-label-large md:label-large">
           {/* dislike */}
           <div className="flex items-center gap-2">
             <Button
@@ -144,7 +144,7 @@ function Page() {
               }}
             />
 
-            <span className="label-large text-on_surface-light">{dislike}</span>
+            <span className="text-on_surface-light">{dislike}</span>
           </div>
 
           {/* like */}
@@ -161,7 +161,7 @@ function Page() {
               }}
             />
 
-            <span className="label-large text-on_surface-light">{like}</span>
+            <span className="text-on_surface-light">{like}</span>
           </div>
         </div>
       </div>

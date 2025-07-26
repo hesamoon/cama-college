@@ -10,7 +10,7 @@ function CourseSlider({ type }: { type?: string }) {
 
   return (
     <div
-      className={`grid grid-cols-3 grid-system-level00 rounded-sm`}
+      className={`grid grid-cols-2 md:grid-cols-3 md:grid-system-level00`}
       style={{
         backgroundImage: `url(/bg-banner.png)`,
         backgroundSize: "cover",
@@ -18,8 +18,8 @@ function CourseSlider({ type }: { type?: string }) {
       }}
     >
       {/* left side */}
-      <div className="space-y-9 pl-16 py-20 col-span-1 rounded-sm bg-linear-to-r from-[#3B070966]">
-        <h2 className="header-large text-txt-on-primary-dark max-w-[304px]">
+      <div className="space-y-4 md:space-y-9 pl-3 md:pl-16 py-10 md:py-20 col-span-1 rounded-sm bg-linear-to-r from-[#3B070966]">
+        <h2 className="mobile-header-large md:header-large text-txt-on-primary-dark max-w-[304px]">
           This is a title for slider
         </h2>
 
@@ -31,17 +31,18 @@ function CourseSlider({ type }: { type?: string }) {
             disabled: false,
             leftIcon: "",
             rightIcon: "arrow-right-ios-white",
-            padding: "py-2 px-6",
-            size: "body-large",
+            padding: "p-2 md:py-2 md:px-6",
+            size: "mobile-body-large md:body-large whitespace-nowrap",
             height: 20,
             width: 20,
-            clickHandler: () => router.push(`/${type==="Programs"?"programs":"events"}`),
+            clickHandler: () =>
+              router.push(`/${type === "Programs" ? "programs" : "events"}`),
           }}
         />
       </div>
 
       {/* right side */}
-      <div className="flex items-end justify-end gap-2 py-5 col-span-2">
+      <div className="flex items-end justify-end gap-2 py-3 pr-3 md:py-5 col-span-1 md:col-span-2">
         <Button
           props={{
             value: "",

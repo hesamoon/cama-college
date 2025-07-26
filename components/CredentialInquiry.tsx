@@ -13,9 +13,9 @@ function CredentialInquiry({
   const [credentialID, setCredentialID] = useState("");
 
   return (
-    <div className="flex items-center gap-3 text-txt-on-primary-dark">
+    <div className="flex flex-col md:flex-row md:items-center gap-3 text-txt-on-primary-dark w-full md:w-fit">
       <input
-        className="outline-none border border-outline1 rounded-sm p-3 body-large w-96"
+        className="outline-none border border-outline1 rounded-sm p-3 mobile-body-large md:body-large md:w-96"
         value={credentialID}
         onChange={(e) => setCredentialID(e.target.value)}
         placeholder={placeholder}
@@ -31,7 +31,7 @@ function CredentialInquiry({
           color: "red",
           width: 24,
           height: 24,
-          size: "body-large",
+          size: "mobile-body-large md:body-large",
           padding: "py-3 px-6",
         }}
       />

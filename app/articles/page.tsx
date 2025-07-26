@@ -57,14 +57,14 @@ function Page() {
   }, [currentPage]);
 
   return (
-    <div className="grid-system-level1 space-y-12 py-6">
+    <div className="mobile-grid-system-level0 md:grid-system-level1 space-y-6 md:space-y-12 py-6">
       {/* search box */}
       <div className="flex items-center justify-center">
         <ArticleSearcher />
       </div>
 
       {/* body */}
-      <div className="space-y-10 px-3">
+      <div className="space-y-5 md:space-y-10 md:px-3">
         {/* Header */}
         <ListHeader title="Articles" />
 
@@ -78,7 +78,7 @@ function Page() {
                 ))
             ) : (
               <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center">
-                <h3 className="body-large text-txt-on-surface-terriary-light">
+                <h3 className="mobile-body-large md:body-large text-txt-on-surface-terriary-light">
                   {search || since ? "Article not found" : "No Articles"}
                 </h3>
               </div>
@@ -87,7 +87,7 @@ function Page() {
 
           {/* pagination */}
           {(articlesList.length >= 4 || currentPage > 1) && (
-            <div className="flex items-center justify-center pb-14">
+            <div className="flex items-center justify-center pb-7 md:pb-14">
               <Pagination
                 totalPages={Math.ceil(articles.length / 4)}
                 currentPage={currentPage}

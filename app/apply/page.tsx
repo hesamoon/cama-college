@@ -6,13 +6,13 @@ import ApplyScreen from "@/components/ApplyScreen";
 
 function page() {
   return (
-    <div className="py-10">
+    <div className="py-5 md:py-10">
       {/* cover */}
-      <div className="grid-system-level1 relative flex items-center justify-between gap-4 py-16">
+      <div className="mobile-grid-system-level0 md:grid-system-level1 relative flex items-center md:justify-between !gap-0 md:!gap-4 py-8 md:py-16">
         {/* left image */}
-        <div className="min-w-20 min-h-20 max-w-20 max-h-20 rounded-sm bg-primary-tints-90 flex items-center justify-center">
+        <div className="min-w-8 min-h-8 max-w-8 max-h-8 md:min-w-20 md:min-h-20 md:max-w-20 md:max-h-20 rounded-sm bg-primary-tints-90 flex items-center justify-center">
           <Image
-            className="rounded-md"
+            className="rounded-md w-6 h-6 md:w-16 md:h-16"
             src="/apply-pic1.jpg"
             alt="apply-pic1"
             width={64}
@@ -22,13 +22,14 @@ function page() {
 
         <div className="w-full h-[1px] bg-primary-tints-90 rounded-full" />
 
-        <div className="min-w-28 min-h-28 max-w-28 max-h-28 rounded-sm bg-primary-tints-90 flex items-center justify-center">
+        <div className="min-w-10 min-h-10 max-w-10 max-h-10 md:min-w-28 md:min-h-28 md:max-w-28 md:max-h-28 rounded-sm bg-primary-tints-90 flex items-center justify-center">
           <svg
             width="40"
             height="40"
             viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5 md:w-10 md:h-10"
           >
             <path
               opacity="0.34"
@@ -51,9 +52,9 @@ function page() {
         <div className="w-full h-[1px] bg-primary-tints-90 rounded-full" />
 
         {/* right image */}
-        <div className="min-w-20 min-h-20 max-w-20 max-h-20 rounded-sm bg-primary-tints-90 flex items-center justify-center">
+        <div className="min-w-8 min-h-8 max-w-8 max-h-8 md:min-w-20 md:min-h-20 md:max-w-20 md:max-h-20 rounded-sm bg-primary-tints-90 flex items-center justify-center">
           <Image
-            className="rounded-md"
+            className="rounded-md w-6 h-6 md:w-16 md:h-16"
             src="/apply-pic2.jpg"
             alt="apply-pic2"
             width={64}
@@ -63,13 +64,14 @@ function page() {
 
         {/* absolute icon and lines */}
         {/* top - left */}
-        <div className="absolute top-[1.375rem] left-[20rem]">
+        <div className="absolute -top-[1.1rem] md:top-[1.375rem] left-[5rem] md:left-[20rem]">
           <svg
             width="167"
             height="98"
             viewBox="0 0 167 98"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-[70px] md:w-[167px]"
           >
             <line
               x1="0.5"
@@ -91,13 +93,14 @@ function page() {
             />
           </svg>
         </div>
-        <div className="absolute top-1 left-[17rem] min-w-10 min-h-10 max-w-10 max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
+        <div className="absolute top-0 md:top-1 left-[4rem] md:left-[17rem] min-w-6 min-h-6 max-w-6 max-h-6 md:min-w-10 md:min-h-10 md:max-w-10 md:max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
           <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4 md:w-6 md:h-6"
           >
             <path
               d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
@@ -137,13 +140,14 @@ function page() {
         </div>
 
         {/* bottom - left */}
-        <div className="absolute bottom-[1.375rem] left-[22rem]">
+        <div className="absolute -bottom-[1.1rem] md:bottom-[1.375rem] left-[6rem] md:left-[22rem]">
           <svg
             width="167"
             height="98"
             viewBox="0 0 167 98"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-[70px] md:w-[167px]"
           >
             <line
               x1="0.5"
@@ -164,13 +168,14 @@ function page() {
             />
           </svg>
         </div>
-        <div className="absolute bottom-1 left-[19rem] min-w-10 min-h-10 max-w-10 max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
+        <div className="absolute bottom-0 md:bottom-1 left-[5rem] md:left-[19rem] min-w-6 min-h-6 max-w-6 max-h-6 md:min-w-10 md:min-h-10 md:max-w-10 md:max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
           <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4 md:w-6 md:h-6"
           >
             <path
               opacity="0.34"
@@ -220,13 +225,14 @@ function page() {
         </div>
 
         {/* top - right */}
-        <div className="absolute top-[1.375rem] right-[22rem]">
+        <div className="absolute -top-[1.1rem] md:top-[1.375rem] right-[6rem] md:right-[22rem]">
           <svg
             width="167"
             height="98"
             viewBox="0 0 167 98"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-[70px] md:w-[167px]"
           >
             <line
               x1="0.5"
@@ -247,13 +253,14 @@ function page() {
             />
           </svg>
         </div>
-        <div className="absolute top-1 right-[19rem] min-w-10 min-h-10 max-w-10 max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
+        <div className="absolute top-0 md:top-1 right-[5rem] md:right-[19rem] min-w-6 min-h-6 max-w-6 max-h-6 md:min-w-10 md:min-h-10 md:max-w-10 md:max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
           <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4 md:w-6 md:h-6"
           >
             <path
               d="M8.67 14H4C2.9 14 2 14.9 2 16V22H8.67V14Z"
@@ -291,13 +298,14 @@ function page() {
         </div>
 
         {/* bottom - right */}
-        <div className="absolute bottom-[1.375rem] right-[20rem]">
+        <div className="absolute -bottom-[1.1rem] md:bottom-[1.375rem] right-[4rem] md:right-[20rem]">
           <svg
             width="167"
             height="98"
             viewBox="0 0 167 98"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-[70px] md:w-[167px]"
           >
             <line
               x1="0.5"
@@ -319,13 +327,14 @@ function page() {
             />
           </svg>
         </div>
-        <div className="absolute bottom-1 right-[17rem] min-w-10 min-h-10 max-w-10 max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
+        <div className="absolute bottom-0 md:bottom-1 right-[3rem] md:right-[17rem] min-w-6 min-h-6 max-w-6 max-h-6 md:min-w-10 md:min-h-10 md:max-w-10 md:max-h-10 rounded-sm bg-primary-tints-90 flex items-center justify-center">
           <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4 md:w-6 md:h-6"
           >
             <path
               d="M10.0495 2.53028L4.02953 6.46028C2.09953 7.72028 2.09953 10.5403 4.02953 11.8003L10.0495 15.7303C11.1295 16.4403 12.9095 16.4403 13.9895 15.7303L19.9795 11.8003C21.8995 10.5403 21.8995 7.73028 19.9795 6.47028L13.9895 2.54028C12.9095 1.82028 11.1295 1.82028 10.0495 2.53028Z"
@@ -355,15 +364,15 @@ function page() {
       </div>
 
       {/* title */}
-      <div className="pt-10 grid-system-level1 flex flex-col items-center justify-center gap-10">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <h1 className="header-large text-on_surface-light">
+      <div className="pt-10 mobile-grid-system-level0 md:grid-system-level1 flex flex-col items-center justify-center !gap-7 md:!gap-10">
+        <div className="flex flex-col items-center justify-center gap-3 md:gap-4">
+          <h1 className="mobile-header-large md:header-large text-center text-on_surface-light">
             Your CAMA College{" "}
             <span className="text-background-primary-light">Journey</span>{" "}
             Starts Here
           </h1>
 
-          <p className="text-center max-w-[784px] body-large text-txt-on-surface-secondary-light">
+          <p className="text-center max-w-[784px] mobile-body-large md:body-large text-txt-on-surface-secondary-light">
             No matter your level, your experiences, who you are, where you are,
             or when you have the time to start your journey, CAMA College is
             here for you. We are an exclusive society of future-shapers, one
@@ -377,13 +386,13 @@ function page() {
       <ApplyScreen />
 
       {/* account creation */}
-      <div className="pt-10 grid-system-level1 flex flex-col items-center justify-center gap-9">
+      <div className="h-screen md:h-fit pt-28 md:pt-10 mobile-grid-system-level0 md:grid-system-level1 flex flex-col items-center md:justify-center !gap-9">
         <div className="flex flex-col items-center justify-center gap-2">
-          <h2 className="title-medium text-on_surface-light">
+          <h2 className="mobile-title-medium md:title-medium text-on_surface-light">
             Account Creation
           </h2>
 
-          <p className="text-center max-w-[577px] body-medium text-txt-on-surface-secondary-light">
+          <p className="text-center max-w-[577px] mobile-body-medium md:body-medium text-txt-on-surface-secondary-light">
             Simply and effortlessly, use your own email address to create your
             account. By doing so, you can have a wide and clear access to
             everything we have to offer.

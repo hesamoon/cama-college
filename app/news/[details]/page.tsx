@@ -39,7 +39,7 @@ function Page() {
   };
 
   return (
-    <div className="grid-system-level3 space-y-16 py-10">
+    <div className="mobile-grid-system-level0 md:grid-system-level3 space-y-16 py-5 md:py-10">
       {/* main content */}
       <div className="space-y-9">
         {/* top section */}
@@ -49,7 +49,7 @@ function Page() {
             {/* cover */}
             <div className="rounded overflow-hidden">
               <Image
-                className="object-cover w-full rounded aspect-16-9"
+                className="object-cover w-full h-[202px] md:h-[377px] rounded aspect-16-9"
                 src={`/${newsDetails?.coverImg}.png`}
                 alt={newsDetails ? newsDetails.coverImg : ""}
                 width={672}
@@ -60,12 +60,12 @@ function Page() {
             {/* title / author, time */}
             <div className="space-y-2">
               {/* title */}
-              <h4 className="title-large text-on_surface-light">
+              <h4 className="mobile-title-large md:title-large text-on_surface-light">
                 Title Of Lesson
               </h4>
 
               {/* author, time */}
-              <div className="flex items-center gap-3 label-medium text-txt-on-surface-terriary-light">
+              <div className="flex items-center gap-3 mobile-label-medium md:label-medium text-txt-on-surface-terriary-light">
                 {/* author */}
                 <div className="flex items-center gap-1">
                   <svg
@@ -131,11 +131,11 @@ function Page() {
           </div>
 
           {/* likes, comments count / share, flag button */}
-          <div className="flex items-center justify-between gap-3 bg-surface0-light rounded py-2 px-2.5">
+          <div className="flex items-center justify-between gap-3 bg-surface0-light rounded py-1 md:py-2 px-1.5 md:px-2.5">
             {/* likes, comments count */}
-            <div className="flex items-center gap-4 label-large text-on_surface-light">
+            <div className="flex items-center gap-4 mobile-label-large md:label-large text-on_surface-light">
               {/* like */}
-              <div className="flex items-center gap-1 pl-4">
+              <div className="flex items-center gap-1 md:pl-4">
                 <Button
                   props={{
                     value: "",
@@ -211,11 +211,11 @@ function Page() {
         {/* descriptions section */}
         <div className="space-y-9">
           <div className="space-y-3">
-            <h4 className="title-medium text-on_surface-light">
+            <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
               Title Of Lesson
             </h4>
 
-            <p className="body-large text-txt-on-surface-secondary-light text-justify">
+            <p className="mobile-body-large md:body-large text-txt-on-surface-secondary-light text-justify">
               {parseStyledText(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. @(*Ullamcorper*)@ velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed "
               )}
@@ -234,17 +234,17 @@ function Page() {
           </div>
 
           <div className="space-y-3">
-            <h4 className="title-medium text-on_surface-light">
+            <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
               Title Of Lesson
             </h4>
 
-            <div className="space-y-2">
-              <p className="body-large text-txt-on-surface-secondary-light text-justify">
+            <div className="space-y-2 mobile-body-large md:body-large">
+              <p className="text-txt-on-surface-secondary-light text-justify">
                 {parseStyledText(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed "
                 )}
               </p>
-              <p className="body-large text-txt-on-surface-secondary-light text-justify">
+              <p className="text-txt-on-surface-secondary-light text-justify">
                 {parseStyledText(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed "
                 )}
@@ -253,11 +253,11 @@ function Page() {
           </div>
 
           {/* likes, comments count / share, flag button */}
-          <div className="flex items-center justify-between gap-3 bg-surface0-light rounded py-2 px-2.5">
+          <div className="flex items-center justify-between gap-3 bg-surface0-light rounded py-1 md:py-2 px-1.5 md:px-2.5">
             {/* likes, comments count */}
-            <div className="flex items-center gap-4 label-large text-on_surface-light">
+            <div className="flex items-center gap-4 mobile-label-large md:label-large text-on_surface-light">
               {/* like */}
-              <div className="flex items-center gap-1 pl-4">
+              <div className="flex items-center gap-1 md:pl-4">
                 <Button
                   props={{
                     value: "",
@@ -269,11 +269,11 @@ function Page() {
                     padding: "p-3",
                     width: 24,
                     height: 24,
-                    clickHandler: () => setLike2((prev) => prev + 1),
+                    clickHandler: () => setLike1((prev) => prev + 1),
                   }}
                 />
 
-                <span>{like2}</span>
+                <span>{like1}</span>
               </div>
 
               {/* count of comments */}
@@ -334,12 +334,14 @@ function Page() {
       {/* comments */}
       <div id="Comments" className="space-y-9">
         <div className="space-y-6">
-          <h4>Comments ({newsDetails?.comments})</h4>
+          <h4 className="mobile-title-medium md:title-medium">
+            Comments ({newsDetails?.comments})
+          </h4>
 
           <div className="p-3 bg-surface0-light rounded">
             <input
               ref={inputRef}
-              className="p-3 bg-white rounded outline-none body-large placeholder:text-txt-on-surface-terriary-light text-on_surface-light w-full"
+              className="p-3 bg-white rounded outline-none mobile-body-large md:body-large placeholder:text-txt-on-surface-terriary-light text-on_surface-light w-full"
               type="text"
               placeholder="What do you think?"
             />
@@ -348,16 +350,16 @@ function Page() {
 
         <div className="space-y-5">
           <div className="space-y-0">
-            <CommentsSection stars={false} />
+            <CommentsSection stars={true} />
           </div>
         </div>
       </div>
 
       {/* related news */}
       <div className="space-y-6">
-        <h4 className="title-medium text-on_surface-light">Related News</h4>
+        <h4 className="mobile-title-medium md:title-medium text-on_surface-light">Related News</h4>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4 md:gap-6">
           {posts.map((post) => (
             <CourseCard key={post.id} data={post} type="post" />
           ))}

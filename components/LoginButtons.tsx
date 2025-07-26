@@ -1,12 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 // components
 import Button from "./Button";
-
-// utils
-import { setCookie } from "@/utilities/cookie";
+import AuthenticationModal from "./modal/AuthenticationModal";
 
 function LoginButtons({
   color = "black",
@@ -17,7 +15,7 @@ function LoginButtons({
   type?: string;
   icon?: string;
 }) {
-  const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="flex items-center gap-2">
@@ -31,29 +29,13 @@ function LoginButtons({
           color: color,
           width: 24,
           height: 24,
-          size: "body-large",
+          size: "mobile-body-large md:body-large",
           padding: "px-4 py-2",
-          clickHandler: () => {
-            setCookie({ accessToken: "ivbgehnogy82332h" });
-            router.refresh();
-          },
+          clickHandler: () => setOpen(true),
         }}
       />
 
-      {/* <Button
-        props={{
-          value: "",
-          leftIcon: "bag",
-          rightIcon: "",
-          type: "outlined",
-          disabled: false,
-          size: "body-large",
-          color: "black",
-          padding: "p-2",
-          width: 24,
-          height: 24,
-        }}
-      /> */}
+      <AuthenticationModal open={open} onClose={() => setOpen(false)} />
     </div>
   );
 }

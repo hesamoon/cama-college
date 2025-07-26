@@ -12,11 +12,12 @@ import { CommentT } from "@/app/types/types";
 function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
   const [like, setLike] = useState(12);
   const [dislike, setDislike] = useState(2);
+
   return (
-    <div className="border-b border-outline-level0 space-y-7 pb-8">
+    <div className="border-b border-outline-level0 space-y-3.5 md:space-y-7 pb-8">
       <div className="flex items-center justify-between">
         <div className="space-y-2">
-          <h3 className="title-medium text-on_surface-light">
+          <h3 className="mobile-title-medium md:title-medium text-on_surface-light">
             {comment.title}
           </h3>
 
@@ -29,7 +30,7 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
               height={36}
             />
 
-            <h5 className="body-medium text-txt-low-important">
+            <h5 className="mobile-body-medium md:body-medium text-txt-low-important">
               {comment.author}
             </h5>
           </div>
@@ -52,7 +53,7 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
                     fill="#34C759"
                   />
                 </svg>
-                <span className="label-large-db text-green">
+                <span className="mobile-label-large-db md:label-large-db text-green">
                   {comment.rating}
                 </span>
               </div>
@@ -62,7 +63,7 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
           )}
 
           {/* date */}
-          <span className="label-small text-txt-low-important">
+          <span className="mobile-label-small md:label-small text-txt-low-important">
             {new Date(comment.date)
               .toLocaleDateString("en-GB", {
                 day: "2-digit",
@@ -87,16 +88,18 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
         </div>
       </div>
 
-      <p className="body-large text-txt-secondary ">{comment.text}</p>
+      <p className="mobile-body-large md:body-large text-justify text-txt-secondary">
+        {comment.text}
+      </p>
 
-      <div className="flex items-center justify-end gap-12">
-        <span className="label-small text-txt-low-important">
+      <div className="flex items-center justify-end gap-6 md:gap-12">
+        <span className="mobile-label-small md:label-small text-txt-low-important">
           Is this comment helpful?
         </span>
 
         <div className="flex items-center gap-4">
           {/* dislike */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center md:gap-2">
             <Button
               props={{
                 value: "",
@@ -109,11 +112,13 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
               }}
             />
 
-            <span className="label-large text-on_surface-light">{dislike}</span>
+            <span className="mobile-label-large md:label-large text-on_surface-light">
+              {dislike}
+            </span>
           </div>
 
           {/* like */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center md:gap-2">
             <Button
               props={{
                 value: "",
@@ -126,7 +131,9 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
               }}
             />
 
-            <span className="label-large text-on_surface-light">{like}</span>
+            <span className="mobile-label-large md:label-large text-on_surface-light">
+              {like}
+            </span>
           </div>
         </div>
       </div>

@@ -3,7 +3,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 
 // components
 import Button from "@/components/Button";
@@ -12,15 +13,36 @@ import RatingCard from "@/components/RatingCard";
 import ContentSection from "@/components/ContentSection";
 import CommentsSection from "@/components/CommentsSection";
 import DescriptionSection from "@/components/DescriptionSection";
+import ProgramDetailsSkeleton from "@/components/skeletons/ProgramDetailsSkeleton";
 
-// fake data
-import { programs } from "@/constants/data";
+// api
+import { getProgram, getPrograms } from "@/lib/api/programs";
+
+// types
+import { Program } from "@/app/types/types";
 
 function Page() {
-  const pathname = usePathname();
-  const programDetails = programs.find(
-    (p) => p.name === decodeURIComponent(pathname.split("/")[2])
-  );
+  const searchParams = useSearchParams();
+  const courseId = searchParams.get("courseId");
+
+  const { data: programDetailss, isLoading: isLoadingProgramDetails } =
+    useQuery({
+      queryKey: ["programDetails", courseId],
+      queryFn: () => getProgram(courseId || ""),
+    });
+
+  const {
+    data: programsData,
+    isLoading: isLoadingPrograms,
+    error: errorPrograms,
+  } = useQuery({
+    queryKey: ["programs"],
+    queryFn: getPrograms,
+  });
+
+  console.log(programDetailss);
+
+  const programDetails = programDetailss?.data.data;
   const tabs = ["Description", "Content", "Comments", "Related Programs"];
   const [activeTab, setActiveTab] = useState("Description");
 
@@ -42,24 +64,29 @@ function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (isLoadingProgramDetails || isLoadingPrograms) {
+    return <ProgramDetailsSkeleton />;
+  }
+
   return (
     <div className="space-y-6">
       <div className="space-y-6">
         {/* top section -> cover, title / cart */}
-        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+        <div className="grid grid-cols-3 gap-6 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
           {/* cover, title */}
           <div className="col-span-3 space-y-6">
             {/* cover, title */}
             <div className="space-y-8">
               <Image
                 className="rounded-sm aspect-16-9 object-cover w-full max-h-[438px]"
-                src={`/${programDetails?.coverImg}.png`}
-                alt={`${programDetails?.coverImg}`}
+                src={programDetails?.avatar}
+                alt={`${programDetails?.name} cover`}
                 width={781}
                 height={438}
+                unoptimized
               />
 
-              <h1 className="display-medium text-color-on_surface-light">
+              <h1 className="mobile-display-medium md:display-medium text-color-on_surface-light">
                 {programDetails?.name}
               </h1>
             </div>
@@ -67,20 +94,20 @@ function Page() {
         </div>
 
         {/* tabs */}
-        <div className="sticky top-[3.75rem] bg-white z-[35] grid-system-level1">
+        <div className="sticky top-[3.75rem] bg-white z-[35] md:grid-system-level1">
           {/* tabs */}
           <div
             className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
               activeTab === "Comments" || activeTab === "Related Programs"
                 ? "w-full"
-                : "w-2/3"
+                : "md:w-2/3"
             }`}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between w-full md:w-fit md:gap-4">
               {tabs.map((tab) => (
                 <div key={tab}>
                   <button
-                    className={`py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
+                    className={`p-2 md:py-3 md:px-2.5 mobile-body-large md:body-large cursor-pointer transition-all ease-linear duration-200 whitespace-nowrap ${
                       activeTab === tab
                         ? "text-background-primary-light border-b border-background-primary-light"
                         : "text-txt-on-surface-terriary-light"
@@ -109,7 +136,7 @@ function Page() {
                 activeTab === "Comments" || activeTab === "Related Programs"
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"
-              } flex items-center gap-1`}
+              } hidden md:flex items-center gap-1`}
             >
               <Button
                 props={{
@@ -145,18 +172,48 @@ function Page() {
         </div>
 
         {/* description, content */}
-        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4 pb-10">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 space-y-6 mt-4 pb-10">
           {/* description, content */}
-          <div className="col-span-2">
+          <div className="col-span-2 mobile-grid-system-level0 md:grid-system-level1">
             {/* description */}
-            <DescriptionSection />
+            <DescriptionSection
+              about={programDetails?.about}
+              prerequisites={programDetails?.prerequisites}
+              audience={programDetails?.audience}
+              what_you_learn={programDetails?.what_you_learn}
+              type="program"
+            />
 
             {/* content */}
             <ContentSection />
           </div>
 
+          <div className="md:hidden border-t border-t-outline-level0 pt-2">
+            <div className="mobile-grid-system-level0 md:grid-system-level1 flex items-center justify-between gap-2">
+              <Button
+                props={{
+                  value: "Get Course",
+                  type: "filled",
+                  color: "red",
+                  disabled: false,
+                  leftIcon: "shopping-cart",
+                  rightIcon: "",
+                  padding: "py-3 px-4",
+                  size: "body-small",
+                  height: 16,
+                  width: 16,
+                }}
+              />
+
+              {/* price */}
+              <h3 className="mobile-header-medium text-txt-on-surface-secondary-light">
+                ${programDetails?.price} (CAD)
+              </h3>
+            </div>
+          </div>
+
           {/* card */}
-          <div className="sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
+          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
             {/* price */}
             <h3 className="header-medium text-txt-on-surface-secondary-light">
               ${programDetails?.price} (CAD)
@@ -232,13 +289,13 @@ function Page() {
                 <h5>{programDetails?.duration}h</h5>
 
                 {/* subject */}
-                <h5>{programDetails?.category}</h5>
+                <h5>{programDetails?.subject}</h5>
 
                 {/* language */}
-                <h5>English/ Persian</h5>
+                <h5>{programDetails?.language}</h5>
 
                 {/* credential type */}
-                <h5>Diploma</h5>
+                <h5>{programDetails?.credential_type}</h5>
 
                 {/* AP - number */}
                 <h5>0</h5>
@@ -308,7 +365,7 @@ function Page() {
         {/* comments */}
         <div
           id="Comments"
-          className="grid grid-cols-3 grid-system-level1 space-y-6 pt-10"
+          className="flex flex-col-reverse md:grid md:grid-cols-3 mobile-grid-system-level0 md:grid-system-level1 space-y-6 pt-10"
         >
           {/* comments */}
           <div className="col-span-2">
@@ -323,48 +380,46 @@ function Page() {
         </div>
 
         {/* programs */}
-        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+        <div className="grid grid-cols-3 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
           {/* programs */}
           <div
             id="Related Programs"
-            className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+            className="col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-8"
           >
-            {programs
-              .filter((p) => p.id <= 6)
-              .map((program) => (
-                <CourseCard key={program.id} data={program} type="programs" />
-              ))}
+            {programsData?.data.data.slice(0, 6).map((program: Program) => (
+              <CourseCard key={program.id} data={program} type="programs" />
+            ))}
           </div>
         </div>
       </div>
 
       {/* apply */}
-      <section className="flex items-center justify-center mt-20">
-        <div className="grid-system-level1 relative bg-primary-tints-90 grid grid-cols-2 gap-8 overflow-hidden py-10">
-          <div className="col-span-1 z-30 space-y-4">
+      <section className="flex items-center justify-center md:mt-20">
+        <div className="mobile-grid-system-level0 md:grid-system-level1 relative bg-primary-tints-90 flex flex-col-reverse md:grid md:grid-cols-2 space-y-8 md:space-y-0 overflow-hidden py-10">
+          <div className="col-span-1 z-30 space-y-6 md:space-y-4">
             <div className="space-y-3">
-              <h2 className="title-large text-on_surface-light">
+              <h2 className="mobile-title-large md:title-large text-on_surface-light">
                 Apply to easy access to Programs
               </h2>
-              <p className="mt-2 text-txt-on-surface-secondary-light body-large text-justify">
+              <p className="mt-2 text-txt-on-surface-secondary-light mobile-body-large md:body-large text-justify">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Egestas purus viverra accumsan
               </p>
             </div>
 
-            <div className="space-y-1">
+            <div className="space-y-2 md:space-y-1">
               <div className="flex items-center gap-10">
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
@@ -373,23 +428,40 @@ function Page() {
               <div className="flex items-center gap-10">
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
               </div>
             </div>
+
+            <div className="md:hidden">
+              <Button
+                props={{
+                  value: "Apply now",
+                  type: "outlined",
+                  disabled: false,
+                  leftIcon: "",
+                  rightIcon: "arrow-right",
+                  color: "red",
+                  width: 20,
+                  height: 20,
+                  size: "body-medium md:body-large",
+                  padding: "px-6 py-3",
+                }}
+              />
+            </div>
           </div>
 
           <div className="col-span-1 flex items-end justify-center gap-4">
-            <div className="pb-4">
+            <div className="hidden md:block pb-4">
               <Button
                 props={{
                   value: "Apply now",
@@ -415,49 +487,49 @@ function Page() {
           </div>
 
           <Image
-            className="absolute top-0 left-0"
+            className="absolute -top-10 -left-10 md:top-0 md:left-0"
             src="/rec-t-l.svg"
             alt="rec-t-l"
             width={150}
             height={150}
           />
           <Image
-            className="absolute top-0 right-8"
+            className="absolute top-0 -right-32 md:right-8"
             src="/rec-t-r.svg"
             alt="rec-t-r"
             width={204}
             height={204}
           />
           <Image
-            className="absolute bottom-0 right-0"
+            className="hidden md:block absolute bottom-0 right-0"
             src="/rec-b-r.svg"
             alt="rec-b-r"
             width={150}
             height={150}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec1.svg"
             alt="rec1"
             width={30}
             height={30}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec2.svg"
             alt="rec2"
             width={50}
             height={50}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec3.svg"
             alt="rec3"
             width={70}
             height={70}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec4.svg"
             alt="rec4"
             width={90}

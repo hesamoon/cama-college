@@ -20,22 +20,22 @@ function CourseInProgress({
   const router = useRouter();
 
   return (
-    <div className="flex justify-between">
-      <div className="flex gap-4">
-        <Image
-          className="rounded object-cover w-[282px] h-[121px]"
-          src={`/${coverImg}.png`}
-          alt={coverImg}
-          width={282}
-          height={121}
-        />
+    <div className="flex flex-col md:flex-row gap-4">
+      <Image
+        className="rounded object-cover w-full h-[155px] md:w-[282px] md:h-[121px]"
+        src={`/${coverImg}.png`}
+        alt={coverImg}
+        width={282}
+        height={121}
+      />
 
-        <div className="flex flex-col justify-between">
+      <div className="flex flex-col gap-2 justify-between w-full">
+        <div className="flex items-start justify-between">
           {/* name */}
-          <div className="">
-            <h4>{name}</h4>
+          <div>
+            <h4 className="mobile-body-large md:body-large">{name}</h4>
 
-            <div className="flex items-center gap-3 label-medium text-txt-on-surface-terriary-light">
+            <div className="flex items-center gap-3 mobile-label-medium md:label-medium text-txt-on-surface-terriary-light">
               {/* level */}
               <div className="flex items-center gap-1">
                 <svg
@@ -209,8 +209,23 @@ function CourseInProgress({
             </div>
           </div>
 
+          {/* more button */}
+          <Button
+            props={{
+              value: "",
+              disabled: false,
+              leftIcon: "",
+              rightIcon: "more",
+              type: "text",
+              width: 24,
+              height: 24,
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
           {/* progressbar */}
-          <div className="space-y-2">
+          <div className="space-y-2 w-full md:w-[50%]">
             <div className="flex justify-between">
               <h4 className="label-medium text-txt-on-surface-secondary-light">
                 Progress
@@ -228,36 +243,25 @@ function CourseInProgress({
               />
             </div>
           </div>
+
+          {/* continue */}
+          <div className="flex items-center justify-end">
+            <Button
+              props={{
+                value: "Continue learning",
+                color: "red",
+                disabled: false,
+                leftIcon: "",
+                rightIcon: "arrow-right-white",
+                type: "filled",
+                size: "mobile-body-medium md:body-medium",
+                padding: "px-3.5 py-2",
+                clickHandler: () =>
+                  router.push(`/programs/in-progress/?program=${name}`),
+              }}
+            />
+          </div>
         </div>
-      </div>
-
-      <div className="flex flex-col items-end justify-between">
-        <Button
-          props={{
-            value: "",
-            disabled: false,
-            leftIcon: "",
-            rightIcon: "more",
-            type: "text",
-            width: 24,
-            height: 24,
-          }}
-        />
-
-        <Button
-          props={{
-            value: "Continue learning",
-            color: "red",
-            disabled: false,
-            leftIcon: "",
-            rightIcon: "arrow-right-white",
-            type: "filled",
-            size: "body-medium",
-            padding: "px-3.5 py-2",
-            clickHandler: () =>
-              router.push(`/programs/in-progress/?program=${name}`),
-          }}
-        />
       </div>
     </div>
   );

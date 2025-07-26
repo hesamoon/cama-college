@@ -10,7 +10,7 @@ function SectionTitle({ title, path }: { title: string; path: string }) {
 
   return (
     <div className="flex items-center justify-between">
-      <h2 className="title-small">{title}</h2>
+      <h2 className="mobile-title-small md:title-small">{title}</h2>
 
       <Button
         props={{
@@ -22,7 +22,7 @@ function SectionTitle({ title, path }: { title: string; path: string }) {
           color: "red",
           width: 20,
           height: 20,
-          size: "body-medium",
+          size: "mobile-body-medium md:body-medium",
           padding: "px-4 py-1",
           clickHandler: () => router.push(path),
         }}

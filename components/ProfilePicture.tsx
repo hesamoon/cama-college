@@ -1,21 +1,71 @@
-import Image from "next/image";
+"use client";
 
+import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+import { useRef, useState } from "react";
+// api
+import { getMe } from "@/lib/api/auth";
 // components
 import Button from "./Button";
+import { Skeleton } from "@mui/material";
 
 function ProfilePicture() {
+  const { data: myData, isLoading: isLoadingMe } = useQuery({
+    queryKey: ["me"],
+    queryFn: () => getMe(),
+  });
+
+  const [image, setImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Handle file selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (ev) => setImage(ev.target?.result as string);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Remove selected image
+  const handleRemove = () => {
+    setImage(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   return (
     <div className="flex items-center gap-6">
-      <Image
-        className="rounded-full"
-        src="/profile.jpg"
-        alt="profile"
-        width={128}
-        height={128}
+      {isLoadingMe ? (
+        <Skeleton variant="circular" width={128} height={128} />
+      ) : (
+        <Image
+          src={image || "/profile.jpg"}
+          alt="Profile Preview"
+          className="rounded-full w-[128px] h-[128px] object-cover"
+          width={128}
+          height={128}
+        />
+      )}
+
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        style={{ display: "none" }}
       />
 
       <div className="space-y-4">
-        <h4 className="header-small text-on_surface-light">Ali Rahimi</h4>
+        {isLoadingMe ? (
+          <div className="mb-4">
+            <Skeleton variant="text" width={120} height={24} />
+          </div>
+        ) : (
+          <h4 className="header-small text-on_surface-light">
+            {`${myData?.data.data.name} ${myData?.data.data.family}`}
+          </h4>
+        )}
 
         <div className="flex items-center gap-3">
           <Button
@@ -29,6 +79,7 @@ function ProfilePicture() {
               height: 24,
               color: "red",
               padding: "py-2 px-4 gap-2",
+              clickHandler: () => fileInputRef.current?.click(),
             }}
           />
 
@@ -36,12 +87,13 @@ function ProfilePicture() {
             props={{
               value: "",
               type: "outlined",
-              disabled: false,
+              disabled: !image,
               leftIcon: "trash",
               rightIcon: "",
               width: 24,
               height: 24,
               color: "red",
+              clickHandler: handleRemove,
             }}
           />
         </div>

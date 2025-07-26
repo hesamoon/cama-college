@@ -1,3 +1,4 @@
+import useIsMobile from "@/hooks/useIsMobile";
 import { Dispatch, SetStateAction } from "react";
 
 export default function Pagination({
@@ -9,6 +10,8 @@ export default function Pagination({
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
 }) {
+  const isMobile = useIsMobile();
+
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -23,23 +26,32 @@ export default function Pagination({
       return pages;
     }
 
-    // Always include first 3 pages
-    pages.push(1, 2, 3);
+    if (isMobile) {
+      pages.push(1);
+    } else {
+      pages.push(1, 2, 3);
+    }
 
-    if (currentPage >= 4 && currentPage <= totalPages - 3) {
+    if (
+      (isMobile ? currentPage >= 2 : currentPage >= 4) &&
+      (isMobile ? currentPage <= totalPages-1 : currentPage <= totalPages - 3)
+    ) {
       pages.push(currentPage);
     } else {
       pages.push("...");
     }
 
-    // Always include last 3 pages
-    pages.push(totalPages - 2, totalPages - 1, totalPages);
+    if (isMobile) {
+      pages.push(totalPages);
+    } else {
+      pages.push(totalPages - 2, totalPages - 1, totalPages);
+    }
 
     return pages;
   };
 
   return (
-    <div className="flex items-center justify-center gap-9 mt-6 body-medium">
+    <div className="flex items-center justify-center gap-2 md:gap-9 mt-6 body-small md:body-medium">
       {/* Previous Button */}
       <button
         onClick={() => goToPage(currentPage - 1)}
@@ -75,7 +87,7 @@ export default function Pagination({
       </button>
 
       {/* Page Numbers */}
-      <div className="flex items-center gap-5 body-large">
+      <div className="flex items-center gap-4 md:gap-5 mobile-body-large md:body-large">
         {getPageNumbers().map((page) => (
           <button
             key={page}

@@ -1,5 +1,7 @@
-import TeamMemberPreview from "@/components/TeamMemberPreview";
 import Image from "next/image";
+
+// components
+import TeamMemberPreview from "@/components/TeamMemberPreview";
 
 const members = [
   {
@@ -42,13 +44,15 @@ const members = [
 
 function page() {
   return (
-    <div className="grid-system-level1 space-y-12 py-10">
+    <div className="mobile-grid-system-level0 md:grid-system-level1 space-y-12 py-5 md:py-10">
       {/* our team section */}
-      <section className="flex justify-between gap-7">
+      <section className="flex flex-col-reverse md:flex-row md:justify-between gap-7">
         <div className="space-y-4">
-          <h2 className="title-large text-black">Our Team</h2>
+          <h2 className="mobile-title-large md:title-large text-black">
+            Our Team
+          </h2>
 
-          <p className="body-large text-txt-secondary">
+          <p className="mobile-body-large md:body-large text-txt-secondary text-justify">
             Lorem ipsum dolor sit amet consectetur. Quam elit lacus praesent ac
             enim. Pellentesque volutpat sagittis ullamcorper orci viverra
             dapibus sit. Sollicitudin tortor ut sem dictum odio in. Ullamcorper
@@ -68,10 +72,12 @@ function page() {
       </section>
 
       {/* team members section */}
-      <section className="space-y-9">
-        <h3 className="title-medium text-black">Team Members</h3>
+      <section className="space-y-4 md:space-y-9">
+        <h3 className="mobile-title-medium md:title-medium text-black">
+          Team Members
+        </h3>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {members.map((mem) => (
             <TeamMemberPreview key={mem.id} memberDetails={mem} />
           ))}

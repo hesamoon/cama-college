@@ -18,7 +18,7 @@ function PoliciesNavs() {
   }, [pathname]);
 
   return (
-    <ul className="sticky top-[6rem]">
+    <ul className="md:sticky md:top-[6rem]">
       {policiesMenu.map((nav) => (
         <Link href={nav.path} key={nav.id}>
           <li

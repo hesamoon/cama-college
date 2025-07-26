@@ -20,16 +20,22 @@ export interface Transaction {
 }
 
 export interface Program {
-  id: number;
-  coverImg: string;
-  name: string;
-  level: string;
-  type: string;
-  duration: number;
   price: number;
   status: string;
-  publishDate: string;
-  category: string;
+  date: string;
+  about: string;
+  audience: { text: string }[];
+  avatar: string;
+  credential_type: string;
+  duration: number | null;
+  id: string;
+  language: string;
+  level: string;
+  name: string;
+  prerequisites: { text: string }[];
+  subject: string;
+  type: string;
+  what_you_learn: { text: string }[];
 }
 
 type Lesson = {
@@ -60,33 +66,40 @@ export interface ProgramInProgress {
   contents: Content[];
 }
 
-export interface CourseCardProps {
+export interface ProgramCardProps {
   type: string;
-  data: {
-    id: number;
-    coverImg: string;
-    name: string;
-    level: string;
-    type: string;
-    duration: number;
-    price: number;
-    status: string;
-    publishDate: string;
-    category: string;
-  };
+  data: Program;
 }
 
-export interface Events {
-  id: number;
-  coverImg: string;
-  name: string;
-  level: string;
+export interface EventCardProps {
   type: string;
-  duration: number;
-  price: number;
+  data: Event;
+}
+
+export interface PostCardProps {
+  type: string;
+  data: Program;
+}
+
+export type CourseCardProps = PostCardProps | ProgramCardProps | EventCardProps;
+
+export interface Event {
   status: string;
-  publishDate: string;
-  category: string;
+  about: string;
+  audience: { text: string }[];
+  avatar: string;
+  date: string;
+  duration: number | null;
+  id: string;
+  language: string;
+  lat: number | null;
+  level: string;
+  lng: number | null;
+  name: string;
+  prerequisites: { text: string }[];
+  price: number;
+  subject: string;
+  what_you_learn: { text: string }[];
 }
 
 export interface Chip {

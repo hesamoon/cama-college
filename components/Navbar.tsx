@@ -1,46 +1,115 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // data
 import { headerMenus } from "@/constants/data";
 
-// type
-import { HeaderNav, HeaderNavProps, SubMenu } from "@/app/types/types";
+// types
+import { HeaderNav, SubMenu } from "@/app/types/types";
+
+// hooks
+import useIsMobile from "@/hooks/useIsMobile";
 
 function Navbar() {
-  const [selNav, setSelNav] = useState<HeaderNav | null>(null);
-  const pathname = usePathname();
+  const isMobile = useIsMobile();
 
-  useEffect(() => {
-    setSelNav(null);
-  }, [pathname]); // Runs every time the URL path changes
-
-  return (
-    <div>
-      <ul className="flex items-center gap-1">
-        {headerMenus.map((hmnu) => (
-          <Nav
-            key={hmnu.id}
-            selNav={selNav}
-            setSelNav={setSelNav}
-            hmnu={hmnu}
-          />
-        ))}
-      </ul>
-    </div>
-  );
+  return <nav>{isMobile ? <MobileNav /> : <DesktopNav />}</nav>;
 }
 
 export default Navbar;
 
-const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
+function MobileNav() {
+  const pathname = usePathname();
+
+  return (
+    <ul className="flex flex-col gap-4">
+      {headerMenus.map((menu) => {
+        // Check if any submenu href matches current pathname
+        const isOpen = menu.subMenus?.some((sm) => sm.href === pathname);
+
+        return (
+          <li key={menu.id}>
+            {menu.subMenus?.length ? (
+              <details className="group" open={isOpen}>
+                <summary className="cursor-pointer list-none font-semibold text-base flex justify-between items-center">
+                  {menu.name}
+                  <svg
+                    className="transition-transform group-open:rotate-180"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.6004 7.45833L11.1671 12.8917C10.5254 13.5333 9.47539 13.5333 8.83372 12.8917L3.40039 7.45833"
+                      stroke="#9B9798"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </summary>
+                <ul className="ml-4 mt-2 space-y-2">
+                  {menu.subMenus.map((sm) => (
+                    <li key={sm.id}>
+                      <Link
+                        href={sm.href}
+                        className="text-sm text-gray-600 hover:text-black block"
+                      >
+                        {sm.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : (
+              <Link
+                href={menu.href}
+                className="text-base font-semibold hover:text-black block"
+              >
+                {menu.name}
+              </Link>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function DesktopNav() {
+  const [selNav, setSelNav] = useState<HeaderNav | null>(null);
+
+  return (
+    <ul className="flex items-center gap-1">
+      {headerMenus.map((hmnu) => (
+        <DesktopNavItem
+          key={hmnu.id}
+          hmnu={hmnu}
+          selNav={selNav}
+          setSelNav={setSelNav}
+        />
+      ))}
+    </ul>
+  );
+}
+
+const DesktopNavItem = ({
+  hmnu,
+  selNav,
+  setSelNav,
+}: {
+  hmnu: HeaderNav;
+  selNav: HeaderNav | null;
+  setSelNav: (val: HeaderNav | null) => void;
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [thisSubMenusHovered, setThisSubMenusHovered] =
     useState<SubMenu | null>(null);
-
   const ref = useRef<HTMLLIElement | null>(null);
 
   // handle click outside
@@ -50,11 +119,8 @@ const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
         setSelNav(null);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -65,7 +131,7 @@ const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false);
-        // setThisSubMenusHovered(null);
+        setThisSubMenusHovered(null);
       }}
     >
       {hmnu.id !== 2 ? (
@@ -84,7 +150,7 @@ const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
 
           <div
             className={`transition-all ease-linear duration-300 ${
-              isHovered || selNav?.id === hmnu.id ? "rotate-180" : null
+              isHovered || selNav?.id === hmnu.id ? "rotate-180" : ""
             }`}
           >
             <svg
@@ -104,7 +170,6 @@ const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
                     : "#9B9798"
                 }
                 strokeWidth="1.5"
-                strokeMiterlimit="10"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -130,80 +195,64 @@ const Nav: React.FC<HeaderNavProps> = ({ selNav, setSelNav, hmnu }) => {
         </Link>
       )}
 
-      {hmnu.subMenus ? (
-        hmnu.subMenus.length > 0 ? (
-          isHovered || selNav?.id === hmnu.id ? (
-            <div
-              className={`absolute top-10.5 flex gap-6 min-w-60 body-medium bg-surface0-light rounded-sm p-3 border border-outline-level1 ${
-                isHovered ? "z-[999]" : null
-              }`}
-            >
-              <ul className="flex flex-col gap-2 min-w-60 w-full">
-                {hmnu.subMenus.map((sm) => (
-                  <Link key={sm.id} href={`${sm.href}`}>
-                    <li
-                      className="whitespace-nowrap flex items-center justify-between gap-3"
-                      onMouseEnter={() => setThisSubMenusHovered(sm)}
-                      onMouseLeave={() => setThisSubMenusHovered(null)}
-                    >
-                      <span className={`text-txt-on-surface-secondary-light`}>
-                        {sm.name}
-                      </span>
+      {hmnu.subMenus?.length && (isHovered || selNav?.id === hmnu.id) ? (
+        <div className="absolute top-10.5 flex gap-6 min-w-60 body-medium bg-surface0-light rounded-sm p-3 border border-outline-level1 z-[999]">
+          <ul className="flex flex-col gap-2 min-w-60 w-full">
+            {hmnu.subMenus.map((sm) => (
+              <Link key={sm.id} href={sm.href}>
+                <li
+                  className="whitespace-nowrap flex items-center justify-between gap-3"
+                  onMouseEnter={() => setThisSubMenusHovered(sm)}
+                  onMouseLeave={() => setThisSubMenusHovered(null)}
+                >
+                  <span className="text-txt-on-surface-secondary-light">
+                    {sm.name}
+                  </span>
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.62 4.45331L13.6667 8.49998L9.62 12.5466"
+                      stroke="#484647"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M2.33333 8.5H13.5533"
+                      stroke="#484647"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </li>
+              </Link>
+            ))}
+          </ul>
 
-                      <div>
-                        <svg
-                          width="16"
-                          height="17"
-                          viewBox="0 0 16 17"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M9.62 4.45331L13.6667 8.49998L9.62 12.5466"
-                            stroke="#484647"
-                            stroke-miterlimit="10"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M2.33333 8.5H13.5533"
-                            stroke="#484647"
-                            stroke-miterlimit="10"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </li>
-                  </Link>
-                ))}
-              </ul>
-
-              {thisSubMenusHovered ? (
-                thisSubMenusHovered?.desc ? (
-                  <div className="flex gap-6 w-full py-2">
-                    <div className="border border-outline-level1 h-full" />
-
-                    <div className="space-y-2 min-w-[17.5rem]">
-                      <h5
-                        className={`title-small ${
-                          selNav?.id === hmnu.id
-                            ? "text-background-primary-light"
-                            : "text-on_surface-light"
-                        }`}
-                      >
-                        {thisSubMenusHovered.desc.title}
-                      </h5>
-                      <p className="text-justify body-medium text-txt-on-surface-secondary-light">
-                        {thisSubMenusHovered.desc.content}
-                      </p>
-                    </div>
-                  </div>
-                ) : null
-              ) : null}
+          {thisSubMenusHovered?.desc && (
+            <div className="flex gap-6 w-full py-2">
+              <div className="border border-outline-level1 h-full" />
+              <div className="space-y-2 min-w-[17.5rem]">
+                <h5
+                  className={`title-small ${
+                    selNav?.id === hmnu.id
+                      ? "text-background-primary-light"
+                      : "text-on_surface-light"
+                  }`}
+                >
+                  {thisSubMenusHovered.desc.title}
+                </h5>
+                <p className="text-justify body-medium text-txt-on-surface-secondary-light">
+                  {thisSubMenusHovered.desc.content}
+                </p>
+              </div>
             </div>
-          ) : null
-        ) : null
+          )}
+        </div>
       ) : null}
     </li>
   );

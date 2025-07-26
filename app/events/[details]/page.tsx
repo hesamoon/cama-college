@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 
 // components
 import Button from "@/components/Button";
@@ -12,15 +13,34 @@ import CommentsSection from "@/components/CommentsSection";
 import SpeakersSection from "@/components/SpeakersSection";
 import LocationSection from "@/components/LocationSection";
 import DescriptionSection from "@/components/DescriptionSection";
+import EventDetailsSkeleton from "@/components/skeletons/EventDetailsSkeleton";
 
-// fake data
-import { events } from "@/constants/data";
+// api
+import { getEvent, getEvents } from "@/lib/api/events";
+
+// types
+import { Event } from "@/app/types/types";
 
 function Page() {
-  const pathname = usePathname();
-  const eventDetails = events.find(
-    (e) => e.name === decodeURIComponent(pathname.split("/")[2])
-  );
+  const searchParams = useSearchParams();
+  const courseId = searchParams.get("courseId");
+
+  const { data: eventDetailss, isLoading: isLoadingEventDetails } = useQuery({
+    queryKey: ["eventDetails", courseId],
+    queryFn: () => getEvent(courseId || ""),
+  });
+
+  const {
+    data: eventsData,
+    isLoading: isLoadingEvents,
+    error: errorEvents,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: getEvents,
+  });
+
+  const eventDetails = eventDetailss?.data.data;
+
   const tabs = [
     "Description",
     "Location",
@@ -48,23 +68,28 @@ function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (isLoadingEventDetails || isLoadingEvents) {
+    return <EventDetailsSkeleton />;
+  }
+
   return (
     <div className="space-y-6">
       <div className="space-y-6">
         {/* top section -> cover, title*/}
-        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+        <div className="grid grid-cols-3 gap-6 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
           <div className="col-span-3 space-y-6">
             {/* cover, title */}
             <div className="space-y-8">
               <Image
                 className="rounded-sm aspect-16-9 object-cover w-full max-h-[438px]"
-                src={`/${eventDetails?.coverImg}.png`}
-                alt={`${eventDetails?.coverImg}`}
+                src={eventDetails?.avatar}
+                alt={`${eventDetails?.name} cover`}
                 width={781}
                 height={438}
+                unoptimized
               />
 
-              <h1 className="display-medium text-color-on_surface-light">
+              <h1 className="mobile-display-medium md:display-medium text-color-on_surface-light">
                 {eventDetails?.name}
               </h1>
             </div>
@@ -72,20 +97,20 @@ function Page() {
         </div>
 
         {/* tabs */}
-        <div className="sticky top-[3.75rem] bg-white z-[35] grid-system-level1">
+        <div className="sticky top-[3.75rem] bg-white z-[35] md:grid-system-level1 overflow-x-auto no-scrollbar">
           {/* tabs */}
           <div
             className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
               activeTab === "Comments" || activeTab === "Related Events"
                 ? "w-full"
-                : "w-2/3"
+                : "md:w-2/3"
             }`}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between w-full md:w-fit md:gap-4">
               {tabs.map((tab) => (
                 <div key={tab}>
                   <button
-                    className={`py-3 px-2.5 body-large cursor-pointer transition-all ease-linear duration-200 ${
+                    className={`p-2 md:py-3 md:px-2.5 mobile-body-large md:body-large cursor-pointer transition-all ease-linear duration-200 whitespace-nowrap ${
                       activeTab === tab
                         ? "text-background-primary-light border-b border-background-primary-light"
                         : "text-txt-on-surface-terriary-light"
@@ -114,7 +139,7 @@ function Page() {
                 activeTab === "Comments" || activeTab === "Related Events"
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"
-              } flex items-center gap-1`}
+              } hidden md:flex items-center gap-1`}
             >
               <Button
                 props={{
@@ -149,10 +174,16 @@ function Page() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
           <div className="col-span-2 space-y-6">
             {/* description */}
-            <DescriptionSection />
+            <DescriptionSection
+              about={eventDetails?.about}
+              prerequisites={eventDetails?.prerequisites || []}
+              audience={eventDetails?.audience || []}
+              what_you_learn={eventDetails?.what_you_learn || []}
+              type="event"
+            />
 
             {/* location */}
             <LocationSection />
@@ -162,7 +193,7 @@ function Page() {
           </div>
 
           {/* right side / card */}
-          <div className="sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
+          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
             {/* price */}
             <h3 className="header-medium text-txt-on-surface-secondary-light">
               ${eventDetails?.price} (CAD)
@@ -222,7 +253,7 @@ function Page() {
                 <h5>{eventDetails?.duration}h</h5>
 
                 {/* rating */}
-                <h5>{eventDetails?.category}</h5>
+                <h5>{20}</h5>
               </div>
             </div>
 
@@ -289,7 +320,7 @@ function Page() {
         {/* comments */}
         <div
           id="Comments"
-          className="grid grid-cols-3 grid-system-level1 space-y-6 pt-8"
+          className="flex flex-col-reverse md:grid md:grid-cols-3 mobile-grid-system-level0 md:grid-system-level1 space-y-6 pt-8"
         >
           {/* comments */}
           <div className="col-span-2">
@@ -304,15 +335,15 @@ function Page() {
         </div>
 
         {/* event */}
-        <div className="grid grid-cols-3 gap-6 grid-system-level1 space-y-6 mt-4">
+        <div className="grid grid-cols-3 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
           {/* event */}
           <div
             id="Related Events"
             className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
           >
-            {events
-              .filter((e) => e.id <= 6)
-              .map((event) => (
+            {eventsData?.data.data
+              .slice(0, 6)
+              .map((event: Event) => (
                 <CourseCard key={event.id} data={event} type="events" />
               ))}
           </div>
@@ -320,32 +351,32 @@ function Page() {
       </div>
 
       {/* apply */}
-      <section className="flex items-center justify-center">
-        <div className="grid-system-level1 relative bg-primary-tints-90 grid grid-cols-2 gap-8 overflow-hidden py-10">
-          <div className="col-span-1 z-30 space-y-4">
+      <section className="flex items-center justify-center md:mt-20">
+        <div className="mobile-grid-system-level0 md:grid-system-level1 relative bg-primary-tints-90 flex flex-col-reverse md:grid md:grid-cols-2 space-y-8 md:space-y-0 overflow-hidden py-10">
+          <div className="col-span-1 z-30 space-y-6 md:space-y-4">
             <div className="space-y-3">
-              <h2 className="title-large text-on_surface-light">
-                Apply to easy access to Programs
+              <h2 className="mobile-title-large md:title-large text-on_surface-light">
+                Apply to easy access to Events
               </h2>
-              <p className="mt-2 text-txt-on-surface-secondary-light body-large text-justify">
+              <p className="mt-2 text-txt-on-surface-secondary-light mobile-body-large md:body-large text-justify">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Egestas purus viverra accumsan
               </p>
             </div>
 
-            <div className="space-y-1">
+            <div className="space-y-2 md:space-y-1">
               <div className="flex items-center gap-10">
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
@@ -354,23 +385,40 @@ function Page() {
               <div className="flex items-center gap-10">
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <div className="rounded-full w-3 h-3 bg-[#A91418]" />
-                  <span className="body-large text-black">
+                  <span className="mobile-body-large md:body-large text-black">
                     Positive feature
                   </span>
                 </div>
               </div>
             </div>
+
+            <div className="md:hidden">
+              <Button
+                props={{
+                  value: "Apply now",
+                  type: "outlined",
+                  disabled: false,
+                  leftIcon: "",
+                  rightIcon: "arrow-right",
+                  color: "red",
+                  width: 20,
+                  height: 20,
+                  size: "body-medium md:body-large",
+                  padding: "px-6 py-3",
+                }}
+              />
+            </div>
           </div>
 
           <div className="col-span-1 flex items-end justify-center gap-4">
-            <div className="pb-4">
+            <div className="hidden md:block pb-4">
               <Button
                 props={{
                   value: "Apply now",
@@ -396,49 +444,49 @@ function Page() {
           </div>
 
           <Image
-            className="absolute top-0 left-0"
+            className="absolute -top-10 -left-10 md:top-0 md:left-0"
             src="/rec-t-l.svg"
             alt="rec-t-l"
             width={150}
             height={150}
           />
           <Image
-            className="absolute top-0 right-8"
+            className="absolute top-0 -right-32 md:right-8"
             src="/rec-t-r.svg"
             alt="rec-t-r"
             width={204}
             height={204}
           />
           <Image
-            className="absolute bottom-0 right-0"
+            className="hidden md:block absolute bottom-0 right-0"
             src="/rec-b-r.svg"
             alt="rec-b-r"
             width={150}
             height={150}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec1.svg"
             alt="rec1"
             width={30}
             height={30}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec2.svg"
             alt="rec2"
             width={50}
             height={50}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec3.svg"
             alt="rec3"
             width={70}
             height={70}
           />
           <Image
-            className="absolute bottom-0 left-0"
+            className="hidden md:block absolute bottom-0 left-0"
             src="/rec4.svg"
             alt="rec4"
             width={90}

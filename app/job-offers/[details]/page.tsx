@@ -20,10 +20,10 @@ function Page() {
   );
 
   return (
-    <div className="grid-system-level">
-      <div className="border border-outline-level0 divide-x divide-outline-level0 grid grid-cols-4 h-screen">
+    <div className="mobile-grid-system-level md:grid-system-level">
+      <div className="border border-outline-level0 divide-x divide-outline-level0 md:grid md:grid-cols-4 md:h-screen">
         {/* related jobs */}
-        <div className="col-span-1 overflow-y-auto no-scrollbar">
+        <div className="hidden md:block col-span-1 overflow-y-auto no-scrollbar">
           {/* title */}
           <h5 className="sticky top-0 p-6 bg-white">Related Jobs</h5>
 
@@ -48,15 +48,17 @@ function Page() {
           </div>
         </div>
 
-        <div className="col-span-3 p-4 grid grid-cols-3 gap-6 overflow-y-auto no-scrollbar">
+        <div className=" md:col-span-3 p-4 md:grid md:grid-cols-3 md:gap-6 md:overflow-y-auto no-scrollbar">
           <div className="col-span-2 space-y-12">
             {/* header section */}
-            <div>
+            <div className="space-y-6 md:space-y-3">
               {/* title */}
               <div className="flex justify-between">
-                <h3>{jobDetails?.title}</h3>
+                <h3 className="mobile-title-large md:title-large">
+                  {jobDetails?.title}
+                </h3>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 md:gap-3">
                   <Button
                     props={{
                       value: "",
@@ -86,13 +88,11 @@ function Page() {
               </div>
 
               {/* important details */}
-              <div className="flex items-center gap-16">
+              <div className="grid grid-cols-2 md:flex items-center gap-4 md:gap-16 mobile-body-large md:body-large">
                 {/* salary */}
                 <div>
-                  <h5 className="body-large text-txt-on-surface-terriary-light">
-                    Salary
-                  </h5>
-                  <p className="text-green body-large">
+                  <h5 className="text-txt-on-surface-terriary-light">Salary</h5>
+                  <p className="text-green">
                     {jobDetails?.ratePerhour
                       .split(" - ")
                       .map((v) => `$${v}`)
@@ -103,20 +103,18 @@ function Page() {
 
                 {/* location */}
                 <div>
-                  <h5 className="body-large text-txt-on-surface-terriary-light">
+                  <h5 className="text-txt-on-surface-terriary-light">
                     Location
                   </h5>
-                  <p className="text-txt-on-surface-secondary-light body-large">
+                  <p className="text-txt-on-surface-secondary-light">
                     {jobDetails?.location}
                   </p>
                 </div>
 
                 {/* time */}
                 <div>
-                  <h5 className="body-large text-txt-on-surface-terriary-light">
-                    Time
-                  </h5>
-                  <p className="text-txt-on-surface-secondary-light body-large">
+                  <h5 className="text-txt-on-surface-terriary-light">Time</h5>
+                  <p className="text-txt-on-surface-secondary-light">
                     {getRelativeTime(jobDetails?.postedAt)}
                   </p>
                 </div>
@@ -129,7 +127,7 @@ function Page() {
                 {/* cover / title */}
                 <div className="flex gap-2">
                   <Image
-                    className="rounded-xs object-cover"
+                    className="rounded-xs object-cover w-10 h-10 md:w-12 md:h-12"
                     src="/c4.png"
                     alt="cover"
                     width={48}
@@ -137,11 +135,11 @@ function Page() {
                   />
 
                   <div className="space-y-1.5">
-                    <h2 className="title-medium text-on_surface-light">
+                    <h2 className="mobile-title-medium md:title-medium text-on_surface-light">
                       About the Company
                     </h2>
 
-                    <p className="label-small text-txt-on-surface-terriary-light">
+                    <p className="mobile-label-small md:label-small text-txt-on-surface-terriary-light">
                       56 employees
                     </p>
                   </div>
@@ -155,13 +153,13 @@ function Page() {
                     disabled: false,
                     leftIcon: "",
                     rightIcon: "arrow-right",
-                    size: "body-medium",
+                    size: "mobile-body-medium md:body-medium",
                     padding: "px-3 py-1",
                   }}
                 />
               </div>
 
-              <p className="text-justify body-large text-txt-on-surface-secondary-light">
+              <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
@@ -171,11 +169,11 @@ function Page() {
 
             {/* job description */}
             <div className="space-y-3">
-              <h2 className="title-medium text-on_surface-light">
+              <h2 className="mobile-title-medium md:title-medium text-on_surface-light">
                 Job Description
               </h2>
 
-              <p className="text-justify body-large text-txt-on-surface-secondary-light">
+              <p className="text-justify mobile-body-large md:body-large text-txt-on-surface-secondary-light">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
@@ -190,13 +188,42 @@ function Page() {
                 rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
                 cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
                 In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
-                vel elit scelerisque. In egestas erat. Arcu
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                vel elit scelerisque. In egestas erat. Arcu Lorem ipsum dolor
+                sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Egestas purus
+                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
+                rhoncus aenean vel elit scelerisque. In egestas erat. Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+                congue mauris rhoncus aenean vel elit In egestas erat.Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod ut labore et dolore magna aliqua. Egestas purus viverra
+                accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus
+                aenean vel elit scelerisque. In egestas erat. Arcu cursus vitae
                 congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                erat. Arcu cursus vitae congue mauris rhoncus aenean vel elit
+                scelerisque. In egestas erat. Arcu Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Egestas purus viverra accumsan in
+                nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel
+                elit scelerisque. In egestas erat. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Egestas purus viverra accumsan in
+                nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel
+                elit In egestas erat.Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod ut labore et dolore magna
+                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
+                vitae congue mauris rhoncus aenean vel elit scelerisque. In
+                egestas erat. Arcu cursus vitae congue mauris rhoncus aenean vel
+                elit scelerisque. In egestas erat. Arcu cursus vitae congue
+                mauris rhoncus aenean vel elit scelerisque. In egestas erat.
+                Arcu Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                 sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
+                vitae congue mauris rhoncus aenean vel elit scelerisque. In
+                egestas erat. Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                 aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
                 vitae congue mauris rhoncus aenean vel elit In egestas
                 erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -205,52 +232,22 @@ function Page() {
                 rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
                 cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
                 In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
-                vel elit scelerisque. In egestas erat. Arcu
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                vel elit scelerisque. In egestas erat. Arcu Lorem ipsum dolor
+                sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Egestas purus
+                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
+                rhoncus aenean vel elit scelerisque. In egestas erat. Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+                congue mauris rhoncus aenean vel elit In egestas erat.Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod ut labore et dolore magna aliqua. Egestas purus viverra
+                accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus
+                aenean vel elit scelerisque. In egestas erat. Arcu cursus vitae
                 congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
-                vitae congue mauris rhoncus aenean vel elit In egestas
-                erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod ut labore et dolore magna aliqua. Egestas purus
-                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
-                rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
-                cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
-                In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
-                vel elit scelerisque. In egestas erat. Arcu
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-                congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
-                vitae congue mauris rhoncus aenean vel elit In egestas
-                erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod ut labore et dolore magna aliqua. Egestas purus
-                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
-                rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
-                cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
-                In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
-                vel elit scelerisque. In egestas erat. Arcu
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-                congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus
-                vitae congue mauris rhoncus aenean vel elit In egestas
-                erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod ut labore et dolore magna aliqua. Egestas purus
-                viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
-                rhoncus aenean vel elit scelerisque. In egestas erat. Arcu
-                cursus vitae congue mauris rhoncus aenean vel elit scelerisque.
-                In egestas erat. Arcu cursus vitae congue mauris rhoncus aenean
-                vel elit scelerisque. In egestas erat. Arcu
+                erat. Arcu cursus vitae congue mauris rhoncus aenean vel elit
+                scelerisque. In egestas erat. Arcu
               </p>
             </div>
           </div>
@@ -258,14 +255,14 @@ function Page() {
           {/* card */}
           <div className="relative col-span-1">
             {/* card */}
-            <div className="sticky top-0 col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 space-y-6 h-fit min-w-80 max-w-fit">
+            <div className="md:sticky md:top-0 col-span-1 md:bg-shades-light-90 md:rounded-sm md:border md:border-outline-level0 pt-6 md:pb-4 md:space-y-6 md:h-fit md:min-w-80 md:max-w-fit">
               {/* Prerequisites */}
-              <h3 className="title-medium text-on_surface-light px-6">
+              <h3 className="hidden md:block title-medium text-on_surface-light px-6">
                 Prerequisites
               </h3>
 
               {/* important details */}
-              <div className="space-y-2 px-6">
+              <div className="hidden md:block space-y-2 px-6">
                 {/* career history */}
                 <div className="flex items-center justify-between gap-3 body-large">
                   <h4 className="whitespace-nowrap text-txt-on-surface-terriary-light">
@@ -320,10 +317,10 @@ function Page() {
               </div>
 
               {/* divider */}
-              <div className="border border-outline-level0" />
+              <div className="hidden md:block border border-outline-level0" />
 
-              {/* get course btn */}
-              <div className="px-6">
+              {/* send cv btn */}
+              <div className="md:px-6">
                 <Button
                   props={{
                     value: "Send CV",

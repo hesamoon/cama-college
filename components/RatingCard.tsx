@@ -8,9 +8,9 @@ const ratingData = [
 
 export default function RatingCard() {
   return (
-    <div className="sticky top-[9.5rem] max-w-96 min-w-[23.7rem] border border-outline-level0 rounded py-5 px-6 space-y-8">
+    <div className="sticky top-[9.5rem] max-w-96 border border-outline-level0 rounded py-5 px-6 space-y-4 md:space-y-8">
       {/* Header */}
-      <div className="flex items-baseline">
+      <div className="hidden md:flex items-baseline">
         <span className="header-large text-on_surface-light">4.7</span>
         <span className="label-small text-txt-on-surface-terriary-light">
           <span className="body-large">/5</span> (58 votes)
@@ -18,7 +18,7 @@ export default function RatingCard() {
       </div>
 
       {/* Ratings Breakdown */}
-      <div className="mt-4 space-y-3">
+      <div className="hidden md:block mt-4 space-y-3">
         {ratingData.map(({ stars, percentage }) => (
           <div key={stars} className="flex items-center gap-3">
             <span className="label-medium-db text-txt-on-surface-secondary-light">
@@ -39,10 +39,10 @@ export default function RatingCard() {
         ))}
       </div>
 
-      <hr className="my-4 border-outline-level0" />
+      <hr className="hidden md:block my-4 border-outline-level0" />
 
       {/* Tip */}
-      <div className="flex items-center gap-2 label-small text-txt-secondary">
+      <div className="flex items-center gap-2 mobile-label-small md:label-small text-txt-secondary">
         <svg
           width="24"
           height="24"
@@ -80,8 +80,10 @@ export default function RatingCard() {
       </div>
 
       {/* Submit Rating */}
-      <div className="mt-4 space-y-2">
-        <p className="body-small text-on_surface-light">Submit your score:</p>
+      <div className="md:mt-4 space-y-2">
+        <p className="mobile-body-small md:body-small text-on_surface-light">
+          Submit your score:
+        </p>
         <div className="flex justify-between">
           {[1, 2, 3, 4, 5].map((num) => (
             <button
@@ -101,7 +103,7 @@ export default function RatingCard() {
                 />
               </svg>
 
-              <h4 className="body-large text-txt-on-surface-secondary-light p-2">
+              <h4 className="mobile-body-large md:body-large text-txt-on-surface-secondary-light p-2">
                 {num}
               </h4>
             </button>

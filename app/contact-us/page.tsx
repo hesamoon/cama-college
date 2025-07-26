@@ -41,12 +41,14 @@ function Page() {
     );
 
   return (
-    <div className="grid-system-level1 space-y-12 py-10">
+    <div className="mobile-grid-system-level0 md:grid-system-level1 space-y-12 py-5 md:py-10">
       {/* general information */}
       <div className="space-y-9">
-        <h3 className="title-large text-black">General Contact Information</h3>
+        <h3 className="mobile-title-large md:title-large text-black">
+          General Contact Information
+        </h3>
 
-        <div className="flex gap-32">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-32">
           {/* location */}
           <div className="flex gap-3">
             <div
@@ -75,10 +77,10 @@ function Page() {
             </div>
 
             <div className="space-y-1">
-              <h6 className="label-large text-txt-on-surface-terriary-light">
+              <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
                 Address
               </h6>
-              <h4 className="body-large text-on_surface-light">
+              <h4 className="mobile-body-large md:body-large text-on_surface-light">
                 Richmond Hill, Ontario, CANADA
               </h4>
             </div>
@@ -108,13 +110,13 @@ function Page() {
             </div>
 
             <div className="space-y-1">
-              <h6 className="label-large text-txt-on-surface-terriary-light">
+              <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
                 Phone
               </h6>
-              <h4 className="body-large text-on_surface-light">
+              <h4 className="mobile-body-large md:body-large text-on_surface-light">
                 +1 647 720 2928 (10 Lines)
               </h4>
-              <h6 className="body-small text-txt-on-surface-terriary-light">
+              <h6 className="mobile-body-small md:body-small text-txt-on-surface-terriary-light">
                 Monday - Friday: 09:00 - 18:00
               </h6>
             </div>
@@ -154,10 +156,10 @@ function Page() {
             </div>
 
             <div className="space-y-1">
-              <h6 className="label-large text-txt-on-surface-terriary-light">
+              <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
                 Mail
               </h6>
-              <h4 className="body-large text-on_surface-light">
+              <h4 className="mobile-body-large md:body-large text-on_surface-light">
                 contact@camacollege.ca
               </h4>
             </div>
@@ -170,9 +172,11 @@ function Page() {
       {/* contact us - form */}
       <div className="space-y-12">
         <div className="space-y-9" onKeyDown={handleKeyDown}>
-          <div className="grid grid-cols-2 items-center gap-32">
-            <div className="col-span-1 space-y-12">
-              <h3 className="title-large text-black">Contact Us</h3>
+          <div className="flex flex-col-reverse md:grid md:grid-cols-2 md:items-center gap-6 md:gap-32">
+            <div className="col-span-1 space-y-6 md:space-y-12">
+              <h3 className="mobile-title-large md:title-large text-black">
+                Contact Us
+              </h3>
 
               <div className="flex flex-col gap-7">
                 <div className="flex flex-col gap-6">
@@ -241,9 +245,10 @@ function Page() {
           </div>
 
           <div className="flex flex-col gap-1">
-            <h6 className="pl-4 body-medium text-txt-on-surface-secondary">
-              Please let us know what&#39;s on your mind. Have a question for us?
-              Ask away. <span className="text-background-primary-light">*</span>
+            <h6 className="pl-2 md:pl-4 body-medium text-txt-on-surface-secondary">
+              Please let us know what&#39;s on your mind. Have a question for
+              us? Ask away.{" "}
+              <span className="text-background-primary-light">*</span>
             </h6>
 
             <TextField
@@ -268,7 +273,7 @@ function Page() {
             rightIcon: "",
             type: "filled",
             size: "body-large",
-            padding: "px-8 py-4",
+            padding:"px-8 py-4",
             clickHandler: () => (!showError ? submitClickHandler() : null),
           }}
         />

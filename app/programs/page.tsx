@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import CourseCard from "@/components/CourseCard";
 import Pagination from "@/components/Pagination";
+import CourseCardSkeleton from "@/components/skeletons/CourseCardSkeleton";
 
 // data
 import {
@@ -14,13 +16,29 @@ import {
   LIMITNUMBEROFSCROLL,
   LIMITOfLOADEDLIST,
   LIMITOfLOADEDLISTINONEPAGE,
-  programs,
 } from "@/constants/data";
 
 // types
 import { Program } from "../types/types";
 
+// api - programs
+import { getPrograms } from "@/lib/api/programs";
+
 function Page() {
+  const {
+    data: programsData,
+    isLoading: isLoadingPrograms,
+    error: errorPrograms,
+  } = useQuery({
+    queryKey: ["programs"],
+    queryFn: getPrograms,
+  });
+
+  console.log(`isLoadingPrograms: ${isLoadingPrograms}`);
+  console.log(`errorPrograms: ${errorPrograms}`);
+  console.log(programsData?.data);
+  console.log(programsData?.data.data);
+
   const [category, setCategory] = useQueryState("category");
   const [type] = useQueryState("type", { defaultValue: "" });
   const [search] = useQueryState("search", { defaultValue: "" });
@@ -35,7 +53,7 @@ function Page() {
   const loadMore = () => {
     setLoading(true);
     setTimeout(() => {
-      const newItems = programs;
+      const newItems = programsData?.data.data;
       setProgramList((prev) =>
         [...prev, ...newItems].slice(
           0,
@@ -51,66 +69,73 @@ function Page() {
   };
 
   useEffect(() => {
-    setProgramList(
-      programs
-        .sort((a, b) => a.status.localeCompare(b.status))
-        .filter(
-          (program) =>
-            program.name.includes(search) &&
-            program.type.includes(type) &&
-            program.category.includes(category ? category : "")
-        )
-        .slice(
-          0,
-          numOfScroll === LIMITNUMBEROFSCROLL
-            ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
-            : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
-        )
-    );
+    if (programsData?.data.data.length > 0) {
+      setProgramList(
+        programsData?.data.data
+          .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          .filter(
+            (program: Program) =>
+              program.name.includes(search) &&
+              program.type.includes(type) &&
+              program.subject.includes(category ? category : "")
+          )
+          .slice(
+            0,
+            numOfScroll === LIMITNUMBEROFSCROLL
+              ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
+              : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
+          )
+      );
+    }
   }, [search, type, category]);
 
   useEffect(() => {
-    setProgramList(
-      programs
-        .sort((a, b) =>
-          sortVal === "Newest"
-            ? new Date(b.publishDate ?? "").getTime() -
-              new Date(a.publishDate ?? "").getTime()
-            : new Date(a.publishDate ?? "").getTime() -
-              new Date(b.publishDate ?? "").getTime()
-        )
-        .sort((a, b) => a.status.localeCompare(b.status))
-        .filter(
-          (program) =>
-            program.name.includes(search) && program.type.includes(type)
-        )
-        .slice(
-          0,
-          numOfScroll === LIMITNUMBEROFSCROLL
-            ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
-            : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
-        )
-    );
+    if (programsData?.data.data.length > 0) {
+      setProgramList(
+        programsData?.data.data
+          .sort((a: Program, b: Program) =>
+            sortVal === "Newest"
+              ? new Date(b.publishDate ?? "").getTime() -
+                new Date(a.publishDate ?? "").getTime()
+              : new Date(a.publishDate ?? "").getTime() -
+                new Date(b.publishDate ?? "").getTime()
+          )
+          .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          .filter(
+            (program: Program) =>
+              program.name.includes(search) && program.type.includes(type)
+          )
+          .slice(
+            0,
+            numOfScroll === LIMITNUMBEROFSCROLL
+              ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
+              : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
+          )
+      );
+    }
   }, [sortVal]);
 
   useEffect(() => {
-    setProgramList(
-      programs
-        .sort((a, b) => a.status.localeCompare(b.status))
-        .filter(
-          (program) =>
-            program.name.includes(search) &&
-            program.type.includes(type) &&
-            program.category.includes(category ? category : "")
-        )
-        .slice(
-          0,
-          numOfScroll === 3 ? 12 * numOfScroll + 11 : 12 * numOfScroll + 12
-        )
-    );
-  }, []);
+    if (programsData?.data.data.length > 0) {
+      setProgramList(
+        programsData?.data.data
+          .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          .filter(
+            (program: Program) =>
+              program.name.includes(search) &&
+              program.type.includes(type) &&
+              program.subject.includes(category ? category : "")
+          )
+          .slice(
+            0,
+            numOfScroll === 3 ? 12 * numOfScroll + 11 : 12 * numOfScroll + 12
+          )
+      );
+    }
+  }, [programsData]);
 
   useEffect(() => {
+    // if (programList.length < LIMITOfLOADEDLISTINONEPAGE) return;
     const handleWindowScroll = () => {
       const scrollTop = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -118,7 +143,10 @@ function Page() {
 
       if (scrollTop + windowHeight >= documentHeight - 600 && !loading) {
         if (numOfScroll <= LIMITNUMBEROFSCROLL) {
-          loadMore();
+          if (programsData?.data.data.length > 0) {
+            if (programsData?.data.data.length > LIMITOfLOADEDLISTINONEPAGE)
+              loadMore();
+          }
         }
       }
     };
@@ -127,16 +155,18 @@ function Page() {
     return () => window.removeEventListener("scroll", handleWindowScroll);
   }, [loading, numOfScroll]);
 
+  console.log(programList);
+
   return (
     <div className="">
       {/* categories - sort and filtring */}
-      <div className="flex items-center justify-between w-full border-y border-outline-level0 grid-system-level0">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full md:border-y md:border-outline-level0 mobile-grid-system-level0 md:grid-system-level0">
         {/* categories */}
-        <div className="flex items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+        <div className="flex items-center gap-2 md:gap-6 lg:gap-8 overflow-x-scroll no-scrollbar border-y border-outline-level0 md:border-none">
           {categories.map((ctgry) => (
             <div
               key={ctgry.id}
-              className={`flex flex-col items-center justify-center transition-all duration-300 gap-1 cursor-pointer px-2 pt-6 pb-2 ${
+              className={`flex flex-col items-center justify-center transition-all duration-300 gap-1 cursor-pointer px-2 py-2 ${
                 category === ctgry.label || (ctgry.id === 0 && !category)
                   ? "border-b border-background-primary-light"
                   : null
@@ -152,7 +182,7 @@ function Page() {
                 height={20}
               />
 
-              <h5 className="body-large text-on_surface-light">
+              <h5 className="mobile-body-large md:body-large text-on_surface-light whitespace-nowrap">
                 {ctgry.label}
               </h5>
             </div>
@@ -160,14 +190,14 @@ function Page() {
         </div>
 
         {/* sort and filtring */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-4">
           {/* sort */}
-          <div className="flex items-center border border-outline1 rounded py-0.5 pl-3 pr-4">
-            <span className="body-large text-txt-on-surface-terriary-light">
+          <div className="flex items-center border border-outline1 rounded pl-3 pr-4">
+            <span className="mobile-body-large md:body-large text-txt-on-surface-terriary-light">
               Sort By:
             </span>
             <select
-              className="px-4 py-2 outline-none body-large text-txt-on-surface-secondary"
+              className="md:px-4 py-2 outline-none mobile-body-large md:body-large text-txt-on-surface-secondary"
               value={sortVal}
               onChange={(e) => {
                 setSortVal(e.target.value);
@@ -181,7 +211,7 @@ function Page() {
           {/* filtring */}
           <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2 pl-3 pr-4 cursor-pointer">
             <Image src="/filter.svg" alt="filter" width={20} height={20} />
-            <span className="body-large text-txt-on-surface-secondary">
+            <span className="mobile-body-large md:body-large text-txt-on-surface-secondary">
               Filters
             </span>
           </div>
@@ -189,15 +219,21 @@ function Page() {
       </div>
 
       {/* programs */}
-      <div className="grid-system-level0">
-        {programList.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-14">
+      <div className="mobile-grid-system-level0 md:grid-system-level0">
+        {isLoadingPrograms ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-7 md:py-14">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <CourseCardSkeleton key={index} type="programs" />
+            ))}
+          </div>
+        ) : programList.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-7 md:py-14">
             {programList.map((program) => (
               <CourseCard key={program.id} data={program} type="programs" />
             ))}
           </div>
         ) : (
-          <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center">
+          <div className="text-center">
             <h3 className="body-large text-txt-on-surface-terriary-light py-10">
               {search || type ? "Program not found" : "No Programs"}
             </h3>

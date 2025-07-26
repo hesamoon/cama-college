@@ -1,4 +1,5 @@
 // components
+import MobileNavbar from "@/components/MobileNavbar";
 import PoliciesNavs from "@/components/PoliciesNavs";
 
 export default function layout({
@@ -7,9 +8,11 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="grid-system-level1 grid grid-cols-3 py-10">
+    <div className="mobile-grid-system-level0 md:grid-system-level1 md:grid md:grid-cols-3 md:space-y-8 md:py-10">
+      <MobileNavbar />
+
       {/* left side */}
-      <div className="col-span-1">
+      <div className="hidden md:block col-span-1">
         {/* navs */}
         <PoliciesNavs />
       </div>
