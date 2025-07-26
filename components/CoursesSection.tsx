@@ -17,7 +17,6 @@ function CoursesSection({ courseType }: { courseType: string }) {
   const {
     data: coursesData,
     isLoading: isLoadingCourses,
-    error: errorCourses,
   } = useQuery({
     queryKey: [courseType],
     queryFn: courseType === "programs" ? getPrograms : getEvents,

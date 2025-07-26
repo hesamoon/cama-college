@@ -50,6 +50,7 @@ function TransactionsTable({
         toast.error("Failed to copy.");
       }
     } catch (err) {
+      console.log(err);
       toast.error("Copy not supported.");
     }
 

@@ -24,7 +24,7 @@ function page() {
   });
   const [city] = useQueryState("city", { defaultValue: "" });
 
-  const [sortVal, setSortVal] = useState("Newest");
+  const [sortVal] = useState("Newest");
 
   useEffect(() => {
     setJobList(
