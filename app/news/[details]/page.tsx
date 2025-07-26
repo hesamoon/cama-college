@@ -18,7 +18,7 @@ import { parseStyledText } from "@/utilities/utils";
 function Page() {
   const pathname = usePathname();
   const newsDetails = news.find(
-    (n) => n.title.trim() === decodeURIComponent(pathname.split("/")[2])
+    (n) => n.name.trim() === decodeURIComponent(pathname.split("/")[2])
   );
 
   const [like1, setLike1] = useState(253);
