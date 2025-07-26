@@ -95,10 +95,10 @@ function Page() {
         programsData?.data.data
           .sort((a: Program, b: Program) =>
             sortVal === "Newest"
-              ? new Date(b.publishDate ?? "").getTime() -
-                new Date(a.publishDate ?? "").getTime()
-              : new Date(a.publishDate ?? "").getTime() -
-                new Date(b.publishDate ?? "").getTime()
+              ? new Date(b.date ?? "").getTime() -
+                new Date(a.date ?? "").getTime()
+              : new Date(a.date ?? "").getTime() -
+                new Date(b.date ?? "").getTime()
           )
           .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
           .filter(
