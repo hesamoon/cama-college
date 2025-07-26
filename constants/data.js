@@ -399,174 +399,385 @@ const programs = [
 
 const events = [
   {
-    id: 1,
-    coverImg: "e1",
-    name: "Name of Event1",
-    level: "Beginner",
-    type: "Event",
-    duration: 2, // example: 2 hours
-    price: 650, // assuming free
+    id: "01984217-c67c-714a-9b3f-7c63525a6dee",
+    name: "Crypto Event",
     status: "Scheduled",
-    publishDate: "2024-09-17",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-24",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 2,
-    coverImg: "e2",
-    name: "Name of Event2",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-1",
+    name: "Crypto Event #2",
     status: "Scheduled",
-    publishDate: "2025-04-25",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-25",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 3,
-    coverImg: "e3",
-    name: "Name of Event3",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-2",
+    name: "Crypto Event #3",
     status: "Scheduled",
-    publishDate: "2025-04-20",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-26",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 4,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-3",
+    name: "Crypto Event #4",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-27",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 5,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-4",
+    name: "Crypto Event #5",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-28",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 6,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-5",
+    name: "Crypto Event #6",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-29",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 7,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-6",
+    name: "Crypto Event #7",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-30",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 8,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-7",
+    name: "Crypto Event #8",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-07-31",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 9,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-8",
+    name: "Crypto Event #9",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-08-01",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 10,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-9",
+    name: "Crypto Event #10",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-08-02",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 11,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-10",
+    name: "Crypto Event #11",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-08-03",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 12,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-11",
+    name: "Crypto Event #12",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-08-04",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 13,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-12",
+    name: "Crypto Event #13",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-08-05",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
   },
   {
-    id: 14,
-    coverImg: "e4",
-    name: "Web Search",
-    level: "Beginner",
-    type: "Event",
-    duration: 2,
-    price: 650,
+    id: "mock-id-13",
+    name: "Crypto Event #14",
     status: "Scheduled",
-    publishDate: "2025-05-08",
-    category: "General",
-  },
+    about: "about of the event is here.",
+    audience: [
+      { text: "audience one" },
+      { text: "audience two" }
+    ],
+    avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
+    date: "2025-08-06",
+    duration: 22,
+    language: "English / Persian",
+    lat: null,
+    lng: null,
+    level: "beginner",
+    prerequisites: [
+      { text: "'prerequisites one'" },
+      { text: "'prerequisites two'" }
+    ],
+    price: 650,
+    subject: "Talking about the crypto world",
+    what_you_learn: [
+      { text: "'what one'" },
+      { text: "'what two'" }
+    ]
+  }
 ];
+
 
 const posts = [
   {

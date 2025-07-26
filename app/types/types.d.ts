@@ -76,17 +76,12 @@ export interface EventCardProps {
   data: Event;
 }
 
-export interface EventCardProps2 {
-  type: string;
-  data: Event2;
-}
-
 export interface PostCardProps {
   type: string;
   data: News;
 }
 
-export type CourseCardProps = PostCardProps | ProgramCardProps | EventCardProps | EventCardProps2;
+export type CourseCardProps = PostCardProps | ProgramCardProps | EventCardProps;
 
 export interface Event {
   status: string;
@@ -105,19 +100,6 @@ export interface Event {
   price: number;
   subject: string;
   what_you_learn: { text: string }[];
-}
-
-export interface Event2 {
-  id: number;
-  coverImg: string;
-  name: string;
-  level: string;
-  type: string;
-  duration: number;
-  price: number;
-  status: string;
-  publishDate: string;
-  category: string;
 }
 
 export interface Chip {

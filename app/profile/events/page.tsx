@@ -8,25 +8,23 @@ import CourseCard from "@/components/CourseCard";
 import ScheduleView from "@/components/ScheduleView";
 import SearchBoxContainer from "@/components/SearchBoxContainer";
 
-// types
-import { Event2 } from "@/app/types/types";
-
 // data
 import { events } from "@/constants/data";
+import { Event } from "@/app/types/types";
 
 function Page() {
   const [filter, setFilter] = useQueryState("filter", { defaultValue: "" });
   const [search] = useQueryState("search", { defaultValue: "" });
 
-  const [controlledList, setControlledList] = useState<Event2[]>([]);
+  const [controlledList, setControlledList] = useState<Event[]>([]);
 
   useEffect(() => {
     setControlledList(
       events.filter(
         (eIP) =>
           eIP.name.toLowerCase().includes(search.toLowerCase()) &&
-          eIP.category.includes(filter ? filter : "")
-      )
+          eIP.status.includes(filter ? filter : "")
+      ) 
     );
   }, [search, filter]);
 
@@ -55,13 +53,13 @@ function Page() {
 
           <div className="flex items-center gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth">
             <div className="min-w-[267px]">
-              <CourseCard data={events[0]} type="events2" />
+              <CourseCard data={events[0]} type="events" />
             </div>
             <div className="min-w-[267px]">
-              <CourseCard data={events[1]} type="events2" />
+              <CourseCard data={events[1]} type="events" />
             </div>
             <div className="min-w-[267px]">
-              <CourseCard data={events[2]} type="events2" />
+              <CourseCard data={events[2]} type="events" />
             </div>
           </div>
         </div>
