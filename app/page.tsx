@@ -12,7 +12,7 @@ import CoursesSection from "@/components/CoursesSection";
 import CredentialInquiry from "@/components/CredentialInquiry";
 
 // data
-import { news, posts } from "../constants/data.js";
+import { news } from "../constants/data.js";
 
 // utils
 import { userAttr } from "../utilities/userAttr.js";
