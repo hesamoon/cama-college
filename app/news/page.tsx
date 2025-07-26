@@ -39,7 +39,7 @@ function Page() {
         )
         .filter(
           (n) =>
-            n.title.includes(search) && n.category.includes(group ? group : "")
+            n.name.includes(search) && n.category.includes(group ? group : "")
         )
         .slice((currentPage - 1) * 4, currentPage * 4)
     );
@@ -55,7 +55,7 @@ function Page() {
         )
         .filter(
           (n) =>
-            n.title.includes(search) && n.category.includes(group ? group : "")
+            n.name.includes(search) && n.category.includes(group ? group : "")
         )
         .slice((currentPage - 1) * 4, currentPage * 4)
     );
@@ -75,7 +75,7 @@ function Page() {
         )
         .filter(
           (n) =>
-            n.title.includes(search) && n.category.includes(group ? group : "")
+            n.name.includes(search) && n.category.includes(group ? group : "")
         )
         .slice((currentPage - 1) * 4, currentPage * 4)
     );
@@ -384,7 +384,7 @@ function Page() {
                 newsList.map((n) => (
                   <Link
                     key={n.id}
-                    href={`/news/${n.title}`}
+                    href={`/news/${n.name}`}
                     className="border-b border-outline-level0 flex flex-col gap-8 pb-4 cursor-pointer"
                   >
                     <div className="flex items-start justify-between gap-2">
@@ -398,7 +398,7 @@ function Page() {
                           </div>
 
                           <h2 className="mobile-title-medium md:title-large text-txt-on-surface-secondary-light">
-                            {n.title}
+                            {n.name}
                           </h2>
                         </div>
 
@@ -581,7 +581,7 @@ function Page() {
                 className={`${index === 0 ? "space-y-3" : "space-y-4"}`}
               >
                 {isMobile ? (
-                  <Link href={`/news/${n.title}`} className="space-y-2">
+                  <Link href={`/news/${n.name}`} className="space-y-2">
                     <div className="flex flex-col gap-2">
                       <div className="rounded overflow-hidden">
                         <Image
@@ -603,9 +603,9 @@ function Page() {
                         {/* title */}
 
                         <h4 className="mobile-body-large text-on_surface-light">
-                          {n.title.length >= 10
-                            ? `${n.title.slice(0, 10)}...`
-                            : n.title}
+                          {n.name.length >= 10
+                            ? `${n.name.slice(0, 10)}...`
+                            : n.name}
                         </h4>
                       </div>
                     </div>
@@ -674,7 +674,7 @@ function Page() {
                     </div>
                   </Link>
                 ) : index === 0 ? (
-                  <Link href={`/news/${n.title}`}>
+                  <Link href={`/news/${n.name}`}>
                     <div className="space-y-2">
                       <div className="rounded overflow-hidden">
                         <Image
@@ -696,7 +696,7 @@ function Page() {
                         </div>
 
                         <h4 className="body-large text-on_surface-light">
-                          {n.title}
+                          {n.name}
                         </h4>
                       </div>
                     </div>
@@ -765,7 +765,7 @@ function Page() {
                     </div>
                   </Link>
                 ) : (
-                  <Link href={`/news/${n.title}`} className="space-y-2">
+                  <Link href={`/news/${n.name}`} className="space-y-2">
                     <div className="flex gap-2">
                       <div className="rounded overflow-hidden">
                         <Image
@@ -779,9 +779,9 @@ function Page() {
 
                       {/* title */}
                       <h4 className="body-medium text-on_surface-light">
-                        {n.title.length >= 20
-                          ? `${n.title.slice(0, 20)}...`
-                          : n.title}
+                        {n.name.length >= 20
+                          ? `${n.name.slice(0, 20)}...`
+                          : n.name}
                       </h4>
                     </div>
 
