@@ -6,7 +6,10 @@ import { CourseCardProps } from "@/app/types/types";
 
 function CourseCard({ type, data }: CourseCardProps) {
   return type === "news" ? (
-    <Link href={`/news/${data.title}`} className="space-y-3">
+    <Link
+      href={`/news/${data.title ? data.title : data.name}`}
+      className="space-y-3"
+    >
       <div className="space-y-2">
         <Image
           src={`/${data.coverImg}.png`}
