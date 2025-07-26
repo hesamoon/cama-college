@@ -78,7 +78,7 @@ export interface EventCardProps {
 
 export interface PostCardProps {
   type: string;
-  data: Program;
+  data: News;
 }
 
 export type CourseCardProps = PostCardProps | ProgramCardProps | EventCardProps;

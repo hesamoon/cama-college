@@ -4,10 +4,15 @@ import Link from "next/link";
 // components
 import Button from "@/components/Button";
 import Searchbox from "@/components/Searchbox";
+import CourseCard from "@/components/CourseCard";
 import ApplyBanner from "@/components/ApplyBanner";
+import SectionTitle from "@/components/SectionTitle";
 import CourseSlider from "@/components/CourseSlider";
 import CoursesSection from "@/components/CoursesSection";
 import CredentialInquiry from "@/components/CredentialInquiry";
+
+// data
+import { news, posts } from "../constants/data.js";
 
 // utils
 import { userAttr } from "../utilities/userAttr.js";
@@ -97,8 +102,16 @@ export default function Home() {
         <ApplyBanner />
       </section>
 
-      {/* new news */}
-      <CoursesSection courseType="news" />
+      {/* news and posts */}
+      <section className="space-y-4 mobile-grid-system-level0 md:grid-system-level0">
+        <SectionTitle title="News and Posts" path="/news" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {news.slice(0, 4).map((n) => (
+            <CourseCard key={n.id} data={n} type="news" />
+          ))}
+        </div>
+      </section>
 
       {/* instructor */}
       <section className="flex flex-col md:grid items-center md:grid-cols-2 gap-8 space-y-2 mobile-grid-system-level0 md:grid-system-level0">

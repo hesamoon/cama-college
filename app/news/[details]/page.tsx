@@ -10,7 +10,7 @@ import CourseCard from "@/components/CourseCard";
 import CommentsSection from "@/components/CommentsSection";
 
 // data
-import { news, posts } from "@/constants/data";
+import { news } from "@/constants/data";
 
 // utils
 import { parseStyledText } from "@/utilities/utils";
@@ -22,6 +22,7 @@ function Page() {
   );
 
   const [like1, setLike1] = useState(253);
+  const [like2, setLike2] = useState(253);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -268,11 +269,11 @@ function Page() {
                     padding: "p-3",
                     width: 24,
                     height: 24,
-                    clickHandler: () => setLike1((prev) => prev + 1),
+                    clickHandler: () => setLike2((prev) => prev + 1),
                   }}
                 />
 
-                <span>{like1}</span>
+                <span>{like2}</span>
               </div>
 
               {/* count of comments */}
@@ -359,8 +360,8 @@ function Page() {
         <h4 className="mobile-title-medium md:title-medium text-on_surface-light">Related News</h4>
 
         <div className="grid grid-cols-2 gap-4 md:gap-6">
-          {posts.map((post) => (
-            <CourseCard key={post.id} data={post} type="news" />
+        {news.map((n) => (
+            <CourseCard key={n.id} data={n} type="news" />
           ))}
         </div>
       </div>

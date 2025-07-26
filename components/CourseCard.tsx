@@ -6,27 +6,26 @@ import { CourseCardProps } from "@/app/types/types";
 
 function CourseCard({ type, data }: CourseCardProps) {
   return type === "news" ? (
-    <Link href={`/news/${data.name}?courseId=${data.id}`} className="space-y-3">
+    <Link href={`/news/${data.title}`} className="space-y-3">
       <div className="space-y-2">
         <Image
-          src={data.avatar}
+          src={`/${data.coverImg}.png`}
           alt={`${data.type} ${data.id}`}
           className="rounded-sm aspect-16-9 object-cover w-full"
           width={310}
           height={174}
-          unoptimized
         />
 
         <div>
           <div className="flex items-center gap-1">
             <div className="w-1.5 h-1.5 rounded-full bg-[#206F12]" />
             <span className="mobile-label-small md:label-small text-txt-on-surface-secondary-light">
-              {data.type}
+              {data.category}
             </span>
           </div>
 
           <h3 className="mobile-body-large md:body-large text-on_surface-light">
-            {data.name}
+            {data.title}
           </h3>
         </div>
       </div>
