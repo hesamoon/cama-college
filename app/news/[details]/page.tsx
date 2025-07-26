@@ -22,7 +22,6 @@ function Page() {
   );
 
   const [like1, setLike1] = useState(253);
-  const [like2, setLike2] = useState(253);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -361,7 +360,7 @@ function Page() {
 
         <div className="grid grid-cols-2 gap-4 md:gap-6">
           {posts.map((post) => (
-            <CourseCard key={post.id} data={post} type="post" />
+            <CourseCard key={post.id} data={post} type="news" />
           ))}
         </div>
       </div>

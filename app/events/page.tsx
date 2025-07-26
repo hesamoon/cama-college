@@ -10,6 +10,7 @@ import Pagination from "@/components/Pagination";
 import CourseCard from "@/components/CourseCard";
 import ListHeader from "@/components/ListHeader";
 import CourseSlider from "@/components/CourseSlider";
+import CourseCardSkeleton from "@/components/skeletons/CourseCardSkeleton";
 
 // data
 import {
@@ -18,27 +19,20 @@ import {
   LIMITOfLOADEDLISTINONEPAGE,
 } from "@/constants/data";
 
-// types
-import { Events } from "../types/types";
-
 // api - events
 import { getEvents } from "@/lib/api/events";
-import CourseCardSkeleton from "@/components/skeletons/CourseCardSkeleton";
+
+// types
+import { Event } from "../types/types";
 
 function page() {
-  const {
-    data: eventsData,
-    isLoading: isLoadingEvents,
-    error: errorEvents,
-  } = useQuery({
+  const { data: eventsData, isLoading: isLoadingEvents } = useQuery({
     queryKey: ["events"],
     queryFn: getEvents,
   });
 
-  console.log(eventsData);
-
-  const [sortVal, setSortVal] = useState("Newest");
-  const [eventList, setEventList] = useState<Events[]>([]);
+  const [sortVal] = useState("Newest");
+  const [eventList, setEventList] = useState<Event[]>([]);
   const [search] = useQueryState("search", { defaultValue: "" });
 
   const [numOfScroll, setNumOfScroll] = useState(0);
@@ -87,8 +81,8 @@ function page() {
   useEffect(() => {
     setEventList(
       eventsData?.data.data
-        .sort((a: Events, b: Events) => a.status.localeCompare(b.status))
-        .filter((event: Events) =>
+        .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
+        .filter((event: Event) =>
           event.name
             .toLowerCase()
             .replace(/\s+/g, " ")
@@ -107,15 +101,15 @@ function page() {
   useEffect(() => {
     setEventList(
       eventsData?.data.data
-        .sort((a: Events, b: Events) =>
+        .sort((a: Event, b: Event) => 
           sortVal === "Newest"
-            ? new Date(b.publishDate ?? "").getTime() -
-              new Date(a.publishDate ?? "").getTime()
-            : new Date(a.publishDate ?? "").getTime() -
-              new Date(b.publishDate ?? "").getTime()
+            ? new Date(b.date ?? "").getTime() -
+              new Date(a.date ?? "").getTime()
+            : new Date(a.date ?? "").getTime() -
+              new Date(b.date ?? "").getTime()
         )
-        .sort((a: Events, b: Events) => a.status.localeCompare(b.status))
-        .filter((event: Events) =>
+        .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
+        .filter((event: Event) =>
           event.name
             .toLowerCase()
             .replace(/\s+/g, " ")
@@ -135,8 +129,8 @@ function page() {
     if (eventsData?.data.data.length > 0) {
       setEventList(
         eventsData?.data.data
-          .sort((a: Events, b: Events) => a.status.localeCompare(b.status))
-          .filter((event: Events) =>
+          .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
+          .filter((event: Event) =>
             event.name
               .toLowerCase()
               .replace(/\s+/g, " ")

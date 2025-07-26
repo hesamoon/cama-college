@@ -33,7 +33,6 @@ function Page() {
   const {
     data: eventsData,
     isLoading: isLoadingEvents,
-    error: errorEvents,
   } = useQuery({
     queryKey: ["events"],
     queryFn: getEvents,

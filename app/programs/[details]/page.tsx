@@ -34,7 +34,6 @@ function Page() {
   const {
     data: programsData,
     isLoading: isLoadingPrograms,
-    error: errorPrograms,
   } = useQuery({
     queryKey: ["programs"],
     queryFn: getPrograms,
