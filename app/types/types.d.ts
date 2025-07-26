@@ -151,7 +151,7 @@ type DescriptionItem = {
 type News = {
   id: number;
   coverImg: string;
-  title: string;
+  name: string;
   mainDesc: string;
   category: string;
   like: number;

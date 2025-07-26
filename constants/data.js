@@ -623,7 +623,7 @@ const news = [
   {
     id: 0,
     coverImg: "np1",
-    title: "This is a title for slider",
+    name: "This is a title for slider",
     mainDesc:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     category: "NEWS",
@@ -651,7 +651,7 @@ const news = [
   {
     id: 1,
     coverImg: "np1",
-    title: "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    name: "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
     mainDesc:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     category: "NEWS",
@@ -679,7 +679,7 @@ const news = [
   {
     id: 2,
     coverImg: "np3",
-    title: "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    name: "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
     mainDesc:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     category: "NEWS",
@@ -707,7 +707,7 @@ const news = [
   {
     id: 3,
     coverImg: "np3",
-    title: "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    name: "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
     mainDesc:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     category: "NEWS",
@@ -735,7 +735,7 @@ const news = [
   {
     id: 4,
     coverImg: "np3",
-    title: "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    name: "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
     mainDesc:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     category: "NEWS",
@@ -763,7 +763,7 @@ const news = [
   {
     id: 5,
     coverImg: "np3",
-    title: "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    name: "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
     mainDesc:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     category: "NEWS",
@@ -791,7 +791,7 @@ const news = [
   {
     id: 6,
     coverImg: "np3",
-    title: "6 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
+    name: "6 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
     mainDesc:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     category: "NEWS",
