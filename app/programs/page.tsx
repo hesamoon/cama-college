@@ -72,7 +72,7 @@ function Page() {
     if (programsData?.data.data.length > 0) {
       setProgramList(
         programsData?.data.data
-          .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          // .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
           .filter(
             (program: Program) =>
               program.name.includes(search) &&
@@ -93,14 +93,14 @@ function Page() {
     if (programsData?.data.data.length > 0) {
       setProgramList(
         programsData?.data.data
-          .sort((a: Program, b: Program) =>
-            sortVal === "Newest"
-              ? new Date(b.date ?? "").getTime() -
-                new Date(a.date ?? "").getTime()
-              : new Date(a.date ?? "").getTime() -
-                new Date(b.date ?? "").getTime()
-          )
-          .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          // .sort((a: Program, b: Program) =>
+          //   sortVal === "Newest"
+          //     ? new Date(b.date ?? "").getTime() -
+          //       new Date(a.date ?? "").getTime()
+          //     : new Date(a.date ?? "").getTime() -
+          //       new Date(b.date ?? "").getTime()
+          // )
+          // .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
           .filter(
             (program: Program) =>
               program.name.includes(search) && program.type.includes(type)
@@ -119,7 +119,7 @@ function Page() {
     if (programsData?.data.data.length > 0) {
       setProgramList(
         programsData?.data.data
-          .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          // .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
           .filter(
             (program: Program) =>
               program.name.includes(search) &&
@@ -229,7 +229,7 @@ function Page() {
         ) : programList.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-7 md:py-14">
             {programList.map((program) => (
-              <CourseCard key={program.id} data={program} type="programs" />
+              <CourseCard key={program.id} data={{ ...program, cardType: "PROGRAM" }} />
             ))}
           </div>
         ) : (

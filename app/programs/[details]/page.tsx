@@ -386,7 +386,7 @@ function Page() {
             className="col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-8"
           >
             {programsData?.data.data.slice(0, 6).map((program: Program) => (
-              <CourseCard key={program.id} data={program} type="programs" />
+              <CourseCard key={program.id} data={{ ...program, cardType: "PROGRAM" }} />
             ))}
           </div>
         </div>
