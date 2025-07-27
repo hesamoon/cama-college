@@ -18,6 +18,9 @@ import EventDetailsSkeleton from "@/components/skeletons/EventDetailsSkeleton";
 // api
 import { getEvent, getEvents } from "@/lib/api/events";
 
+// types
+import { Event } from "@/app/types/types";
+
 function Page() {
   const searchParams = useSearchParams();
   const courseId = searchParams.get("courseId");
@@ -334,7 +337,7 @@ function Page() {
             id="Related Events"
             className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
           >
-            {eventsData?.data.data.slice(0, 6).map((event) => (
+            {eventsData?.data.data.slice(0, 6).map((event: Event) => (
               <CourseCard
                 key={event.id}
                 data={{ ...event, cardType: "EVENT" }}
