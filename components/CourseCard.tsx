@@ -5,6 +5,8 @@ import Link from "next/link";
 import { CourseCardProps } from "@/app/types/types";
 
 function CourseCard({ data }: { data: CourseCardProps }) {
+  console.log(data);
+
   return data.cardType === "NEWS" ? (
     <Link href={`/news/${data.name}`} className="space-y-3">
       <div className="space-y-2">
