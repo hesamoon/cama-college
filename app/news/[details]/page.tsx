@@ -50,8 +50,8 @@ function Page() {
             <div className="rounded overflow-hidden">
               <Image
                 className="object-cover w-full h-[202px] md:h-[377px] rounded aspect-16-9"
-                src={`/${newsDetails?.coverImg}.png`}
-                alt={newsDetails ? newsDetails.coverImg : ""}
+                src={`/${newsDetails?.avatar}.png`}
+                alt={newsDetails ? newsDetails.category : ""}
                 width={672}
                 height={377}
               />
@@ -226,8 +226,8 @@ function Page() {
           <div className="rounded overflow-hidden">
             <Image
               className="object-cover w-full max-h-[234px] rounded"
-              src={`/${newsDetails?.coverImg}.png`}
-              alt={newsDetails ? newsDetails.coverImg : ""}
+              src={`/${newsDetails?.avatar}.png`}
+              alt={newsDetails ? newsDetails.category : ""}
               width={672}
               height={234}
             />
@@ -360,8 +360,8 @@ function Page() {
         <h4 className="mobile-title-medium md:title-medium text-on_surface-light">Related News</h4>
 
         <div className="grid grid-cols-2 gap-4 md:gap-6">
-        {news.map((n) => (
-            <CourseCard key={n.id} data={n} type="news" />
+          {news.map((n) => (
+            <CourseCard key={n.id} data={{ ...n, cardType: "NEWS" }} />
           ))}
         </div>
       </div>

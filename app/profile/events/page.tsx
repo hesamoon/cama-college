@@ -10,21 +10,19 @@ import SearchBoxContainer from "@/components/SearchBoxContainer";
 
 // data
 import { events } from "@/constants/data";
-import { Event } from "@/app/types/types";
 
 function Page() {
   const [filter, setFilter] = useQueryState("filter", { defaultValue: "" });
   const [search] = useQueryState("search", { defaultValue: "" });
 
-  const [controlledList, setControlledList] = useState<Event[]>([]);
+  const [controlledList, setControlledList] = useState(events);
 
   useEffect(() => {
     setControlledList(
       events.filter(
-        (eIP) =>
-          eIP.name.toLowerCase().includes(search.toLowerCase()) &&
-          eIP.status.includes(filter ? filter : "")
-      ) 
+        (eIP) => eIP.name.toLowerCase().includes(search.toLowerCase())
+        // eIP.status.includes(filter ? filter : "")
+      )
     );
   }, [search, filter]);
 
@@ -53,13 +51,13 @@ function Page() {
 
           <div className="flex items-center gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth">
             <div className="min-w-[267px]">
-              <CourseCard data={events[0]} type="events" />
+              <CourseCard data={{ ...events[0], cardType: "EVENT" }} />
             </div>
             <div className="min-w-[267px]">
-              <CourseCard data={events[1]} type="events" />
+              <CourseCard data={{ ...events[1], cardType: "EVENT" }} />
             </div>
             <div className="min-w-[267px]">
-              <CourseCard data={events[2]} type="events" />
+              <CourseCard data={{ ...events[2], cardType: "EVENT" }} />
             </div>
           </div>
         </div>
@@ -103,7 +101,7 @@ function Page() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
               {controlledList.length > 0 ? (
                 controlledList.map((item) => (
-                  <CourseCard key={item.id} data={item} type="events" />
+                  <CourseCard key={item.id} data={{ ...item, cardType: "EVENT" }} />
                 ))
               ) : filter || search ? (
                 <h5 className="col-span-8 p-3 text-center">Event not found!</h5>

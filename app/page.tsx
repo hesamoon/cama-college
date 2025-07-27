@@ -108,7 +108,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {news.slice(0, 4).map((n) => (
-            <CourseCard key={n.id} data={n} type="news" />
+            <CourseCard key={n.id} data={{ ...n, cardType: "NEWS" }} />
           ))}
         </div>
       </section>

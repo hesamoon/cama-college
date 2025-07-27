@@ -81,7 +81,7 @@ function page() {
   useEffect(() => {
     setEventList(
       eventsData?.data.data
-        .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
+        // .sort((a, b) => a.status.localeCompare(b.status))
         .filter((event: Event) =>
           event.name
             .toLowerCase()
@@ -101,14 +101,14 @@ function page() {
   useEffect(() => {
     setEventList(
       eventsData?.data.data
-        .sort((a: Event, b: Event) => 
+        .sort((a: Event, b: Event) =>
           sortVal === "Newest"
             ? new Date(b.date ?? "").getTime() -
               new Date(a.date ?? "").getTime()
             : new Date(a.date ?? "").getTime() -
               new Date(b.date ?? "").getTime()
         )
-        .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
+        // .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
         .filter((event: Event) =>
           event.name
             .toLowerCase()
@@ -129,7 +129,7 @@ function page() {
     if (eventsData?.data.data.length > 0) {
       setEventList(
         eventsData?.data.data
-          .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
+          // .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
           .filter((event: Event) =>
             event.name
               .toLowerCase()
@@ -170,8 +170,11 @@ function page() {
             </div>
           ) : eventList?.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {eventList.map((event) => (
-                <CourseCard key={event.id} data={event} type="events" />
+              {eventList.map((event: Event) => (
+                <CourseCard
+                  key={event.id}
+                  data={{ ...event, cardType: "EVENT" }}
+                />
               ))}
             </div>
           ) : (

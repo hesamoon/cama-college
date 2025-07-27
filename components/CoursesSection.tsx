@@ -14,10 +14,7 @@ import { getEvents } from "@/lib/api/events";
 import { getPrograms } from "@/lib/api/programs";
 
 function CoursesSection({ courseType }: { courseType: string }) {
-  const {
-    data: coursesData,
-    isLoading: isLoadingCourses,
-  } = useQuery({
+  const { data: coursesData, isLoading: isLoadingCourses } = useQuery({
     queryKey: [courseType],
     queryFn: courseType === "programs" ? getPrograms : getEvents,
   });
@@ -35,7 +32,13 @@ function CoursesSection({ courseType }: { courseType: string }) {
         ) : coursesData?.data.data.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {coursesData?.data.data.slice(0, 4).map((course) => (
-              <CourseCard key={course.id} data={course} type={courseType} />
+              <CourseCard
+                key={course.id}
+                data={{
+                  ...course,
+                  cardType: courseType === "programs" ? "PROGRAM" : "EVENT",
+                }}
+              />
             ))}
           </div>
         ) : (

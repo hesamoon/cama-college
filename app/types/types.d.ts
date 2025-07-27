@@ -19,24 +19,58 @@ export interface Transaction {
   transactionId: string;
 }
 
-export interface Program {
-  price: number;
-  status: string;
-  date: string;
+type CourseCardType = "PROGRAM" | "EVENT" | "NEWS";
+
+interface CourseBase {
+  id: string;
+  name: string;
   about: string;
   audience: { text: string }[];
   avatar: string;
-  credential_type: string;
-  duration: number | null;
-  id: string;
   language: string;
   level: string;
-  name: string;
   prerequisites: { text: string }[];
   subject: string;
-  type: string;
   what_you_learn: { text: string }[];
+  cardType: CourseCardType;
 }
+
+interface Program extends CourseBase {
+  cardType: "PROGRAM";
+  type: string;
+  credential_type: string;
+  duration: number | null;
+  price: number;
+}
+
+interface Event extends CourseBase {
+  cardType: "EVENT";
+  date: string;
+  duration: number;
+  price: number;
+  lat?: number | null;
+  lng?: number | null;
+}
+
+type DescriptionItem = {
+  id: number;
+  title: string;
+  content: string;
+  cover: string;
+};
+
+interface News extends CourseBase {
+  cardType: "NEWS";
+  date?: string;
+  category: string;
+  like: number;
+  comments: number;
+  author: string;
+  date: string;
+  description1: DescriptionItem[];
+}
+
+type CourseCardProps = Program | Event | News;
 
 type Lesson = {
   id: number;
@@ -66,42 +100,6 @@ export interface ProgramInProgress {
   contents: Content[];
 }
 
-export interface ProgramCardProps {
-  type: string;
-  data: Program;
-}
-
-export interface EventCardProps {
-  type: string;
-  data: Event;
-}
-
-export interface PostCardProps {
-  type: string;
-  data: News;
-}
-
-export type CourseCardProps = PostCardProps | ProgramCardProps | EventCardProps;
-
-export interface Event {
-  status: string;
-  about: string;
-  audience: { text: string }[];
-  avatar: string;
-  date: string;
-  duration: number | null;
-  id: string;
-  language: string;
-  lat: number | null;
-  level: string;
-  lng: number | null;
-  name: string;
-  prerequisites: { text: string }[];
-  price: number;
-  subject: string;
-  what_you_learn: { text: string }[];
-}
-
 export interface Chip {
   lable: string;
   leftIcon: string;
@@ -122,26 +120,6 @@ export interface CommentT {
   likes: number;
   disLike: number;
 }
-
-type DescriptionItem = {
-  id: number;
-  title: string;
-  content: string;
-  cover: string;
-};
-
-type News = {
-  id: number;
-  coverImg: string;
-  name: string;
-  mainDesc: string;
-  category: string;
-  like: number;
-  comments: number;
-  author: string;
-  publishDate: string;
-  description1: DescriptionItem[];
-};
 
 type Article = {
   id: number;

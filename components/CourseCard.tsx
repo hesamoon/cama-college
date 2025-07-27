@@ -4,13 +4,13 @@ import Link from "next/link";
 // types
 import { CourseCardProps } from "@/app/types/types";
 
-function CourseCard({ type, data }: CourseCardProps) {
-  return type === "news" ? (
+function CourseCard({ data }: { data: CourseCardProps }) {
+  return data.cardType === "NEWS" ? (
     <Link href={`/news/${data.name}`} className="space-y-3">
       <div className="space-y-2">
         <Image
-          src={`/${data.coverImg}.png`}
-          alt={`${data.type} ${data.id}`}
+          src={`/${data.avatar}.png`}
+          alt={`${data.cardType} ${data.id}`}
           className="rounded-sm aspect-16-9 object-cover w-full"
           width={310}
           height={174}
@@ -31,7 +31,7 @@ function CourseCard({ type, data }: CourseCardProps) {
       </div>
 
       <p className="mobile-label-small md:label-small text-txt-on-surface-terriary-light">
-        {new Date(data.publishDate).toLocaleDateString("en-US", {
+        {new Date(data.date || "").toLocaleDateString("en-US", {
           year: "numeric",
           month: "short",
           day: "2-digit",
@@ -40,28 +40,30 @@ function CourseCard({ type, data }: CourseCardProps) {
     </Link>
   ) : (
     <Link
-      href={`/${type}/${data.name}?courseId=${data.id}`}
+      href={`/${data.cardType === "PROGRAM" ? "programs" : "events"}/${
+        data.name
+      }?courseId=${data.id}`}
       className="space-y-2 relative cursor-pointer"
     >
       <Image
         src={data.avatar}
-        alt={`${type} ${data.id}`}
+        alt={`avatar ${data.id}`}
         className="rounded-sm aspect-16-9 object-cover w-full"
         width={310}
         height={174}
         unoptimized
       />
 
-      {data?.status === "Sold Out" ? (
+      {/* {data?.status === "Sold Out" ? (
         <div className="absolute top-2 left-2 py-0.5 px-3 rounded-xs text-white mobile-label-small md:label-small bg-background-primary-light">
           Sold Out
         </div>
-      ) : null}
+      ) : null} */}
 
       <div className="space-y-3">
         <h3 className="mobile-body-large md:body-large">{data.name}</h3>
 
-        {type === "programs" ? (
+        {data.cardType === "PROGRAM" ? (
           <div className="space-y-1.5">
             <div className="mobile-label-medium md:label-medium text-shades-light-50 flex items-center gap-3">
               <div className="hidden md:flex items-center gap-1">
@@ -87,7 +89,7 @@ function CourseCard({ type, data }: CourseCardProps) {
               ${data.price} (CAD)
             </p>
           </div>
-        ) : type === "events" ? (
+        ) : data.cardType === "EVENT" ? (
           <div className="flex items-center gap-4">
             <span className="mobile-label-large-db md:label-large-db text-background-primary-light">
               {new Date(data.date)

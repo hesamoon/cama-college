@@ -403,10 +403,7 @@ const events = [
     name: "Crypto Event",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-24",
     duration: 22,
@@ -416,24 +413,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-1",
     name: "Crypto Event #2",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-25",
     duration: 22,
@@ -443,24 +434,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-2",
     name: "Crypto Event #3",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-26",
     duration: 22,
@@ -470,24 +455,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-3",
     name: "Crypto Event #4",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-27",
     duration: 22,
@@ -497,24 +476,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-4",
     name: "Crypto Event #5",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-28",
     duration: 22,
@@ -524,24 +497,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-5",
     name: "Crypto Event #6",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-29",
     duration: 22,
@@ -551,24 +518,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-6",
     name: "Crypto Event #7",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-30",
     duration: 22,
@@ -578,24 +539,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-7",
     name: "Crypto Event #8",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-07-31",
     duration: 22,
@@ -605,24 +560,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-8",
     name: "Crypto Event #9",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-08-01",
     duration: 22,
@@ -632,24 +581,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-9",
     name: "Crypto Event #10",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-08-02",
     duration: 22,
@@ -659,24 +602,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-10",
     name: "Crypto Event #11",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-08-03",
     duration: 22,
@@ -686,24 +623,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-11",
     name: "Crypto Event #12",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-08-04",
     duration: 22,
@@ -713,24 +644,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-12",
     name: "Crypto Event #13",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-08-05",
     duration: 22,
@@ -740,24 +665,18 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
   },
   {
     id: "mock-id-13",
     name: "Crypto Event #14",
     status: "Scheduled",
     about: "about of the event is here.",
-    audience: [
-      { text: "audience one" },
-      { text: "audience two" }
-    ],
+    audience: [{ text: "audience one" }, { text: "audience two" }],
     avatar: "https://api.itaxim.ir/storage/4/01K12NM4Q5NYV36DN8HCGFMF0X.png",
     date: "2025-08-06",
     duration: 22,
@@ -767,17 +686,13 @@ const events = [
     level: "beginner",
     prerequisites: [
       { text: "'prerequisites one'" },
-      { text: "'prerequisites two'" }
+      { text: "'prerequisites two'" },
     ],
     price: 650,
     subject: "Talking about the crypto world",
-    what_you_learn: [
-      { text: "'what one'" },
-      { text: "'what two'" }
-    ]
-  }
+    what_you_learn: [{ text: "'what one'" }, { text: "'what two'" }],
+  },
 ];
-
 
 const posts = [
   {
@@ -832,202 +747,179 @@ const posts = [
 
 const news = [
   {
-    id: 0,
-    coverImg: "np1",
+    id: "01982c37-b8d2-7354-8b5d-b3bf76b7e2d3",
     name: "This is a title for slider",
-    mainDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    about:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
+    audience: [{ text: "Audience one" }, { text: "Audience two" }],
+    avatar: "np1",
+    language: "English / Persian",
+    level: "beginner",
+    prerequisites: [
+      { text: "Prerequisites one" },
+      { text: "Prerequisites two" },
+    ],
+    subject: "Talking about the crypto world",
+    what_you_learn: [{ text: "What one" }, { text: "What two" }],
     category: "NEWS",
     like: 253,
     comments: 26,
     author: "Reza Bidari",
-    publishDate: "2024-12-01",
+    date: "2024-12-01",
     description1: [
       {
         id: 11,
         title: "Title Of Lesson",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
         cover: "c1",
       },
       {
         id: 12,
         title: "Title Of Lesson",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...",
         cover: "c1",
       },
     ],
   },
   {
-    id: 1,
-    coverImg: "np1",
-    name: "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
-    mainDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    id: "01982c38-b8d2-7354-8b5d-b3bf76b7e2d4",
+    name: "Bitcoin price hits new all-time high",
+    about:
+      "Bitcoin surges past previous records amidst increasing institutional adoption and ETF approvals.",
+    audience: [{ text: "Traders" }, { text: "Investors" }],
+    avatar: "np2",
+    language: "English",
+    level: "intermediate",
+    prerequisites: [{ text: "Basic trading knowledge" }],
+    subject: "Bitcoin price movements",
+    what_you_learn: [{ text: "Market trends" }],
     category: "NEWS",
-    like: 253,
-    comments: 26,
-    author: "Reza Bidari",
-    publishDate: "2024-12-01",
-    description1: [
-      {
-        id: 11,
-        title: "Title Of Lesson",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. @(*Ullamcorper*)@ velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
-      },
-      {
-        id: 12,
-        title: "Title Of Lesson",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
-      },
-    ],
-  },
-  {
-    id: 2,
-    coverImg: "np3",
-    name: "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
-    mainDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    category: "NEWS",
-    like: 253,
-    comments: 26,
-    author: "Reza Bidari",
-    publishDate: "2024-12-01",
+    like: 340,
+    comments: 58,
+    author: "Elham Safari",
+    date: "2025-01-15",
     description1: [
       {
         id: 21,
-        title: "Title Of Lesson",
+        title: "Bitcoin Rally Explained",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
-      },
-      {
-        id: 22,
-        title: "Title Of Lesson",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
+          "Experts believe the recent rally is due to positive ETF approval news and macroeconomic shifts...",
+        cover: "c2",
       },
     ],
   },
   {
-    id: 3,
-    coverImg: "np3",
-    name: "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
-    mainDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    id: "01982c39-b8d2-7354-8b5d-b3bf76b7e2d5",
+    name: "Ethereum 2.0 launch gets delayed",
+    about:
+      "The much-anticipated upgrade to Ethereum’s consensus mechanism has been pushed back again.",
+    audience: [{ text: "Developers" }, { text: "Crypto enthusiasts" }],
+    avatar: "np3",
+    language: "English / Persian",
+    level: "advanced",
+    prerequisites: [{ text: "Ethereum basics" }],
+    subject: "Ethereum updates",
+    what_you_learn: [{ text: "Proof of Stake" }],
     category: "NEWS",
-    like: 253,
-    comments: 26,
-    author: "Reza Bidari",
-    publishDate: "2024-12-01",
+    like: 147,
+    comments: 19,
+    author: "Sina Zarei",
+    date: "2025-02-10",
     description1: [
       {
         id: 31,
-        title: "Title Of Lesson",
+        title: "Reasons Behind the Delay",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
-      },
-      {
-        id: 32,
-        title: "Title Of Lesson",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
+          "The development team cited technical bugs and security concerns as reasons for the postponement...",
+        cover: "c3",
       },
     ],
   },
   {
-    id: 4,
-    coverImg: "np3",
-    name: "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
-    mainDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    id: "01982c40-b8d2-7354-8b5d-b3bf76b7e2d6",
+    name: "Top 5 altcoins to watch in 2025",
+    about:
+      "With Bitcoin dominance declining, these altcoins are gaining traction in the market.",
+    audience: [{ text: "Investors" }],
+    avatar: "np3",
+    language: "English",
+    level: "all",
+    prerequisites: [{ text: "Wallet setup" }],
+    subject: "Altcoin market",
+    what_you_learn: [{ text: "Investment strategies" }],
     category: "NEWS",
-    like: 253,
-    comments: 26,
-    author: "Reza Bidari",
-    publishDate: "2024-12-01",
+    like: 198,
+    comments: 33,
+    author: "Arezoo Kamali",
+    date: "2025-01-05",
     description1: [
       {
         id: 41,
-        title: "Title Of Lesson",
+        title: "Altcoin Analysis",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
-      },
-      {
-        id: 42,
-        title: "Title Of Lesson",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
+          "These 5 altcoins show strong fundamentals and active communities, making them promising picks for 2025...",
+        cover: "c3",
       },
     ],
   },
   {
-    id: 5,
-    coverImg: "np3",
-    name: "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
-    mainDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    id: "01982c41-b8d2-7354-8b5d-b3bf76b7e2d7",
+    name: "Iran’s approach to blockchain regulation",
+    about:
+      "Iran is working on new frameworks to regulate blockchain projects and cryptocurrencies.",
+    audience: [{ text: "Legal experts" }, { text: "Tech startups" }],
+    avatar: "np4",
+    language: "Persian",
+    level: "beginner",
+    prerequisites: [{ text: "Regulation basics" }],
+    subject: "Crypto law",
+    what_you_learn: [{ text: "Iran policy directions" }],
     category: "NEWS",
-    like: 253,
-    comments: 26,
-    author: "Reza Bidari",
-    publishDate: "2024-12-01",
+    like: 97,
+    comments: 10,
+    author: "Mohammad Karimi",
+    date: "2025-03-01",
     description1: [
       {
         id: 51,
-        title: "Title Of Lesson",
+        title: "Policy Draft Overview",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
-      },
-      {
-        id: 52,
-        title: "Title Of Lesson",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
+          "The draft law includes licensing, KYC rules, and support for blockchain innovation...",
+        cover: "c4",
       },
     ],
   },
   {
-    id: 6,
-    coverImg: "np3",
-    name: "6 Lorem ipsum dolor sit amet, consectetur adipiscing elit ",
-    mainDesc:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    id: "01982c42-b8d2-7354-8b5d-b3bf76b7e2d8",
+    name: "How AI is impacting crypto markets",
+    about:
+      "Artificial intelligence is now a key player in analyzing and predicting crypto price movements.",
+    audience: [{ text: "AI Researchers" }, { text: "Crypto Analysts" }],
+    avatar: "np4",
+    language: "English",
+    level: "intermediate",
+    prerequisites: [{ text: "AI basics" }, { text: "Crypto trading knowledge" }],
+    subject: "AI & crypto",
+    what_you_learn: [{ text: "AI tools" }, { text: "Market forecasting" }],
     category: "NEWS",
-    like: 253,
-    comments: 26,
-    author: "Reza Bidari",
-    publishDate: "2024-12-01",
+    like: 421,
+    comments: 74,
+    author: "Niloofar Ghanbari",
+    date: "2025-03-10",
     description1: [
       {
         id: 61,
-        title: "Title Of Lesson",
+        title: "AI in Trading",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
-      },
-      {
-        id: 62,
-        title: "Title Of Lesson",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Morbi tristique senectus et netus. Mattis pellentesque id nibh tortor id aliquet lectus proin. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Dictum varius duis at consectetur lorem. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Velit ut tortor pretium viverra suspendisse potenti nullam. Et molestie ac feugiat sed ",
-        cover: "c1",
+          "From sentiment analysis to trend prediction, AI systems are transforming how we trade crypto...",
+        cover: "c4",
       },
     ],
   },
 ];
+
 
 const categories = [
   { id: 0, label: "All" },
@@ -1518,7 +1410,6 @@ const orgChart = {
       name: "Professional Identity",
       children: [{ name: "Consultative / Advisory Arm" }],
     },
-    
   ],
 };
 

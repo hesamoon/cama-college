@@ -11,16 +11,13 @@ import Pagination from "@/components/Pagination";
 // data
 import { news, newsGroups } from "@/constants/data";
 
-// types
-import { News } from "../types/types";
-
 // hooks
 import useIsMobile from "@/hooks/useIsMobile";
 
 function Page() {
   // const [pageNum, setPageNum] = useState(1);
   const [category, setCategory] = useState("News & Articles");
-  const [newsList, setNewsList] = useState<News[]>([]);
+  const [newsList, setNewsList] = useState(news);
   const [search] = useQueryState("search", { defaultValue: "" });
   const [type] = useQueryState("type", { defaultValue: "" });
   const [group, setGroup] = useQueryState("group");
@@ -32,11 +29,7 @@ function Page() {
   useEffect(() => {
     setNewsList(
       news
-        .sort(
-          (a, b) =>
-            new Date(b.publishDate).getTime() -
-            new Date(a.publishDate).getTime()
-        )
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         .filter(
           (n) =>
             n.name.includes(search) && n.category.includes(group ? group : "")
@@ -48,11 +41,7 @@ function Page() {
   useEffect(() => {
     setNewsList(
       news
-        .sort(
-          (a, b) =>
-            new Date(b.publishDate).getTime() -
-            new Date(a.publishDate).getTime()
-        )
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         .filter(
           (n) =>
             n.name.includes(search) && n.category.includes(group ? group : "")
@@ -62,17 +51,16 @@ function Page() {
   }, [category]);
 
   useEffect(() => {
-    setNewsList(news.slice((currentPage - 1) * 4, currentPage * 4));
+    setNewsList(
+      news
+        .slice((currentPage - 1) * 4, currentPage * 4)
+    );
   }, [currentPage]);
 
   useEffect(() => {
     setNewsList(
       news
-        .sort(
-          (a, b) =>
-            new Date(b.publishDate).getTime() -
-            new Date(a.publishDate).getTime()
-        )
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         .filter(
           (n) =>
             n.name.includes(search) && n.category.includes(group ? group : "")
@@ -403,17 +391,17 @@ function Page() {
                         </div>
 
                         <p className="hidden md:block text-justify body-large text-txt-on-surface-secondary-light">
-                          {n.mainDesc.length >= 123
-                            ? `${n.mainDesc.slice(0, 123)}...`
-                            : n.mainDesc}
+                          {n.about.length >= 123
+                            ? `${n.about.slice(0, 123)}...`
+                            : n.about}
                         </p>
                       </div>
 
                       <div className="rounded overflow-hidden">
                         <Image
                           className="object-cover w-[146px] h-[81px] md:w-[268px] md:h-[150px] rounded"
-                          src={`/${n.coverImg}.png`}
-                          alt={n.coverImg}
+                          src={`/${n.avatar}.png`}
+                          alt={n.avatar}
                           width={268}
                           height={150}
                         />
@@ -586,8 +574,8 @@ function Page() {
                       <div className="rounded overflow-hidden">
                         <Image
                           className="object-cover w-[172px] h-[97px]"
-                          src={`/${n.coverImg}.png`}
-                          alt={n.coverImg}
+                          src={`/${n.avatar}.png`}
+                          alt={n.avatar}
                           width={85}
                           height={48}
                         />
@@ -679,8 +667,8 @@ function Page() {
                       <div className="rounded overflow-hidden">
                         <Image
                           className="object-cover w-full"
-                          src={`/${n.coverImg}.png`}
-                          alt={n.coverImg}
+                          src={`/${n.avatar}.png`}
+                          alt={n.avatar}
                           width={310}
                           height={174}
                         />
@@ -770,8 +758,8 @@ function Page() {
                       <div className="rounded overflow-hidden">
                         <Image
                           className="object-cover max-h-[48px]"
-                          src={`/${n.coverImg}.png`}
-                          alt={n.coverImg}
+                          src={`/${n.avatar}.png`}
+                          alt={n.avatar}
                           width={85}
                           height={48}
                         />
