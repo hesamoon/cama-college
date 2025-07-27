@@ -12,6 +12,7 @@ import CourseCardSkeleton from "./skeletons/CourseCardSkeleton";
 // apis
 import { getEvents } from "@/lib/api/events";
 import { getPrograms } from "@/lib/api/programs";
+import { CourseCardProps } from "@/app/types/types";
 
 function CoursesSection({ courseType }: { courseType: string }) {
   const { data: coursesData, isLoading: isLoadingCourses } = useQuery({
@@ -31,15 +32,16 @@ function CoursesSection({ courseType }: { courseType: string }) {
           </div>
         ) : coursesData?.data.data.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {coursesData?.data.data.slice(0, 4).map((course) => (
-              <CourseCard
-                key={course.id}
-                data={{
-                  ...course,
-                  cardType: courseType === "programs" ? "PROGRAM" : "EVENT",
-                }}
-              />
-            ))}
+            {coursesData?.data.data
+              .slice(0, 4)
+              .map((course: CourseCardProps) => (
+                <CourseCard
+                  key={course.id}
+                  data={{
+                    ...course,
+                  }}
+                />
+              ))}
           </div>
         ) : (
           <div className="text-center">
