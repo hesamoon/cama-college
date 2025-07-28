@@ -56,11 +56,11 @@ function CourseCard({ data }: { data: CourseCardProps }) {
         unoptimized
       />
 
-      {/* {data?.status === "Sold Out" ? (
+      {data?.status === "sold_out" ? (
         <div className="absolute top-2 left-2 py-0.5 px-3 rounded-xs text-white mobile-label-small md:label-small bg-background-primary-light">
           Sold Out
         </div>
-      ) : null} */}
+      ) : null}
 
       <div className="space-y-3">
         <h3 className="mobile-body-large md:body-large">{data.name}</h3>

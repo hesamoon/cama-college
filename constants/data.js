@@ -1408,7 +1408,7 @@ const orgChart = {
     },
     {
       name: "Professional Identity",
-      children: [{ name: "Consultative / Advisory Arm" }],
+      children: [{ name: "Consultative / Advisory Arm" } ],
     },
   ],
 };

@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useQueryState } from "nuqs";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 // components
 import Pagination from "@/components/Pagination";
@@ -20,18 +20,24 @@ import {
 } from "@/constants/data";
 
 // api - events
-import { getEvents } from "@/lib/api/events";
+import { getEvents, getSortedEvents } from "@/lib/api/events";
 
 // types
 import { Event } from "../types/types";
 
 function page() {
-  const { data: eventsData, isLoading: isLoadingEvents } = useQuery({
+  const queryClient = useQueryClient();
+  const [sort] = useQueryState("sortBy");
+  console.log(sort ? "getEvents" : "getSortedEvents");
+  const {
+    data: eventsData,
+    isLoading: isLoadingEvents,
+    isFetching: isFetchingEvents,
+  } = useQuery({
     queryKey: ["events"],
-    queryFn: getEvents,
+    queryFn: sort ? getEvents : getSortedEvents,
   });
 
-  const [sortVal] = useState("Newest");
   const [eventList, setEventList] = useState<Event[]>([]);
   const [search] = useQueryState("search", { defaultValue: "" });
 
@@ -81,7 +87,13 @@ function page() {
   useEffect(() => {
     setEventList(
       eventsData?.data.data
-        // .sort((a, b) => a.status.localeCompare(b.status))
+        .sort((a: Event, b: Event) => {
+          // "active" should come before "sold_out"
+          if (a.status === b.status) return 0;
+          if (a.status === "active") return -1;
+          if (b.status === "active") return 1;
+          return 0;
+        })
         .filter((event: Event) =>
           event.name
             .toLowerCase()
@@ -99,37 +111,20 @@ function page() {
   }, [search]);
 
   useEffect(() => {
-    setEventList(
-      eventsData?.data.data
-        .sort((a: Event, b: Event) =>
-          sortVal === "Newest"
-            ? new Date(b.date ?? "").getTime() -
-              new Date(a.date ?? "").getTime()
-            : new Date(a.date ?? "").getTime() -
-              new Date(b.date ?? "").getTime()
-        )
-        // .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
-        .filter((event: Event) =>
-          event.name
-            .toLowerCase()
-            .replace(/\s+/g, " ")
-            .trim()
-            .includes(search.toLowerCase())
-        )
-        .slice(
-          0,
-          numOfScroll === LIMITNUMBEROFSCROLL
-            ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
-            : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
-        )
-    );
-  }, [sortVal]);
+    queryClient.invalidateQueries({ queryKey: ["events"] });
+  }, [sort]);
 
   useEffect(() => {
     if (eventsData?.data.data.length > 0) {
       setEventList(
         eventsData?.data.data
-          // .sort((a: Event, b: Event) => a.status.localeCompare(b.status))
+          .sort((a: Event, b: Event) => {
+            // "active" should come before "sold_out"
+            if (a.status === b.status) return 0;
+            if (a.status === "active") return -1;
+            if (b.status === "active") return 1;
+            return 0;
+          })
           .filter((event: Event) =>
             event.name
               .toLowerCase()
@@ -148,7 +143,7 @@ function page() {
   }, [eventsData]);
 
   return (
-    <div className="space-y-7 md:space-y-14 pb-14">
+    <div className="space-y-4 md:space-y-14 pb-14">
       {/* banner */}
       <section className="">
         <CourseSlider type="Events" />
@@ -157,19 +152,24 @@ function page() {
       <section className="space-y-5 md:space-y-9">
         {/* title - sort and filtring */}
         <div className="mobile-grid-system-level0 md:grid-system-level0">
-          <ListHeader title="Events" />
+          <div className="hidden md:block">
+            <ListHeader title="Events" />
+          </div>
+          <div className="block md:hidden">
+            <ListHeader title="" />
+          </div>
         </div>
 
         {/* events */}
         <div className="mobile-grid-system-level0 md:grid-system-level0">
-          {isLoadingEvents ? (
+          {isLoadingEvents || isFetchingEvents ? (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {Array.from({ length: 4 }).map((_, index) => (
                 <CourseCardSkeleton key={index} type="events" />
               ))}
             </div>
           ) : eventList?.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {eventList.map((event: Event) => (
                 <CourseCard
                   key={event.id}

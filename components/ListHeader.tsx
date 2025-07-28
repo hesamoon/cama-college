@@ -3,7 +3,7 @@
 import { useQueryState } from "nuqs";
 
 function ListHeader({ title }: { title: string }) {
-  const [sort, setSort] = useQueryState("sortBy", { defaultValue: "" });
+  const [sort, setSort] = useQueryState("sortBy", { defaultValue: "Newest" });
 
   return (
     <div className="flex flex-col md:flex-row gap-2 md:items-center md:justify-between">

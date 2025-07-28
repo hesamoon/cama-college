@@ -106,9 +106,12 @@ export default function Home() {
       <section className="space-y-4 mobile-grid-system-level0 md:grid-system-level0">
         <SectionTitle title="News and Posts" path="/news" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {news.slice(0, 4).map((n) => (
-            <CourseCard key={n.id} data={{ ...n, cardType: "NEWS" }} />
+            <CourseCard
+              key={n.id}
+              data={{ ...n, cardType: "NEWS", status: "active" }}
+            />
           ))}
         </div>
       </section>

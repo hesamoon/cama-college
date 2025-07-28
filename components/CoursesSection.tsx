@@ -10,20 +10,25 @@ import SectionTitle from "./SectionTitle";
 import CourseCardSkeleton from "./skeletons/CourseCardSkeleton";
 
 // apis
-import { getEvents } from "@/lib/api/events";
-import { getPrograms } from "@/lib/api/programs";
+import { getSortedEvents } from "@/lib/api/events";
+import { getSortedPrograms } from "@/lib/api/programs";
+
+// types
 import { CourseCardProps } from "@/app/types/types";
 
 function CoursesSection({ courseType }: { courseType: string }) {
   const { data: coursesData, isLoading: isLoadingCourses } = useQuery({
     queryKey: [courseType],
-    queryFn: courseType === "programs" ? getPrograms : getEvents,
+    queryFn: courseType === "programs" ? getSortedPrograms : getSortedEvents,
   });
+
+  console.log(coursesData);
 
   return (
     <section className="space-y-8 mobile-grid-system-level0 md:grid-system-level0">
       <div className="space-y-4">
         <SectionTitle title={`New ${courseType}`} path={`/${courseType}`} />
+
         {isLoadingCourses ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {Array.from({ length: 4 }).map((_, index) => (

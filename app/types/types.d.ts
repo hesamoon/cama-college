@@ -32,6 +32,7 @@ interface CourseBase {
   prerequisites: { text: string }[];
   subject: string;
   what_you_learn: { text: string }[];
+  status: string;
   cardType: CourseCardType;
 }
 

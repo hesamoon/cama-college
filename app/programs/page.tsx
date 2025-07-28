@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 // components
 import CourseCard from "@/components/CourseCard";
@@ -22,28 +22,30 @@ import {
 import { Program } from "../types/types";
 
 // api - programs
-import { getPrograms } from "@/lib/api/programs";
+import { getPrograms, getSortedPrograms } from "@/lib/api/programs";
 
 function Page() {
+  const queryClient = useQueryClient();
+  const [sortVal, setSortVal] = useState("Newest");
+
   const {
     data: programsData,
     isLoading: isLoadingPrograms,
+    isFetching: isFetchingPrograms,
     error: errorPrograms,
   } = useQuery({
     queryKey: ["programs"],
-    queryFn: getPrograms,
+    queryFn: sortVal === "Newest" ? getSortedPrograms : getPrograms,
   });
 
   console.log(`isLoadingPrograms: ${isLoadingPrograms}`);
   console.log(`errorPrograms: ${errorPrograms}`);
-  console.log(programsData?.data);
   console.log(programsData?.data.data);
 
   const [category, setCategory] = useQueryState("category");
   const [type] = useQueryState("type", { defaultValue: "" });
   const [search] = useQueryState("search", { defaultValue: "" });
 
-  const [sortVal, setSortVal] = useState("Newest");
   const [numOfScroll, setNumOfScroll] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [programList, setProgramList] = useState<Program[]>([]);
@@ -72,7 +74,13 @@ function Page() {
     if (programsData?.data.data.length > 0) {
       setProgramList(
         programsData?.data.data
-          // .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          .sort((a: Program, b: Program) => {
+            // "active" should come before "sold_out"
+            if (a.status === b.status) return 0;
+            if (a.status === "active") return -1;
+            if (b.status === "active") return 1;
+            return 0;
+          })
           .filter(
             (program: Program) =>
               program.name.includes(search) &&
@@ -90,36 +98,20 @@ function Page() {
   }, [search, type, category]);
 
   useEffect(() => {
-    if (programsData?.data.data.length > 0) {
-      setProgramList(
-        programsData?.data.data
-          // .sort((a: Program, b: Program) =>
-          //   sortVal === "Newest"
-          //     ? new Date(b.date ?? "").getTime() -
-          //       new Date(a.date ?? "").getTime()
-          //     : new Date(a.date ?? "").getTime() -
-          //       new Date(b.date ?? "").getTime()
-          // )
-          // .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
-          .filter(
-            (program: Program) =>
-              program.name.includes(search) && program.type.includes(type)
-          )
-          .slice(
-            0,
-            numOfScroll === LIMITNUMBEROFSCROLL
-              ? LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST - 1
-              : LIMITOfLOADEDLIST * numOfScroll + LIMITOfLOADEDLIST
-          )
-      );
-    }
+    queryClient.invalidateQueries({ queryKey: ["programs"] });
   }, [sortVal]);
 
   useEffect(() => {
     if (programsData?.data.data.length > 0) {
       setProgramList(
         programsData?.data.data
-          // .sort((a: Program, b: Program) => a.status.localeCompare(b.status))
+          .sort((a: Program, b: Program) => {
+            // "active" should come before "sold_out"
+            if (a.status === b.status) return 0;
+            if (a.status === "active") return -1;
+            if (b.status === "active") return 1;
+            return 0;
+          })
           .filter(
             (program: Program) =>
               program.name.includes(search) &&
@@ -154,8 +146,6 @@ function Page() {
     window.addEventListener("scroll", handleWindowScroll);
     return () => window.removeEventListener("scroll", handleWindowScroll);
   }, [loading, numOfScroll]);
-
-  console.log(programList);
 
   return (
     <div className="">
@@ -220,7 +210,7 @@ function Page() {
 
       {/* programs */}
       <div className="mobile-grid-system-level0 md:grid-system-level0">
-        {isLoadingPrograms ? (
+        {isLoadingPrograms || isFetchingPrograms ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-7 md:py-14">
             {Array.from({ length: 3 }).map((_, index) => (
               <CourseCardSkeleton key={index} type="programs" />
@@ -229,7 +219,10 @@ function Page() {
         ) : programList.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 py-7 md:py-14">
             {programList.map((program) => (
-              <CourseCard key={program.id} data={{ ...program, cardType: "PROGRAM" }} />
+              <CourseCard
+                key={program.id}
+                data={{ ...program, cardType: "PROGRAM" }}
+              />
             ))}
           </div>
         ) : (
