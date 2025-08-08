@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
@@ -10,6 +11,37 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import QueryProvider from "@/components/QueryProvider";
+
+const dylanCopperplate = localFont({
+  src: [
+    {
+      path: "./fonts/dylancopperplate_xlight_macroman/Dylan-CopperplateXLight-webfont.woff2",
+      weight: "200",
+    },
+    {
+      path: "./fonts/dylancopperplate_light_macroman/Dylan-CopperplateLight-webfont.woff2",
+      weight: "300",
+    },
+    {
+      path: "./fonts/dylancopperplate_normal_macroman/Dylan-CopperplateNormal-webfont.woff2",
+      weight: "400",
+    },
+    {
+      path: "./fonts/dylancopperplate_medium_macroman/Dylan-CopperplateMedium-webfont.woff2",
+      weight: "500",
+    },
+    {
+      path: "./fonts/dylancopperplate_bold_macroman/Dylan-CopperplateBold-webfont.woff2",
+      weight: "700",
+    },
+    {
+      path: "./fonts/dylancopperplate_xbold_macroman/Dylan-CopperplateXBOLD-webfont.woff2",
+      weight: "800",
+    },
+  ],
+  display: "swap",
+  variable: "--font-dylan-copperplate",
+});
 
 export const metadata: Metadata = {
   title: "CAMA College",
@@ -22,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={dylanCopperplate.variable}>
       <body className="bg-background h-screen flex flex-col justify-between overflow-x-hidden">
         <QueryProvider>
           <NuqsAdapter>
