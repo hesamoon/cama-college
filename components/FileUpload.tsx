@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // components
@@ -9,7 +10,6 @@ import Button from "./Button";
 
 // api
 import { applyForJobOpportunity } from "@/lib/api/job-opportunity";
-import toast from "react-hot-toast";
 
 interface FileUploadProps {
   onFileSelect?: (file: File) => void;
