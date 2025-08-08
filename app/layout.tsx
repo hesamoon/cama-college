@@ -35,7 +35,7 @@ const dylanCopperplate = localFont({
       weight: "700",
     },
     {
-      path: "../public/fonts/dylancopperplate_xbold_macroman/Dylan-CopperplateXBOLD-webfont.woff2",
+      path: "../public/fonts/dylancopperplate_xbold_macroman/Dylan-CopperplateXBold-webfont.woff2",
       weight: "800",
     },
   ],
