@@ -168,3 +168,39 @@ export interface Node {
   name: string;
   children?: Node[];
 }
+
+export interface Street {
+  id: number;
+  city_id: number;
+  name: string;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+export interface Company {
+  id: string;
+  name: string;
+  employee_count: number;
+  description: string;
+  website_link: string;
+}
+
+export interface JobOffers {
+  application_deadline: string;
+  company: Company;
+  description: string;
+  disability_friendly: number;
+  education_level: string;
+  experience_years: number;
+  gender: string;
+  id: string;
+  is_active: number;
+  max_age: number;
+  min_age: number;
+  release_time: string;
+  salary_max: number;
+  salary_min: number;
+  street: Street;
+  title: string;
+  type: string;
+}

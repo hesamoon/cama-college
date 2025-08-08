@@ -31,10 +31,7 @@ function Page() {
       queryFn: () => getProgram(courseId || ""),
     });
 
-  const {
-    data: programsData,
-    isLoading: isLoadingPrograms,
-  } = useQuery({
+  const { data: programsData, isLoading: isLoadingPrograms } = useQuery({
     queryKey: ["programs"],
     queryFn: getPrograms,
   });
@@ -172,6 +169,97 @@ function Page() {
 
         {/* description, content */}
         <div className="flex flex-col md:grid md:grid-cols-3 gap-6 space-y-6 mt-4 pb-10">
+          {/* card */}
+          <div className="block md:hidden bg-shades-light-90 rounded-sm p-3 space-y-3 h-fit w-full">
+            {/* price */}
+            <h3 className="title-medium text-txt-on-surface-secondary-light">
+              Program Features
+            </h3>
+
+            {/* important details */}
+            <div className="grid grid-cols-2 gap-2">
+              {/* labels */}
+              <div className="col-span-1 space-y-2 mobile-body-large">
+                {/* level */}
+                <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                  <Image src="/chart.svg" alt="chart" width={16} height={16} />
+                  <span>Level</span>
+                </div>
+
+                {/* duration */}
+                <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                  <Image src="/timer.svg" alt="timer" width={16} height={16} />
+                  <span>Duration</span>
+                </div>
+
+                {/* subject */}
+                <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                  <Image
+                    src="/monitor-mobbile.svg"
+                    alt="monitor-mobbile"
+                    width={16}
+                    height={16}
+                  />
+                  <span>Subject</span>
+                </div>
+
+                {/* language */}
+                <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                  <Image
+                    src="/monitor-mobbile.svg"
+                    alt="monitor-mobbile"
+                    width={16}
+                    height={16}
+                  />
+                  <span>Language</span>
+                </div>
+
+                {/* credential type */}
+                <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                  <Image
+                    src="/monitor-mobbile.svg"
+                    alt="monitor-mobbile"
+                    width={16}
+                    height={16}
+                  />
+                  <span>Credential Type</span>
+                </div>
+
+                {/* AP - number */}
+                <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                  <Image
+                    src="/monitor-mobbile.svg"
+                    alt="monitor-mobbile"
+                    width={16}
+                    height={16}
+                  />
+                  <span>AP - Number</span>
+                </div>
+              </div>
+
+              {/* values */}
+              <div className="col-span-1 mobile-body-large text-txt-on-surface-secondary-light space-y-2">
+                {/* level */}
+                <h5>{programDetails?.level}</h5>
+
+                {/* duration */}
+                <h5>{programDetails?.duration}h</h5>
+
+                {/* subject */}
+                <h5>{programDetails?.subject}</h5>
+
+                {/* language */}
+                <h5>{programDetails?.language}</h5>
+
+                {/* credential type */}
+                <h5>{programDetails?.credential_type}</h5>
+
+                {/* AP - number */}
+                <h5>0</h5>
+              </div>
+            </div>
+          </div>
+
           {/* description, content */}
           <div className="col-span-2 mobile-grid-system-level0 md:grid-system-level1">
             {/* description */}
@@ -386,7 +474,10 @@ function Page() {
             className="col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-8"
           >
             {programsData?.data.data.slice(0, 6).map((program: Program) => (
-              <CourseCard key={program.id} data={{ ...program, cardType: "PROGRAM" }} />
+              <CourseCard
+                key={program.id}
+                data={{ ...program, cardType: "PROGRAM" }}
+              />
             ))}
           </div>
         </div>

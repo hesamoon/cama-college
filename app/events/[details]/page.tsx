@@ -106,7 +106,7 @@ function Page() {
               {tabs.map((tab) => (
                 <div key={tab}>
                   <button
-                    className={`p-2 md:py-3 md:px-2.5 mobile-body-large md:body-large cursor-pointer transition-all ease-linear duration-200 whitespace-nowrap ${
+                    className={`py-2 px-4 md:py-3 md:px-2.5 mobile-body-large md:body-large cursor-pointer transition-all ease-linear duration-200 whitespace-nowrap ${
                       activeTab === tab
                         ? "text-background-primary-light border-b border-background-primary-light"
                         : "text-txt-on-surface-terriary-light"
@@ -170,8 +170,117 @@ function Page() {
           </div>
         </div>
 
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
-          <div className="col-span-2 space-y-6">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 mobile-grid-system-level0 md:grid-system-level1">
+          <div className="col-span-2">
+            {/* card */}
+            <div className="block md:hidden bg-shades-light-90 rounded-sm p-3 space-y-3 h-fit w-full">
+              {/* price */}
+              <h3 className="title-medium text-txt-on-surface-secondary-light">
+                Event Features
+              </h3>
+
+              {/* important details */}
+              <div className="grid grid-cols-2 gap-2">
+                {/* labels */}
+                <div className="col-span-1 space-y-2 mobile-body-large">
+                  {/* event date */}
+                  <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                    <Image
+                      src="/chart.svg"
+                      alt="chart"
+                      width={16}
+                      height={16}
+                    />
+                    <span>Event Date</span>
+                  </div>
+
+                  {/* event time */}
+                  <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                    <Image
+                      src="/timer.svg"
+                      alt="timer"
+                      width={16}
+                      height={16}
+                    />
+                    <span>Event Time</span>
+                  </div>
+
+                  {/* rating */}
+                  <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                    <Image
+                      src="/monitor-mobbile.svg"
+                      alt="monitor-mobbile"
+                      width={16}
+                      height={16}
+                    />
+                    <span>Rating</span>
+                  </div>
+
+                  {/* location */}
+                  <div className="space-y-2">
+                    {/* location */}
+                    <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
+                      <Image
+                        src="/monitor-mobbile.svg"
+                        alt="monitor-mobbile"
+                        width={16}
+                        height={16}
+                      />
+                      <span>Location</span>
+                    </div>
+
+                    {/* location */}
+                    <h5>Province, City, Street</h5>
+                  </div>
+                </div>
+
+                {/* values */}
+                <div className="col-span-1 text-txt-on-surface-secondary-light space-y-2 mobile-body-large">
+                  {/* event date */}
+                  <h5>{eventDetails?.level}</h5>
+
+                  {/* event time */}
+                  <h5>{eventDetails?.duration}h</h5>
+
+                  {/* rating */}
+                  <h5>{20}</h5>
+                </div>
+              </div>
+
+              {/* social media */}
+              <div className="flex items-center gap-3">
+                <Button
+                  props={{
+                    value: "",
+                    type: "outlined",
+                    color: "red",
+                    disabled: false,
+                    leftIcon: "telegram",
+                    rightIcon: "",
+                    size: "body-large",
+                    padding: "p-3",
+                    height: 24,
+                    width: 24,
+                  }}
+                />
+
+                <Button
+                  props={{
+                    value: "",
+                    type: "outlined",
+                    color: "red",
+                    disabled: false,
+                    leftIcon: "instagram",
+                    rightIcon: "",
+                    size: "body-large",
+                    padding: "p-3",
+                    height: 24,
+                    width: 24,
+                  }}
+                />
+              </div>
+            </div>
+
             {/* description */}
             <DescriptionSection
               about={eventDetails?.about}
@@ -183,6 +292,40 @@ function Page() {
 
             {/* location */}
             <LocationSection />
+
+            {/* get course btn */}
+            <div className="block md:hidden space-y-2 pt-4">
+              {/* count of student enrolled */}
+              <div className="flex items-center gap-1">
+                <Image
+                  src="/like-shapes.svg"
+                  alt="like-shapes"
+                  width={20}
+                  height={20}
+                />
+                <span className="text-green mobile-label-medium-db md:label-medium-db">
+                  1220 Students enrolled
+                </span>
+              </div>
+
+              {/* button */}
+              <div className="">
+                <Button
+                  props={{
+                    value: "Get Ticket",
+                    type: "filled",
+                    color: "red",
+                    disabled: false,
+                    leftIcon: "",
+                    rightIcon: "",
+                    padding: "py-2 px-6 w-full",
+                    size: "mobile-body-large md:body-large",
+                    height: 24,
+                    width: 24,
+                  }}
+                />
+              </div>
+            </div>
 
             {/* speakers */}
             <SpeakersSection />
@@ -335,7 +478,7 @@ function Page() {
           {/* event */}
           <div
             id="Related Events"
-            className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8"
+            className="col-span-3 grid grid-cols-2 md:grid-cols-3 gap-6 pt-8"
           >
             {eventsData?.data.data.slice(0, 6).map((event: Event) => (
               <CourseCard

@@ -3,7 +3,7 @@ import Image from "next/image";
 function SpeakersSection() {
   return (
     <div id="Speakers" className="pt-8">
-      <div className="border border-outline-level1 py-5 px-6 rounded-sm space-y-4">
+      <div className="border border-outline-level1 p-3 md:py-5 md:px-6 rounded-sm space-y-4">
         <h3 className="mobile-title-medium md:title-medium text-on_surface-light">Speakers</h3>
 
         <div className="space-y-3">

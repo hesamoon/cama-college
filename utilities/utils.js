@@ -51,6 +51,43 @@ const getRelativeTime = (ISODate) => {
   return relativeTime;
 };
 
+const getTimeRemaining = (ISODate) => {
+  const deadline = new Date(ISODate);
+  const now = new Date();
+
+  if (deadline <= now) {
+    return "Deadline passed";
+  }
+
+  const minutesDifference = differenceInMinutes(deadline, now);
+  const hoursDifference = differenceInHours(deadline, now);
+  const daysDifference = differenceInDays(deadline, now);
+  const monthsDifference = differenceInMonths(deadline, now);
+  const yearsDifference = differenceInYears(deadline, now);
+  const weeksDifference = Math.floor(daysDifference / 7);
+
+  if (yearsDifference >= 1) {
+    return `${yearsDifference} year${yearsDifference > 1 ? "s" : ""} left`;
+  }
+  if (monthsDifference >= 1) {
+    return `${monthsDifference} month${monthsDifference > 1 ? "s" : ""} left`;
+  }
+  if (weeksDifference >= 1) {
+    return `${weeksDifference} week${weeksDifference > 1 ? "s" : ""} left`;
+  }
+  if (daysDifference >= 1) {
+    return `${daysDifference} day${daysDifference > 1 ? "s" : ""} left`;
+  }
+  if (hoursDifference >= 1) {
+    return `${hoursDifference} hour${hoursDifference > 1 ? "s" : ""} left`;
+  }
+  if (minutesDifference >= 1) {
+    return `${minutesDifference} min${minutesDifference > 1 ? "s" : ""} left`;
+  }
+
+  return "Less than a minute left";
+};
+
 function parseStyledText(text) {
   const regex = /@\(\*(.*?)\*\)@/g;
   const parts = [];
@@ -88,4 +125,4 @@ function parseStyledText(text) {
   return parts;
 }
 
-export { getRelativeTime, parseStyledText };
+export { getRelativeTime, getTimeRemaining, parseStyledText };

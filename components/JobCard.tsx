@@ -1,14 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // components
 import Button from "./Button";
 
 // utils
-import { getRelativeTime } from "@/utilities/utils.js";
+import { getTimeRemaining } from "@/utilities/utils.js";
 
 // types
-import { Job } from "@/app/types/types";
+import { JobOffers } from "@/app/types/types";
 
 export default function JobCard({
   job,
@@ -17,15 +17,27 @@ export default function JobCard({
   divider = true,
   cvBtn = true,
 }: {
-  job: Job;
+  job: JobOffers;
   border?: boolean;
   archFlag?: boolean;
   divider?: boolean;
   cvBtn?: boolean;
 }) {
+  const router = useRouter();
+
+  // Handle card click (navigate to job details)
+  const handleCardClick = () => {
+    router.push(`/job-offers/${job.title}?jobId=${job.id}`);
+  };
+
+  // Prevent navigation when a button is clicked
+  const stopPropagation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <Link
-      href={`/job-offers/${job.title}`}
+    <div
+      onClick={handleCardClick}
       className={`${
         border ? "rounded border border-outline-level1" : ""
       } p-3 cursor-pointer`}
@@ -41,12 +53,12 @@ export default function JobCard({
           />
 
           <div className="space-y-1">
-            <h2 className="mobile-title-medium md:title-medium text-on_surface-light">
+            <h2 className="mobile-title-medium md:title-medium text-on_surface-light max-w-[180px]">
               {job.title}
             </h2>
 
             <p className="mobile-body-medium md:body-medium text-txt-on-surface-terriary-light">
-              {job.company}
+              {job.company.name}
             </p>
           </div>
         </div>
@@ -54,53 +66,36 @@ export default function JobCard({
         <div className="mobile-label-small md:label-small text-gray-400 flex items-center gap-2.5">
           {archFlag && (
             <>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.0827 8.875H7.91602"
-                  stroke="#9B9798"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+              <div onClick={stopPropagation}>
+                <Button
+                  props={{
+                    value: "",
+                    type: "text",
+                    color: "red",
+                    disabled: false,
+                    leftIcon: "",
+                    rightIcon: "archive-add-white",
+                    size: "mobile-body-medium md:body-medium",
+                    clickHandler: () => console.log("arch flag"),
+                  }}
                 />
-                <path
-                  d="M10 6.84167V11.0083"
-                  stroke="#9B9798"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M14.0176 1.66666H5.98424C4.20924 1.66666 2.76758 3.11666 2.76758 4.88332V16.625C2.76758 18.125 3.84258 18.7583 5.15924 18.0333L9.22591 15.775C9.65924 15.5333 10.3592 15.5333 10.7842 15.775L14.8509 18.0333C16.1676 18.7667 17.2426 18.1333 17.2426 16.625V4.88332C17.2342 3.11666 15.7926 1.66666 14.0176 1.66666Z"
-                  stroke="#9B9798"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+              </div>
 
               <div className="w-1 h-1 rounded-full bg-outline-level0" />
             </>
           )}
 
           <span className="text-txt-on-surface-terriary-light">
-            {getRelativeTime(job.postedAt)}
+            {getTimeRemaining(job.application_deadline)}
           </span>
         </div>
       </div>
 
       <div className="mt-4 pl-12 md:pl-14 mobile-body-medium md:body-medium text-txt-on-surface-secondary-light space-y-1">
-        <p>{job.location}</p>
+        <p>{job.street.name}</p>
         <p>
-          {job.isRemote ? "Remote Work" : "Fulltime Work"}
-          {job.isDisabilityFriendly ? " • Hiring the disabled" : null}
+          {job.type === "remote" ? "Remote Work" : "Fulltime Work"}
+          {job.disability_friendly === 1 ? " • Hiring the disabled" : null}
         </p>
       </div>
 
@@ -108,28 +103,27 @@ export default function JobCard({
 
       <div className="flex justify-between items-center pt-3">
         <span className="text-green mobile-label-medium-db md:label-medium-db">
-          {job.ratePerhour
-            .split(" - ")
-            .map((v) => `$${v}`)
-            .join(" - ")}{" "}
-          per hour
+          ${job.salary_min} - ${job.salary_max} per hour
         </span>
 
-        {cvBtn && (
-          <Button
-            props={{
-              value: "Upload CV",
-              type: "text",
-              color: "red",
-              disabled: false,
-              leftIcon: "",
-              rightIcon: "arrow-right",
-              size: "mobile-body-medium md:body-medium",
-              padding: "px-4 py-1.5",
-            }}
-          />
-        )}
+        {cvBtn && job.is_active === 1 ? (
+          <div onClick={stopPropagation}>
+            <Button
+              props={{
+                value: "Upload CV",
+                type: "text",
+                color: "red",
+                disabled: false,
+                leftIcon: "",
+                rightIcon: "arrow-right",
+                size: "mobile-body-medium md:body-medium",
+                padding: "px-4 py-1.5",
+                clickHandler: () => handleCardClick(),
+              }}
+            />
+          </div>
+        ) : null}
       </div>
-    </Link>
+    </div>
   );
 }

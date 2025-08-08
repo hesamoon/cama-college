@@ -920,7 +920,6 @@ const news = [
   },
 ];
 
-
 const categories = [
   { id: 0, label: "All" },
   { id: 1, label: "IT & AI" },
@@ -1192,25 +1191,25 @@ const headerMenus = [
       {
         id: 11,
         href: "/programs",
-        name: "All Courses",
+        name: "All Programs",
         desc: null,
       },
       {
         id: 12,
         href: `/programs?type=${encodeURIComponent("Attendance")}`,
-        name: "Attendance Courses",
+        name: "Attendance Programs",
         desc: null,
       },
       {
         id: 13,
         href: `/programs?type=${encodeURIComponent("Online")}`,
-        name: "Online Courses",
+        name: "Online Programs",
         desc: null,
       },
       {
         id: 14,
         href: `/programs?type=${encodeURIComponent("Self Study")}`,
-        name: "Self-Study Courses",
+        name: "Self-Study Programs",
         desc: null,
       },
     ],

@@ -80,7 +80,7 @@ function CourseSlider({ type }: { type?: string }) {
         </div>
       </div>
 
-      <div className="block relative md:hidden mobile-grid-system-level0 -mt-4 z-50">
+      <div className="block relative md:hidden mobile-grid-system-level0 -mt-4 z-20">
         <div className="flex flex-row items-center justify-between gap-2 py-2 px-3 bg-white border border-outline-level0 rounded">
           <h2 className="mobile-title-medium text-on_surface-light">
             This is a title for slider

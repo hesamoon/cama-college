@@ -2,96 +2,155 @@ import Image from "next/image";
 import Link from "next/link";
 
 // components
+import AboutUs from "./AboutUs";
 import StaticMap from "./StaticMap";
 import MoreDetailsP from "./MoreDetailsP";
 
 function Footer() {
   return (
-    <footer className="hidden md:block bg-shades-light-90">
-      <div className="grid grid-cols-7 gap-4 grid-system-level0 pt-8 sm:pt-12 lg:pt-16">
+    <footer className="bg-shades-light-90">
+      <div className="flex flex-col md:grid md:grid-cols-7 gap-4 mobile-grid-system-level0 md:grid-system-level0 pt-8 sm:pt-12 lg:pt-16">
         {/* left section */}
         <div className="col-span-5">
           {/* top - left section */}
-          <div className="grid grid-cols-4">
-            {/* logo */}
-            <Link href="/">
+          <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-6">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-4">
               <Image
+                className="w-[45px] h-[49px] md:w-[156px] md:h-[173px]"
                 src="/cama-college-logo.png"
                 alt="logo"
                 width={156}
                 height={173}
               />
+              <h4 className="whitespace-nowrap block md:hidden header-small text-on_surface-light">
+                CAMA College
+              </h4>
             </Link>
 
-            {/* about section */}
-            <div className="space-y-6">
-              <h4 className="title-medium text-on_surface-light">About</h4>
-
-              <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
+            {/* About Section */}
+            <details className="group md:[&[open]]:block md:open" open>
+              <summary className="flex justify-between items-center cursor-pointer md:cursor-default mobile-title-medium md:title-medium text-on_surface-light list-none">
+                About
+                <span className="md:hidden">
+                  <svg
+                    className="w-4 h-4 transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
                 <li>
                   <Link href="/team">About Us</Link>
                 </li>
-                <li><Link href="/contact-us">Contact</Link></li>
+                <li>
+                  <Link href="/contact-us">Contact</Link>
+                </li>
                 <li>Tagline</li>
                 <li>Professor TUUM</li>
-                <li><Link href="/identity-chart">Identity Chart</Link></li>
-                <li><Link href="/our-legality-and-legitimacy">Our Legality and Legitimacy</Link></li>
+                <li>
+                  <Link href="/identity-chart">Identity Chart</Link>
+                </li>
+                <li>
+                  <Link href="/our-legality-and-legitimacy">
+                    Our Legality and Legitimacy
+                  </Link>
+                </li>
               </ul>
-            </div>
+            </details>
 
-            {/* stay informed section */}
-            <div className="space-y-6">
-              <h4 className="title-medium text-on_surface-light">
+            {/* Stay Informed Section */}
+            <div className="border-t border-outline-level0 block md:hidden" />
+            <details className="group md:[&[open]]:block md:open" open>
+              <summary className="flex justify-between items-center cursor-pointer md:cursor-default mobile-title-medium md:title-medium text-on_surface-light list-none">
                 Stay Informed
-              </h4>
-
-              <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
-                <li><Link href="/news">News & Blog</Link></li>
+                <span className="md:hidden">
+                  <svg
+                    className="w-4 h-4 transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
+                <li>
+                  <Link href="/news">News & Blog</Link>
+                </li>
                 <li>Courses</li>
-                <li><Link href="/events">Events</Link></li>
+                <li>
+                  <Link href="/events">Events</Link>
+                </li>
                 <li>Consultant</li>
               </ul>
-            </div>
+            </details>
 
-            {/* hot links section */}
-            <div className="space-y-6">
-              <h4 className="title-medium text-on_surface-light">Hot Links</h4>
-
-              <ul className="body-large text-txt-on-surface-secondary-light space-y-4">
+            {/* Hot Links Section */}
+            <div className="border-t border-outline-level0 block md:hidden" />
+            <details className="group md:[&[open]]:block md:open" open>
+              <summary className="flex justify-between items-center cursor-pointer md:cursor-default mobile-title-medium md:title-medium text-on_surface-light list-none">
+                Hot Links
+                <span className="md:hidden">
+                  <svg
+                    className="w-4 h-4 transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
                 <li>FAQ</li>
                 <li>Careers</li>
-                <li><Link href="/work-with-us">Partners</Link></li>
+                <li>
+                  <Link href="/work-with-us">Partners</Link>
+                </li>
                 <li>Instructor Registration</li>
                 <li>Representative Inquiry</li>
                 <li>Charity & Philanthropy</li>
               </ul>
-            </div>
+            </details>
           </div>
 
           {/* about us description*/}
-          <div className="space-y-2 mt-16">
-            <h4 className="title-medium text-on_surface-light">About Us</h4>
-
-            <MoreDetailsP
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In"
-              textStyle="body-large text-txt-on-surface-secondary-light"
-              href="/team"
-            />
-          </div>
+          <AboutUs sx="hidden md:block" />
         </div>
 
         {/* right section */}
-        <div className="col-span-2 flex flex-col justify-between">
+        <div className="mt-10 md:mt-0 col-span-2 flex flex-col justify-between gap-8">
           {/* contact us */}
           <div className="space-y-5">
-            <h4 className="title-medium text-on_surface-light">Contact Us</h4>
+            <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
+              Contact Us
+            </h4>
 
             {/* location */}
             <StaticMap paddingPer="75%" />
 
-            <ul className="body-large text-black space-y-3">
-              <li>Phone</li>
-              <li>Email</li>
+            <ul className="mobile-body-large md:body-large text-txt-on-surface-terriary-light space-y-3">
+              <li>
+                Phone:{" "}
+                <span className="text-txt-on-surface-secondary-light">
+                  +1 9382 737
+                </span>
+              </li>
+              <li>
+                Email:{" "}
+                <span className="text-txt-on-surface-secondary-light">
+                  cama@gmail.com
+                </span>
+              </li>
             </ul>
 
             {/* social media */}
@@ -114,7 +173,9 @@ function Footer() {
 
           {/* our partners */}
           <div className="space-y-2">
-            <h4 className="title-medium text-on_surface-light">Our Partners</h4>
+            <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
+              Our Partners
+            </h4>
 
             {/* social media */}
             <div className="flex items-center gap-4">
@@ -136,6 +197,9 @@ function Footer() {
         </div>
       </div>
 
+      {/* about us description*/}
+      <AboutUs sx="block md:hidden" />
+
       {/* copyright */}
       <div
         className="mt-2 py-4 flex items-center justify-center gap-1"
@@ -145,7 +209,7 @@ function Footer() {
         }}
       >
         <Image src="/copyright.svg" alt="copyright" width={20} height={20} />
-        <p className="text-center body-large text-txt-on-surface-terriary-light">
+        <p className="text-center mobile-body-large md:body-large text-txt-on-surface-terriary-light">
           CAMA College. All Rights Reserved
         </p>
       </div>

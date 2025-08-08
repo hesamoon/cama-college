@@ -20,9 +20,11 @@ import { login, register, verify } from "@/lib/api/auth";
 import { setCookie } from "@/utilities/cookie";
 
 // validation schemas
-import { codeSchema } from "@/lib/validation/codeSchema";
-import { loginSchema } from "@/lib/validation/loginSchema";
-import { signupSchema } from "@/lib/validation/signupSchema";
+import {
+  codeSchema,
+  loginSchema,
+  signupSchema,
+} from "@/lib/validation/authSchema";
 
 function googleSignIn() {
   // TODO: Replace with real Google sign-in
@@ -55,7 +57,6 @@ function AuthenticationModal({
   });
 
   // Code state
-  const [sentCode, setSentCode] = useState("");
   const [codeDigits, setCodeDigits] = useState(["", "", "", "", "", ""]);
   const [codeErrors, setCodeErrors] = useState<{ [k: string]: string }>({});
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
@@ -95,19 +96,11 @@ function AuthenticationModal({
     mutationFn: register,
     onSuccess: (data) => {
       console.log(data);
-
       toast.success(data.data.message, {
         position: "top-center",
       });
-      setSentCode(data.data.message.split(":")[1].trim());
+
       setStep(3);
-      // router.refresh();
-      // {
-      //   "success": true,
-      //   "data": [],
-      //   "message": "You Registered Successfully! And The Code is : 679819"
-      // }
-      // handleClose();
     },
     onError: (error) => {
       console.log(error);
@@ -515,7 +508,7 @@ function AuthenticationModal({
               <p className="body-medium text-start text-txt-on-surface-secondary-light max-w-[500px]">
                 We sent a code to{" "}
                 <span className="font-bold">{signupForm.email}</span>. Please
-                Enter it here : <span className="font-bold">{sentCode}</span>
+                Enter it here :
               </p>
 
               <div className="flex flex-col gap-1 items-">

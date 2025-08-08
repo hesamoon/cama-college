@@ -150,9 +150,9 @@ function Page() {
   return (
     <div className="">
       {/* categories - sort and filtring */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full md:border-y md:border-outline-level0 mobile-grid-system-level0 md:grid-system-level0">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full md:border-y md:border-outline-level0 md:grid-system-level0">
         {/* categories */}
-        <div className="flex items-center gap-2 md:gap-6 lg:gap-8 overflow-x-scroll no-scrollbar border-y border-outline-level0 md:border-none">
+        <div className="flex items-center gap-0 md:gap-6 lg:gap-8 overflow-x-scroll no-scrollbar border-y border-outline-level0 md:border-none">
           {categories.map((ctgry) => (
             <div
               key={ctgry.id}
@@ -172,7 +172,7 @@ function Page() {
                 height={20}
               />
 
-              <h5 className="mobile-body-large md:body-large text-on_surface-light whitespace-nowrap">
+              <h5 className="mobile-body-large md:body-large text-on_surface-light whitespace-nowrap px-4 md:px-0">
                 {ctgry.label}
               </h5>
             </div>
@@ -180,7 +180,7 @@ function Page() {
         </div>
 
         {/* sort and filtring */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 p-4 md:p-0">
           {/* sort */}
           <div className="flex items-center border border-outline1 rounded pl-3 pr-4">
             <span className="mobile-body-large md:body-large text-txt-on-surface-terriary-light">
