@@ -4,7 +4,6 @@ import Link from "next/link";
 // components
 import AboutUs from "./AboutUs";
 import StaticMap from "./StaticMap";
-import MoreDetailsP from "./MoreDetailsP";
 
 function Footer() {
   return (
