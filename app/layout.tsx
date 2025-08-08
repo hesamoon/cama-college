@@ -15,27 +15,27 @@ import QueryProvider from "@/components/QueryProvider";
 const dylanCopperplate = localFont({
   src: [
     {
-      path: "./fonts/dylancopperplate_xlight_macroman/Dylan-CopperplateXLight-webfont.woff2",
+      path: "../public/fonts/dylancopperplate_xlight_macroman/Dylan-CopperplateXLight-webfont.woff2",
       weight: "200",
     },
     {
-      path: "./fonts/dylancopperplate_light_macroman/Dylan-CopperplateLight-webfont.woff2",
+      path: "../public/fonts/dylancopperplate_light_macroman/Dylan-CopperplateLight-webfont.woff2",
       weight: "300",
     },
     {
-      path: "./fonts/dylancopperplate_normal_macroman/Dylan-CopperplateNormal-webfont.woff2",
+      path: "../public/fonts/dylancopperplate_normal_macroman/Dylan-CopperplateNormal-webfont.woff2",
       weight: "400",
     },
     {
-      path: "./fonts/dylancopperplate_medium_macroman/Dylan-CopperplateMedium-webfont.woff2",
+      path: "../public/fonts/dylancopperplate_medium_macroman/Dylan-CopperplateMedium-webfont.woff2",
       weight: "500",
     },
     {
-      path: "./fonts/dylancopperplate_bold_macroman/Dylan-CopperplateBold-webfont.woff2",
+      path: "../public/fonts/dylancopperplate_bold_macroman/Dylan-CopperplateBold-webfont.woff2",
       weight: "700",
     },
     {
-      path: "./fonts/dylancopperplate_xbold_macroman/Dylan-CopperplateXBOLD-webfont.woff2",
+      path: "../public/fonts/dylancopperplate_xbold_macroman/Dylan-CopperplateXBOLD-webfont.woff2",
       weight: "800",
     },
   ],
