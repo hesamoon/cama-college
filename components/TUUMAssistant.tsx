@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 // components
@@ -8,15 +8,15 @@ import ChatBox from "./ChatBox";
 
 function TUUMAssistant() {
   const [openChat, setOpenChat] = useState(false);
-  const [chatBoxHeight, setChatBoxHeight] = useState(window.innerHeight - 200);
+  const [chatBoxHeight] = useState(500);
 
-  useEffect(() => {
-    if (window) {
-      const handleResize = () => setChatBoxHeight(window.innerHeight - 200);
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window) {
+  //     const handleResize = () => setChatBoxHeight(window.innerHeight - 200);
+  //     window.addEventListener("resize", handleResize);
+  //     return () => window.removeEventListener("resize", handleResize);
+  //   }
+  // }, []);
 
   return (
     <div className="fixed right-16 bottom-16 z-60">
