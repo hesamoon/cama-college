@@ -20,11 +20,13 @@ import { getProgram, getPrograms } from "@/lib/api/programs";
 
 // types
 import { Program } from "@/app/types/types";
+import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
 
 function Page() {
   const searchParams = useSearchParams();
   const courseId = searchParams.get("courseId");
 
+  // GET
   const { data: programDetailss, isLoading: isLoadingProgramDetails } =
     useQuery({
       queryKey: ["programDetails", courseId],
@@ -41,6 +43,7 @@ function Page() {
   const programDetails = programDetailss?.data.data;
   const tabs = ["Description", "Content", "Comments", "Related Programs"];
   const [activeTab, setActiveTab] = useState("Description");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -146,6 +149,7 @@ function Page() {
                   size: "body-large",
                   height: 20,
                   width: 20,
+                  clickHandler: () => setOpen(true),
                 }}
               />
 
@@ -168,7 +172,7 @@ function Page() {
         </div>
 
         {/* description, content */}
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 space-y-6 mt-4 pb-10">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 space-y-6 mt-4 pb-10 mobile-grid-system-level0 md:grid-system-level1">
           {/* card */}
           <div className="block md:hidden bg-shades-light-90 rounded-sm p-3 space-y-3 h-fit w-full">
             {/* price */}
@@ -261,7 +265,7 @@ function Page() {
           </div>
 
           {/* description, content */}
-          <div className="col-span-2 mobile-grid-system-level0 md:grid-system-level1">
+          <div className="col-span-2">
             {/* description */}
             <DescriptionSection
               about={programDetails?.about}
@@ -289,6 +293,7 @@ function Page() {
                   size: "body-small",
                   height: 16,
                   width: 16,
+                  clickHandler: () => setOpen(true),
                 }}
               />
 
@@ -300,7 +305,7 @@ function Page() {
           </div>
 
           {/* card */}
-          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
+          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit">
             {/* price */}
             <h3 className="header-medium text-txt-on-surface-secondary-light">
               ${programDetails?.price} (CAD)
@@ -421,6 +426,7 @@ function Page() {
                     size: "body-large",
                     height: 24,
                     width: 24,
+                    clickHandler: () => setOpen(true),
                   }}
                 />
 
@@ -462,7 +468,7 @@ function Page() {
 
           {/* rating card */}
           <div className="col-span-1">
-            <RatingCard />
+            <RatingCard ratingFor="Program" />
           </div>
         </div>
 
@@ -627,6 +633,12 @@ function Page() {
           />
         </div>
       </section>
+
+      <GeneralInfoModal
+        open={open}
+        onClose={() => setOpen(false)}
+        infoFor="program"
+      />
     </div>
   );
 }

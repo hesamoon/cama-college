@@ -26,6 +26,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
     <Dialog
       open={open}
       onClose={onClose}
+      maxWidth={false}
       slotProps={{ paper: { className: "no-scrollbar" } }}
     >
       <div

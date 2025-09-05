@@ -20,6 +20,7 @@ import { getEvent, getEvents } from "@/lib/api/events";
 
 // types
 import { Event } from "@/app/types/types";
+import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -45,6 +46,7 @@ function Page() {
     "Related Events",
   ];
   const [activeTab, setActiveTab] = useState("Description");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -139,7 +141,7 @@ function Page() {
             >
               <Button
                 props={{
-                  value: "Get Course",
+                  value: "Get Ticket",
                   type: "filled",
                   color: "red",
                   disabled: false,
@@ -149,6 +151,7 @@ function Page() {
                   size: "body-large",
                   height: 20,
                   width: 20,
+                  clickHandler: () => setOpen(true)
                 }}
               />
 
@@ -322,6 +325,7 @@ function Page() {
                     size: "mobile-body-large md:body-large",
                     height: 24,
                     width: 24,
+                    clickHandler: () => setOpen(true)
                   }}
                 />
               </div>
@@ -332,7 +336,7 @@ function Page() {
           </div>
 
           {/* right side / card */}
-          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit min-w-96 max-w-fit">
+          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit">
             {/* price */}
             <h3 className="header-medium text-txt-on-surface-secondary-light">
               ${eventDetails?.price} (CAD)
@@ -420,7 +424,7 @@ function Page() {
             {/* divider */}
             <div className="border border-outline-level1" />
 
-            {/* get course btn */}
+            {/* get events btn */}
             <div className="space-y-2">
               {/* count of student enrolled */}
               <div className="flex items-center gap-1">
@@ -449,6 +453,7 @@ function Page() {
                     size: "body-large",
                     height: 24,
                     width: 24,
+                    clickHandler: () => setOpen(true)
                   }}
                 />
               </div>
@@ -469,7 +474,7 @@ function Page() {
 
           {/* rating card */}
           <div className="col-span-1">
-            <RatingCard />
+            <RatingCard ratingFor="Event" />
           </div>
         </div>
 
@@ -634,6 +639,8 @@ function Page() {
           />
         </div>
       </section>
+
+      <GeneralInfoModal open={open} onClose={() => setOpen(false)} infoFor="event" />
     </div>
   );
 }

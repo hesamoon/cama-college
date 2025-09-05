@@ -99,7 +99,7 @@ function page() {
 
         <Button
           props={{
-            value: "Change Password",
+            value: "Save Changes",
             disabled: false,
             leftIcon: "login-white",
             rightIcon: "",

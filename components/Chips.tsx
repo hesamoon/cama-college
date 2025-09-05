@@ -12,13 +12,14 @@ function Chips({
     disabled,
     width = 24,
     height = 24,
+    padding = "py-4 px-6",
   },
 }: {
   chips: Chip;
 }) {
   return (
     <div
-      className={`flex items-center justify-center whitespace-nowrap w-fit gap-1 rounded-sm py-4 px-6 transition-all duration-300 text-sm sm:text-base lg:text-base text-on-surface-secondary ${
+      className={`flex items-center justify-center whitespace-nowrap w-fit gap-1 rounded-sm ${padding} transition-all duration-300 text-sm sm:text-base lg:text-base text-on-surface-secondary ${
         disabled ? "opacity-40 hover:bg-transparent" : null
       } ${
         type === "tonal"

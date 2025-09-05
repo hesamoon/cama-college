@@ -118,7 +118,7 @@ function LessonesNavs() {
   }, []);
 
   return (
-    <div className="md:border md:border-outline-level1 md:rounded divide-y divide-outline-level0">
+    <div className="md:border md:border-outline-level1 divide-y divide-outline-level0">
       {programInProgressDetails?.contents.map((content) => (
         <div key={content.id} className="bg-surface0-light">
           <div

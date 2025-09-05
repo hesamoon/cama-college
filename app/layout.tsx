@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import QueryProvider from "@/components/QueryProvider";
 
 // global styles
 import "./globals.css";
@@ -10,7 +11,7 @@ import "./globals.css";
 // components
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import QueryProvider from "@/components/QueryProvider";
+import TUUMAssistant from "@/components/TUUMAssistant";
 
 const dylanCopperplate = localFont({
   src: [
@@ -60,6 +61,7 @@ export default function RootLayout({
           <NuqsAdapter>
             <div>
               <Header />
+              <TUUMAssistant />
               <Suspense fallback={<p>Loading search info...</p>}>
                 {children}
               </Suspense>

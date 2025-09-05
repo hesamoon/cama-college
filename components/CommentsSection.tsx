@@ -5,6 +5,7 @@ import { useState } from "react";
 // components
 import Button from "./Button";
 import Comment from "./Comment";
+import AISummarizesComments from "./ai-compo/AISummarizesComments";
 
 // data
 import { comments } from "@/constants/data";
@@ -35,6 +36,8 @@ function CommentsSection({ stars = true }: { stars?: boolean }) {
           <option value="Oldest">Oldest</option>
         </select>
       </div>
+
+      <AISummarizesComments />
 
       {comments.slice(0, visibleCount).map((comment) => (
         <Comment key={comment.id} comment={comment} stars={stars} />

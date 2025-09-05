@@ -109,6 +109,7 @@ export interface Chip {
   disabled: boolean;
   width: number;
   height: number;
+  padding?: string | null;
 }
 
 export interface CommentT {
@@ -204,3 +205,19 @@ export interface JobOffers {
   title: string;
   type: string;
 }
+
+export type ChatHistory = {
+  id: number;
+  title: string;
+  messages: ChatMessage[];
+  created_at: string;
+  updated_at: string;
+} | null;
+
+export type ChatMessage = {
+  id: number;
+  type: 'question' | 'answer';
+  content: string;
+  timestamp: string;
+  attachments?: string[]; // URLs to images/files
+};

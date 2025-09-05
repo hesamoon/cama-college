@@ -1274,7 +1274,7 @@ const headerMenus = [
     subMenus: [
       {
         id: 41,
-        href: "/#",
+        href: "/professor-tuum",
         name: "Professor TUUM",
         desc: {
           title: "Title",

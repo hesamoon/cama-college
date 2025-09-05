@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import SendCommentModal from "./modal/SendCommentModal";
+
 const ratingData = [
   { stars: 5, percentage: 88.98 },
   { stars: 4, percentage: 32.03 },
@@ -6,9 +11,12 @@ const ratingData = [
   { stars: 1, percentage: 15.08 },
 ];
 
-export default function RatingCard() {
+export default function RatingCard({ ratingFor }: { ratingFor: string }) {
+  const [open, setOpen] = useState(false);
+  const [score, setScore] = useState(1);
+
   return (
-    <div className="sticky top-[9.5rem] max-w-96 border border-outline-level0 rounded py-5 px-6 space-y-4 md:space-y-8">
+    <div className="sticky top-[9.5rem] border border-outline-level0 rounded py-5 px-6 space-y-4 md:space-y-8">
       {/* Header */}
       <div className="hidden md:flex items-baseline">
         <span className="header-large text-on_surface-light">4.7</span>
@@ -89,6 +97,10 @@ export default function RatingCard() {
             <button
               key={num}
               className="flex flex-col items-center justify-center gap-1 cursor-pointer"
+              onClick={() => {
+                setScore(num);
+                setOpen(true);
+              }}
             >
               <svg
                 width="27"
@@ -110,6 +122,13 @@ export default function RatingCard() {
           ))}
         </div>
       </div>
+
+      <SendCommentModal
+        open={open}
+        onClose={() => setOpen(false)}
+        score={score}
+        commentFor={ratingFor}
+      />
     </div>
   );
 }

@@ -186,7 +186,7 @@ function Page() {
             )}
           </div>
 
-          <div className="absolute bottom-2 right-2 -rotate-45 bg-white">
+          <div className="absolute bottom-2 right-2 -rotate-45 ">
             <Button
               props={{
                 value: "",

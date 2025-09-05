@@ -23,8 +23,9 @@ function Page() {
 
   const [like1, setLike1] = useState(253);
   const [like2, setLike2] = useState(253);
+  const [expanded, setExpanded] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToComments = () => {
     const element = document.getElementById("Comments");
@@ -35,6 +36,7 @@ function Page() {
 
       inputRef.current?.focus();
       window.scrollTo({ top: y, behavior: "smooth" });
+      setExpanded(true);
     }
   };
 
@@ -338,13 +340,33 @@ function Page() {
             Comments ({newsDetails?.comments})
           </h4>
 
-          <div className="p-3 bg-surface0-light rounded">
-            <input
+          <div className="p-3 bg-surface0-light rounded space-y-2.5">
+            <textarea
               ref={inputRef}
-              className="p-3 bg-white rounded outline-none mobile-body-large md:body-large placeholder:text-txt-on-surface-terriary-light text-on_surface-light w-full"
-              type="text"
+              className={`p-3 bg-white rounded resize-none outline-none mobile-body-large md:body-large placeholder:text-txt-on-surface-terriary-light text-on_surface-light w-full transition-all ease-in-out duration-300 ${
+                expanded ? "h-[150px]" : "h-[50px]"
+              }`}
               placeholder="What do you think?"
+              onBlur={() => setExpanded(false)}
+              onFocus={() => setExpanded(true)}
             />
+
+            {expanded && (
+              <div className="flex justify-end">
+                <Button
+                  props={{
+                    value: "Send Comment",
+                    type: "filled",
+                    color: "red",
+                    leftIcon: "",
+                    rightIcon: "",
+                    disabled: false,
+                    padding: "py-3 px-6",
+                    // clickHandler: () => setLike2((prev) => prev + 1),
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -357,7 +379,9 @@ function Page() {
 
       {/* related news */}
       <div className="space-y-6">
-        <h4 className="mobile-title-medium md:title-medium text-on_surface-light">Related News</h4>
+        <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
+          Related News
+        </h4>
 
         <div className="grid grid-cols-2 gap-4 md:gap-6">
           {news.map((n) => (
