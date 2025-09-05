@@ -11,9 +11,11 @@ function TUUMAssistant() {
   const [chatBoxHeight, setChatBoxHeight] = useState(window.innerHeight - 200);
 
   useEffect(() => {
-    const handleResize = () => setChatBoxHeight(window.innerHeight - 200);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    if (window) {
+      const handleResize = () => setChatBoxHeight(window.innerHeight - 200);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
   return (
