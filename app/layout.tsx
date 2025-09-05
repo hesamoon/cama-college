@@ -9,9 +9,9 @@ import QueryProvider from "@/components/QueryProvider";
 import "./globals.css";
 
 // components
+import TUUM from "@/components/TUUM";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import TUUMAssistant from "@/components/TUUMAssistant";
 
 const dylanCopperplate = localFont({
   src: [
@@ -61,7 +61,7 @@ export default function RootLayout({
           <NuqsAdapter>
             <div>
               <Header />
-              <TUUMAssistant />
+              <TUUM />
               <Suspense fallback={<p>Loading search info...</p>}>
                 {children}
               </Suspense>
