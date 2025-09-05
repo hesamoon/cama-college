@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import SmoothTimerCarousel from "./TimerCarousel";
 
 const benefits = [
   {
