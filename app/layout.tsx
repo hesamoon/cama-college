@@ -11,11 +11,7 @@ import "./globals.css";
 // components
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import dynamic from "next/dynamic";
-const TUUMAssistant = dynamic(
-  () => import('../components/TUUMAssistant'),
-  { ssr: false }
-)
+import TUUMAssistant from "@/components/TUUMAssistant";
 
 const dylanCopperplate = localFont({
   src: [
