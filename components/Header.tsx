@@ -5,6 +5,7 @@ import { Suspense } from "react";
 // components
 import Navbar from "./Navbar";
 import RoleBaseView from "./RoleBaseView";
+import LanguageChanger from "./LanguageChanger";
 import MobileMenuToggle from "./MobileMenuToggle";
 import SearchBoxContainer from "./SearchBoxContainer";
 
@@ -48,7 +49,10 @@ function Header() {
         </div>
 
         {/* Right: Auth/Profile buttons */}
-        <div className="hidden md:block flex-shrink-0">
+        <div className="hidden md:flex flex-shrink-0 gap-2">
+          {/* language button */}
+          <LanguageChanger />
+
           <RoleBaseView role={user.role} />
         </div>
       </div>

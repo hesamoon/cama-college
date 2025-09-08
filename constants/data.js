@@ -900,7 +900,10 @@ const news = [
     avatar: "np4",
     language: "English",
     level: "intermediate",
-    prerequisites: [{ text: "AI basics" }, { text: "Crypto trading knowledge" }],
+    prerequisites: [
+      { text: "AI basics" },
+      { text: "Crypto trading knowledge" },
+    ],
     subject: "AI & crypto",
     what_you_learn: [{ text: "AI tools" }, { text: "Market forecasting" }],
     category: "NEWS",
@@ -1407,7 +1410,7 @@ const orgChart = {
     },
     {
       name: "Professional Identity",
-      children: [{ name: "Consultative / Advisory Arm" } ],
+      children: [{ name: "Consultative / Advisory Arm" }],
     },
   ],
 };
@@ -2631,11 +2634,38 @@ const days = [
   { id: 20, date: "2025-05-24", haveClass: false, newEvents: [] },
 ];
 
+const sx = {
+  "& .MuiOutlinedInput-root": {
+    // "&.Mui-focused": {
+
+    // },
+    "& fieldset": {
+      borderColor: "#D7D9DB",
+    },
+    "&:hover fieldset": {
+      borderColor: "#BCBFC2", // hover border
+      boxShadow: "0 1px 3px rgba(255, 203, 5, 0.15)", // shadow
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#906E3E", // hover border
+      boxShadow: "1px 1px 4px rgba(255, 203, 5, 0.15)", // shadow
+    },
+    "&.Mui-error": {
+      borderColor: "#6E170B", // hover border
+      boxShadow: "1px 1px 4px rgba(110, 23, 11, 0.15)", // shadow
+    },
+  },
+  "& .MuiInputLabel-root.Mui-focused": {
+    color: "#44474B",
+  },
+};
+
 const LIMITOfLOADEDLIST = 12;
 const LIMITOfLOADEDLISTINONEPAGE = 47;
 const LIMITNUMBEROFSCROLL = 3;
 
 export {
+  sx,
   news,
   days,
   posts,

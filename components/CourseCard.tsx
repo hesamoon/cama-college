@@ -10,13 +10,18 @@ function CourseCard({ data }: { data: CourseCardProps }) {
   return data.cardType === "NEWS" ? (
     <Link href={`/news/${data.name}`} className="space-y-3">
       <div className="space-y-2">
-        <Image
-          src={`/${data.avatar}.png`}
-          alt={`${data.cardType} ${data.id}`}
-          className="rounded-sm aspect-16-9 object-cover w-full"
-          width={310}
-          height={174}
-        />
+        <div className="relative group overflow-hidden rounded-sm">
+          <Image
+            src={`/${data.avatar}.png`}
+            alt={`${data.cardType} ${data.id}`}
+             className="aspect-16-9 object-cover w-full"
+            // className="aspect-16-9 object-cover w-full transition-transform duration-700 ease-out group-hover:scale-120"
+            width={310}
+            height={174}
+          />
+          {/* <span className="pointer-events-none absolute left-0 top-2 z-20 h-10 w-[220%] bg-black/20 -rotate-45 -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-7 group-hover:translate-y-7" />
+          <span className="pointer-events-none absolute left-0 top-3 z-10 h-12 w-[220%] bg-background-primary-light/40 -rotate-45 -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-10 group-hover:translate-y-10" /> */}
+        </div>
 
         <div>
           <div className="flex items-center gap-1">
@@ -47,14 +52,19 @@ function CourseCard({ data }: { data: CourseCardProps }) {
       }?courseId=${data.id}`}
       className="space-y-2 relative cursor-pointer"
     >
-      <Image
-        src={data.avatar}
-        alt={`avatar ${data.id}`}
-        className="rounded-sm aspect-16-9 object-cover w-full"
-        width={310}
-        height={174}
-        unoptimized
-      />
+      <div className="relative group overflow-hidden rounded-sm">
+        <Image
+          src={data.avatar}
+          alt={`avatar ${data.id}`}
+          className="aspect-16-9 object-cover w-full"
+          // className="aspect-16-9 object-cover w-full transition-transform duration-700 ease-out group-hover:scale-120"
+          width={310}
+          height={174}
+          unoptimized
+        />
+        {/* <span className="pointer-events-none absolute left-0 top-2 z-20 h-10 w-[220%] bg-black/20 -rotate-45 -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-7 group-hover:translate-y-7" />
+        <span className="pointer-events-none absolute left-0 top-3 z-10 h-12 w-[220%] bg-background-primary-light/40 -rotate-45 -translate-x-full -translate-y-full transition-transform duration-700 ease-out group-hover:translate-x-10 group-hover:translate-y-10" /> */}
+      </div>
 
       {data?.status === "sold_out" ? (
         <div className="absolute top-2 left-2 py-0.5 px-3 rounded-xs text-white mobile-label-small md:label-small bg-background-primary-light">

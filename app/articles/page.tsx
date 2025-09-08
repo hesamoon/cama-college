@@ -22,6 +22,10 @@ function Page() {
   const [sort] = useQueryState("sortBy", { defaultValue: "" });
   const [search] = useQueryState("search", { defaultValue: "" });
   const [since] = useQueryState("since", { defaultValue: "" });
+  const [filters, setFilters] = useState<{
+    programTypes: string[];
+    priceRange: { min: number; max: number };
+  } | null>(null);
 
   useEffect(() => {
     setArticlesList(
@@ -66,7 +70,11 @@ function Page() {
       {/* body */}
       <div className="space-y-5 md:space-y-10 md:px-3">
         {/* Header */}
-        <ListHeader title="Articles" />
+        <ListHeader
+          title="Articles"
+          filters={filters}
+          setFilters={setFilters}
+        />
 
         <div className="space-y-10">
           <div className="space-y-4 divide-y divide-outline-level0">

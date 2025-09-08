@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
@@ -21,6 +22,7 @@ import { getProgram, getPrograms } from "@/lib/api/programs";
 // types
 import { Program } from "@/app/types/types";
 import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
+import SendCommentModal from "@/components/modal/SendCommentModal";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -43,7 +45,9 @@ function Page() {
   const programDetails = programDetailss?.data.data;
   const tabs = ["Description", "Content", "Comments", "Related Programs"];
   const [activeTab, setActiveTab] = useState("Description");
-  const [open, setOpen] = useState(false);
+  const [openGenInfo, setOpenGenInfo] = useState(false);
+  const [openSendComment, setOpenSendComment] = useState(false);
+  const [score, setScore] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +72,14 @@ function Page() {
   }
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      key="program-details"
+      className="space-y-6"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 100, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+    >
       <div className="space-y-6">
         {/* top section -> cover, title / cart */}
         <div className="grid grid-cols-3 gap-6 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
@@ -93,10 +104,10 @@ function Page() {
         </div>
 
         {/* tabs */}
-        <div className="sticky top-[3.75rem] bg-white z-[35] md:grid-system-level1">
+        <div className="sticky top-[3.75rem] z-[35] md:grid-system-level1">
           {/* tabs */}
           <div
-            className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
+            className={`flex items-center bg-white justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
               activeTab === "Comments" || activeTab === "Related Programs"
                 ? "w-full"
                 : "md:w-2/3"
@@ -149,7 +160,7 @@ function Page() {
                   size: "body-large",
                   height: 20,
                   width: 20,
-                  clickHandler: () => setOpen(true),
+                  clickHandler: () => setOpenGenInfo(true),
                 }}
               />
 
@@ -172,7 +183,7 @@ function Page() {
         </div>
 
         {/* description, content */}
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 space-y-6 mt-4 pb-10 mobile-grid-system-level0 md:grid-system-level1">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 space-y-6 mt-4  mobile-grid-system-level0 md:grid-system-level1">
           {/* card */}
           <div className="block md:hidden bg-shades-light-90 rounded-sm p-3 space-y-3 h-fit w-full">
             {/* price */}
@@ -293,7 +304,7 @@ function Page() {
                   size: "body-small",
                   height: 16,
                   width: 16,
-                  clickHandler: () => setOpen(true),
+                  clickHandler: () => setOpenGenInfo(true),
                 }}
               />
 
@@ -305,7 +316,7 @@ function Page() {
           </div>
 
           {/* card */}
-          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit">
+          <div className="hidden md:block sticky top-[4.5rem] z-[34] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit">
             {/* price */}
             <h3 className="header-medium text-txt-on-surface-secondary-light">
               ${programDetails?.price} (CAD)
@@ -426,7 +437,7 @@ function Page() {
                     size: "body-large",
                     height: 24,
                     width: 24,
-                    clickHandler: () => setOpen(true),
+                    clickHandler: () => setOpenGenInfo(true),
                   }}
                 />
 
@@ -468,7 +479,7 @@ function Page() {
 
           {/* rating card */}
           <div className="col-span-1">
-            <RatingCard ratingFor="Program" />
+            <RatingCard setScore={setScore} setOpen={setOpenSendComment} />
           </div>
         </div>
 
@@ -635,11 +646,17 @@ function Page() {
       </section>
 
       <GeneralInfoModal
-        open={open}
-        onClose={() => setOpen(false)}
+        open={openGenInfo}
+        onClose={() => setOpenGenInfo(false)}
         infoFor="program"
       />
-    </div>
+      <SendCommentModal
+        open={openSendComment}
+        onClose={() => setOpenSendComment(false)}
+        score={score}
+        commentFor="Program"
+      />
+    </motion.div>
   );
 }
 

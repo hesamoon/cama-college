@@ -2,12 +2,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useQueryState } from "nuqs";
 
 // components
+import Chips from "@/components/Chips";
 import Button from "@/components/Button";
 import Pagination from "@/components/Pagination";
+import FiltersModal from "@/components/modal/FiltersModal";
 import TransactionsTable from "@/components/TransactionsTable";
 
 // data
@@ -22,6 +23,11 @@ function page() {
   const [sortVal, setSortVal] = useState("Newest");
   const [searchVal, setSearchVal] = useState(search);
   const [currentPage, setCurrentPage] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [filters, setFilters] = useState<{
+    programTypes: string[];
+    priceRange: { min: number; max: number };
+  } | null>(null);
 
   const [transactionList, setTransactionList] = useState<Transaction[]>([]);
 
@@ -151,11 +157,20 @@ function page() {
             </div>
 
             {/* filtring */}
-            <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2 pl-3 pr-4 cursor-pointer">
-              <Image src="/filter.svg" alt="filter" width={20} height={20} />
-              <span className="mobile-body-large md:body-large text-txt-on-surface-secondary">
-                Filters
-              </span>
+            <div className="cursor-pointer" onClick={() => setOpen(true)}>
+              <Chips
+                chips={{
+                  lable: "Filters",
+                  leftIcon: "filter",
+                  rightIcon: "",
+                  disabled: false,
+                  type: "tonal",
+                  padding:
+                    "py-2 pl-3 pr-4 mobile-body-large md:body-large text-txt-on-surface-secondary",
+                  width: 20,
+                  height: 20,
+                }}
+              />
             </div>
           </div>
         </div>
@@ -177,6 +192,13 @@ function page() {
           </div>
         )}
       </div>
+
+      <FiltersModal
+        open={open}
+        onClose={() => setOpen(false)}
+        filters={filters}
+        setFilters={setFilters}
+      />
     </div>
   );
 }

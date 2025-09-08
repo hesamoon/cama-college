@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 // components
 import FAQPreview from "@/components/FAQPreview";
 import HelpCard from "@/components/ai-compo/HelpCard";
@@ -13,7 +15,14 @@ function page() {
       <div className="max-w-[120rem] mx-auto">
         {/* cover image */}
         <div className="relative flex items-center justify-center">
-          <img src="/tuum-bg.jpg" alt="tuum bg" className="object-cover" />
+          <Image
+            src="/tuum-bg.jpg"
+            alt="tuum bg"
+            width={1920}
+            height={1080}
+            priority
+            className="w-full h-auto object-cover"
+          />
 
           <div className="absolute inset-0 bg-gradient-to-r from-[#3B070966] to-[#720D1100]" />
 

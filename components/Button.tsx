@@ -41,7 +41,13 @@ function Button({
         disabled ? "opacity-40 hover:bg-transparent" : "cursor-pointer"
       } text-primary-shades-80 ${
         type === "filled"
-          ? `${color === "red" ? "text-white" : null} bg-primary-shades-10`
+          ? `${
+              color === "red"
+                ? "text-white"
+                : color === "orange"
+                ? "!bg-gradient-to-br from-[#F78B5D] to-[#CE6312]"
+                : null
+            } bg-primary-shades-10`
           : type === "outlined"
           ? `${
               color === "red" ? "!text-primary-shades-10" : null

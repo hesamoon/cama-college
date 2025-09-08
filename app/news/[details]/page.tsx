@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 // components
@@ -24,6 +25,7 @@ function Page() {
   const [like1, setLike1] = useState(253);
   const [like2, setLike2] = useState(253);
   const [expanded, setExpanded] = useState(false);
+  const [commentVal, setCommentVal] = useState("");
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -41,7 +43,14 @@ function Page() {
   };
 
   return (
-    <div className="mobile-grid-system-level0 md:grid-system-level3 space-y-16 py-5 md:py-10">
+    <motion.div
+      key="news-details"
+      className="mobile-grid-system-level0 md:grid-system-level3 space-y-16 py-5 md:py-10"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 100, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+    >
       {/* main content */}
       <div className="space-y-9">
         {/* top section */}
@@ -346,8 +355,10 @@ function Page() {
               className={`p-3 bg-white rounded resize-none outline-none mobile-body-large md:body-large placeholder:text-txt-on-surface-terriary-light text-on_surface-light w-full transition-all ease-in-out duration-300 ${
                 expanded ? "h-[150px]" : "h-[50px]"
               }`}
+              value={commentVal}
+              onChange={(e) => setCommentVal(e.target.value)}
               placeholder="What do you think?"
-              onBlur={() => setExpanded(false)}
+              // onBlur={() => setExpanded(false)}
               onFocus={() => setExpanded(true)}
             />
 
@@ -362,7 +373,11 @@ function Page() {
                     rightIcon: "",
                     disabled: false,
                     padding: "py-3 px-6",
-                    // clickHandler: () => setLike2((prev) => prev + 1),
+                    clickHandler: () => {
+                      alert("kf");
+                      setCommentVal("");
+                      setExpanded(false);
+                    },
                   }}
                 />
               </div>
@@ -392,7 +407,7 @@ function Page() {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -43,6 +43,10 @@ function page() {
 
   const [numOfScroll, setNumOfScroll] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filters, setFilters] = useState<{
+    programTypes: string[];
+    priceRange: { min: number; max: number };
+  } | null>(null);
 
   const [loading, setLoading] = useState(false);
 
@@ -153,10 +157,14 @@ function page() {
         {/* title - sort and filtring */}
         <div className="mobile-grid-system-level0 md:grid-system-level0">
           <div className="hidden md:block">
-            <ListHeader title="Events" />
+            <ListHeader
+              title="Events"
+              filters={filters}
+              setFilters={setFilters}
+            />
           </div>
           <div className="block md:hidden">
-            <ListHeader title="" />
+            <ListHeader title="" filters={filters} setFilters={setFilters} />
           </div>
         </div>
 

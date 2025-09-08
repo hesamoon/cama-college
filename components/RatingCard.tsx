@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import SendCommentModal from "./modal/SendCommentModal";
-
 const ratingData = [
   { stars: 5, percentage: 88.98 },
   { stars: 4, percentage: 32.03 },
@@ -11,10 +8,13 @@ const ratingData = [
   { stars: 1, percentage: 15.08 },
 ];
 
-export default function RatingCard({ ratingFor }: { ratingFor: string }) {
-  const [open, setOpen] = useState(false);
-  const [score, setScore] = useState(1);
-
+export default function RatingCard({
+  setOpen,
+  setScore,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
+}) {
   return (
     <div className="sticky top-[9.5rem] border border-outline-level0 rounded py-5 px-6 space-y-4 md:space-y-8">
       {/* Header */}
@@ -122,13 +122,6 @@ export default function RatingCard({ ratingFor }: { ratingFor: string }) {
           ))}
         </div>
       </div>
-
-      <SendCommentModal
-        open={open}
-        onClose={() => setOpen(false)}
-        score={score}
-        commentFor={ratingFor}
-      />
     </div>
   );
 }

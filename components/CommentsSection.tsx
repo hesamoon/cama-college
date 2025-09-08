@@ -19,7 +19,7 @@ function CommentsSection({ stars = true }: { stars?: boolean }) {
   };
 
   return (
-    <div id="Comments" className="space-y-8">
+    <div id="Comments" className="space-y-5">
       {/* sort */}
       <div className="w-fit flex items-center border border-outline1 rounded px-3">
         <span className="mobile-body-large md:body-large text-txt-on-surface-terriary-light">

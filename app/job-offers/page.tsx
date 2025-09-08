@@ -32,6 +32,10 @@ function page() {
   const [city] = useQueryState("city", { defaultValue: "" });
 
   const [sortVal] = useState("Newest");
+  const [filters, setFilters] = useState<{
+    programTypes: string[];
+    priceRange: { min: number; max: number };
+  } | null>(null);
 
   useEffect(() => {
     setJobList(
@@ -96,7 +100,11 @@ function page() {
       </div>
 
       {/* title / sort,filter */}
-      <ListHeader title="Job Offers" />
+      <ListHeader
+        title="Job Offers"
+        filters={filters}
+        setFilters={setFilters}
+      />
 
       {/* job offers */}
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

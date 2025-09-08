@@ -6,8 +6,10 @@ import { useQueryState } from "nuqs";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 // components
+import Chips from "@/components/Chips";
 import CourseCard from "@/components/CourseCard";
 import Pagination from "@/components/Pagination";
+import FiltersModal from "@/components/modal/FiltersModal";
 import CourseCardSkeleton from "@/components/skeletons/CourseCardSkeleton";
 
 // data
@@ -27,6 +29,11 @@ import { getPrograms, getSortedPrograms } from "@/lib/api/programs";
 function Page() {
   const queryClient = useQueryClient();
   const [sortVal, setSortVal] = useState("Newest");
+  const [open, setOpen] = useState(false);
+  const [filters, setFilters] = useState<{
+    programTypes: string[];
+    priceRange: { min: number; max: number };
+  } | null>(null);
 
   const {
     data: programsData,
@@ -51,6 +58,8 @@ function Page() {
   const [programList, setProgramList] = useState<Program[]>([]);
 
   const [loading, setLoading] = useState(false);
+
+  console.log(filters); 
 
   const loadMore = () => {
     setLoading(true);
@@ -199,11 +208,20 @@ function Page() {
           </div>
 
           {/* filtring */}
-          <div className="flex items-center gap-1 bg-statelayer-neutral-opacity-4 rounded-sm py-2 pl-3 pr-4 cursor-pointer">
-            <Image src="/filter.svg" alt="filter" width={20} height={20} />
-            <span className="mobile-body-large md:body-large text-txt-on-surface-secondary">
-              Filters
-            </span>
+          <div className="cursor-pointer" onClick={() => setOpen(true)}>
+            <Chips
+              chips={{
+                lable: "Filters",
+                leftIcon: "filter",
+                rightIcon: "",
+                disabled: false,
+                type: "tonal",
+                padding:
+                  "py-2 pl-3 pr-4 mobile-body-large md:body-large text-txt-on-surface-secondary",
+                width: 20,
+                height: 20,
+              }}
+            />
           </div>
         </div>
       </div>
@@ -333,6 +351,13 @@ function Page() {
             </div>
           )
         : null}
+
+      <FiltersModal
+        open={open}
+        onClose={() => setOpen(false)}
+        filters={filters}
+        setFilters={setFilters}
+      />
     </div>
   );
 }

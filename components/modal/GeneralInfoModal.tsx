@@ -16,6 +16,9 @@ import {
 import Modal from "./Modal";
 import Button from "../Button";
 
+// constant
+import { sx } from "@/constants/data";
+
 const formSchema = z.object({
   address: z.string().optional(),
   gender: z.string().optional(),
@@ -164,10 +167,11 @@ function GeneralInfoModal({
               value={gInfo.address}
               onChange={(e) => setGInfo({ ...gInfo, address: e.target.value })}
               placeholder="Country; State; City; Street..."
+              sx={sx}
             />
 
             {/* Gender (optional) */}
-            <FormControl>
+            <FormControl sx={sx}>
               <InputLabel id="gender-label">Gender</InputLabel>
               <Select
                 labelId="gender-label"
@@ -184,7 +188,7 @@ function GeneralInfoModal({
             </FormControl>
 
             {/* Citizenship (required) */}
-            <FormControl error={!!errors.citizenship}>
+            <FormControl error={!!errors.citizenship} sx={sx}>
               <InputLabel id="citizenship-label">
                 Citizenship
                 <span className="text-background-primary-light">*</span>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
@@ -21,6 +22,7 @@ import { getEvent, getEvents } from "@/lib/api/events";
 // types
 import { Event } from "@/app/types/types";
 import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
+import SendCommentModal from "@/components/modal/SendCommentModal";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -46,7 +48,9 @@ function Page() {
     "Related Events",
   ];
   const [activeTab, setActiveTab] = useState("Description");
-  const [open, setOpen] = useState(false);
+  const [openGenInfo, setOpenGenInfo] = useState(false);
+  const [openSendComment, setOpenSendComment] = useState(false);
+  const [score, setScore] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,7 +75,14 @@ function Page() {
   }
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      key="event-details"
+      className="space-y-6"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 100, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+    >
       <div className="space-y-6">
         {/* top section -> cover, title*/}
         <div className="grid grid-cols-3 gap-6 mobile-grid-system-level0 md:grid-system-level1 space-y-6 mt-4">
@@ -95,10 +106,10 @@ function Page() {
         </div>
 
         {/* tabs */}
-        <div className="sticky top-[3.75rem] bg-white z-[35] md:grid-system-level1 overflow-x-auto no-scrollbar">
+        <div className="sticky top-[3.75rem] z-[35] md:grid-system-level1 overflow-x-auto no-scrollbar">
           {/* tabs */}
           <div
-            className={`flex items-center justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
+            className={`flex items-center bg-white justify-between border-b border-outline-level0 transition-all duration-300 ease-in-out ${
               activeTab === "Comments" || activeTab === "Related Events"
                 ? "w-full"
                 : "md:w-2/3"
@@ -151,7 +162,7 @@ function Page() {
                   size: "body-large",
                   height: 20,
                   width: 20,
-                  clickHandler: () => setOpen(true)
+                  clickHandler: () => setOpenGenInfo(true),
                 }}
               />
 
@@ -325,7 +336,7 @@ function Page() {
                     size: "mobile-body-large md:body-large",
                     height: 24,
                     width: 24,
-                    clickHandler: () => setOpen(true)
+                    clickHandler: () => setOpenGenInfo(true),
                   }}
                 />
               </div>
@@ -336,7 +347,7 @@ function Page() {
           </div>
 
           {/* right side / card */}
-          <div className="hidden md:block sticky top-[4.5rem] z-[36] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit">
+          <div className="hidden md:block sticky top-[4.5rem] z-[34] col-span-1 bg-shades-light-90 rounded-sm border border-outline-level0 pt-6 pb-4 px-6 space-y-6 h-fit">
             {/* price */}
             <h3 className="header-medium text-txt-on-surface-secondary-light">
               ${eventDetails?.price} (CAD)
@@ -453,7 +464,7 @@ function Page() {
                     size: "body-large",
                     height: 24,
                     width: 24,
-                    clickHandler: () => setOpen(true)
+                    clickHandler: () => setOpenGenInfo(true),
                   }}
                 />
               </div>
@@ -474,7 +485,7 @@ function Page() {
 
           {/* rating card */}
           <div className="col-span-1">
-            <RatingCard ratingFor="Event" />
+            <RatingCard setScore={setScore} setOpen={setOpenSendComment} />
           </div>
         </div>
 
@@ -640,8 +651,18 @@ function Page() {
         </div>
       </section>
 
-      <GeneralInfoModal open={open} onClose={() => setOpen(false)} infoFor="event" />
-    </div>
+      <GeneralInfoModal
+        open={openGenInfo}
+        onClose={() => setOpenGenInfo(false)}
+        infoFor="event"
+      />
+      <SendCommentModal
+        open={openSendComment}
+        onClose={() => setOpenSendComment(false)}
+        score={score}
+        commentFor="Event"
+      />
+    </motion.div>
   );
 }
 
