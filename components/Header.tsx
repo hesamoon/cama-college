@@ -90,7 +90,7 @@ function Header({ landingHeader = false }: { landingHeader?: boolean }) {
 
           {/* Hamburger menu (mobile only) */}
           <div className="flex md:hidden">
-            <MobileMenuToggle role={user.role} />
+            <MobileMenuToggle role={user.role} landingNavbar={landingHeader} />
           </div>
 
           {/* Desktop Navbar */}

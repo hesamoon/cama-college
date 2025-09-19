@@ -10,11 +10,13 @@ import { Menu, X } from "lucide-react";
 import Navbar from "./Navbar";
 import LoginButtons from "./LoginButtons";
 
-interface MobileMenuToggleProps {
+function MobileMenuToggle({
+  role,
+  landingNavbar = false,
+}: {
   role: string;
-}
-
-function MobileMenuToggle({ role }: MobileMenuToggleProps) {
+  landingNavbar: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -95,7 +97,7 @@ function MobileMenuToggle({ role }: MobileMenuToggleProps) {
 
         {/* Nav Content */}
         <div className="px-4 space-y-10">
-          <Navbar />
+          <Navbar landingNavbar={landingNavbar} />
 
           {role !== "UNSIGNED" ? (
             <Link
