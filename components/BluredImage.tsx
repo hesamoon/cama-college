@@ -24,10 +24,10 @@ function BluredImage({
   const [imageLoading, setImageLoading] = useState(true);
 
   return (
-    <>
+    <div className="relative">
       {imageLoading && (
         <div
-          className={`aspect-16-9 rounded-sm object-cover ${blurhashStyle} overflow-hidden`}
+          className={`absolute inset-0 aspect-16-9 rounded-sm object-cover ${blurhashStyle} overflow-hidden`}
         >
           <Blurhash
             hash={hash}
@@ -41,7 +41,7 @@ function BluredImage({
       )}
 
       <Image
-        className={`rounded-sm aspect-16-9 object-cover transition-all ease-linear duration-300 ${imgStyle} ${
+        className={`aspect-16-9 rounded-sm object-cover transition-all ease-linear duration-300 ${imgStyle} ${
           imageLoading ? "opacity-0" : "opacity-100"
         }`}
         src={url}
@@ -51,7 +51,7 @@ function BluredImage({
         onLoad={() => setImageLoading(false)}
         priority={false}
       />
-    </>
+    </div>
   );
 }
 
