@@ -1,3 +1,5 @@
+"use client";
+
 // utilities/userAttr.js
 import { getCookie } from "./cookie";
 
