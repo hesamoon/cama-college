@@ -9,8 +9,12 @@ const clearCookie = () => {
 };
 
 const getCookie = (cookieName) => {
+  if (typeof document === "undefined") {
+    return "";
+  }
+
   return document?.cookie
-    .split(";") 
+    .split(";")
     .find((token) => token.trim().split("=")[0] === cookieName)
     ?.split("=")[1];
 };
