@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
 
 // components
 import Chips from "./Chips";
@@ -164,7 +165,13 @@ const actions = [
   { id: 2, title: "Show all new programs" },
 ];
 
-function ChatBox({ onlyChatting = false }: { onlyChatting?: boolean }) {
+function ChatBox({
+  onlyChatting = false,
+  setLoading,
+}: {
+  onlyChatting?: boolean;
+  setLoading?: Dispatch<SetStateAction<boolean>>;
+}) {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedChat, setSelectedChat] = useState<ChatHistory>({
     id: 1,
@@ -213,12 +220,14 @@ function ChatBox({ onlyChatting = false }: { onlyChatting?: boolean }) {
     created_at: "2024-01-15T10:30:00Z",
     updated_at: "2024-01-15T10:33:00Z",
   });
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imgFile, setImgFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [promptValue, setPromptValue] = useState<string>("");
+  const [preview, setPreview] = useState<string | null>(null);
   const [newChatTitle, setNewChatTitle] = useState<string>("New Chat");
   const [lastAnswerAIID, setLastAnswerAIID] = useState<number | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const [replyText, setReplyText] = useState("");
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -244,6 +253,30 @@ function ChatBox({ onlyChatting = false }: { onlyChatting?: boolean }) {
         .find((msg) => msg.type === "answer")?.id ?? null // fallback to null
     );
   }, [selectedChat]);
+
+  // Listen for global prompt set events
+  useEffect(() => {
+    const handler = (e: Event) => {
+      try {
+        const detail = (e as CustomEvent<{ text: string }>).detail;
+        if (!detail || typeof detail.text !== "string") return;
+        setPromptValue(detail.text);
+        setReplyText(detail.text);
+        if (inputRef.current) {
+          inputRef.current.focus();
+          requestAnimationFrame(() => {
+            if (!inputRef.current) return;
+            inputRef.current.style.height = "auto";
+            inputRef.current.style.height =
+              Math.min(inputRef.current.scrollHeight, 120) + "px";
+          });
+        }
+      } catch {}
+    };
+    window.addEventListener("tuum:setPrompt", handler as EventListener);
+    return () =>
+      window.removeEventListener("tuum:setPrompt", handler as EventListener);
+  }, []);
 
   return (
     <>
@@ -412,119 +445,182 @@ function ChatBox({ onlyChatting = false }: { onlyChatting?: boolean }) {
           </div>
         )}
 
-        <div className="border border-outline-level0 rounded-md p-1.5 m-3 space-y-2">
-          {preview && (
-            <div className="relative w-fit">
-              <Image
-                className="w-10 h-10 object-cover rounded-lg"
-                src={preview}
-                alt={imgFile ? imgFile.name : "preview"}
-                width={40}
-                height={40}
-              />
-
-              <div
-                className="absolute -top-1 -right-1 bg-white rounded-full w-5 h-5 flex items-center justify-center text-sm text-center cursor-pointer"
-                onClick={() => {
-                  setPreview(null);
-                  setImgFile(null);
-                }}
+        <div className="m-3">
+          <AnimatePresence>
+            {!!replyText && (
+              <motion.div
+                key="reply-chat"
+                className="px-4 pt-2 pb-2.5 bg-surface0-light rounded-t-md flex items-center justify-between"
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 100, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 30 }}
               >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M9.17188 14.8299L14.8319 9.16992"
-                    stroke="#170304"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M14.8319 14.8299L9.17188 9.16992"
-                    stroke="#292D32"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
-          )}
+                <div className="flex items-center gap-2">
+                  <div>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M14.0584 15.2591H7.39176C5.09176 15.2591 3.2251 13.3924 3.2251 11.0924C3.2251 8.79245 5.09176 6.92578 7.39176 6.92578H16.5584"
+                        stroke="#484647"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M14.6416 9.00885L16.7749 6.87552L14.6416 4.74219"
+                        stroke="#484647"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
 
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 w-full">
-              {/* Hidden File Input */}
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                hidden
-                onChange={handleChange}
-              />
+                  <span className="max-h-20 overflow-auto text-justify body-large text-txt-on-surface-secondary-light">
+                    {replyText}
+                  </span>
+                </div>
+
+                <div className="min-w-9 min-h-9">
+                  <Button
+                    props={{
+                      value: "",
+                      leftIcon: "close-circle",
+                      rightIcon: "",
+                      type: "text",
+                      disabled: false,
+                      color: "red",
+                      width: 20,
+                      height: 20,
+                      size: "mobile-body-large md:body-large",
+                      clickHandler: () => setReplyText(""),
+                    }}
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div className="border border-outline-level0 rounded-md p-1.5 -mt-1 bg-white space-y-2 z-10">
+            {preview && (
+              <div className="relative w-fit">
+                <Image
+                  className="w-10 h-10 object-cover rounded-lg"
+                  src={preview}
+                  alt={imgFile ? imgFile.name : "preview"}
+                  width={40}
+                  height={40}
+                />
+
+                <div
+                  className="absolute -top-1 -right-1 bg-white rounded-full w-5 h-5 flex items-center justify-center text-sm text-center cursor-pointer"
+                  onClick={() => {
+                    setPreview(null);
+                    setImgFile(null);
+                  }}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                      stroke="#170304"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9.17188 14.8299L14.8319 9.16992"
+                      stroke="#170304"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M14.8319 14.8299L9.17188 9.16992"
+                      stroke="#292D32"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2 w-full">
+                {/* Hidden File Input */}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleChange}
+                />
+                <Button
+                  props={{
+                    value: "",
+                    leftIcon: "gallery-add",
+                    rightIcon: "",
+                    type: "text",
+                    disabled: false,
+                    color: "red",
+                    width: 20,
+                    height: 20,
+                    size: "mobile-body-large md:body-large",
+                    padding: "p-2.5",
+                    clickHandler: () => handleClick(),
+                  }}
+                />
+
+                {/* Input */}
+                <textarea
+                  className="flex-1 body-medium focus:outline-none placeholder:text-semantics-on-surface-tertiary resize-none max-h-30 overflow-y-auto"
+                  value={promptValue}
+                  onChange={(e) => setPromptValue(e.target.value)}
+                  placeholder="prompt text..."
+                  rows={1}
+                  style={{
+                    height: "auto",
+                    maxHeight: "120px",
+                  }}
+                  ref={inputRef}
+                  onInput={(e) => {
+                    const target = e.target as HTMLTextAreaElement;
+                    target.style.height = "auto";
+                    target.style.height =
+                      Math.min(target.scrollHeight, 120) + "px";
+                  }}
+                />
+              </div>
+
               <Button
                 props={{
                   value: "",
-                  leftIcon: "gallery-add",
+                  leftIcon: "send",
                   rightIcon: "",
-                  type: "text",
+                  type: "filled",
                   disabled: false,
                   color: "red",
                   width: 20,
                   height: 20,
                   size: "mobile-body-large md:body-large",
                   padding: "p-2.5",
-                  clickHandler: () => handleClick(),
-                }}
-              />
-
-              {/* Input */}
-              <textarea
-                className="flex-1 body-medium focus:outline-none placeholder:text-semantics-on-surface-tertiary resize-none max-h-30 overflow-y-auto"
-                value={promptValue}
-                onChange={(e) => setPromptValue(e.target.value)}
-                placeholder="prompt text..."
-                rows={1}
-                style={{
-                  height: "auto",
-
-                  maxHeight: "120px",
-                }}
-                onInput={(e) => {
-                  const target = e.target as HTMLTextAreaElement;
-                  target.style.height = "auto";
-                  target.style.height =
-                    Math.min(target.scrollHeight, 120) + "px";
+                  clickHandler: () => (setLoading ? setLoading(true) : null),
                 }}
               />
             </div>
-
-            <Button
-              props={{
-                value: "",
-                leftIcon: "send",
-                rightIcon: "",
-                type: "filled",
-                disabled: false,
-                color: "red",
-                width: 20,
-                height: 20,
-                size: "mobile-body-large md:body-large",
-                padding: "p-2.5",
-                // clickHandler: () => setOpen(true),
-              }}
-            />
           </div>
         </div>
 
@@ -581,7 +677,7 @@ function Message({
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2" data-message-type={msg.type}>
       <div className="space-y-0.5 px-4">
         <div
           className={`rounded-lg p-2 ${

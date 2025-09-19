@@ -15,13 +15,13 @@ export default function SummaryCard() {
 
       {/* Right Section (Tilted Preview) */}
       <div className="w-1/2 absolute -bottom-16 -right-6">
-        <div className="bg-white rounded-lg p-4 rotate-15 text-gray-800">
+        <div className="bg-white rounded-lg p-4 rotate-15 text-gray-800 shadow-[70px_-45px_80px_rgba(228,27,33,0.5)]">
           {/* Header */}
           <div className="flex items-center gap-2 mb-3">
-            <div className="h-6 w-6 rounded-full bg-primary-tints-90 flex items-center justify-center">
+            <div className="h-7 w-7 rounded-full bg-primary-tints-90 flex items-center justify-center">
               <Image
                 className="h-5 w-5"
-                src="/cama-college-logo.png"
+                src="/tuum/tuum-logo.svg"
                 alt="tuum logo"
                 width={20}
                 height={20}

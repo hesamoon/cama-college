@@ -1,7 +1,6 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 // components
@@ -73,10 +72,11 @@ function TUUMNotification({
 
   return (
     <motion.div
+      key="notification"
       className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      exit={{ y: 100, opacity: 0 }}
+      exit={{ y: 500, opacity: 0 }}
       transition={{ type: "spring", stiffness: 200, damping: 10 }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -182,23 +182,16 @@ function TUUMNotification({
             <div className="absolute -bottom-[2px] -right-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
 
             <div className="bg-[#320E0B] rounded-full flex items-center justify-center w-[47.63px] h-[47.63px]">
-              <Image
-                className="w-[40px] h-[39px]"
-                src="/tuum/tuum-logo.svg"
-                alt="tuum logo"
-                width={40}
-                height={39}
-              />
-              {/*  <video
-                 autoPlay
-                 loop={true} // set true if you want looping
-                 muted
-                 playsInline
-                 className="w-[50.05px] h-[48.7px] rounded-full"
-               >
-                 <source src="/tuum/tuum-animation.mp4" type="video/mp4" />
-              //   Your browser does not support the video tag.
-               </video> */}
+              <video
+                autoPlay
+                loop={true} // set true if you want looping
+                muted
+                playsInline
+                className="rounded-full"
+              >
+                <source src="/tuum/tuum-animation3.webm" type="video/webm" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
 

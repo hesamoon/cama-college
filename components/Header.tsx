@@ -1,23 +1,81 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 // components
 import Navbar from "./Navbar";
+import Button from "./Button";
 import RoleBaseView from "./RoleBaseView";
-import LanguageChanger from "./LanguageChanger";
 import MobileMenuToggle from "./MobileMenuToggle";
 import SearchBoxContainer from "./SearchBoxContainer";
+import LanguagesListModal from "./modal/LanguagesListModal";
 
 // utils
 import { userAttr } from "@/utilities/userAttr";
 
-function Header() {
+function Header({ landingHeader = false }: { landingHeader?: boolean }) {
   const user = userAttr();
 
+  const [show] = useState(true);
+  // const [lastScrollY, setLastScrollY] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   const header = document.getElementById("site-header");
+  //   if (header) {
+  //     document.documentElement.style.setProperty(
+  //       "--header-height",
+  //       `${show ? header.offsetHeight : 0}px`
+  //     );
+  //   }
+
+  //   const handleScroll = () => {
+  //     if (window.scrollY > lastScrollY) {
+  //       setShow(false);
+  //       setOpen(false);
+  //     } else {
+  //       setShow(true);
+  //     }
+  //     setLastScrollY(window.scrollY);
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [lastScrollY]);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-outline-level0">
-      <div className="mobile-grid-system-level0 md:grid-system-level0 flex items-center justify-between py-3 h-[3.75rem] gap-4">
+    <header
+      id="site-header"
+      className={`sticky top-0 z-40 ${
+        landingHeader
+          ? "bg-transparent"
+          : "bg-white border-b border-outline-level0"
+      } transition-transform duration-300 ${show ? "" : "-translate-y-full"}`}
+    >
+      <div className="relative mobile-grid-system-level0 md:grid-system-level0 flex items-center justify-between py-3 h-[3.75rem] gap-4">
         {/* Left: Logo + Hamburger */}
         <div className="flex items-center gap-2 md:gap-10 flex-shrink-0">
           <Link href="/" className="shrink-0">
@@ -26,7 +84,7 @@ function Header() {
               alt="logo"
               width={43}
               height={48}
-              className="w-auto h-10"
+              className="w-[43px] h-[48px]"
             />
           </Link>
 
@@ -37,7 +95,7 @@ function Header() {
 
           {/* Desktop Navbar */}
           <div className="hidden md:block">
-            <Navbar />
+            <Navbar landingNavbar={landingHeader} />
           </div>
         </div>
 
@@ -49,11 +107,34 @@ function Header() {
         </div>
 
         {/* Right: Auth/Profile buttons */}
-        <div className="hidden md:flex flex-shrink-0 gap-2">
+        <div className="hidden md:flex items-center flex-shrink-0 gap-2">
           {/* language button */}
-          <LanguageChanger />
+          <div ref={modalRef}>
+            <Button
+              props={{
+                value: "",
+                leftIcon: open
+                  ? landingHeader
+                    ? "close-circle-white"
+                    : "close-circle"
+                  : landingHeader
+                  ? "language-circle-white"
+                  : "language-circle",
+                rightIcon: "",
+                type: "outlined",
+                disabled: false,
+                color: "red",
+                width: 24,
+                height: 24,
+                size: "mobile-body-large md:body-large",
+                clickHandler: () => setOpen((prev) => !prev),
+              }}
+            />
 
-          <RoleBaseView role={user.role} />
+            <LanguagesListModal open={open} onClose={() => setOpen(false)} />
+          </div>
+
+          <RoleBaseView role={user.role} landingHeader={landingHeader} />
         </div>
       </div>
     </header>

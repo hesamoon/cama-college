@@ -13,6 +13,7 @@ import { news, newsGroups } from "@/constants/data";
 
 // hooks
 import useIsMobile from "@/hooks/useIsMobile";
+import BluredImage from "@/components/BluredImage";
 
 function Page() {
   // const [pageNum, setPageNum] = useState(1);
@@ -51,10 +52,7 @@ function Page() {
   }, [category]);
 
   useEffect(() => {
-    setNewsList(
-      news
-        .slice((currentPage - 1) * 4, currentPage * 4)
-    );
+    setNewsList(news.slice((currentPage - 1) * 4, currentPage * 4));
   }, [currentPage]);
 
   useEffect(() => {
@@ -130,12 +128,13 @@ function Page() {
               className="relative rounded overflow-hidden"
             >
               {/* Image */}
-              <Image
-                className="object-cover min-w-[267px] h-[150px] md:w-full md:h-[174px]"
-                src="/c1.png"
-                alt="c1"
-                width={310}
-                height={174}
+              <BluredImage
+                url="/c1.png"
+                name="c1"
+                imgStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                blurhashStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                cWidth={310}
+                cHeight={174}
               />
 
               <p className="absolute bottom-3.5 left-3.5 mobile-title-medium md:title-medium text-txt-on-primary-dark z-20">
@@ -151,12 +150,13 @@ function Page() {
               className="relative rounded overflow-hidden"
             >
               {/* Image */}
-              <Image
-                className="object-cover min-w-[267px] h-[150px] md:w-full md:h-[174px]"
-                src="/c1.png"
-                alt="c1"
-                width={310}
-                height={174}
+              <BluredImage
+                url="/c1.png"
+                name="c1"
+                imgStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                blurhashStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                cWidth={310}
+                cHeight={174}
               />
 
               <p className="absolute bottom-3.5 left-3.5 mobile-title-medium md:title-medium text-txt-on-primary-dark z-20">
@@ -173,12 +173,13 @@ function Page() {
             className="col-span-2 relative rounded overflow-hidden"
           >
             {/* Image */}
-            <Image
-              className="object-cover min-w-[267px] h-[150px] md:w-full md:h-[361px]"
-              src="/c1.png"
-              alt="c1"
-              width={644}
-              height={361}
+            <BluredImage
+              url="/c1.png"
+              name="c1"
+              imgStyle="min-w-[267px] h-[150px] md:w-full md:h-[361px]"
+              blurhashStyle="min-w-[267px] h-[150px] md:w-full md:h-[361px]"
+              cWidth={644}
+              cHeight={361}
             />
 
             <div className="absolute bottom-3.5 left-3.5 z-20 space-y-1">
@@ -319,12 +320,13 @@ function Page() {
               className="relative rounded overflow-hidden"
             >
               {/* Image */}
-              <Image
-                className="object-cover min-w-[267px] h-[150px] md:w-full md:h-[174px]"
-                src="/c1.png"
-                alt="c1"
-                width={310}
-                height={174}
+              <BluredImage
+                url="/c1.png"
+                name="c1"
+                imgStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                blurhashStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                cWidth={310}
+                cHeight={174}
               />
 
               <p className="absolute bottom-3.5 left-3.5 mobile-title-medium md:title-medium text-txt-on-primary-dark z-20">
@@ -340,12 +342,13 @@ function Page() {
               className="relative rounded overflow-hidden"
             >
               {/* Image */}
-              <Image
-                className="object-cover min-w-[267px] h-[150px] md:w-full md:h-[174px]"
-                src="/c1.png"
-                alt="c1"
-                width={310}
-                height={174}
+              <BluredImage
+                url="/c1.png"
+                name="c1"
+                imgStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                blurhashStyle="min-w-[267px] h-[150px] md:w-full md:h-[174px]"
+                cWidth={310}
+                cHeight={174}
               />
 
               <p className="absolute bottom-3.5 left-3.5 mobile-title-medium md:title-medium text-txt-on-primary-dark z-20">
@@ -398,12 +401,13 @@ function Page() {
                       </div>
 
                       <div className="rounded overflow-hidden">
-                        <Image
-                          className="object-cover w-[146px] h-[81px] md:w-[268px] md:h-[150px] rounded"
-                          src={`/${n.avatar}.png`}
-                          alt={n.avatar}
-                          width={268}
-                          height={150}
+                        <BluredImage
+                          url={`/${n.avatar}.png`}
+                          name={n.avatar}
+                          imgStyle="w-[146px] h-[81px] md:w-[268px] md:h-[150px] rounded"
+                          blurhashStyle="w-[146px] h-[81px] md:w-[268px] md:h-[150px] rounded"
+                          cWidth={268}
+                          cHeight={150}
                         />
                       </div>
                     </div>
@@ -572,12 +576,13 @@ function Page() {
                   <Link href={`/news/${n.name}`} className="space-y-2">
                     <div className="flex flex-col gap-2">
                       <div className="rounded overflow-hidden">
-                        <Image
-                          className="object-cover w-[172px] h-[97px]"
-                          src={`/${n.avatar}.png`}
-                          alt={n.avatar}
-                          width={85}
-                          height={48}
+                        <BluredImage
+                          url={`/${n.avatar}.png`}
+                          name={n.avatar}
+                          imgStyle="object-cover w-[172px] h-[97px]"
+                          blurhashStyle="object-cover w-[172px] h-[97px]"
+                          cWidth={85}
+                          cHeight={48}
                         />
                       </div>
 
@@ -665,12 +670,13 @@ function Page() {
                   <Link href={`/news/${n.name}`}>
                     <div className="space-y-2">
                       <div className="rounded overflow-hidden">
-                        <Image
-                          className="object-cover w-full"
-                          src={`/${n.avatar}.png`}
-                          alt={n.avatar}
-                          width={310}
-                          height={174}
+                        <BluredImage
+                          url={`/${n.avatar}.png`}
+                          name={n.avatar}
+                          imgStyle="w-full"
+                          blurhashStyle="w-full"
+                          cWidth={310}
+                          cHeight={174}
                         />
                       </div>
 
@@ -756,12 +762,13 @@ function Page() {
                   <Link href={`/news/${n.name}`} className="space-y-2">
                     <div className="flex gap-2">
                       <div className="rounded overflow-hidden">
-                        <Image
-                          className="object-cover max-h-[48px]"
-                          src={`/${n.avatar}.png`}
-                          alt={n.avatar}
-                          width={85}
-                          height={48}
+                        <BluredImage
+                          url={`/${n.avatar}.png`}
+                          name={n.avatar}
+                          imgStyle="object-cover max-h-[48px]"
+                          blurhashStyle="object-cover max-h-[48px]"
+                          cWidth={85}
+                          cHeight={48}
                         />
                       </div>
 

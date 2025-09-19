@@ -7,7 +7,8 @@ import ChatBox from "@/components/ChatBox";
 import MobileNavbar from "@/components/MobileNavbar";
 import LessonesNavs from "@/components/LessonesNavs";
 // disable interaction / components
-import DisableInteractions from "@/components/DisableInteractions";
+// import DisableInteractions from "@/components/DisableInteractions";
+import AIToolsPopup from "@/components/ai-compo/AIToolsPopup";
 
 export default function Layout({
   children,
@@ -25,7 +26,7 @@ export default function Layout({
 
   return (
     <>
-      <DisableInteractions />
+      {/* <DisableInteractions /> */}
 
       <div className="mobile-grid-system-level0 md:grid-system-level md:grid md:grid-cols-3 md:!gap-0">
         <MobileNavbar />
@@ -77,6 +78,20 @@ export default function Layout({
           {children}
         </div>
       </div>
+
+      <AIToolsPopup />
+      {/* Switch to AI tab when prompted */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+          (function(){
+            window.addEventListener('tuum:openChat', function(){
+              try{ var btns = document.querySelectorAll('button'); Array.prototype.find.call(btns, function(b){ return b && b.textContent && b.textContent.trim() === 'TUUM AI'; })?.click(); }catch(e){}
+            });
+          })();
+        `,
+        }}
+      />
     </>
   );
 }

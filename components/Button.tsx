@@ -50,7 +50,11 @@ function Button({
             } bg-primary-shades-10`
           : type === "outlined"
           ? `${
-              color === "red" ? "!text-primary-shades-10" : null
+              color === "red"
+                ? "!text-primary-shades-10"
+                : color === "white"
+                ? "text-white"
+                : null
             } border border-outline1`
           : type === "text"
           ? color === "red"

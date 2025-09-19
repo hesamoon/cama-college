@@ -7,11 +7,18 @@ import { usePathname } from "next/navigation";
 
 // components
 import LoginButtons from "./LoginButtons";
+import BluredImage from "./BluredImage";
 
 // api
 // import { getMe } from "@/lib/api/auth";
 
-function RoleBaseView({ role }: { role: string }) {
+function RoleBaseView({
+  role,
+  landingHeader,
+}: {
+  role: string;
+  landingHeader?: boolean;
+}) {
   // const { data: myData } = useQuery({
   //   queryKey: ["me"],
   //   queryFn: () => getMe(),
@@ -28,12 +35,13 @@ function RoleBaseView({ role }: { role: string }) {
       href="/profile"
       className="rounded-full flex items-center gap-2 p-1 pr-2 cursor-pointer border border-outline1"
     >
-      <Image
-        className="rounded-full"
-        src="/profile.jpg"
-        alt="profile"
-        width={40}
-        height={40}
+      <BluredImage
+        url="/profile.jpg"
+        name="profile"
+        imgStyle="!rounded-full w-10 h-10"
+        blurhashStyle="!rounded-full w-10 h-10"
+        cWidth={40}
+        cHeight={40}
       />
 
       <Image
@@ -45,7 +53,7 @@ function RoleBaseView({ role }: { role: string }) {
       />
     </Link>
   ) : (
-    <LoginButtons />
+    <LoginButtons color={landingHeader ? "white" : "black"} icon={landingHeader ? "login-white" : "login"} />
   );
 }
 

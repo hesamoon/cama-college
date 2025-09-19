@@ -25,7 +25,7 @@ function CoursesSection({ courseType }: { courseType: string }) {
   console.log(coursesData);
 
   return (
-    <section className="space-y-8 mobile-grid-system-level0 md:grid-system-level0">
+    <section className="mt-30 space-y-8 mobile-grid-system-level0 md:grid-system-level0">
       <div className="space-y-4">
         <SectionTitle title={`New ${courseType}`} path={`/${courseType}`} />
 

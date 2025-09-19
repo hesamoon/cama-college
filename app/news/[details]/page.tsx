@@ -3,11 +3,11 @@
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 // components
 import Button from "@/components/Button";
 import CourseCard from "@/components/CourseCard";
+import BluredImage from "@/components/BluredImage";
 import CommentsSection from "@/components/CommentsSection";
 
 // data
@@ -59,12 +59,13 @@ function Page() {
           <div className="space-y-4">
             {/* cover */}
             <div className="rounded overflow-hidden">
-              <Image
-                className="object-cover w-full h-[202px] md:h-[377px] rounded aspect-16-9"
-                src={`/${newsDetails?.avatar}.png`}
-                alt={newsDetails ? newsDetails.category : ""}
-                width={672}
-                height={377}
+              <BluredImage
+                url={`/${newsDetails?.avatar}.png`}
+                name={newsDetails ? newsDetails.category : ""}
+                imgStyle="w-full h-[202px] md:h-[377px]"
+                blurhashStyle="w-full h-[202px] md:h-[377px]"
+                cWidth={672}
+                cHeight={377}
               />
             </div>
 
@@ -235,12 +236,13 @@ function Page() {
 
           {/* cover */}
           <div className="rounded overflow-hidden">
-            <Image
-              className="object-cover w-full max-h-[234px] rounded"
-              src={`/${newsDetails?.avatar}.png`}
-              alt={newsDetails ? newsDetails.category : ""}
-              width={672}
-              height={234}
+            <BluredImage
+              url={`/${newsDetails?.avatar}.png`}
+              name={newsDetails ? newsDetails.category : ""}
+              imgStyle="w-full max-h-[234px]"
+              blurhashStyle="w-full max-h-[234px]"
+              cWidth={672}
+              cHeight={234}
             />
           </div>
 

@@ -43,7 +43,7 @@ function Footer() {
                   </svg>
                 </span>
               </summary>
-              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
+              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light [&>li]:hover:text-background-primary-light [&>li]:hover:transition-all [&>li]:hover:ease-in-out [&>li]:hover:duration-300">
                 <li>
                   <Link href="/team">About Us</Link>
                 </li>
@@ -80,7 +80,7 @@ function Footer() {
                   </svg>
                 </span>
               </summary>
-              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
+              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light [&>li]:hover:text-background-primary-light [&>li]:hover:transition-all [&>li]:hover:ease-in-out [&>li]:hover:duration-300">
                 <li>
                   <Link href="/news">News & Blog</Link>
                 </li>
@@ -109,7 +109,7 @@ function Footer() {
                   </svg>
                 </span>
               </summary>
-              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
+              <ul className="mt-4 space-y-4 mobile-body-large md:body-large text-txt-on-surface-secondary-light [&>li]:hover:text-background-primary-light [&>li]:hover:transition-all [&>li]:hover:ease-in-out [&>li]:hover:duration-300">
                 <li>FAQ</li>
                 <li>Careers</li>
                 <li>

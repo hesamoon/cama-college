@@ -21,7 +21,7 @@ function TranslateCard() {
           ut
         </p>
 
-        <div className="relative w-[258px] h-[93px] rounded-lg border border-primary-tints-90 p-3 bg-[#170304] flex flex-col justify-between">
+        <div className="relative w-[258px] h-[93px] rounded-lg border border-primary-tints-90 p-3 bg-[#170304] flex flex-col justify-between shadow-[150px_-35px_80px_rgba(228,27,33,0.5)]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="label-medium text-white">Translated To </span>

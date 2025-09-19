@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 // component
 import Button from "@/components/Button";
+import BluredImage from "@/components/BluredImage";
 
 // data
 import { policiesMenu } from "@/constants/data";
@@ -47,12 +47,13 @@ function Page() {
         </div>
 
         {/* cover picture */}
-        <Image
-          className="object-cover rounded w-full h-[272px]"
-          src="/c1.png"
-          alt="c1"
-          width={781}
-          height={272}
+        <BluredImage
+          url="/c1.png"
+          name="c1"
+          imgStyle="w-full h-[272px]"
+          blurhashStyle="w-full h-[272px]"
+          cWidth={781}
+          cHeight={272}
         />
 
         {/* title / description 2 */}

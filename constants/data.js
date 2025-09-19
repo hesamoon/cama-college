@@ -748,7 +748,7 @@ const posts = [
 const news = [
   {
     id: "01982c37-b8d2-7354-8b5d-b3bf76b7e2d3",
-    name: "This is a title for slider",
+    name: "This is a title for slider This is a title for slider This is a title for slider",
     about:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
     audience: [{ text: "Audience one" }, { text: "Audience two" }],
@@ -928,8 +928,8 @@ const categories = [
   { id: 1, label: "IT & AI" },
   { id: 2, label: "Branding" },
   { id: 3, label: "Business" },
-  { id: 4, label: "Management & Leadership" },
-  { id: 5, label: "Marketing & Sales" },
+  { id: 4, label: "Leadership" },
+  { id: 5, label: "Marketing" },
   { id: 6, label: "Other" },
 ];
 

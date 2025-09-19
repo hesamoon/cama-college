@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 // api
 import { getMe } from "@/lib/api/auth";
+
 // components
 import Button from "./Button";
+import BluredImage from "./BluredImage";
 import { Skeleton } from "@mui/material";
 
 function ProfilePicture() {
@@ -39,12 +40,13 @@ function ProfilePicture() {
       {isLoadingMe ? (
         <Skeleton variant="circular" width={128} height={128} />
       ) : (
-        <Image
-          src={image || "/profile.jpg"}
-          alt="Profile Preview"
-          className="rounded-full w-[128px] h-[128px] object-cover"
-          width={128}
-          height={128}
+        <BluredImage
+          url={image || "/profile.jpg"}
+          name="Profile Preview"
+          imgStyle="!rounded-full w-[128px] h-[128px] object-cover"
+          blurhashStyle="!rounded-full w-[128px] h-[128px] object-cover"
+          cWidth={128}
+          cHeight={128}
         />
       )}
 

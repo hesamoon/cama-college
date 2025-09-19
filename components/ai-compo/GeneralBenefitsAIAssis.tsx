@@ -165,6 +165,14 @@ function GeneralBenefitsAIAssis() {
       </div>
 
       <div className="col-span-1 flex items-center justify-end">
+        {/* <BluredImage
+                url={`/${newsDetails?.avatar}.png`}
+                name={newsDetails ? newsDetails.category : ""}
+                imgStyle="w-full h-[202px] md:h-[377px]"
+                blurhashStyle="w-full h-[202px] md:h-[377px]"
+                cWidth={672}
+                cHeight={377}
+              /> */}
         <svg
           width="354"
           height="321"

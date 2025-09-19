@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 // types
@@ -8,6 +7,7 @@ import { ProgramInProgress } from "@/app/types/types";
 
 // components
 import Button from "./Button";
+import BluredImage from "./BluredImage";
 
 function CourseInProgress({
   courseDetails,
@@ -21,12 +21,13 @@ function CourseInProgress({
 
   return (
     <div className="flex flex-col md:flex-row gap-4">
-      <Image
-        className="rounded object-cover w-full h-[155px] md:w-[282px] md:h-[121px]"
-        src={`/${coverImg}.png`}
-        alt={coverImg}
-        width={282}
-        height={121}
+      <BluredImage
+        url={`/${coverImg}.png`}
+        name={coverImg}
+        imgStyle="object-cover w-full h-[155px] md:w-[282px] md:h-[121px]"
+        blurhashStyle="object-cover w-full h-[155px] md:w-[282px] md:h-[121px]"
+        cWidth={282}
+        cHeight={121}
       />
 
       <div className="flex flex-col gap-2 justify-between w-full">

@@ -1,7 +1,6 @@
-import Image from "next/image";
-
 // components
 import FAQPreview from "@/components/FAQPreview";
+import BluredImage from "@/components/BluredImage";
 import HelpCard from "@/components/ai-compo/HelpCard";
 import SummaryCard from "@/components/ai-compo/SummaryCard";
 import ReminderCard from "@/components/ai-compo/ReminderCard";
@@ -15,13 +14,13 @@ function page() {
       <div className="max-w-[120rem] mx-auto">
         {/* cover image */}
         <div className="relative flex items-center justify-center">
-          <Image
-            src="/tuum-bg.jpg"
-            alt="tuum bg"
-            width={1920}
-            height={1080}
-            priority
-            className="w-full h-auto object-cover"
+          <BluredImage
+            url="/tuum-bg.jpg"
+            name="tuum bg"
+            imgStyle="w-full h-auto object-cover"
+            blurhashStyle="w-full h-auto object-cover"
+            cWidth={1920}
+            cHeight={1080}
           />
 
           <div className="absolute inset-0 bg-gradient-to-r from-[#3B070966] to-[#720D1100]" />

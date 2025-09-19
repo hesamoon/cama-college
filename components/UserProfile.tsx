@@ -3,9 +3,12 @@
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 
+// components
+import BluredImage from "./BluredImage";
+import UserProfileSkeleton from "./skeletons/UserProfileSkeleton";
+
 // api
 import { getMe } from "@/lib/api/auth";
-import UserProfileSkeleton from "./skeletons/UserProfileSkeleton";
 
 function UserProfile() {
   const { data: myData, isLoading: isLoadingMe } = useQuery({
@@ -22,12 +25,13 @@ function UserProfile() {
       ) : (
         <>
           <div className="flex items-center gap-2">
-            <Image
-              className="rounded-full"
-              src="/profile.jpg"
-              alt="profile"
-              width={48}
-              height={48}
+            <BluredImage
+              url="/profile.jpg"
+              name="profile"
+              imgStyle="!rounded-full w-12 h-12"
+              blurhashStyle="!rounded-full w-12 h-12"
+              cWidth={48}
+              cHeight={48}
             />
             <div className="space-y-0.5">
               <h4 className="body-large text-on_surface-light">{`${myData?.data.data.name} ${myData?.data.data.family}`}</h4>

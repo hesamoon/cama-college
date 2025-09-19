@@ -1,8 +1,7 @@
-import Image from "next/image";
-
 // components
-import LoginButtons from "@/components/LoginButtons";
 import ApplyScreen from "@/components/ApplyScreen";
+import BluredImage from "@/components/BluredImage";
+import LoginButtons from "@/components/LoginButtons";
 
 function page() {
   return (
@@ -11,12 +10,13 @@ function page() {
       <div className="mobile-grid-system-level0 md:grid-system-level1 relative flex items-center md:justify-between !gap-0 md:!gap-4 py-8 md:py-16">
         {/* left image */}
         <div className="min-w-8 min-h-8 max-w-8 max-h-8 md:min-w-20 md:min-h-20 md:max-w-20 md:max-h-20 rounded-sm bg-primary-tints-90 flex items-center justify-center">
-          <Image
-            className="rounded-md w-6 h-6 md:w-16 md:h-16"
-            src="/apply-pic1.jpg"
-            alt="apply-pic1"
-            width={64}
-            height={64}
+          <BluredImage
+            url="/apply-pic1.jpg"
+            name="apply-pic1"
+            imgStyle="rounded-md w-6 h-6 md:w-16 md:h-16"
+            blurhashStyle="rounded-md w-6 h-6 md:w-16 md:h-16"
+            cWidth={64}
+            cHeight={64}
           />
         </div>
 
@@ -53,12 +53,13 @@ function page() {
 
         {/* right image */}
         <div className="min-w-8 min-h-8 max-w-8 max-h-8 md:min-w-20 md:min-h-20 md:max-w-20 md:max-h-20 rounded-sm bg-primary-tints-90 flex items-center justify-center">
-          <Image
-            className="rounded-md w-6 h-6 md:w-16 md:h-16"
-            src="/apply-pic2.jpg"
-            alt="apply-pic2"
-            width={64}
-            height={64}
+          <BluredImage
+            url="/apply-pic2.jpg"
+            name="apply-pic2"
+            imgStyle="rounded-md w-6 h-6 md:w-16 md:h-16"
+            blurhashStyle="rounded-md w-6 h-6 md:w-16 md:h-16"
+            cWidth={64}
+            cHeight={64}
           />
         </div>
 

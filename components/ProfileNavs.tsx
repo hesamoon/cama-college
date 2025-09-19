@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 // components
@@ -8,7 +9,6 @@ import Button from "./Button";
 
 // utils
 import { clearCookie } from "@/utilities/cookie";
-import Link from "next/link";
 
 const navs = [
   { id: 0, path: "/profile/dashboard", val: "Dashboard" },

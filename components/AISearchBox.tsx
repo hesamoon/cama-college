@@ -22,14 +22,14 @@ function AISearchBox() {
     setSearch(searchVal.trim().replace(/\s+/g, " ").trim());
   };
 
-  const openTUUMAssistantClickHandler = () => {
-    const tuumEl = document.getElementById("tuum-ai-assistant-btn");
-    tuumEl?.click();
-  };
+  // const openTUUMAssistantClickHandler = () => {
+  //   const tuumEl = document.getElementById("tuum-ai-assistant-btn");
+  //   tuumEl?.click();
+  // };
 
   return (
-    <section className="space-y-3 max-w-3xl">
-      <h5 className="body-large text-on_surface-light">
+    <section className="space-y-5 max-w-2xl min-w-xl z-20">
+      <h5 className="body-large text-txt-on-primary-dark text-start">
         What you want to learn?
       </h5>
 
@@ -64,7 +64,7 @@ function AISearchBox() {
         />
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* <div className="flex items-center gap-2">
         <span className="body-large text-txt-on-surface-terriary-light">
           OR
         </span>
@@ -84,7 +84,7 @@ function AISearchBox() {
             clickHandler: () => openTUUMAssistantClickHandler(),
           }}
         />
-      </div>
+      </div> */}
     </section>
   );
 }

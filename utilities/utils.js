@@ -6,6 +6,7 @@ import {
   differenceInMonths,
   differenceInYears,
 } from "date-fns";
+import Link from "next/link";
 
 const getRelativeTime = (ISODate) => {
   const date = new Date(ISODate);
@@ -106,12 +107,13 @@ function parseStyledText(text) {
 
     // Push styled span
     parts.push(
-      <span
+      <Link
+        href="/#"
         key={index}
         className="relative text-[#A91418] before:content-[''] before:absolute before:bottom-0.5 before:left-0 before:right-0 before:h-[0.5em] before:bg-[#A9141829] before:-z-10"
       >
         {highlighted}
-      </span>
+      </Link>
     );
 
     lastIndex = index + fullMatch.length;

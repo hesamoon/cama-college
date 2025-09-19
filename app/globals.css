@@ -558,6 +558,21 @@ body {
   left: 0px;
 }
 
+.tuum-landing {
+  text-align: center;
+  background-color: var(--primary_shades_90);
+}
+
+.tuum-landing::before {
+  content: "";
+  background-image: url("/tuum/lines.svg");
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
 .blurred {
   filter: blur(10px);
   pointer-events: none;

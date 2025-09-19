@@ -12,6 +12,7 @@ import "./globals.css";
 import TUUM from "@/components/TUUM";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import TextSelectionPopupProps from "@/components/TextSelectionPopup";
 
 const dylanCopperplate = localFont({
   src: [
@@ -68,6 +69,7 @@ export default function RootLayout({
               <Toaster position="bottom-center" />
             </div>
             <Footer />
+            <TextSelectionPopupProps />
           </NuqsAdapter>
         </QueryProvider>
       </body>

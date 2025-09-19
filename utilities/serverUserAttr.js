@@ -1,10 +1,9 @@
-// utilities/userAttr.js
-import { getCookie } from "./cookie";
+import { cookies } from "next/headers";
 
 export const userAttr = () => {
   let token;
-  // Client side
-  token = getCookie("accessToken");
+  // Server side
+  token = cookies().get("accessToken")?.value;
 
   if (!token || token === "undefined" || token === "") {
     return { role: "UNSIGNED" };

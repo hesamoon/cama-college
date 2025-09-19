@@ -25,6 +25,7 @@ import {
   loginSchema,
   signupSchema,
 } from "@/lib/validation/authSchema";
+import { sx } from "@/constants/data";
 
 function googleSignIn() {
   // TODO: Replace with real Google sign-in
@@ -315,11 +316,7 @@ function AuthenticationModal({
             <form onSubmit={handleLoginSubmit} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
                 <TextField
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      borderRadius: "6px",
-                    },
-                  }}
+                  sx={sx}
                   type="email"
                   label="E-mail"
                   value={email}
@@ -334,11 +331,7 @@ function AuthenticationModal({
               </div>
               <div className="flex flex-col gap-1">
                 <TextField
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      borderRadius: "6px",
-                    },
-                  }}
+                  sx={sx}
                   type="password"
                   label="Password"
                   value={password}
@@ -376,11 +369,7 @@ function AuthenticationModal({
             <form onSubmit={handleSignupSubmit} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
                 <TextField
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      borderRadius: "6px",
-                    },
-                  }}
+                  sx={sx}
                   type="text"
                   label="Name"
                   value={signupForm.name}
@@ -397,11 +386,7 @@ function AuthenticationModal({
               </div>
               <div className="flex flex-col gap-1">
                 <TextField
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      borderRadius: "6px",
-                    },
-                  }}
+                  sx={sx}
                   type="text"
                   label="Family"
                   value={signupForm.family}
@@ -417,11 +402,7 @@ function AuthenticationModal({
               </div>
               <div className="flex flex-col gap-1">
                 <TextField
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      borderRadius: "6px",
-                    },
-                  }}
+                  sx={sx}
                   type="email"
                   label="E-mail"
                   value={signupForm.email}
@@ -437,11 +418,7 @@ function AuthenticationModal({
               </div>
               <div className="flex flex-col gap-1">
                 <TextField
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      borderRadius: "6px",
-                    },
-                  }}
+                  sx={sx}
                   type="password"
                   label="Password"
                   value={signupForm.password}
@@ -457,11 +434,7 @@ function AuthenticationModal({
               </div>
               <div className="flex flex-col gap-1">
                 <TextField
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      borderRadius: "6px",
-                    },
-                  }}
+                  sx={sx}
                   type="password"
                   label="Password Confirmation"
                   value={signupForm.password_confirmation}
@@ -524,6 +497,7 @@ function AuthenticationModal({
                           width: "2rem",
                         },
                       }}
+                      sx={sx}
                       autoFocus={idx === 0}
                       value={digit}
                       onChange={(e) => handleCodeInput(idx, e.target.value)}

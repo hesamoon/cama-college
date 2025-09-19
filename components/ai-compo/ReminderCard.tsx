@@ -12,12 +12,12 @@ export default function ReminderCard() {
       </div>
 
       {/* Inner Card */}
-      <div className="mt-4 w-[300px] h-[102px] rounded-lg border border-primary-tints-90 p-3 bg-[#170304]">
+      <div className="mt-4 w-[300px] h-[102px] rounded-lg border border-primary-tints-90 p-3 bg-[#170304] shadow-[100px_-25px_80px_rgba(228,27,33,0.5)]">
         {/* App icon + name */}
         <div className="flex items-center gap-2">
           <Image
             className="h-5 w-5"
-            src="/cama-college-logo.png"
+            src="/tuum/tuum-logo.svg"
             alt="tuum logo"
             width={20}
             height={20}

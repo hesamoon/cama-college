@@ -37,12 +37,13 @@ export default function Modal({
     <AnimatePresence>
       {open ? (
         <div
-          className="fixed inset-0 bg-black/30 z-999 flex items-center justify-center"
+          className="fixed inset-0 bg-black/30 z-999 flex items-center justify-center py-6"
           id="wrapper"
           onClick={handleClose}
         >
           <motion.div
-            className={`overflow-auto scroll-smooth bg-white rounded-lg ${padding} min-w-[541px]`}
+            key="wrapper-modal"
+            className={`bg-white rounded-lg ${padding} min-w-[320px] max-w-[90vw] md:min-w-[541px] md:max-w-[80vw] max-h-[90vh] overflow-auto no-scrollbar`}
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}

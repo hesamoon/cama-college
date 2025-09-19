@@ -1,10 +1,9 @@
-import Image from "next/image";
-
 // types
 import { Company } from "@/app/types/types";
 
 // components
 import Button from "./Button";
+import BluredImage from "./BluredImage";
 
 // types
 function CompanyPreview({ companyDetails }: { companyDetails: Company }) {
@@ -13,12 +12,13 @@ function CompanyPreview({ companyDetails }: { companyDetails: Company }) {
       <div className="flex justify-between">
         {/* cover / title */}
         <div className="flex gap-2">
-          <Image
-            className="rounded-xs object-cover w-10 h-10 md:w-12 md:h-12"
-            src="/c4.png"
-            alt="cover"
-            width={48}
-            height={48}
+          <BluredImage
+            url="/c4.png"
+            name="cover"
+            imgStyle="rounded-xs object-cover w-10 md:w-12 h-10 md:h-12"
+            blurhashStyle="rounded-xs object-cover w-10 md:w-12 h-10 md:h-12"
+            cWidth={48}
+            cHeight={48}
           />
 
           <div className="space-y-1.5">

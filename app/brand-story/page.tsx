@@ -1,4 +1,5 @@
-import Image from "next/image";
+// components
+import BluredImage from "@/components/BluredImage";
 
 // utils
 import { parseStyledText } from "@/utilities/utils";
@@ -7,7 +8,9 @@ function page() {
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level3 space-y-6 md:space-y-10 py-5 md:py-10">
       {/* title */}
-      <h2 className="mobile-title-large md:title-large text-on_surface-light">Total Title</h2>
+      <h2 className="mobile-title-large md:title-large text-on_surface-light">
+        Total Title
+      </h2>
 
       <div className="space-y-9">
         {/* title / description 1 */}
@@ -24,12 +27,13 @@ function page() {
         </div>
 
         {/* cover picture */}
-        <Image
-          className="object-cover rounded w-full h-[272px]"
-          src="/c1.png"
-          alt="c1"
-          width={672}
-          height={272}
+        <BluredImage
+          url="/c1.png"
+          name="c1"
+          imgStyle="w-full h-[272px]"
+          blurhashStyle="w-full h-[272px]"
+          cWidth={672}
+          cHeight={272}
         />
 
         {/* title / description 2 */}

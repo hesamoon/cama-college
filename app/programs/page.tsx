@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { useQueryState } from "nuqs";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -59,7 +58,7 @@ function Page() {
 
   const [loading, setLoading] = useState(false);
 
-  console.log(filters); 
+  console.log(filters);
 
   const loadMore = () => {
     setLoading(true);
@@ -161,30 +160,14 @@ function Page() {
       {/* categories - sort and filtring */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full md:border-y md:border-outline-level0 md:grid-system-level0">
         {/* categories */}
-        <div className="flex items-center gap-0 md:gap-6 lg:gap-8 overflow-x-scroll no-scrollbar border-y border-outline-level0 md:border-none">
+        <div className="flex items-center gap-0 overflow-x-scroll no-scrollbar border-y border-outline-level0 md:border-none">
           {categories.map((ctgry) => (
-            <div
+            <CategoryPreview
               key={ctgry.id}
-              className={`flex flex-col items-center justify-center transition-all duration-300 gap-1 cursor-pointer px-2 py-2 ${
-                category === ctgry.label || (ctgry.id === 0 && !category)
-                  ? "border-b border-background-primary-light"
-                  : null
-              }`}
-              onClick={() =>
-                ctgry.id === 0 ? setCategory(null) : setCategory(ctgry.label)
-              }
-            >
-              <Image
-                src="/monitor-mobbile-black.svg"
-                alt="monitor-mobbile-black"
-                width={20}
-                height={20}
-              />
-
-              <h5 className="mobile-body-large md:body-large text-on_surface-light whitespace-nowrap px-4 md:px-0">
-                {ctgry.label}
-              </h5>
-            </div>
+              data={ctgry}
+              category={category}
+              setCategory={setCategory}
+            />
           ))}
         </div>
 
@@ -363,3 +346,137 @@ function Page() {
 }
 
 export default Page;
+
+const CategoryPreview = ({
+  data,
+  category,
+  setCategory,
+}: {
+  data: { id: number; label: string };
+  category: string | null;
+  setCategory: (value: string | null) => void;
+}) => {
+  const [hovered, setHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [maxWidth, setMaxWidth] = useState(0);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const widths = Array.from(containerRef.current.children).map(
+        (child) => (child as HTMLElement).offsetWidth
+      );
+      setMaxWidth(Math.max(...widths));
+    }
+  }, []);
+
+  return (
+    <div
+      key={data.id}
+      ref={containerRef}
+      className={`flex flex-col items-center justify-center transition-all ease-in-out duration-300 gap-1 cursor-pointer px-4 py-2 
+       hover:bg-primary-opacity-12 hover:border-b hover:border-background-primary-light hover:text-background-primary-light ${
+         category === data.label || (data.id === 0 && !category)
+           ? "text-on_surface-light border-b border-background-primary-light"
+           : "text-txt-on-surface-secondary-light border-transparent"
+       } flex-1`}
+      style={{ minWidth: maxWidth }}
+      onClick={() =>
+        data.id === 0 ? setCategory(null) : setCategory(data.label)
+      }
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <svg
+        width="21"
+        height="20"
+        viewBox="0 0 21 20"
+        className="transition-all ease-in-out duration-300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.83317 14.125H5.67484C2.8665 14.125 2.1665 13.425 2.1665 10.6167V5.61666C2.1665 2.80833 2.8665 2.10833 5.67484 2.10833H14.4498C17.2582 2.10833 17.9582 2.80833 17.9582 5.61666"
+          stroke={
+            hovered
+              ? "#A91418"
+              : category === data.label || (data.id === 0 && !category)
+              ? "#170304"
+              : "#484647"
+          }
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M8.8335 17.8917V14.125"
+          stroke={
+            hovered
+              ? "#A91418"
+              : category === data.label || (data.id === 0 && !category)
+              ? "#170304"
+              : "#484647"
+          }
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M2.1665 10.7917H8.83317"
+          stroke={
+            hovered
+              ? "#A91418"
+              : category === data.label || (data.id === 0 && !category)
+              ? "#170304"
+              : "#484647"
+          }
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M6.1167 17.8917H8.83337"
+          stroke={
+            hovered
+              ? "#A91418"
+              : category === data.label || (data.id === 0 && !category)
+              ? "#170304"
+              : "#484647"
+          }
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M18.8336 10.6667V15.425C18.8336 17.4 18.3419 17.8917 16.3669 17.8917H13.4086C11.4336 17.8917 10.9419 17.4 10.9419 15.425V10.6667C10.9419 8.69166 11.4336 8.2 13.4086 8.2H16.3669C18.3419 8.2 18.8336 8.69166 18.8336 10.6667Z"
+          stroke={
+            hovered
+              ? "#A91418"
+              : category === data.label || (data.id === 0 && !category)
+              ? "#170304"
+              : "#484647"
+          }
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M14.8706 15.2083H14.8781"
+          stroke={
+            hovered
+              ? "#A91418"
+              : category === data.label || (data.id === 0 && !category)
+              ? "#170304"
+              : "#484647"
+          }
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+      <h5 className="mobile-body-large md:body-large px-4 md:px-2 whitespace-nowrap">
+        {data.label}
+      </h5>
+    </div>
+  );
+};

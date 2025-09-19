@@ -5,19 +5,18 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Searchbox from "@/components/Searchbox";
 import CourseCard from "@/components/CourseCard";
-import AISearchBox from "@/components/AISearchBox";
+import TUUMLanding from "@/components/TUUMLanding";
 import ApplyBanner from "@/components/ApplyBanner";
 import SectionTitle from "@/components/SectionTitle";
 import CourseSlider from "@/components/CourseSlider";
 import CoursesSection from "@/components/CoursesSection";
 import CredentialInquiry from "@/components/CredentialInquiry";
-import TypingAnimationText from "@/components/TypingAnimationText";
 
 // data
 import { news } from "../constants/data.js";
 
 // utils
-import { userAttr } from "../utilities/userAttr.js";
+import { userAttr } from "../utilities/serverUserAttr.js";
 
 export default function Home() {
   return (
@@ -38,66 +37,7 @@ export default function Home() {
           </div>
         </section>
       ) : (
-        <section className="mt-8 grid grid-cols-2 mobile-grid-system-level0 md:grid-system-level0">
-          <div className="space-y-12 col-span-1">
-            <div className="space-y-6">
-              {/* TUUM Professor AI */}
-              <div className="flex items-center gap-6">
-                <div className="relative">
-                  {/* glow effect */}
-                  <>
-                    <div className="absolute -top-[2px] -left-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
-                    <div className="absolute -top-[2px] -right-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
-                    <div className="absolute -bottom-[2px] -left-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
-                    <div className="absolute -bottom-[2px] -right-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
-                  </>
-
-                  <div className="bg-[#320E0B] rounded-full flex items-center justify-center w-[47.63px] h-[47.63px]">
-                    <Image
-                      className="w-[40px] h-[39px]"
-                      src="/tuum/tuum-logo.svg"
-                      alt="tuum logo"
-                      width={40}
-                      height={39}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-0.5">
-                  <h5 className="label-medium-db bg-gradient-to-r from-[#F78B5D] to-[#CE6312] bg-clip-text text-transparent">
-                    TUUM Professor
-                  </h5>
-                  <h3 className="body-large text-on_surface-light">
-                    Hello, Im CAMA College AI assistant
-                  </h3>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <TypingAnimationText
-                  text="With CAMA college, shape your future!"
-                  sx="mobile-display-large md:header-small max-w-96 md:max-w-xl"
-                />
-
-                <p className="max-w-96 md:max-w-xl body-large">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Egestas
-                </p>
-              </div>
-            </div>
-
-            {/* searchbox */}
-            <AISearchBox />
-          </div>
-
-          {/* two circle shape */}
-          <div className="col-span-1 flex items-center justify-center">
-            <div className="w-[295px] h-[295px] rounded-full bg-[#ED9D705C] flex items-center justify-center">
-              <div className="w-[266px] h-[266px] rounded-full bg-[#ED9D705C]"></div>
-            </div>
-          </div>
-        </section>
+        <TUUMLanding />
       )}
 
       {/* new programs */}

@@ -13,10 +13,14 @@ import { HeaderNav, SubMenu } from "@/app/types/types";
 // hooks
 import useIsMobile from "@/hooks/useIsMobile";
 
-function Navbar() {
+function Navbar({ landingNavbar = false }: { landingNavbar: boolean }) {
   const isMobile = useIsMobile();
 
-  return <nav>{isMobile ? <MobileNav /> : <DesktopNav />}</nav>;
+  return (
+    <nav>
+      {isMobile ? <MobileNav /> : <DesktopNav landingNavbar={landingNavbar} />}
+    </nav>
+  );
 }
 
 export default Navbar;
@@ -81,7 +85,7 @@ function MobileNav() {
   );
 }
 
-function DesktopNav() {
+function DesktopNav({ landingNavbar }: { landingNavbar: boolean }) {
   const [selNav, setSelNav] = useState<HeaderNav | null>(null);
 
   return (
@@ -92,6 +96,7 @@ function DesktopNav() {
           hmnu={hmnu}
           selNav={selNav}
           setSelNav={setSelNav}
+          landingNavbar={landingNavbar}
         />
       ))}
     </ul>
@@ -102,10 +107,12 @@ const DesktopNavItem = ({
   hmnu,
   selNav,
   setSelNav,
+  landingNavbar,
 }: {
   hmnu: HeaderNav;
   selNav: HeaderNav | null;
   setSelNav: (val: HeaderNav | null) => void;
+  landingNavbar: boolean;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [thisSubMenusHovered, setThisSubMenusHovered] =
@@ -135,10 +142,18 @@ const DesktopNavItem = ({
       }}
     >
       {hmnu.id !== 2 ? (
-        <div className="flex items-center gap-1 rounded-sm hover:bg-surface0-light py-2.5 px-2">
+        <div
+          className={`flex items-center gap-1 rounded-sm ${
+            landingNavbar
+              ? "hover:bg-background-primary-light/20"
+              : "hover:bg-surface0-light"
+          } py-2.5 px-2`}
+        >
           <span
             className={`body-medium ${
-              selNav?.id === hmnu.id
+              landingNavbar
+                ? "text-txt-on-primary-dark"
+                : selNav?.id === hmnu.id
                 ? "text-background-primary-light"
                 : isHovered
                 ? "text-on_surface-light"
@@ -163,7 +178,9 @@ const DesktopNavItem = ({
               <path
                 d="M16.6004 7.45833L11.1671 12.8917C10.5254 13.5333 9.47539 13.5333 8.83372 12.8917L3.40039 7.45833"
                 stroke={
-                  selNav?.id === hmnu.id
+                  landingNavbar
+                    ? "#F3F3F3"
+                    : selNav?.id === hmnu.id
                     ? "#A91418"
                     : isHovered
                     ? "#170304"
@@ -179,11 +196,17 @@ const DesktopNavItem = ({
       ) : (
         <Link
           href={hmnu.href}
-          className="flex items-center gap-1 rounded-sm hover:bg-surface0-light py-2.5 px-2"
+          className={`flex items-center gap-1 rounded-sm ${
+            landingNavbar
+              ? "hover:bg-background-primary-light/20"
+              : "hover:bg-surface0-light"
+          } py-2.5 px-2`}
         >
           <span
             className={`body-medium ${
-              selNav?.id === hmnu.id
+              landingNavbar
+                ? "text-txt-on-primary-dark"
+                : selNav?.id === hmnu.id
                 ? "text-background-primary-light"
                 : isHovered
                 ? "text-on_surface-light"
