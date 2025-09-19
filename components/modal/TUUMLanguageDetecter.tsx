@@ -190,7 +190,7 @@ function TUUMLanguageDetecter({
                   </div>
 
                   <h5 className="body-large text-on_surface-light text-start">
-                    I think you are in {currentLang.name}; Right? :)
+                    I think you are in {info.country}; Right? :)
                   </h5>
                 </div>
 
