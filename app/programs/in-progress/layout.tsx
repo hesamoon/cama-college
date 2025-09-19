@@ -16,10 +16,11 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const [activeTab, setActiveTab] = useState("Subjects");
-  const [chatBoxHeight, setChatBoxHeight] = useState(window.innerHeight - 110);
+  const [chatBoxHeight, setChatBoxHeight] = useState(0);
 
   useEffect(() => {
     const handleResize = () => setChatBoxHeight(window.innerHeight - 110);
+    setChatBoxHeight(window.innerHeight - 110);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
