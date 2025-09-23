@@ -21,9 +21,11 @@ import { userAttr } from "../utilities/serverUserAttr.js";
 export default function Home() {
   return (
     <div className="space-y-7 md:space-y-14">
+      <TUUMLanding />
+
       {/* header */}
       {userAttr()?.role === "ADMIN" ? (
-        <section className="mt-6 md:mt-12 space-y-6 md:space-y-12">
+        <section className="mt-6 md:mt-10 space-y-6 md:space-y-12">
           {/* searchbox */}
           <div className="w-full flex items-center justify-center">
             <div className="md:w-3xl">
@@ -36,12 +38,10 @@ export default function Home() {
             <CourseSlider type="Programs" />
           </div>
         </section>
-      ) : (
-        <TUUMLanding />
-      )}
+      ) : null}
 
       {/* new programs */}
-      <CoursesSection courseType="programs" />
+      <CoursesSection courseType="programs" onlyThisSection={true} />
 
       <section className="hero mobile-grid-system-level0 md:grid-system-level0">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6">

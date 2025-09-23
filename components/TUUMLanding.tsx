@@ -3,14 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 
 // components
-import Header from "./Header";
 import Typewriter from "./Typewriter";
 import AISearchBox from "./AISearchBox";
 import MouseTooltipWrapper from "./MouseTooltipWrapper";
-import TUUMLanguageDetecter from "./modal/TUUMLanguageDetecter";
 
 function TUUMLanding() {
-  const [open, setOpen] = useState(true);
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
   const landingHeight = useRef(0);
@@ -48,14 +45,14 @@ function TUUMLanding() {
   return (
     <section
       ref={landingRef}
-      className={`fixed top-0 left-0 w-full tuum-landing transition-all duration-400 ease-in-out ${
-        hidden ? "-translate-y-full z-0" : "translate-y-0 z-70"
+      className={`h-screen w-full transition-all duration-400 ease-in-out tuum-landing pt-[6rem] ${
+        hidden
+          ? "opacity-0 fixed -z-10 pointer-events-none"
+          : "opacity-100 translate-y-0 z-80"
       }`}
     >
-      <Header landingHeader={true} />
-
       <MouseTooltipWrapper message="Hello, Im CAMA College AI assistant">
-        <div className="h-screen flex flex-col items-center justify-center mobile-grid-system-level0 md:grid-system-level0">
+        <div className="flex flex-col items-center mobile-grid-system-level0 md:grid-system-level0">
           <div className="space-y-16 flex flex-col items-center justify-center">
             <div className="space-y-8">
               {/* TUUM Professor AI */}
@@ -120,8 +117,6 @@ function TUUMLanding() {
           </div>
         </div>
       </MouseTooltipWrapper>
-
-      <TUUMLanguageDetecter open={open} onClose={() => setOpen(false)} />
 
       <div className="absolute left-0 top-0">
         <svg

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 // components
 import Navbar from "./Navbar";
@@ -14,13 +14,16 @@ import LanguagesListModal from "./modal/LanguagesListModal";
 
 // utils
 import { userAttr } from "@/utilities/userAttr";
+import { usePathname } from "next/navigation";
 
-function Header({ landingHeader = false }: { landingHeader?: boolean }) {
+function Header() {
   const user = userAttr();
+  const pathname = usePathname();
 
   const [show] = useState(true);
   // const [lastScrollY, setLastScrollY] = useState(0);
   const [open, setOpen] = useState(false);
+  const [landingHeader, setLandingHeader] = useState(true);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -66,14 +69,23 @@ function Header({ landingHeader = false }: { landingHeader?: boolean }) {
   //   };
   // }, [open]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (pathname === "/") setLandingHeader(window.scrollY < 50);
+      else setLandingHeader(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
+
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-40 ${
+      className={`${pathname === "/" ? "fixed" : "sticky"} top-0 w-full z-40 ${
         landingHeader
           ? "bg-transparent"
           : "bg-white border-b border-outline-level0"
-      } transition-transform duration-300 ${show ? "" : "-translate-y-full"}`}
+      } transition-all duration-300 ${show ? "" : "-translate-y-full"}`}
     >
       <div className="relative mobile-grid-system-level0 md:grid-system-level0 flex items-center justify-between py-3 h-[3.75rem] gap-4">
         {/* Left: Logo + Hamburger */}

@@ -38,7 +38,7 @@ function Button({
   return (
     <button
       className={`flex items-center justify-center gap-1 rounded-full transition-all duration-300 ${hover} ${padding} ${size} ${
-        disabled ? "opacity-40 hover:bg-transparent" : "cursor-pointer"
+        disabled ? "opacity-40" : "cursor-pointer"
       } text-primary-shades-80 ${
         type === "filled"
           ? `${

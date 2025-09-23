@@ -1476,7 +1476,7 @@ const programsInProgress = [
   {
     id: 1,
     coverImg: "c4",
-    name: "Name of Program1",
+    name: "Crypto",
     level: "Expert",
     type: "Self Study",
     type2: "Career",
@@ -1760,7 +1760,7 @@ const programsInProgress = [
   {
     id: 2,
     coverImg: "c1",
-    name: "Name of Program2",
+    name: "AI",
     level: "Expert",
     type: "Self Study",
     type2: "Career",
@@ -2044,7 +2044,7 @@ const programsInProgress = [
   {
     id: 3,
     coverImg: "c1",
-    name: "Name of Program3",
+    name: "Game",
     level: "Expert",
     type: "Self Study",
     type2: "Career",
@@ -2328,7 +2328,7 @@ const programsInProgress = [
   {
     id: 4,
     coverImg: "c1",
-    name: "Name of Program4",
+    name: "Python",
     level: "Expert",
     type: "Self Study",
     type2: "Career",

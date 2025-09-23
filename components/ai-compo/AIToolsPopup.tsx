@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+// components
 import Button from "../Button";
 
 function AIToolsPopup() {

@@ -1,9 +1,14 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 // components
 import Button from "../Button";
+
+// utils
+import { setLang } from "@/utilities/storeLanguage";
 
 const languages = [
   { code: "fa-IR", name: "فارسی", flag: "ir" },
@@ -137,7 +142,7 @@ function TUUMLanguageDetecter({
                 />
               </div>
 
-              <h5 className="label-large-db bg-gradient-to-r from-[#F78B5D] to-[#CE6312] bg-clip-text text-transparent">
+              <h5 className="label-large-db bg-gradient-to-r from-[#F78B5D] to-[#CE6312] bg-clip-text text-transparent text-center">
                 TUUM Professor
               </h5>
             </div>
@@ -215,7 +220,10 @@ function TUUMLanguageDetecter({
                     <div
                       key={lang.code}
                       className="flex items-center gap-2 cursor-pointer p-4"
-                      onClick={() => alert(lang.name)}
+                      onClick={() => {
+                        setLang(lang.name);
+                        handleClose();
+                      }}
                     >
                       <span
                         className={`fi fi-${lang.flag} rounded-xs min-w-8 min-h-6`}

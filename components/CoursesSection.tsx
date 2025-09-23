@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 
@@ -16,16 +17,41 @@ import { getSortedPrograms } from "@/lib/api/programs";
 // types
 import { CourseCardProps } from "@/app/types/types";
 
-function CoursesSection({ courseType }: { courseType: string }) {
+function CoursesSection({
+  courseType,
+  onlyThisSection = false,
+}: {
+  courseType: string;
+  onlyThisSection?: boolean;
+}) {
   const { data: coursesData, isLoading: isLoadingCourses } = useQuery({
     queryKey: [courseType],
     queryFn: courseType === "programs" ? getSortedPrograms : getSortedEvents,
   });
 
+  const [scrolled, setScrolled] = useState(false);
+
   console.log(coursesData);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log("Y: " + window.scrollY);
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="mt-30 space-y-8 mobile-grid-system-level0 md:grid-system-level0">
+    <section
+      className={`space-y-8 mobile-grid-system-level0 md:grid-system-level0 transition-transform duration-700 ${
+        onlyThisSection
+          ? scrolled
+            ? "mt-[10rem]"
+            : "-translate-y-35 text-white"
+          : null
+      }`}
+    >
       <div className="space-y-4">
         <SectionTitle title={`New ${courseType}`} path={`/${courseType}`} />
 

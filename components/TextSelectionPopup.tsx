@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Button from "./Button";
 import { usePathname } from "next/navigation";
+
+// components
+import Button from "./Button";
 
 export default function TextSelectionPopup() {
   const pathname = usePathname();
@@ -36,7 +38,7 @@ export default function TextSelectionPopup() {
     };
 
     const handleSelectionChange = () => {
-      if (pathname.includes("/programs/in-progress")) {
+      if (pathname.includes("/in-progress")) {
        return
       } else {
         const selection = document.getSelection();

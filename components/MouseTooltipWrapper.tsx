@@ -20,6 +20,8 @@ export default function MouseTooltipWrapper({
   const textRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const [visibleWidth, setVisibleWidth] = useState<number>(0);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   const words = message.trim().split(" ");
 
@@ -27,10 +29,35 @@ export default function MouseTooltipWrapper({
     setMousePos({ x: e.clientX, y: e.clientY });
   };
 
+  // Show tooltip with 5-second timer
+  useEffect(() => {
+    if (hovered) {
+      setShowTooltip(true);
+      setIsAnimatingOut(false);
+      // Start slide-out animation after 5 seconds
+      const hideTimer = setTimeout(() => {
+        setIsAnimatingOut(true);
+        // Hide completely after animation duration
+        const finalHideTimer = setTimeout(() => {
+          setShowTooltip(false);
+          setHovered(false);
+          setIsAnimatingOut(false);
+        }, 500); // Match transition duration
+
+        return () => clearTimeout(finalHideTimer);
+      }, 5000);
+
+      return () => clearTimeout(hideTimer);
+    } else {
+      setShowTooltip(false);
+      setIsAnimatingOut(false);
+    }
+  }, [hovered]);
+
   // Animate words one by one
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (hovered) {
+    if (showTooltip) {
       setVisibleCount(1); // show first word immediately
       let i = 1;
       timer = setInterval(() => {
@@ -45,18 +72,18 @@ export default function MouseTooltipWrapper({
       setVisibleCount(0);
     }
     return () => clearInterval(timer);
-  }, [hovered, message]);
+  }, [showTooltip, message]);
 
   // Measure width of currently visible words and animate container growth
   useEffect(() => {
-    if (!hovered) {
+    if (!showTooltip) {
       setVisibleWidth(0);
       return;
     }
     if (measureRef.current) {
       setVisibleWidth(measureRef.current.offsetWidth);
     }
-  }, [hovered, visibleCount, message]);
+  }, [showTooltip, visibleCount, message]);
 
   return (
     <div
@@ -67,15 +94,17 @@ export default function MouseTooltipWrapper({
     >
       {children}
 
-      {hovered && (
+      {showTooltip && (
         <div
-          className="fixed pointer-events-none z-50"
+          className="fixed pointer-events-none z-50 transition-all ease-out"
           style={{
             left: mousePos.x + 10,
             top: mousePos.y - 25,
+            transform: isAnimatingOut ? 'translateY(20px)' : 'translateY(0)',
+            opacity: isAnimatingOut ? 0 : 1,
           }}
         >
-          <div className="bg-primary-tints-90 rounded-tl-4xl rounded-bl-xs rounded-r-lg py-2 px-4 flex items-center gap-2 shadow-lg transition-all duration-500 ease-out">
+          <div className="bg-primary-tints-90 rounded-tl-4xl rounded-bl-xs rounded-r-lg py-2 px-4 flex items-center gap-2 shadow-lg">
             <Image
               className="h-4 w-4 shrink-0"
               src="/tuum/tuum-logo.svg"

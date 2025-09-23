@@ -24,7 +24,7 @@ function BluredImage({
   const [imageLoading, setImageLoading] = useState(true);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden rounded-sm">
       {imageLoading && (
         <div
           className={`absolute inset-0 aspect-16-9 rounded-sm object-cover ${blurhashStyle} overflow-hidden`}

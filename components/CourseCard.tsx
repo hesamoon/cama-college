@@ -63,33 +63,36 @@ function CourseCard({ data }: { data: CourseCardProps }) {
           })}
         </p>
 
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              key="details-hover-wipe"
-              initial={{ x: -40, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -40, opacity: 0 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-            >
-              <Button
-                props={{
-                  value: "Details",
-                  disabled: false,
-                  leftIcon: "",
-                  rightIcon: "arrow-right",
-                  type: "text",
-                  color: "red",
-                  width: 20,
-                  height: 20,
-                  size: "mobile-body-medium md:body-small",
-                  padding: "px-4 py-1",
-                  // clickHandler: () => router.push(path),
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="relative min-w-[80px] h-[32px] flex items-center justify-end">
+          <AnimatePresence>
+            {hovered && (
+              <motion.div
+                key="details-hover-wipe"
+                className="absolute right-0"
+                initial={{ x: -40, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -40, opacity: 0 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+              >
+                <Button
+                  props={{
+                    value: "Details",
+                    disabled: false,
+                    leftIcon: "",
+                    rightIcon: "arrow-right",
+                    type: "text",
+                    color: "red",
+                    width: 20,
+                    height: 20,
+                    size: "mobile-body-medium md:body-small",
+                    padding: "px-4 py-1",
+                    // clickHandler: () => router.push(path),
+                  }}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </Link>
   ) : data.cardType === "PROGRAM" && data.price === 950 ? (
@@ -150,33 +153,36 @@ function CourseCard({ data }: { data: CourseCardProps }) {
                   ${data.price} (CAD)
                 </p>
 
-                <AnimatePresence>
-                  {hovered && (
-                    <motion.div
-                      key="details-hover-wipe"
-                      initial={{ x: -40, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: -40, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: "easeOut" }}
-                    >
-                      <Button
-                        props={{
-                          value: "Details",
-                          disabled: false,
-                          leftIcon: "",
-                          rightIcon: "arrow-right",
-                          type: "text",
-                          color: "red",
-                          width: 20,
-                          height: 20,
-                          size: "mobile-body-medium md:body-medium",
-                          padding: "px-4 py-1",
-                          // clickHandler: () => router.push(path),
-                        }}
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div className="relative min-w-[80px] h-[32px] flex items-center justify-end">
+                  <AnimatePresence>
+                    {hovered && (
+                      <motion.div
+                        key="details-hover-wipe"
+                        className="absolute right-0"
+                        initial={{ x: -40, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: -40, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
+                      >
+                        <Button
+                          props={{
+                            value: "Details",
+                            disabled: false,
+                            leftIcon: "",
+                            rightIcon: "arrow-right",
+                            type: "text",
+                            color: "red",
+                            width: 20,
+                            height: 20,
+                            size: "mobile-body-medium md:body-medium",
+                            padding: "px-4 py-1",
+                            // clickHandler: () => router.push(path),
+                          }}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           ) : null}
@@ -242,33 +248,36 @@ function CourseCard({ data }: { data: CourseCardProps }) {
                 ${data.price} (CAD)
               </p>
 
-              <AnimatePresence>
-                {hovered && (
-                  <motion.div
-                    key="details-hover-wipe"
-                    initial={{ x: -40, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -40, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                  >
-                    <Button
-                      props={{
-                        value: "Details",
-                        disabled: false,
-                        leftIcon: "",
-                        rightIcon: "arrow-right",
-                        type: "text",
-                        color: "red",
-                        width: 20,
-                        height: 20,
-                        size: "mobile-body-medium md:body-medium",
-                        padding: "px-4 py-1",
-                        // clickHandler: () => router.push(path),
-                      }}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div className="relative min-w-[80px] h-[32px] flex items-center justify-end">
+                <AnimatePresence>
+                  {hovered && (
+                    <motion.div
+                      key="details-hover-wipe"
+                      className="absolute right-0"
+                      initial={{ x: -40, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: -40, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                    >
+                      <Button
+                        props={{
+                          value: "Details",
+                          disabled: false,
+                          leftIcon: "",
+                          rightIcon: "arrow-right",
+                          type: "text",
+                          color: "red",
+                          width: 20,
+                          height: 20,
+                          size: "mobile-body-medium md:body-medium",
+                          padding: "px-4 py-1",
+                          // clickHandler: () => router.push(path),
+                        }}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         ) : data.cardType === "EVENT" ? (

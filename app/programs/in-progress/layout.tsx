@@ -28,7 +28,6 @@ export default function Layout({
   return (
     <>
       {/* <DisableInteractions /> */}
-
       <div className="mobile-grid-system-level0 md:grid-system-level md:grid md:grid-cols-3 md:!gap-0">
         <MobileNavbar />
 
@@ -75,7 +74,7 @@ export default function Layout({
         </div>
 
         {/* right side / details */}
-        <div className="col-span-2 mobile-grid-system-level0 !px-0 md:!px-16 md:!py-10 md:grid-system-level0 border-l border-outline-level0">
+        <div className="col-span-2 mobile-grid-system-level0 !px-0 md:!px-16 md:!py-10 md:grid-system-level0 border-l border-outline-level0 flex items-center justify-center w-full">
           {children}
         </div>
       </div>

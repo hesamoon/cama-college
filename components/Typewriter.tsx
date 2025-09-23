@@ -3,45 +3,37 @@
 import { useEffect, useState } from "react";
 
 const Typewriter = ({ text, sx }: { text: string; sx: string }) => {
-  // 👇 text array (each string is a line)
-  const aText = [text];
-
-  const iSpeed = 75; // typing speed (ms)
-  const [displayedText, setDisplayedText] = useState<string[]>([""]);
-  const [lineIndex, setLineIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
+  const words = text.split(' ');
+  const [visibleCount, setVisibleCount] = useState(0);
+  const iSpeed = 300; // word reveal speed (ms)
 
   useEffect(() => {
-    if (lineIndex >= aText.length) return; // all lines finished
-
-    if (charIndex < aText[lineIndex].length) {
+    if (visibleCount < words.length) {
       const timeout = setTimeout(() => {
-        setDisplayedText((prev) => {
-          const copy = [...prev];
-          copy[lineIndex] = aText[lineIndex].substring(0, charIndex + 1);
-          return copy;
-        });
-        setCharIndex((prev) => prev + 1);
+        setVisibleCount(prev => prev + 1);
       }, iSpeed);
 
       return () => clearTimeout(timeout);
-    } else {
-      // line finished → move to next line
-      const timeout = setTimeout(() => {
-        setDisplayedText((prev) => [...prev, ""]);
-        setLineIndex((prev) => prev + 1);
-        setCharIndex(0);
-      }, 500);
-
-      return () => clearTimeout(timeout);
     }
-  }, [charIndex, lineIndex]);
+  }, [visibleCount, words.length]);
 
   return (
     <div className={sx}>
-      {displayedText.map((line, i) => (
-        <div key={i}>{line}</div>
-      ))}
+      <div className="flex items-center justify-center flex-wrap gap-1 overflow-hidden transition-all duration-500 ease-out">
+        {words.map((word, idx) => (
+          <span
+            key={idx}
+            className={`transition-all duration-500 ease-out ${
+              idx < visibleCount
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-2"
+            }`}
+            style={{ transitionDelay: `${idx * 10}ms` }}
+          >
+            {word}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
