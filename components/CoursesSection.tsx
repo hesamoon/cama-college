@@ -16,6 +16,7 @@ import { getSortedPrograms } from "@/lib/api/programs";
 
 // types
 import { CourseCardProps } from "@/app/types/types";
+import { isLogged } from "@/utilities/cookie";
 
 function CoursesSection({
   courseType,
@@ -35,7 +36,6 @@ function CoursesSection({
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log("Y: " + window.scrollY);
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
@@ -45,7 +45,9 @@ function CoursesSection({
   return (
     <section
       className={`space-y-8 mobile-grid-system-level0 md:grid-system-level0 transition-transform duration-700 ${
-        onlyThisSection
+        isLogged()
+          ? null
+          : onlyThisSection
           ? scrolled
             ? "mt-[10rem]"
             : "-translate-y-35 text-white"

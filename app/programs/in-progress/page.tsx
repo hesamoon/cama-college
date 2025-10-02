@@ -95,7 +95,7 @@ function Page() {
   };
 
   return queryLesson === "Lesson Title 1-4" ? (
-    <div className="flex flex-col items-center justify-center gap-20">
+    <div className="pt-10 md:pt-0 h-screen md:h-fit flex flex-col items-center md:justify-center gap-20 mobile-grid-system-level0 md:grid-system-level0">
       {/* logo */}
       <div className="flex items-center justify-center gap-2">
         <svg
@@ -146,7 +146,7 @@ function Page() {
         </div>
 
         {/* link */}
-        <div className="space-y-4 min-w-[422px]">
+        <div className="space-y-4 md:min-w-[422px]">
           <div className="py-1 px-6 border border-[#E3E3E3] rounded-full flex items-center justify-between">
             <h3 className="body-large text-txt-on-surface-secondary-light">
               meet.google.com/jdf-sjdh-kdj

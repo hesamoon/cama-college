@@ -3,12 +3,11 @@ import Link from "next/link";
 
 // components
 import Button from "@/components/Button";
-import Searchbox from "@/components/Searchbox";
 import CourseCard from "@/components/CourseCard";
 import TUUMLanding from "@/components/TUUMLanding";
 import ApplyBanner from "@/components/ApplyBanner";
+import LoginBanner from "@/components/LoginBanner";
 import SectionTitle from "@/components/SectionTitle";
-import CourseSlider from "@/components/CourseSlider";
 import CoursesSection from "@/components/CoursesSection";
 import CredentialInquiry from "@/components/CredentialInquiry";
 
@@ -24,21 +23,7 @@ export default function Home() {
       <TUUMLanding />
 
       {/* header */}
-      {userAttr()?.role === "ADMIN" ? (
-        <section className="mt-6 md:mt-10 space-y-6 md:space-y-12">
-          {/* searchbox */}
-          <div className="w-full flex items-center justify-center">
-            <div className="md:w-3xl">
-              <Searchbox />
-            </div>
-          </div>
-
-          {/* banner */}
-          <div className="">
-            <CourseSlider type="Programs" />
-          </div>
-        </section>
-      ) : null}
+      {userAttr()?.role === "ADMIN" ? <LoginBanner /> : null}
 
       {/* new programs */}
       <CoursesSection courseType="programs" onlyThisSection={true} />

@@ -28,8 +28,8 @@ function AISearchBox() {
   // };
 
   return (
-    <section className="space-y-5 max-w-2xl min-w-xl z-20">
-      <h5 className="body-large text-txt-on-primary-dark text-start">
+    <section className="space-y-2.5 md:space-y-5 min-w-85 max-w-xs md:max-w-2xl md:min-w-xl z-20">
+      <h5 className="mobile-body-large md:body-large text-txt-on-primary-dark text-start">
         What you want to learn?
       </h5>
 

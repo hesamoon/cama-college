@@ -12,7 +12,7 @@ import { programsInProgress } from "@/constants/data";
 
 function page() {
   return (
-    <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9">
+    <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9 py-5">
       {/* schedule */}
       <div className="space-y-4">
         <h2 className="mobile-title-large md:title-large text-on_surface-light">
@@ -37,7 +37,7 @@ function page() {
           Certifications
         </h2>
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="space-y-3 md:grid md:grid-cols-3 md:gap-6">
           {programsInProgress.map((pIP) => (
             <div
               key={pIP.id}
@@ -46,7 +46,7 @@ function page() {
               <div className="absolute -top-[4.5rem] -left-[4.5rem] w-[110px] h-[395.3496956058634px] rounded-lg bg-[#A91418] opacity-10 rotate-[30deg] -z-5" />
 
               <div className="flex items-center justify-between pt-2 px-4">
-                <h3 className="title-small text-txt-on-surface-secondary-light">
+                <h3 className="mobile-title-small md:title-small text-txt-on-surface-secondary-light">
                   {pIP.name}
                 </h3>
 

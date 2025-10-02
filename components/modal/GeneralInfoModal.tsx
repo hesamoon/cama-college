@@ -80,9 +80,9 @@ function GeneralInfoModal({
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={handleClose} padding="py-4 px-6 md:w-[60rem]">
       {/* header */}
-      <div className="flex items-center justify-between w-4xl">
+      <div className="flex items-center justify-between md:w-4xl">
         {/* logo */}
         <div className="flex items-center gap-4">
           <Link href="/" className="shrink-0">
@@ -94,7 +94,7 @@ function GeneralInfoModal({
               className="w-auto h-10"
             />
           </Link>
-          <h3 className="header-small text-on_surface-light">CAMA College</h3>
+          <h3 className="mobile-header-small md:header-small text-on_surface-light">CAMA College</h3>
         </div>
 
         {/* close button */}
@@ -114,7 +114,7 @@ function GeneralInfoModal({
       </div>
 
       {/* body */}
-      <div className="mt-12 flex flex-col gap-6">
+      <div className="mt-6 md:mt-12 flex flex-col gap-6">
         {/* notaion */}
         <div className="flex items-center gap-2">
           <div>
@@ -149,18 +149,18 @@ function GeneralInfoModal({
             </svg>
           </div>
 
-          <h4 className="body-large text-txt-on-surface-secondary-light">
+          <h4 className="mobile-body-large md:body-large text-txt-on-surface-secondary-light">
             We need the following information to know the location of the{" "}{infoFor}.
           </h4>
         </div>
 
         {/* form */}
-        <div className="flex">
-          <h4 className="w-[40%] title-medium text-on_surface-light">
+        <div className="space-y-4 md:flex">
+          <h4 className="md:w-[40%] mobile-title-medium md:title-medium text-on_surface-light">
             General Information
           </h4>
 
-          <form className="w-[60%] flex flex-col gap-6" onSubmit={handleSubmit}>
+          <form className="md:w-[60%] flex flex-col gap-3 md:gap-6" onSubmit={handleSubmit}>
             {/* Address (optional) */}
             <TextField
               label="Address"
@@ -219,7 +219,7 @@ function GeneralInfoModal({
       </div>
 
       {/* footer */}
-      <footer className="flex items-center justify-between mt-12">
+      <footer className="flex items-center justify-between gap-2 mt-6 md:mt-12">
         <Button
           props={{
             value: "Cancel",
@@ -228,7 +228,7 @@ function GeneralInfoModal({
             type: "outlined",
             color: "red",
             disabled: false,
-            size: "mobile-body-large md:body-large",
+            size: "mobile-body-large md:body-large w-full md:w-fit",
             padding: "py-2 px-4",
             clickHandler: handleClose,
           }}
@@ -242,7 +242,7 @@ function GeneralInfoModal({
             type: "filled",
             color: "red",
             disabled: false,
-            size: "mobile-body-large md:body-large",
+            size: "mobile-body-large md:body-large w-full md:w-fit",
             padding: "py-2 px-4",
             clickHandler: handleSubmit,
           }}

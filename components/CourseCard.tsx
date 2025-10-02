@@ -29,6 +29,7 @@ function CourseCard({ data }: { data: CourseCardProps }) {
         <div className="relative overflow-hidden rounded-sm">
           <BluredImage
             url={`/${data.avatar}.png`}
+            hash={data.avatar_hash}
             name={`${data.cardType} ${data.id}`}
             imgStyle="w-full transition-all duration-700 group-hover:scale-120"
             blurhashStyle=""
@@ -106,6 +107,7 @@ function CourseCard({ data }: { data: CourseCardProps }) {
         <div className="relative overflow-hidden rounded-sm">
           <BluredImage
             url={data.avatar}
+            hash={data.avatar_hash}
             name={`avatar ${data.id}`}
             imgStyle="w-full transition-all duration-700 group-hover:scale-120"
             blurhashStyle=""
@@ -201,6 +203,7 @@ function CourseCard({ data }: { data: CourseCardProps }) {
       <div className="relative overflow-hidden rounded-sm">
         <BluredImage
           url={data.avatar}
+          hash={data.avatar_hash}
           name={`avatar ${data.id}`}
           imgStyle="w-full transition-all duration-700 group-hover:scale-120"
           blurhashStyle=""

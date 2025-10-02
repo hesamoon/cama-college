@@ -26,6 +26,8 @@ function TUUMAssistant() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if (pathname.includes("/checkout")) return;
+
   return (
     <div className="fixed right-8 bottom-8 z-60">
       {/* Overlay */}
@@ -125,7 +127,7 @@ function TUUMAssistant() {
         )}
       </AnimatePresence>
 
-      {!getLang() && (
+      {!getLang() && !pathname.includes("/checkout") && (
         <TUUMLanguageDetecter open={open} onClose={() => setOpen(false)} />
       )}
     </div>

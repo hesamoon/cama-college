@@ -43,7 +43,7 @@ export default function Modal({
         >
           <motion.div
             key="wrapper-modal"
-            className={`bg-white rounded-lg ${padding} min-w-[320px] max-w-[90vw] md:min-w-[541px] md:max-w-[80vw] max-h-[90vh] overflow-auto no-scrollbar`}
+            className={`fixed md:static bottom-0 bg-white md:rounded-lg ${padding} w-full md:min-w-[541px] max-h-[90vh] overflow-auto no-scrollbar`}
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}

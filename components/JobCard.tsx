@@ -25,6 +25,8 @@ export default function JobCard({
 }) {
   const router = useRouter();
 
+  console.log(job)
+
   // Handle card click (navigate to job details)
   const handleCardClick = () => {
     router.push(`/job-offers/${job.title}?jobId=${job.id}`);

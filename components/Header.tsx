@@ -74,9 +74,12 @@ function Header() {
       if (pathname === "/") setLandingHeader(window.scrollY < 50);
       else setLandingHeader(false);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
+
+  if (pathname.includes("/checkout")) return;
 
   return (
     <header

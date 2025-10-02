@@ -1,11 +1,18 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 // components
 import AboutUs from "./AboutUs";
 import StaticMap from "./StaticMap";
 
 function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.includes("/checkout")) return;
+
   return (
     <footer className="bg-shades-light-90">
       <div className="flex flex-col md:grid md:grid-cols-7 gap-4 mobile-grid-system-level0 md:grid-system-level0 pt-8 sm:pt-12 lg:pt-16">

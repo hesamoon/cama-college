@@ -25,6 +25,7 @@ import {
   loginSchema,
   signupSchema,
 } from "@/lib/validation/authSchema";
+
 import { sx } from "@/constants/data";
 
 function googleSignIn() {
@@ -244,7 +245,7 @@ function AuthenticationModal({
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={handleClose} padding="py-4 px-6 md:w-[541px]">
       {/* header */}
       <div className="flex items-center justify-between">
         {/* logo */}
@@ -351,6 +352,7 @@ function AuthenticationModal({
               <Button
                 props={{
                   value: isLoggingIn ? "Logging in..." : "Login",
+                  loading: isLoggingIn,
                   type: "filled",
                   disabled: false,
                   clickHandler: undefined,
@@ -459,6 +461,7 @@ function AuthenticationModal({
               <Button
                 props={{
                   value: isRegistering ? "Registering..." : "Signup",
+                  loading: isRegistering,
                   type: "filled",
                   disabled: false,
                   clickHandler: undefined,
@@ -523,6 +526,7 @@ function AuthenticationModal({
               <Button
                 props={{
                   value: isVerifying ? "Verifying..." : "Verify",
+                  loading: isVerifying,
                   type: "filled",
                   disabled: false,
                   clickHandler: undefined,

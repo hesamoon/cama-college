@@ -60,11 +60,11 @@ function FiltersModal({
   console.log(filters);
 
   return (
-    <Modal open={open} onClose={handleClose} padding="p-0">
+    <Modal open={open} onClose={handleClose} padding="p-0 md:w-[541px]">
       <div className="divide-y divide-outline-level1">
         {/* header */}
         <header className="flex items-center justify-between py-2 px-4">
-          <h3 className="title-medium text-on_surface-light">Filters</h3>
+          <h3 className="mobile-title-medium md:title-medium text-on_surface-light">Filters</h3>
 
           {/* close button */}
           <Button
@@ -86,9 +86,9 @@ function FiltersModal({
         <div className="flex flex-col divide-y divide-outline-level1">
           {/* Program Type */}
           <div className="p-4 space-y-6">
-            <h4 className="title-large text-on_surface-light">Program Type</h4>
+            <h4 className="mobile-title-large md:title-large text-on_surface-light">Program Type</h4>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {[
                 { id: 1, fVal: "Attendance Programs" },
                 { id: 2, fVal: "Online Programs" },
@@ -142,7 +142,7 @@ function FiltersModal({
               type: "text",
               color: "red",
               disabled: false,
-              size: "mobile-body-large md:body-medium",
+              size: "mobile-body-large md:body-medium w-full md:w-fit",
               padding: "py-2 px-6",
               clickHandler: resetClickHandler,
             }}
@@ -156,7 +156,7 @@ function FiltersModal({
               type: "filled",
               color: "red",
               disabled: false,
-              size: "mobile-body-large md:body-medium",
+              size: "mobile-body-large md:body-medium w-full md:w-fit",
               padding: "py-2 px-6",
               clickHandler: filterClickHandler,
             }}

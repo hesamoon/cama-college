@@ -573,6 +573,21 @@ body {
   left: 0px;
 }
 
+.bg-checkout {
+  background-color: var(--primary_shades_70);
+  overflow: hidden;
+}
+
+.bg-checkout::before {
+  content: "";
+  background-image: url("/checkout-bg.svg");
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
 .blurred {
   filter: blur(10px);
   pointer-events: none;

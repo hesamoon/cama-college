@@ -41,8 +41,6 @@ function Page() {
 
   const jobDetails: JobOffers = jobOpportunityData?.data.data;
 
-  console.log(jobDetails);
-
   return (
     <div className="relative mobile-grid-system-level md:grid-system-level">
       <div className="border border-outline-level0 md:grid md:grid-cols-4 md:h-screen">

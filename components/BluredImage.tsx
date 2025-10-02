@@ -25,23 +25,25 @@ function BluredImage({
 
   return (
     <div className="relative overflow-hidden rounded-sm">
-      {imageLoading && (
-        <div
-          className={`absolute inset-0 aspect-16-9 rounded-sm object-cover ${blurhashStyle} overflow-hidden`}
-        >
-          <Blurhash
-            hash={hash}
-            width="100%"
-            height="100%"
-            resolutionX={32}
-            resolutionY={32}
-            punch={1}
-          />
-        </div>
-      )}
+      {/* Blurhash placeholder */}
+      <div
+        className={`absolute inset-0 aspect-16-9 rounded-sm object-cover transition-all ease-in-out duration-700 ${blurhashStyle} overflow-hidden ${
+          imageLoading ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Blurhash
+          hash={hash}
+          width="100%"
+          height="100%"
+          resolutionX={32}
+          resolutionY={32}
+          punch={1}
+        />
+      </div>
 
+      {/* Real image */}
       <Image
-        className={`aspect-16-9 rounded-sm object-cover transition-all ease-linear duration-300 ${imgStyle} ${
+        className={`aspect-16-9 rounded-sm object-cover transition-all ease-in-out duration-700 ${imgStyle} ${
           imageLoading ? "opacity-0" : "opacity-100"
         }`}
         src={url}

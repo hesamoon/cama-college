@@ -145,6 +145,7 @@ function FileUpload({
       <Button
         props={{
           value: isApplying ? "Sending..." : buttonText,
+          loading: isApplying,
           type: "filled",
           color: "red",
           disabled: false,

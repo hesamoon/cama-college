@@ -160,7 +160,7 @@ function Page() {
       {/* categories - sort and filtring */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full md:border-y md:border-outline-level0 md:grid-system-level0">
         {/* categories */}
-        <div className="flex items-center gap-0 overflow-x-scroll no-scrollbar border-y border-outline-level0 md:border-none">
+        <div className="flex items-center gap-10 md:gap-0 overflow-x-scroll no-scrollbar border-y border-outline-level0 md:border-none">
           {categories.map((ctgry) => (
             <CategoryPreview
               key={ctgry.id}

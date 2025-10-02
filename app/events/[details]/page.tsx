@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // components
 import Button from "@/components/Button";
@@ -20,23 +22,62 @@ import SendCommentModal from "@/components/modal/SendCommentModal";
 import EventDetailsSkeleton from "@/components/skeletons/EventDetailsSkeleton";
 
 // api
+import { getMe } from "@/lib/api/auth";
+import { addCart } from "@/lib/api/cart";
 import { getEvent, getEvents } from "@/lib/api/events";
 
 // types
 import { Event } from "@/app/types/types";
 
+// utils
+import { userAttr } from "@/utilities/userAttr";
+
 function Page() {
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const courseId = searchParams.get("courseId");
 
+  // GET
   const { data: eventDetailss, isLoading: isLoadingEventDetails } = useQuery({
     queryKey: ["eventDetails", courseId],
     queryFn: () => getEvent(courseId || ""),
   });
-
   const { data: eventsData, isLoading: isLoadingEvents } = useQuery({
     queryKey: ["events"],
     queryFn: getEvents,
+  });
+  const { data: meData, isLoading: isLoadingMe } = useQuery({
+    queryKey: ["me"],
+    queryFn: getMe,
+  });
+
+  //POST
+  const { mutate: addToCardMutation, isPending: isAdding } = useMutation({
+    mutationFn: (data: {
+      cartable_type: string;
+      cartable_id: string;
+      quantity: number;
+    }) => addCart(data),
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries({ queryKey: ["carts"] });
+      toast.success("This event has been successfully added to your cart.", {
+        position: "top-center",
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.message || error?.message, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("An unknown error occurred.", {
+          position: "top-center",
+        });
+      }
+    },
   });
 
   const eventDetails = eventDetailss?.data.data;
@@ -52,6 +93,23 @@ function Page() {
   const [openGenInfo, setOpenGenInfo] = useState(false);
   const [openSendComment, setOpenSendComment] = useState(false);
   const [score, setScore] = useState(1);
+
+  const handleGetTicket = () => {
+    const user = userAttr();
+    if (user.role !== "UNSIGNED") {
+      if (meData?.data.data.mobile === null) {
+        setOpenGenInfo(true);
+      } else {
+        addToCardMutation({
+          cartable_type: "events",
+          cartable_id: eventDetails?.id,
+          quantity: 1,
+        });
+      }
+    } else {
+      toast.error("Please login to continue", { position: "top-center" });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,6 +150,7 @@ function Page() {
                 <div className="space-y-8">
                   <BluredImage
                     url={eventDetails?.avatar}
+                    hash={eventDetails?.avatar_hash}
                     name={`${eventDetails?.name} cover`}
                     imgStyle="w-full max-h-[438px]"
                     blurhashStyle="w-full max-h-[438px]"
@@ -108,8 +167,8 @@ function Page() {
 
             {/* tabs */}
             <div
-              className="sticky z-[35] md:grid-system-level1 overflow-x-auto no-scrollbar"
-              style={{ top: "var(--header-height)" }}
+              className="sticky top-[3.5rem] z-[35] md:grid-system-level1 overflow-x-auto no-scrollbar"
+              // style={{ top: "var(--header-height)" }}
             >
               {/* tabs */}
               <div
@@ -156,17 +215,18 @@ function Page() {
                 >
                   <Button
                     props={{
-                      value: "Get Ticket",
+                      value: isAdding ? "Getting..." : "Get Ticket",
+                      loading: isAdding,
                       type: "filled",
                       color: "red",
-                      disabled: false,
+                      disabled: isAdding || isLoadingMe,
                       leftIcon: "shopping-cart",
                       rightIcon: "",
                       padding: "py-2 pr-6 pl-4 w-full",
                       size: "body-large",
                       height: 20,
                       width: 20,
-                      clickHandler: () => setOpenGenInfo(true),
+                      clickHandler: handleGetTicket,
                     }}
                   />
 
@@ -330,17 +390,18 @@ function Page() {
                   <div className="">
                     <Button
                       props={{
-                        value: "Get Ticket",
+                        value: isAdding ? "Getting..." : "Get Ticket",
+                        loading: isAdding,
                         type: "filled",
                         color: "red",
-                        disabled: false,
+                        disabled: isAdding || isLoadingMe,
                         leftIcon: "",
                         rightIcon: "",
                         padding: "py-2 px-6 w-full",
                         size: "mobile-body-large md:body-large",
                         height: 24,
                         width: 24,
-                        clickHandler: () => setOpenGenInfo(true),
+                        clickHandler: handleGetTicket,
                       }}
                     />
                   </div>
@@ -468,17 +529,18 @@ function Page() {
                   <div className="">
                     <Button
                       props={{
-                        value: "Get Ticket",
+                        value: isAdding ? "Getting..." : "Get Ticket",
+                        loading: isAdding,
                         type: "filled",
                         color: "red",
-                        disabled: false,
+                        disabled: isAdding || isLoadingMe,
                         leftIcon: "",
                         rightIcon: "",
                         padding: "py-2 px-6 w-full",
                         size: "body-large",
                         height: 24,
                         width: 24,
-                        clickHandler: () => setOpenGenInfo(true),
+                        clickHandler: handleGetTicket,
                       }}
                     />
                   </div>

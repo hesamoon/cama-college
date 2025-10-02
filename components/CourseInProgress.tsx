@@ -246,7 +246,7 @@ function CourseInProgress({
           </div>
 
           {/* continue */}
-          <div className="flex items-center justify-end">
+          <div className="md:flex md:items-center md:justify-end">
             <Button
               props={{
                 value: "Continue learning",
@@ -255,7 +255,7 @@ function CourseInProgress({
                 leftIcon: "",
                 rightIcon: "arrow-right-white",
                 type: "filled",
-                size: "mobile-body-medium md:body-medium",
+                size: "mobile-body-medium md:body-medium w-full md:w-fit",
                 padding: "px-3.5 py-2",
                 clickHandler: () =>
                   router.push(`/programs/in-progress/?program=${name}`),

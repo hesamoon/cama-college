@@ -3,29 +3,37 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 // components
 import Button from "@/components/Button";
 import CourseCard from "@/components/CourseCard";
 import RatingCard from "@/components/RatingCard";
+import BluredImage from "@/components/BluredImage";
 import ContentSection from "@/components/ContentSection";
 import CommentsSection from "@/components/CommentsSection";
 import DescriptionSection from "@/components/DescriptionSection";
+import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
+import SendCommentModal from "@/components/modal/SendCommentModal";
 import ProgramDetailsSkeleton from "@/components/skeletons/ProgramDetailsSkeleton";
 
 // api
+import { getMe } from "@/lib/api/auth";
+import { addCart } from "@/lib/api/cart";
 import { getProgram, getPrograms } from "@/lib/api/programs";
 
 // types
 import { Program } from "@/app/types/types";
-import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
-import SendCommentModal from "@/components/modal/SendCommentModal";
-import BluredImage from "@/components/BluredImage";
+
+// utils
+import { userAttr } from "@/utilities/userAttr";
 
 function Page() {
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const courseId = searchParams.get("courseId");
 
@@ -35,13 +43,43 @@ function Page() {
       queryKey: ["programDetails", courseId],
       queryFn: () => getProgram(courseId || ""),
     });
-
   const { data: programsData, isLoading: isLoadingPrograms } = useQuery({
     queryKey: ["programs"],
     queryFn: getPrograms,
   });
+  const { data: meData, isLoading: meIsLoading } = useQuery({
+    queryKey: ["me"],
+    queryFn: getMe,
+  });
 
-  console.log(programDetailss);
+  //POST
+  const { mutate: addToCardMutation, isPending: isAdding } = useMutation({
+    mutationFn: (data: {
+      cartable_type: string;
+      cartable_id: string;
+      quantity: number;
+    }) => addCart(data),
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries({ queryKey: ["carts"] });
+      toast.success("This program has been successfully added to your cart.", {
+        position: "top-center",
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.message || error?.message, {
+          position: "top-center",
+        });
+      } else {
+        toast.error("An unknown error occurred.", {
+          position: "top-center",
+        });
+      }
+    },
+  });
 
   const programDetails = programDetailss?.data.data;
   const tabs = ["Description", "Content", "Comments", "Related Programs"];
@@ -49,6 +87,24 @@ function Page() {
   const [openGenInfo, setOpenGenInfo] = useState(false);
   const [openSendComment, setOpenSendComment] = useState(false);
   const [score, setScore] = useState(1);
+
+  const getCourseClickHandler = () => {
+    console.log(meData);
+    const user = userAttr();
+    if (user.role !== "UNSIGNED") {
+      if (meData?.data.data.mobile === null) {
+        setOpenGenInfo(true);
+      } else {
+        addToCardMutation({
+          cartable_type: "programs",
+          cartable_id: programDetails?.id,
+          quantity: 1,
+        });
+      }
+    } else {
+      toast.error("Please login to continue", { position: "top-center" });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,6 +146,7 @@ function Page() {
                 <div className="space-y-8">
                   <BluredImage
                     url={programDetails?.avatar}
+                    hash={programDetails?.avatar_hash}
                     name={`${programDetails?.name} cover`}
                     imgStyle="w-full max-h-[438px]"
                     blurhashStyle="w-full max-h-[438px]"
@@ -106,8 +163,8 @@ function Page() {
 
             {/* tabs */}
             <div
-              className="sticky z-[35] md:grid-system-level1 transition-transform duration-300"
-              style={{ top: "var(--header-height)" }}
+              className="sticky z-[35] md:grid-system-level1 transition-transform duration-300 top-[3.5rem]"
+              // style={{ top: "var(--header-height)" }}
             >
               {/* tabs */}
               <div
@@ -154,17 +211,18 @@ function Page() {
                 >
                   <Button
                     props={{
-                      value: "Get Course",
+                      value: isAdding ? "Getting..." : "Get Course",
                       type: "filled",
                       color: "red",
-                      disabled: false,
+                      disabled: isAdding || meIsLoading,
                       leftIcon: "shopping-cart",
                       rightIcon: "",
                       padding: "py-2 pr-6 pl-4 w-full",
                       size: "body-large",
                       height: 20,
                       width: 20,
-                      clickHandler: () => setOpenGenInfo(true),
+                      clickHandler: getCourseClickHandler,
+                      loading: isAdding,
                     }}
                   />
 
@@ -308,17 +366,18 @@ function Page() {
                 <div className="mobile-grid-system-level0 md:grid-system-level1 flex items-center justify-between gap-2">
                   <Button
                     props={{
-                      value: "Get Course",
+                      value: isAdding ? "Getting..." : "Get Course",
+                      loading: isAdding,
                       type: "filled",
                       color: "red",
-                      disabled: false,
+                      disabled: isAdding || meIsLoading,
                       leftIcon: "shopping-cart",
                       rightIcon: "",
                       padding: "py-3 px-4",
                       size: "body-small",
                       height: 16,
                       width: 16,
-                      clickHandler: () => setOpenGenInfo(true),
+                      clickHandler: getCourseClickHandler,
                     }}
                   />
 
@@ -451,17 +510,18 @@ function Page() {
                   <div className="flex items-center gap-2">
                     <Button
                       props={{
-                        value: "Get Course",
+                        value: isAdding ? "Getting..." : "Get Course",
+                        loading: isAdding,
                         type: "filled",
                         color: "red",
-                        disabled: false,
+                        disabled: isAdding || meIsLoading,
                         leftIcon: "shopping-cart",
                         rightIcon: "",
                         padding: "py-2 pr-6 pl-4 w-full",
                         size: "body-large",
                         height: 24,
                         width: 24,
-                        clickHandler: () => setOpenGenInfo(true),
+                        clickHandler: getCourseClickHandler,
                       }}
                     />
 

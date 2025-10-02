@@ -15,6 +15,7 @@ type Props = {
   padding?: string;
   hover?: string;
   clickHandler?: () => void;
+  loading?: boolean;
 };
 
 function Button({
@@ -31,6 +32,7 @@ function Button({
     padding = "p-2",
     hover = "hover:bg-primary-opacity-40 focus:bg-primary-opacity-12",
     clickHandler = () => {},
+    loading = false,
   },
 }: {
   props: Props;
@@ -64,13 +66,36 @@ function Button({
           ? "bg-primary-shades-10-opacity-4"
           : null
       }`}
-      disabled={disabled}
+      disabled={disabled || loading}
       onClick={(e) => {
         e.stopPropagation();
-        clickHandler();
+        if (!loading) {
+          clickHandler();
+        }
       }}
     >
-      {leftIcon ? (
+      {loading ? (
+        <svg
+          width={width}
+          height={height}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="animate-spin"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeDasharray="31.416"
+            strokeDashoffset="31.416"
+            className="opacity-75"
+          />
+        </svg>
+      ) : leftIcon ? (
         <Image
           src={`/${leftIcon}.svg`}
           alt={leftIcon}
@@ -81,7 +106,7 @@ function Button({
 
       {value}
 
-      {rightIcon ? (
+      {!loading && rightIcon ? (
         <Image
           src={`/${rightIcon}.svg`}
           alt={rightIcon}

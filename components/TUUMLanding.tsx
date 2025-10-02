@@ -8,9 +8,9 @@ import AISearchBox from "./AISearchBox";
 import MouseTooltipWrapper from "./MouseTooltipWrapper";
 
 function TUUMLanding() {
-  const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
   const landingHeight = useRef(0);
+  const [hidden, setHidden] = useState(false);
 
   const landingRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,10 +53,10 @@ function TUUMLanding() {
     >
       <MouseTooltipWrapper message="Hello, Im CAMA College AI assistant">
         <div className="flex flex-col items-center mobile-grid-system-level0 md:grid-system-level0">
-          <div className="space-y-16 flex flex-col items-center justify-center">
-            <div className="space-y-8">
+          <div className="space-y-8 md:space-y-16 flex flex-col items-center justify-center">
+            <div className="space-y-4 md:space-y-8">
               {/* TUUM Professor AI */}
-              <div className="flex flex-col items-center justify-center gap-12">
+              <div className=" flex flex-col items-center justify-center gap-8 md:gap-12">
                 <div className="relative rounded-full shadow-[0px_0px_100px_rgba(183,105,41,1)]">
                   {/* glow effect */}
                   <>
@@ -82,10 +82,10 @@ function TUUMLanding() {
                     </video>
                   </div>
 
-                  <div className="absolute -top-65 -left-50 w-[500px] h-[500px] rounded-full bg-[#B76929] blur-3xl opacity-20 " />
+                  <div className="absolute -top-30 md:-top-65 -left-25 md:-left-50 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-[#B76929] blur-3xl opacity-20" />
                 </div>
 
-                <h5 className="label-large-db bg-gradient-to-r from-[#F78B5D] to-[#CE6312] bg-clip-text text-transparent">
+                <h5 className="mobile-label-large-db md:label-large-db bg-gradient-to-r from-[#F78B5D] to-[#CE6312] bg-clip-text text-transparent">
                   TUUM Professor
                 </h5>
 
@@ -102,12 +102,12 @@ function TUUMLanding() {
               <div className="space-y-4 flex flex-col items-center justify-center">
                 <Typewriter
                   text="With CAMA college, shape your future!"
-                  sx="mobile-display-large md:header-small max-w-96 md:max-w-xl text-txt-on-primary-dark"
+                  sx="mobile-header-small md:header-small max-w-96 md:max-w-xl text-txt-on-primary-dark"
                 />
 
                 <Typewriter
                   text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas"
-                  sx="body-large text-txt-on-surface-terriary-light max-w-140"
+                  sx="mobile-body-large md:body-large text-txt-on-surface-terriary-light max-w-85 md:max-w-140"
                 />
               </div>
             </div>

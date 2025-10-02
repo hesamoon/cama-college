@@ -27,6 +27,7 @@ interface CourseBase {
   about: string;
   audience: { text: string }[];
   avatar: string;
+  avatar_hash:string;
   language: string;
   level: string;
   prerequisites: { text: string }[];
@@ -220,4 +221,18 @@ export type ChatMessage = {
   content: string;
   timestamp: string;
   attachments?: string[]; // URLs to images/files
+};
+
+type CreditCardValue = {
+  cardNumber: string;
+  expiry: string; // "MM/YY"
+  cvv: string;
+  cardType: "visa" | "mastercard" | "amex" | "default";
+};
+
+type CartType = {
+  cartable: CourseCardProps;
+  cartable_type: string;
+  price: number;
+  quantity: number;
 };

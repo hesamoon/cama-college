@@ -19,4 +19,16 @@ const getCookie = (cookieName) => {
     ?.split("=")[1];
 };
 
-export { setCookie, getCookie, clearCookie };
+const isLogged = () => {
+  if (typeof document === "undefined") {
+    return false;
+  }
+
+  return !!document?.cookie
+    .split(";")
+    .find((token) => token.trim().split("=")[0] === "accessToken")
+    ?.split("=")[1]
+  
+};
+
+export { setCookie, getCookie, clearCookie, isLogged };

@@ -27,7 +27,7 @@ function Selector({
 }) {
   return (
     <button
-      className={`mobile-body-medium md:body-large transition-all duration-300 border rounded-full py-0.5 px-4 sm:py-1 sm:px-8 md:py-2 md:px-12 hover:border-background-primary-light hover:bg-[#A914180A] focus:border-background-primary-light focus:bg-[#A9141814] ${
+      className={`mobile-body-large md:body-large transition-all duration-300 border rounded-full w-fit md:w-full py-2 px-3 hover:border-background-primary-light hover:bg-[#A914180A] focus:border-background-primary-light focus:bg-[#A9141814] ${
         selected
           ? "bg-[#A9141814] border-background-primary-light text-background-primary-light"
           : "border-outline-level0 text-on_surface-light"
