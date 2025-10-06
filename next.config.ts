@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["api.itaxim.ir"],
   },
+  output: 'standalone',
 };
 
 export default nextConfig;
