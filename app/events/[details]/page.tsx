@@ -80,7 +80,7 @@ function Page() {
     "Comments",
     "Related Events",
   ];
-  
+
   const [score, setScore] = useState(1);
   const [activeTab, setActiveTab] = useState("Description");
   const [openSendComment, setOpenSendComment] = useState(false);
@@ -538,7 +538,7 @@ function Page() {
               {/* comments */}
               <div className="col-span-2">
                 {/* comments */}
-                <CommentsSection />
+                <CommentsSection comments={eventDetails.comments} />
               </div>
 
               {/* rating card */}
@@ -714,6 +714,7 @@ function Page() {
             onClose={() => setOpenSendComment(false)}
             score={score}
             commentFor="Event"
+            id={eventDetails?.id}
           />
         </>
       )}
