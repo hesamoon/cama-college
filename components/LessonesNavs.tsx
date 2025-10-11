@@ -10,6 +10,7 @@ import { Lesson, ProgramDetailsType, Subject } from "@/app/types/types";
 
 // api
 import { getProgram } from "@/lib/api/programs";
+import SubjectsSkeleton from "./skeletons/SubjectsSkeleton";
 
 function LessonesNavs() {
   // const [program] = useQueryState("program", { defaultValue: "" });
@@ -138,7 +139,9 @@ function LessonesNavs() {
     }
   }, [programDetails]);
 
-  return (
+  return isLoadingProgramDetails ? (
+    <SubjectsSkeleton />
+  ) : (
     <div className="md:border md:border-outline-level1 divide-y divide-outline-level0">
       {programDetails?.data.data.subjects.map((subject: Subject) => (
         <div key={subject.id} className="bg-surface0-light">

@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useQueryState } from "nuqs";
 import { useRouter } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import Button from "@/components/Button";
@@ -28,15 +28,13 @@ import { getProgram } from "@/lib/api/programs";
 import { Lesson, Subject } from "@/app/types/types";
 
 function Page() {
-  const queryClient = useQueryClient();
-  const [program] = useQueryState("program", { defaultValue: "" });
   const [queryLesson] = useQueryState("lesson", { defaultValue: "" });
   const [courseId] = useQueryState("courseId", { defaultValue: "" });
   const [lessonId] = useQueryState("lessonID", {
     defaultValue: "",
   });
 
-  const [getVideo, setGetVideo] = useState(false);
+  const [getVideo] = useState(false);
   const [lessonDetails, setLessonsDetails] = useState<Lesson>(null);
 
   // GET
@@ -57,6 +55,7 @@ function Page() {
     }
   );
   console.log(courseId);
+  console.log(lessonsData);
   console.log(programDetails);
 
   const router = useRouter();
