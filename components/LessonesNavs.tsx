@@ -1,59 +1,71 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useQueryState } from "nuqs";
 import toast from "react-hot-toast";
+import { useQueryState } from "nuqs";
+import { useQuery } from "@tanstack/react-query";
 
 // types
-import { ProgramInProgress } from "@/app/types/types";
+import { Lesson, ProgramDetailsType, Subject } from "@/app/types/types";
 
-// data
-import { programsInProgress } from "@/constants/data";
+// api
+import { getProgram } from "@/lib/api/programs";
 
 function LessonesNavs() {
-  const [program] = useQueryState("program", { defaultValue: "" });
+  // const [program] = useQueryState("program", { defaultValue: "" });
+  const [courseId] = useQueryState("courseId", { defaultValue: "" });
   const [queryLesson, setLesson] = useQueryState("lesson", {
     defaultValue: "",
   });
+  const [lessondId, setLessonId] = useQueryState("lessonID", {
+    defaultValue: "",
+  });
 
-  const [openID, setOpenID] = useState(-1);
-
-  const programInProgressDetails = programsInProgress.find(
-    (p) => p.name === decodeURIComponent(program)
+  // GET
+  const { data: programDetails, isLoading: isLoadingProgramDetails } = useQuery(
+    {
+      queryKey: ["programDetails", courseId],
+      queryFn: () => getProgram(courseId || ""),
+      enabled: !!courseId,
+    }
   );
 
+  const [openID, setOpenID] = useState("-1");
+
   function findSubjectIDByLessonTitle(
-    data: ProgramInProgress,
+    data: ProgramDetailsType,
     lessonTitle: string
   ) {
-    for (const subject of data.contents) {
+    for (const subject of data.subjects) {
       for (const lesson of subject.lessons) {
-        if (lesson.title === lessonTitle) {
+        if (lesson?.title === lessonTitle) {
           return subject.id;
         }
       }
     }
-    return -1;
+    return "-1";
   }
 
   useEffect(() => {
-    if (programInProgressDetails) {
-      const lessonDetails = programInProgressDetails.contents.flatMap(
-        (subject) =>
-          subject.lessons.filter((lesson) => lesson.title === queryLesson)
+    if (programDetails?.data.data.subjects.lenght > 0) {
+      const lessonDetails = programDetails?.data.data.subjects.flatMap(
+        (subject: Subject) =>
+          subject.lessons.filter(
+            (lesson: Lesson) => lesson?.title === queryLesson
+          )
       )[0];
 
       if (lessonDetails) {
-        if (lessonDetails.passed === -1) {
+        if (lessonDetails.is_free === 0) {
           const id = findSubjectIDByLessonTitle(
-            programInProgressDetails,
+            programDetails?.data.data,
             queryLesson
           );
 
           const lastInProgressLessonDetails =
-            programInProgressDetails.contents.flatMap((subject) =>
+            programDetails?.data.data.subjects.flatMap((subject: Subject) =>
               subject.lessons.filter(
-                (lesson) => lesson.passed === 0 && subject.id === id
+                (lesson: Lesson) => lesson?.is_free === 0 && subject.id === id
               )
             );
 
@@ -66,22 +78,24 @@ function LessonesNavs() {
                 : 0
             ].title
           );
+          setLessonId(lessonDetails[0].id);
           setOpenID(id);
         } else {
           const id = findSubjectIDByLessonTitle(
-            programInProgressDetails,
+            programDetails?.data.data,
             queryLesson
           );
 
           setOpenID(id);
         }
       } else {
-        const lessonDetails = programInProgressDetails.contents.flatMap(
-          (subject) => subject.lessons.filter((lesson) => lesson.passed === 0)
+        const lessonDetails = programDetails?.data.data.subjects.flatMap(
+          (subject: Subject) =>
+            subject.lessons.filter((lesson: Lesson) => lesson?.is_free === 0)
         );
 
         const id = findSubjectIDByLessonTitle(
-          programInProgressDetails,
+          programDetails?.data.data,
           lessonDetails[lessonDetails.length - 1].title
         );
 
@@ -90,50 +104,57 @@ function LessonesNavs() {
 
         setOpenID(id);
         setLesson(lessonDetails[lessonDetails.length - 1].title);
+        setLessonId(lessonDetails[0].id);
       }
     }
   }, [queryLesson]);
 
   useEffect(() => {
-    if (!queryLesson && programInProgressDetails) {
-      const lessonDetails = programInProgressDetails.contents.flatMap(
-        (subject) => subject.lessons.filter((lesson) => lesson.passed === 0)
+    if (!queryLesson && programDetails?.data) {
+      const lessonDetails = programDetails?.data.data.subjects.flatMap(
+        (subject: Subject) =>
+          subject.lessons.filter((lesson: Lesson) => lesson?.is_free === 0)
       );
+      console.log(programDetails);
+      console.log(lessonDetails);
 
-      const id = findSubjectIDByLessonTitle(
-        programInProgressDetails,
-        lessonDetails[0].title
-      );
+      if (lessonDetails[0]) {
+        const id = findSubjectIDByLessonTitle(
+          programDetails?.data.data,
+          lessonDetails[0].title
+        );
 
-      setLesson(lessonDetails[0].title);
-      setOpenID(id);
-    } else if (programInProgressDetails) {
+        setLesson(lessonDetails[0].title);
+        setLessonId(lessonDetails[0].id);
+        setOpenID(id);
+      }
+    } else if (programDetails?.data) {
       const id = findSubjectIDByLessonTitle(
-        programInProgressDetails,
+        programDetails?.data.data,
         queryLesson
       );
 
       setOpenID(id);
     }
-  }, []);
+  }, [programDetails]);
 
   return (
     <div className="md:border md:border-outline-level1 divide-y divide-outline-level0">
-      {programInProgressDetails?.contents.map((content) => (
-        <div key={content.id} className="bg-surface0-light">
+      {programDetails?.data.data.subjects.map((subject: Subject) => (
+        <div key={subject.id} className="bg-surface0-light">
           <div
             className="flex items-center justify-between bg-surface0-light p-5 cursor-pointer"
             onClick={() =>
-              setOpenID((prev) => (prev === content.id ? -1 : content.id))
+              setOpenID((prev) => (prev === subject.id ? "-1" : subject.id))
             }
           >
             <h4 className="mobile-title-medium md:title-medium text-on_surface-light">
-              {content.title}
+              {subject.name}
             </h4>
 
             <div
               className={`transition-all ease-in-out duration-300 ${
-                openID === content.id ? "rotate-180" : null
+                openID === subject.id ? "rotate-180" : null
               }`}
             >
               <svg
@@ -155,20 +176,25 @@ function LessonesNavs() {
             </div>
           </div>
 
-          {openID === content.id && (
+          {openID === subject.id && (
             <div className="bg-white divide-y divide-outline-level1">
-              {content.lessons.map((lesson) => (
+              {subject.lessons.map((lesson: Lesson) => (
                 <div
-                  key={lesson.id}
+                  key={lesson?.id}
                   className={`p-4 flex items-center justify-between ${
-                    lesson.passed === -1 ? null : "cursor-pointer"
+                    lesson?.is_free === 0
+                      ? "pointer-events-none"
+                      : "cursor-pointer"
                   }`}
-                  onClick={() =>
-                    lesson.passed === -1 ? null : setLesson(lesson.title)
-                  }
+                  onClick={() => {
+                    if (lesson?.is_free !== 0) {
+                      setLesson(lesson?.title || "");
+                      setLessonId(lesson?.id || "");
+                    }
+                  }}
                 >
                   <div className="flex items-center gap-2">
-                    {lesson.type === "video" ? (
+                    {lesson?.avatar ? (
                       <svg
                         width="20"
                         height="20"
@@ -179,7 +205,7 @@ function LessonesNavs() {
                         <path
                           d="M17.5665 7.15035V12.8503C17.5665 13.7837 17.0665 14.6504 16.2581 15.1254L11.3081 17.9837C10.4998 18.4504 9.49981 18.4504 8.68315 17.9837L3.73314 15.1254C2.92481 14.6587 2.4248 13.792 2.4248 12.8503V7.15035C2.4248 6.21702 2.92481 5.35032 3.73314 4.87532L8.68315 2.01699C9.49148 1.55033 10.4915 1.55033 11.3081 2.01699L16.2581 4.87532C17.0665 5.35032 17.5665 6.20869 17.5665 7.15035Z"
                           stroke={
-                            lesson.title === queryLesson ? "#A91418" : "#484647"
+                            lesson?.id === lessondId ? "#A91418" : "#484647"
                           }
                           stroke-width="1.5"
                           stroke-linecap="round"
@@ -188,7 +214,7 @@ function LessonesNavs() {
                         <path
                           d="M8.125 10.0001V9.00007C8.125 7.71674 9.03334 7.19177 10.1417 7.83344L11.0083 8.33342L11.875 8.8334C12.9833 9.47506 12.9833 10.5251 11.875 11.1668L11.0083 11.6667L10.1417 12.1667C9.03334 12.8084 8.125 12.2834 8.125 11.0001V10.0001Z"
                           stroke={
-                            lesson.title === queryLesson ? "#A91418" : "#484647"
+                            lesson?.id === lessondId ? "#A91418" : "#484647"
                           }
                           stroke-width="1.5"
                           stroke-miterlimit="10"
@@ -207,7 +233,7 @@ function LessonesNavs() {
                         <path
                           d="M2.9165 15.0003V5.83366C2.9165 2.50033 3.74984 1.66699 7.08317 1.66699H12.9165C16.2498 1.66699 17.0832 2.50033 17.0832 5.83366V14.167C17.0832 14.2837 17.0832 14.4003 17.0748 14.517"
                           stroke={
-                            lesson.title === queryLesson ? "#A91418" : "#484647"
+                            lesson?.id === lessondId ? "#A91418" : "#484647"
                           }
                           stroke-width="1.5"
                           stroke-linecap="round"
@@ -216,7 +242,7 @@ function LessonesNavs() {
                         <path
                           d="M5.2915 12.5H17.0832V15.4167C17.0832 17.025 15.7748 18.3333 14.1665 18.3333H5.83317C4.22484 18.3333 2.9165 17.025 2.9165 15.4167V14.875C2.9165 13.5667 3.98317 12.5 5.2915 12.5Z"
                           stroke={
-                            lesson.title === queryLesson ? "#A91418" : "#484647"
+                            lesson?.id === lessondId ? "#A91418" : "#484647"
                           }
                           stroke-width="1.5"
                           stroke-linecap="round"
@@ -225,7 +251,7 @@ function LessonesNavs() {
                         <path
                           d="M6.6665 5.83301H13.3332"
                           stroke={
-                            lesson.title === queryLesson ? "#A91418" : "#484647"
+                            lesson?.id === lessondId ? "#A91418" : "#484647"
                           }
                           stroke-width="1.5"
                           stroke-linecap="round"
@@ -234,7 +260,7 @@ function LessonesNavs() {
                         <path
                           d="M6.6665 8.75H10.8332"
                           stroke={
-                            lesson.title === queryLesson ? "#A91418" : "#484647"
+                            lesson?.id === lessondId ? "#A91418" : "#484647"
                           }
                           stroke-width="1.5"
                           stroke-linecap="round"
@@ -245,17 +271,17 @@ function LessonesNavs() {
 
                     <h5
                       className={`mobile-title-small md:title-small transition-all ease-in-out duration-300 ${
-                        queryLesson === lesson.title
+                        lessondId === lesson?.id
                           ? "text-background-primary-light"
                           : "text-txt-on-surface-secondary-light"
                       }`}
                     >
-                      {lesson.title}
+                      {lesson?.title}
                     </h5>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    {lesson.passed === 1 ? (
+                    {lesson?.is_free === 1 ? (
                       <svg
                         width="20"
                         height="20"
@@ -278,7 +304,7 @@ function LessonesNavs() {
                           stroke-linejoin="round"
                         />
                       </svg>
-                    ) : lesson.passed === -1 ? (
+                    ) : lesson?.is_free === 0 ? (
                       <svg
                         width="16"
                         height="16"

@@ -16,6 +16,7 @@ type Props = {
   hover?: string;
   clickHandler?: () => void;
   loading?: boolean;
+  rotation?: string;
 };
 
 function Button({
@@ -28,11 +29,12 @@ function Button({
     color,
     width = 24,
     height = 24,
-    size = "body-large",
+    size = "mobile-body-large md:body-large",
     padding = "p-2",
     hover = "hover:bg-primary-opacity-40 focus:bg-primary-opacity-12",
     clickHandler = () => {},
     loading = false,
+    rotation = "",
   },
 }: {
   props: Props;
@@ -112,6 +114,7 @@ function Button({
           alt={rightIcon}
           width={width}
           height={height}
+          className={rotation}
         />
       ) : null}
     </button>

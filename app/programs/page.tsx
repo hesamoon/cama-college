@@ -34,6 +34,7 @@ function Page() {
     priceRange: { min: number; max: number };
   } | null>(null);
 
+  // GET
   const {
     data: programsData,
     isLoading: isLoadingPrograms,

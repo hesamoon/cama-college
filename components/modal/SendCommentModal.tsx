@@ -3,22 +3,63 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
 
 // components
 import Modal from "./Modal";
 import Button from "../Button";
+
+// apis
+import { addEventComment } from "@/lib/api/events";
+import { addProgramComment } from "@/lib/api/programs";
 
 function SendCommentModal({
   open,
   onClose,
   score,
   commentFor,
+  id,
 }: {
   open: boolean;
   onClose: () => void;
   score: number;
   commentFor: string;
+  id: string;
 }) {
+  // POST
+  const { mutate: addCommentMutation, isPending: isAddingComment } =
+    useMutation({
+      mutationFn:
+        commentFor === "Program" ? addProgramComment : addEventComment,
+      onSuccess: (data) => {
+        console.log(data);
+        toast.success("Your comment submitted successfully!", {
+          position: "top-center",
+        });
+        handleClose();
+      },
+      onError: (error) => {
+        console.log(error);
+
+        if (error instanceof AxiosError) {
+          if (error.response?.data?.errors) {
+            console.log(error.response.data.errors);
+            toast.error(error.response.data.errors.text[0], {
+              position: "top-center",
+            });
+          } else {
+            toast.error(error.response?.data?.message || error?.message, {
+              position: "top-center",
+            });
+          }
+        } else {
+          toast.error("An unknown error occurred.", { position: "top-center" });
+        }
+      },
+    });
+
   const [selScore, setSelScore] = useState(score);
   const [commentValue, setCommentValue] = useState("");
 
@@ -27,8 +68,23 @@ function SendCommentModal({
     onClose();
   };
 
-  console.log(selScore);
-  console.log(score);
+  const submitClickHandler = () => {
+    console.log({
+      id: id,
+      data: {
+        text: commentValue,
+        score: selScore,
+      },
+    });
+
+    addCommentMutation({
+      id: id,
+      data: {
+        text: commentValue,
+        score: selScore,
+      },
+    });
+  };
 
   useEffect(() => {
     setSelScore(score);
@@ -145,15 +201,16 @@ function SendCommentModal({
 
         <Button
           props={{
-            value: "Submit Comment",
+            value: isAddingComment ? "Submitting..." : "Submit Comment",
+            loading: isAddingComment,
             leftIcon: "",
             rightIcon: "",
             type: "filled",
             color: "red",
-            disabled: false,
+            disabled: isAddingComment,
             size: "mobile-body-large md:body-large w-full md:w-fit",
             padding: "py-2 px-4",
-            // clickHandler: handleClose,
+            clickHandler: submitClickHandler,
           }}
         />
       </footer>

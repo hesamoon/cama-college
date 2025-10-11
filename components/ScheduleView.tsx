@@ -39,7 +39,10 @@ function ScheduleView() {
             {day.newEvents.length > 0 ? (
               <div className="absolute top-1 right-1 flex items-center gap-0.5">
                 {day.newEvents.map((e) => (
-                  <div key={e} className="w-1 h-1 md:w-2 md:h-2 rounded-full bg-green" />
+                  <div
+                    key={e}
+                    className="w-1 h-1 md:w-2 md:h-2 rounded-full bg-green"
+                  />
                 ))}
               </div>
             ) : null}
@@ -65,6 +68,10 @@ function ScheduleView() {
             type: "text",
             size: "mobile-body-large md:body-large",
             padding: "px-3 py-2",
+            rotation:
+              (isMobile ? more * 7 : more * 12) > days.length
+                ? "rotate-180"
+                : "",
             clickHandler: () =>
               (isMobile ? more * 7 : more * 12) <= days.length
                 ? setMore((prev) => prev + 1)

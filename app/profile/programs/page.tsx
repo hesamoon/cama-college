@@ -2,37 +2,54 @@
 
 import { useEffect, useState } from "react";
 import { useQueryState } from "nuqs";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import ScheduleView from "@/components/ScheduleView";
 import CourseInProgress from "@/components/CourseInProgress";
 import SearchBoxContainer from "@/components/SearchBoxContainer";
+import InProgressSkeletone from "@/components/skeletons/InProgressSkeletone";
 
 // types
-import { ProgramInProgress } from "@/app/types/types";
+import { Program } from "@/app/types/types";
 
-// data
-import { programsInProgress } from "@/constants/data";
+// api
+import { getPrograms } from "@/lib/api/programs";
 
 function Page() {
+  // GET
+  const { data: programsData, isLoading: isLoadingPrograms } = useQuery({
+    queryKey: ["programs"],
+    queryFn: getPrograms,
+  });
+
+  console.log(programsData);
+
   const [filter, setFilter] = useQueryState("filter", { defaultValue: "" });
   const [search] = useQueryState("search", { defaultValue: "" });
 
-  const [controlledList, setControlledList] = useState<ProgramInProgress[]>([]);
+  const [controlledList, setControlledList] = useState<Program[]>([]);
 
   useEffect(() => {
-    setControlledList(
-      programsInProgress.filter(
-        (pIP) =>
-          pIP.name.toLowerCase().includes(search.toLowerCase()) &&
-          pIP.category.includes(filter ? filter : "")
-      )
-    );
+    if (programsData?.data.data.length > 0)
+      setControlledList(
+        programsData?.data.data.filter(
+          (pIP: Program) =>
+            pIP.name.toLowerCase().includes(search.toLowerCase()) &&
+            pIP.subject.includes(filter ? filter : "")
+        )
+      );
   }, [search, filter]);
 
   useEffect(() => {
-    setControlledList(programsInProgress);
-  }, []);
+    console.log(programsData?.data.data);
+    if (programsData?.data.data.length > 0)
+      setControlledList(programsData?.data.data);
+  }, [programsData]);
+
+  console.log(controlledList);
+
+  if (isLoadingPrograms) return <InProgressSkeletone />;
 
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9">
@@ -53,7 +70,7 @@ function Page() {
             Last Program
           </h2>
 
-          <CourseInProgress courseDetails={programsInProgress[0]} />
+          <CourseInProgress courseDetails={programsData?.data.data[0]} />
         </div>
 
         {/* all program section */}

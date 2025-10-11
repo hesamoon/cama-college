@@ -17,8 +17,8 @@ function page() {
           <BluredImage
             url="/tuum-bg.jpg"
             name="tuum bg"
-            imgStyle="w-full h-auto object-cover"
-            blurhashStyle="w-full h-auto object-cover"
+            imgStyle="object-cover"
+            blurhashStyle="object-cover"
             cWidth={1920}
             cHeight={1080}
           />

@@ -17,20 +17,15 @@ import CommentsSection from "@/components/CommentsSection";
 import SpeakersSection from "@/components/SpeakersSection";
 import LocationSection from "@/components/LocationSection";
 import DescriptionSection from "@/components/DescriptionSection";
-import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
 import SendCommentModal from "@/components/modal/SendCommentModal";
 import EventDetailsSkeleton from "@/components/skeletons/EventDetailsSkeleton";
 
 // api
-import { getMe } from "@/lib/api/auth";
 import { addCart } from "@/lib/api/cart";
 import { getEvent, getEvents } from "@/lib/api/events";
 
 // types
 import { Event } from "@/app/types/types";
-
-// utils
-import { userAttr } from "@/utilities/userAttr";
 
 function Page() {
   const queryClient = useQueryClient();
@@ -45,10 +40,6 @@ function Page() {
   const { data: eventsData, isLoading: isLoadingEvents } = useQuery({
     queryKey: ["events"],
     queryFn: getEvents,
-  });
-  const { data: meData, isLoading: isLoadingMe } = useQuery({
-    queryKey: ["me"],
-    queryFn: getMe,
   });
 
   //POST
@@ -89,26 +80,17 @@ function Page() {
     "Comments",
     "Related Events",
   ];
-  const [activeTab, setActiveTab] = useState("Description");
-  const [openGenInfo, setOpenGenInfo] = useState(false);
-  const [openSendComment, setOpenSendComment] = useState(false);
+  
   const [score, setScore] = useState(1);
+  const [activeTab, setActiveTab] = useState("Description");
+  const [openSendComment, setOpenSendComment] = useState(false);
 
   const handleGetTicket = () => {
-    const user = userAttr();
-    if (user.role !== "UNSIGNED") {
-      if (meData?.data.data.mobile === null) {
-        setOpenGenInfo(true);
-      } else {
-        addToCardMutation({
-          cartable_type: "events",
-          cartable_id: eventDetails?.id,
-          quantity: 1,
-        });
-      }
-    } else {
-      toast.error("Please login to continue", { position: "top-center" });
-    }
+    addToCardMutation({
+      cartable_type: "events",
+      cartable_id: eventDetails?.id,
+      quantity: 1,
+    });
   };
 
   useEffect(() => {
@@ -219,7 +201,7 @@ function Page() {
                       loading: isAdding,
                       type: "filled",
                       color: "red",
-                      disabled: isAdding || isLoadingMe,
+                      disabled: isAdding,
                       leftIcon: "shopping-cart",
                       rightIcon: "",
                       padding: "py-2 pr-6 pl-4 w-full",
@@ -394,7 +376,7 @@ function Page() {
                         loading: isAdding,
                         type: "filled",
                         color: "red",
-                        disabled: isAdding || isLoadingMe,
+                        disabled: isAdding,
                         leftIcon: "",
                         rightIcon: "",
                         padding: "py-2 px-6 w-full",
@@ -533,7 +515,7 @@ function Page() {
                         loading: isAdding,
                         type: "filled",
                         color: "red",
-                        disabled: isAdding || isLoadingMe,
+                        disabled: isAdding,
                         leftIcon: "",
                         rightIcon: "",
                         padding: "py-2 px-6 w-full",
@@ -727,11 +709,6 @@ function Page() {
             </div>
           </section>
 
-          <GeneralInfoModal
-            open={openGenInfo}
-            onClose={() => setOpenGenInfo(false)}
-            infoFor="event"
-          />
           <SendCommentModal
             open={openSendComment}
             onClose={() => setOpenSendComment(false)}

@@ -6,8 +6,8 @@ import Image from "next/image";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // components
 import Button from "@/components/Button";
@@ -17,20 +17,15 @@ import BluredImage from "@/components/BluredImage";
 import ContentSection from "@/components/ContentSection";
 import CommentsSection from "@/components/CommentsSection";
 import DescriptionSection from "@/components/DescriptionSection";
-import GeneralInfoModal from "@/components/modal/GeneralInfoModal";
 import SendCommentModal from "@/components/modal/SendCommentModal";
 import ProgramDetailsSkeleton from "@/components/skeletons/ProgramDetailsSkeleton";
 
 // api
-import { getMe } from "@/lib/api/auth";
 import { addCart } from "@/lib/api/cart";
 import { getProgram, getPrograms } from "@/lib/api/programs";
 
 // types
 import { Program } from "@/app/types/types";
-
-// utils
-import { userAttr } from "@/utilities/userAttr";
 
 function Page() {
   const queryClient = useQueryClient();
@@ -46,10 +41,6 @@ function Page() {
   const { data: programsData, isLoading: isLoadingPrograms } = useQuery({
     queryKey: ["programs"],
     queryFn: getPrograms,
-  });
-  const { data: meData, isLoading: meIsLoading } = useQuery({
-    queryKey: ["me"],
-    queryFn: getMe,
   });
 
   //POST
@@ -83,27 +74,17 @@ function Page() {
 
   const programDetails = programDetailss?.data.data;
   const tabs = ["Description", "Content", "Comments", "Related Programs"];
-  const [activeTab, setActiveTab] = useState("Description");
-  const [openGenInfo, setOpenGenInfo] = useState(false);
-  const [openSendComment, setOpenSendComment] = useState(false);
+
   const [score, setScore] = useState(1);
+  const [activeTab, setActiveTab] = useState("Description");
+  const [openSendComment, setOpenSendComment] = useState(false);
 
   const getCourseClickHandler = () => {
-    console.log(meData);
-    const user = userAttr();
-    if (user.role !== "UNSIGNED") {
-      if (meData?.data.data.mobile === null) {
-        setOpenGenInfo(true);
-      } else {
-        addToCardMutation({
-          cartable_type: "programs",
-          cartable_id: programDetails?.id,
-          quantity: 1,
-        });
-      }
-    } else {
-      toast.error("Please login to continue", { position: "top-center" });
-    }
+    addToCardMutation({
+      cartable_type: "programs",
+      cartable_id: programDetails?.id,
+      quantity: 1,
+    });
   };
 
   useEffect(() => {
@@ -123,6 +104,8 @@ function Page() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  console.log(programDetails)
 
   return (
     <motion.div
@@ -214,7 +197,7 @@ function Page() {
                       value: isAdding ? "Getting..." : "Get Course",
                       type: "filled",
                       color: "red",
-                      disabled: isAdding || meIsLoading,
+                      disabled: isAdding,
                       leftIcon: "shopping-cart",
                       rightIcon: "",
                       padding: "py-2 pr-6 pl-4 w-full",
@@ -370,7 +353,7 @@ function Page() {
                       loading: isAdding,
                       type: "filled",
                       color: "red",
-                      disabled: isAdding || meIsLoading,
+                      disabled: isAdding,
                       leftIcon: "shopping-cart",
                       rightIcon: "",
                       padding: "py-3 px-4",
@@ -514,7 +497,7 @@ function Page() {
                         loading: isAdding,
                         type: "filled",
                         color: "red",
-                        disabled: isAdding || meIsLoading,
+                        disabled: isAdding,
                         leftIcon: "shopping-cart",
                         rightIcon: "",
                         padding: "py-2 pr-6 pl-4 w-full",
@@ -558,7 +541,7 @@ function Page() {
               {/* comments */}
               <div className="col-span-2">
                 {/* comments */}
-                <CommentsSection />
+                <CommentsSection comments={programDetails.comments} />
               </div>
 
               {/* rating card */}
@@ -729,17 +712,12 @@ function Page() {
             </div>
           </section>
 
-          <GeneralInfoModal
-            open={openGenInfo}
-            onClose={() => setOpenGenInfo(false)}
-            infoFor="program"
-          />
-
           <SendCommentModal
             open={openSendComment}
             onClose={() => setOpenSendComment(false)}
             score={score}
             commentFor="Program"
+            id={programDetails?.id}
           />
         </>
       )}

@@ -3,18 +3,14 @@
 import { useRouter } from "next/navigation";
 
 // types
-import { ProgramInProgress } from "@/app/types/types";
+import { Program } from "@/app/types/types";
 
 // components
 import Button from "./Button";
 import BluredImage from "./BluredImage";
 
-function CourseInProgress({
-  courseDetails,
-}: {
-  courseDetails: ProgramInProgress;
-}) {
-  const { coverImg, name, level, type, type2, duration, progress } =
+function CourseInProgress({ courseDetails }: { courseDetails: Program }) {
+  const { id, avatar, avatar_hash, name, level, type, duration } =
     courseDetails;
 
   const router = useRouter();
@@ -22,8 +18,9 @@ function CourseInProgress({
   return (
     <div className="flex flex-col md:flex-row gap-4">
       <BluredImage
-        url={`/${coverImg}.png`}
-        name={coverImg}
+        url={avatar}
+        hash={avatar_hash}
+        name="avatar"
         imgStyle="object-cover w-full h-[155px] md:w-[282px] md:h-[121px]"
         blurhashStyle="object-cover w-full h-[155px] md:w-[282px] md:h-[121px]"
         cWidth={282}
@@ -126,7 +123,7 @@ function CourseInProgress({
               </div>
 
               {/* type2 */}
-              <div className="flex items-center gap-1">
+              {/* <div className="flex items-center gap-1">
                 <svg
                   width="12"
                   height="12"
@@ -173,7 +170,7 @@ function CourseInProgress({
                 </svg>
 
                 <span>{type2}</span>
-              </div>
+              </div> */}
 
               {/* duration */}
               <div className="flex items-center gap-1">
@@ -233,14 +230,14 @@ function CourseInProgress({
               </h4>
 
               <h4 className="label-medium text-txt-on-surface-secondary-light">
-                {progress}%
+                {67}%
               </h4>
             </div>
 
             <div className="bg-outline-level1 h-1 rounded-full">
               <div
                 className="bg-background-primary-light h-1 rounded-full"
-                style={{ width: `${progress}%` }}
+                style={{ width: `${67}%` }}
               />
             </div>
           </div>
@@ -258,7 +255,7 @@ function CourseInProgress({
                 size: "mobile-body-medium md:body-medium w-full md:w-fit",
                 padding: "px-3.5 py-2",
                 clickHandler: () =>
-                  router.push(`/programs/in-progress/?program=${name}`),
+                  router.push(`/programs/in-progress/?program=${name}&courseId=${id}`),
               }}
             />
           </div>

@@ -10,3 +10,11 @@ export const getProgram = async (id: string) =>
 
 export const getRegisteredPrograms = async () =>
   await api.get(`/v1/programs/register/asda`);
+
+export const addProgramComment = async ({
+  id,
+  data,
+}: {
+  id: string;
+  data: { text: string; score: number };
+}) => await api.post(`/programs/comment/${id}`, { ...data });

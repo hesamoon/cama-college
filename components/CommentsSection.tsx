@@ -7,10 +7,16 @@ import Button from "./Button";
 import Comment from "./Comment";
 import AISummarizesComments from "./ai-compo/AISummarizesComments";
 
-// data
-import { comments } from "@/constants/data";
+// type
+import { CommentType } from "@/app/types/types";
 
-function CommentsSection({ stars = true }: { stars?: boolean }) {
+function CommentsSection({
+  stars = true,
+  comments,
+}: {
+  stars?: boolean;
+  comments: CommentType[];
+}) {
   const [sortVal, setSortVal] = useState("Most Helpful");
   const [visibleCount, setVisibleCount] = useState(3);
 
@@ -37,11 +43,19 @@ function CommentsSection({ stars = true }: { stars?: boolean }) {
         </select>
       </div>
 
-      <AISummarizesComments />
+      {comments.length > 0 && <AISummarizesComments />}
 
-      {comments.slice(0, visibleCount).map((comment) => (
-        <Comment key={comment.id} comment={comment} stars={stars} />
-      ))}
+      {comments.length > 0 ? (
+        comments
+          .slice(0, visibleCount)
+          .map((comment) => (
+            <Comment key={comment.id} comment={comment} stars={stars} />
+          ))
+      ) : (
+        <h3 className="text-center text-on_surface-light mobile-body-large md:body-large">
+          No Comment
+        </h3>
+      )}
 
       {visibleCount < comments.length && (
         <div className="flex items-center justify-center">

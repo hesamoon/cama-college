@@ -708,7 +708,6 @@ const events = [
   },
 ];
 
-
 const posts = [
   {
     id: 1,
@@ -943,7 +942,6 @@ const news = [
     ],
   },
 ];
-
 
 const categories = [
   { id: 0, label: "All" },
@@ -1498,7 +1496,7 @@ const programsInProgress = [
   {
     id: 1,
     coverImg: "c4",
-    name: "Crypto",
+    name: "Introduction to crypto currencies",
     level: "Expert",
     type: "Self Study",
     type2: "Career",
@@ -3038,6 +3036,80 @@ const navs = [
   },
 ];
 
+const exam = {
+  id: "0",
+  time: "04:30",
+  num: 4,
+  questions: [
+    {
+      id: "00",
+      numOfQues: 1,
+      title:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt?",
+      type: "test",
+      options: [
+        {
+          id: "000",
+          option: "Option 1",
+        },
+        {
+          id: "001",
+          option: "Option 2",
+        },
+        {
+          id: "002",
+          option: "Option 3",
+        },
+        {
+          id: "003",
+          option: "Option 4",
+        },
+      ],
+    },
+    {
+      id: "01",
+      numOfQues: 2,
+      title:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt?",
+      type: "essay",
+      options: [],
+    },
+    {
+      id: "02",
+      numOfQues: 3,
+      title:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt?",
+      type: "test",
+      options: [
+        {
+          id: "020",
+          option: "Option 1",
+        },
+        {
+          id: "021",
+          option: "Option 2",
+        },
+        {
+          id: "022",
+          option: "Option 3",
+        },
+        {
+          id: "023",
+          option: "Option 4",
+        },
+      ],
+    },
+    {
+      id: "03",
+      numOfQues: 4,
+      title:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt?",
+      type: "essay",
+      options: [],
+    },
+  ],
+};
+
 const LIMITOfLOADEDLIST = 12;
 const LIMITOfLOADEDLISTINONEPAGE = 47;
 const LIMITNUMBEROFSCROLL = 3;
@@ -3045,6 +3117,7 @@ const LIMITNUMBEROFSCROLL = 3;
 export {
   sx,
   news,
+  exam,
   navs,
   days,
   posts,

@@ -2,23 +2,86 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
 
 // components
 import Button from "./Button";
 
 // types
-import { CommentT } from "@/app/types/types";
+import { CommentType } from "@/app/types/types";
 
-function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
-  const [like, setLike] = useState(12);
-  const [dislike, setDislike] = useState(2);
+// apis
+import { addDislike, addLike } from "@/lib/api/comments";
+
+function Comment({
+  comment,
+  stars,
+}: {
+  comment: CommentType;
+  stars?: boolean;
+}) {
+  // POST
+  const { mutate: addLikeMutation, isPending: isAddingLike } = useMutation({
+    mutationFn: addLike,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+
+      if (error instanceof AxiosError) {
+        if (error.response?.data?.errors) {
+          console.log(error.response.data.errors);
+          toast.error(error.response.data.errors.text[0], {
+            position: "top-center",
+          });
+        } else {
+          toast.error(error.response?.data?.message || error?.message, {
+            position: "top-center",
+          });
+        }
+      } else {
+        toast.error("An unknown error occurred.", { position: "top-center" });
+      }
+    },
+  });
+  const { mutate: addDislikeMutation, isPending: isAddingDislike } =
+    useMutation({
+      mutationFn: addDislike,
+      onSuccess: (data) => {
+        console.log(data);
+      },
+      onError: (error) => {
+        console.log(error);
+
+        if (error instanceof AxiosError) {
+          if (error.response?.data?.errors) {
+            console.log(error.response.data.errors);
+            toast.error(error.response.data.errors.text[0], {
+              position: "top-center",
+            });
+          } else {
+            toast.error(error.response?.data?.message || error?.message, {
+              position: "top-center",
+            });
+          }
+        } else {
+          toast.error("An unknown error occurred.", { position: "top-center" });
+        }
+      },
+    });
+
+  const [like, setLike] = useState(comment.likes_count);
+  const [dislike, setDislike] = useState(comment.dislikes_count);
 
   return (
     <div className="border-b border-outline-level0 space-y-3.5 md:space-y-7 pb-8">
       <div className="flex items-center justify-between">
         <div className="space-y-2">
           <h3 className="mobile-title-medium md:title-medium text-on_surface-light">
-            {comment.title}
+            {comment.comment}
           </h3>
 
           <div className="flex items-center gap-2">
@@ -31,7 +94,7 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
             />
 
             <h5 className="mobile-body-medium md:body-medium text-txt-low-important">
-              {comment.author}
+              {comment.user.name} {comment.user.family}
             </h5>
           </div>
         </div>
@@ -54,7 +117,7 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
                   />
                 </svg>
                 <span className="mobile-label-large-db md:label-large-db text-green">
-                  {comment.rating}
+                  {comment.score}
                 </span>
               </div>
 
@@ -64,7 +127,7 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
 
           {/* date */}
           <span className="mobile-label-small md:label-small text-txt-low-important">
-            {new Date(comment.date)
+            {new Date(comment.created_at)
               .toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "short",
@@ -89,7 +152,7 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
       </div>
 
       <p className="mobile-body-large md:body-large text-justify text-txt-secondary">
-        {comment.text}
+        {comment.comment}
       </p>
 
       <div className="flex items-center justify-end gap-6 md:gap-12">
@@ -107,8 +170,12 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
                 color: "red",
                 leftIcon: "",
                 rightIcon: "dislike",
-                disabled: false,
-                clickHandler: () => setDislike((prev) => prev + 1),
+                disabled: isAddingDislike,
+                loading: isAddingDislike,
+                clickHandler: () => {
+                  addDislikeMutation(`${comment.id}`);
+                  setDislike((prev) => prev + 1);
+                },
               }}
             />
 
@@ -126,8 +193,12 @@ function Comment({ comment, stars }: { comment: CommentT; stars?: boolean }) {
                 color: "red",
                 leftIcon: "",
                 rightIcon: "like",
-                disabled: false,
-                clickHandler: () => setLike((prev) => prev + 1),
+                disabled: isAddingLike,
+                loading: isAddingLike,
+                clickHandler: () => {
+                  addLikeMutation(`${comment.id}`);
+                  setLike((prev) => prev + 1);
+                },
               }}
             />
 

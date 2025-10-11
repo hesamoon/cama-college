@@ -119,7 +119,7 @@ function Page() {
       <div className="md:grid md:grid-cols-2">
         {/* left-side */}
         <div
-          className="md:h-screen col-span-1 py-3.5 md:py-7 px-4 md:px-14 flex flex-col justify-between gap-4.5 md:gap-9"
+          className="md:h-full md:min-h-screen col-span-1 py-3.5 md:py-7 px-4 md:px-14 flex flex-col justify-between gap-4.5 md:gap-9"
           style={{
             backgroundImage: "url(/checkout-bg.svg)",
             backgroundColor: "var(--primary_shades_70)",

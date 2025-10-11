@@ -40,7 +40,7 @@ function DescriptionSection({
           </div>
 
           <ul className="space-y-1 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
-            {prerequisites.map((item) => (
+            {prerequisites?.map((item) => (
               <li key={item.text} className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-txt-on-surface-secondary-light" />
                 {item.text}
@@ -59,7 +59,7 @@ function DescriptionSection({
           </div>
 
           <ul className="space-y-1 mobile-body-large md:body-large text-txt-on-surface-secondary-light">
-            {audience.map((item) => (
+            {audience?.map((item) => (
               <li key={item.text} className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-txt-on-surface-secondary-light" />
                 {item.text}
@@ -81,7 +81,7 @@ function DescriptionSection({
 
         {/* list of what you'll learn */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {what_you_learn.map((item, index) => (
+          {what_you_learn?.map((item, index) => (
             <div key={index} className="flex items-start gap-4 py-2.5">
               <h4 className="mobile-display-small md:display-small text-primary-tints-70">
                 {index + 1}

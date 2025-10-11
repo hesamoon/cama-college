@@ -1,16 +1,39 @@
 "use client";
 
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import Button from "@/components/Button";
 import ScheduleView from "@/components/ScheduleView";
 import CourseInProgress from "@/components/CourseInProgress";
+import DashboardSkeleton from "@/components/skeletons/DashboardSkeleton";
 
 // data
 import { programsInProgress } from "@/constants/data";
 
-function page() {
+// api
+import { getPrograms } from "@/lib/api/programs";
+import { myRequests } from "@/lib/api/work-request";
+
+function Page() {
+  // GET
+  const { data: workRequestsData, isLoading: isLoadingWorkRequests } = useQuery(
+    {
+      queryKey: ["work-requests"],
+      queryFn: myRequests,
+    }
+  );
+  const { data: programsData, isLoading: isLoadingPrograms } = useQuery({
+    queryKey: ["programs"],
+    queryFn: getPrograms,
+  });
+
+  console.log(workRequestsData);
+  console.log(isLoadingWorkRequests);
+
+  if (isLoadingWorkRequests || isLoadingPrograms) return <DashboardSkeleton />;
+
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9 py-5">
       {/* schedule */}
@@ -28,7 +51,7 @@ function page() {
           Last Program
         </h2>
 
-        <CourseInProgress courseDetails={programsInProgress[0]} />
+        <CourseInProgress courseDetails={programsData?.data.data[0]} />
       </div>
 
       {/* Certifications section */}
@@ -81,4 +104,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

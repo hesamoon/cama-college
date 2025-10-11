@@ -77,19 +77,19 @@ export default function Layout({
         </div>
 
         {/* right side / details */}
-        <div className="col-span-2 mobile-grid-system-level0 !px-0 md:!px-16 md:!py-10 md:grid-system-level0 md:border-l md:border-outline-level0 flex items-center justify-center w-full">
+        <div className="col-span-2 md:border-l md:border-outline-level0 flex items-center justify-center w-full">
           {children}
         </div>
       </div>
-      
+
       <AnimatePresence>
         <div className="md:hidden sticky bottom-0 w-full bg-white">
           <motion.div
             key="mobile-title-chat"
             className="p-4 flex items-center justify-between cursor-pointer bg-gradient-to-r from-[#CE63121a] to-[#F78B5D1a]"
-            animate={{ 
+            animate={{
               y: openChat ? 0 : 1,
-              opacity: 1
+              opacity: 1,
             }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             onClick={() => setOpenChat((prev) => !prev)}
@@ -146,22 +146,22 @@ export default function Layout({
             </div>
           </motion.div>
 
-            {openChat && (
-              <motion.div
-                key="mobile-chat"
-                className={`z-90 flex flex-col bg-white`}
-                style={{
-                  height: chatBoxHeight - 150,
-                }}
-                initial={{ y: 100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -100, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ChatBox onlyChatting={true} />
-              </motion.div>
-            )}
+          {openChat && (
+            <motion.div
+              key="mobile-chat"
+              className={`z-90 flex flex-col bg-white`}
+              style={{
+                height: chatBoxHeight - 150,
+              }}
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -100, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ChatBox onlyChatting={true} />
+            </motion.div>
+          )}
         </div>
       </AnimatePresence>
 

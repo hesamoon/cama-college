@@ -27,7 +27,7 @@ interface CourseBase {
   about: string;
   audience: { text: string }[];
   avatar: string;
-  avatar_hash:string;
+  avatar_hash: string;
   language: string;
   level: string;
   prerequisites: { text: string }[];
@@ -74,34 +74,6 @@ interface News extends CourseBase {
 
 type CourseCardProps = Program | Event | News;
 
-type Lesson = {
-  id: number;
-  title: string;
-  type: string;
-  content: string;
-  passed: number;
-};
-
-type Content = {
-  id: number;
-  title: string;
-  lessons: Lesson[];
-};
-
-export interface ProgramInProgress {
-  id: number;
-  coverImg: string;
-  name: string;
-  level: string;
-  type: string;
-  type2: string;
-  duration: number;
-  progress: number;
-  publishDate: string;
-  category: string;
-  contents: Content[];
-}
-
 export interface Chip {
   lable: string;
   leftIcon: string;
@@ -122,6 +94,31 @@ export interface CommentT {
   rating: number;
   likes: number;
   disLike: number;
+}
+
+export interface UserType {
+  id: string;
+  name: string;
+  family: string;
+  email: string;
+  bio: string | null;
+  tuum_balance: number;
+  mobile: string | null;
+  mobile_verified_at: string | null;
+  email_verified_at: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CommentType {
+  id: string;
+  comment: string;
+  score: number;
+  likes_count: number;
+  dislikes_count: number;
+  created_at: string;
+  parent?: string | null;
+  user: UserType;
 }
 
 type Article = {
@@ -217,7 +214,7 @@ export type ChatHistory = {
 
 export type ChatMessage = {
   id: number;
-  type: 'question' | 'answer';
+  type: "question" | "answer";
   content: string;
   timestamp: string;
   attachments?: string[]; // URLs to images/files
@@ -236,3 +233,45 @@ type CartType = {
   price: number;
   quantity: number;
 };
+
+export type Lesson = {
+  id: string;
+  title: string;
+  content: string;
+  is_free: number;
+  subject: string;
+  avatar: string;
+  avatar_hash: string;
+} | null;
+
+export type Subject = {
+  id: string;
+  name: string;
+  duration: number;
+  program: string;
+  lessons: Lesson[];
+};
+
+export interface ProgramDetailsType {
+  id: string;
+  name: string;
+  subject: string;
+  language: string;
+  type: string;
+  credential_type: string;
+  level: string;
+  status: string;
+  duration: number;
+  max_lessons_per_day: number | null;
+  about: string;
+  price: number;
+  tuum_bonus: number | null;
+  prerequisites: { text: string }[];
+  audience: { text: string }[];
+  what_you_learn: { text: string }[];
+  subjects: Subject[];
+  avatar: string;
+  avatar_hash: string | null;
+  comments_count: number;
+  comments: CommentT[];
+}

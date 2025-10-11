@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 // components
@@ -11,7 +11,14 @@ import BluredImage from "./BluredImage";
 import LoginButtons from "./LoginButtons";
 
 // api
+import { getMe } from "@/lib/api/auth";
 import { getCarts } from "@/lib/api/cart";
+
+// utils
+import { userAttr } from "@/utilities/userAttr";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import GeneralInfoModal from "./modal/GeneralInfoModal";
 
 function RoleBaseView({
   role,
@@ -25,31 +32,54 @@ function RoleBaseView({
     queryKey: ["carts"],
     queryFn: getCarts,
   });
+  const { data: meData, isLoading: meIsLoading } = useQuery({
+    queryKey: ["me"],
+    queryFn: getMe,
+  });
 
+  const router = useRouter();
   const pathname = usePathname();
+
+  const [openGenInfo, setOpenGenInfo] = useState(false);
+
+  const shoppingClickHandler = () => {
+    console.log(meData);
+    const user = userAttr();
+    if (user.role !== "UNSIGNED") {
+      // if (meData?.data.data.mobile === null) {
+      //   setOpenGenInfo(true);
+      // } else {
+      //   router.push("/checkout");
+      // }
+      router.push('/checkout');
+    } else {
+      toast.error("Please login to continue", { position: "top-center" });
+    }
+  };
 
   if (pathname === "/apply") return;
 
   return role !== "UNSIGNED" ? (
     <div className="flex items-center gap-2">
-      <Link href="/checkout" className="relative">
+      <div className="relative cursor-pointer">
         <Button
           props={{
             value: "",
             leftIcon: landingHeader ? "shopping-cart" : "shopping-cart-black",
             rightIcon: "",
             type: "outlined",
-            disabled: false,
+            disabled: meIsLoading,
             color: "red",
             width: 24,
             height: 24,
             size: "mobile-body-large md:body-large",
+            clickHandler: shoppingClickHandler,
           }}
         />
 
         {cartsData?.data.data.length > 0 && (
           <div
-            className={`absolute -top-1 -right-1 p-1 flex items-center justify-center rounded-full bg-orange-400 w-5 h-5 ${
+            className={`absolute -top-1 -right-1 p-1 flex items-center justify-center rounded-full bg-orange-400 w-5 h-5 pointer-events-none ${
               isLoadingCarts ? "opacity-0" : "opacity-100"
             }`}
           >
@@ -58,7 +88,7 @@ function RoleBaseView({
             </span>
           </div>
         )}
-      </Link>
+      </div>
 
       <Link
         href="/profile"
@@ -81,6 +111,12 @@ function RoleBaseView({
           height={20}
         />
       </Link>
+
+      <GeneralInfoModal
+        open={openGenInfo}
+        onClose={() => setOpenGenInfo(false)}
+        infoFor="product"
+      />
     </div>
   ) : (
     <LoginButtons
