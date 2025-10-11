@@ -389,7 +389,33 @@ function Page() {
 
         <div className="space-y-5">
           <div className="space-y-0">
-            <CommentsSection stars={true} />
+            <CommentsSection
+              stars={true}
+              comments={[
+                {
+                  id: "0199baf4-937f-72e0-98d2-95c605a391vf",
+                  comment: "nice",
+                  score: 4,
+                  parent: null,
+                  user: {
+                    id: "019874a9-e3ac-736d-8c23-cb6745d271f9",
+                    name: "hesam",
+                    family: "zar",
+                    email: "he3am8000@gmail.com",
+                    email_verified_at: "2025-08-04T10:40:53.000000Z",
+                    mobile: null,
+                    mobile_verified_at: null,
+                    bio: null,
+                    tuum_balance: 100,
+                    created_at: "2025-08-04T10:39:07.000000Z",
+                    updated_at: "2025-08-04T10:40:53.000000Z",
+                  },
+                  likes_count: 1,
+                  dislikes_count: 0,
+                  created_at: "2025-10-06T19:16:54.000000Z",
+                },
+              ]}
+            />
           </div>
         </div>
       </div>
