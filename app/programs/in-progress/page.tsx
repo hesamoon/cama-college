@@ -103,7 +103,7 @@ function Page() {
     isLoadingExams,
     examError,
   });
-  // console.log(lessonsData)
+  console.log(lessonsData)
 
   return queryLesson === "Lesson Title 1-3" ? (
     <MeetPreview />
