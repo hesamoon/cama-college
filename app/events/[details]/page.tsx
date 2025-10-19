@@ -265,7 +265,7 @@ function Page() {
                         <span>Event Time</span>
                       </div>
 
-                      {/* rating */}
+                      {/* level */}
                       <div className="flex items-center text-txt-on-surface-terriary-light gap-1">
                         <Image
                           src="/monitor-mobbile.svg"
@@ -273,7 +273,7 @@ function Page() {
                           width={16}
                           height={16}
                         />
-                        <span>Rating</span>
+                        <span>Level</span>
                       </div>
 
                       {/* location */}
@@ -297,13 +297,13 @@ function Page() {
                     {/* values */}
                     <div className="col-span-1 text-txt-on-surface-secondary-light space-y-2 mobile-body-large">
                       {/* event date */}
-                      <h5>{eventDetails?.level}</h5>
+                      <h5>{eventDetails?.date}</h5>
 
                       {/* event time */}
                       <h5>{eventDetails?.duration}h</h5>
 
-                      {/* rating */}
-                      <h5>{20}</h5>
+                      {/* level */}
+                      <h5>{eventDetails?.level}</h5>
                     </div>
                   </div>
 
@@ -426,7 +426,7 @@ function Page() {
                       <span>Event Time</span>
                     </div>
 
-                    {/* rating */}
+                    {/* level */}
                     <div className="flex items-center body-large text-txt-on-surface-terriary-light gap-1">
                       <Image
                         src="/monitor-mobbile.svg"
@@ -434,7 +434,7 @@ function Page() {
                         width={16}
                         height={16}
                       />
-                      <span>Rating</span>
+                      <span>Level</span>
                     </div>
 
                     {/* location */}
@@ -458,13 +458,13 @@ function Page() {
                   {/* values */}
                   <div className="col-span-1 body-large text-txt-on-surface-secondary-light space-y-2">
                     {/* event date */}
-                    <h5>{eventDetails?.level}</h5>
+                    <h5>{eventDetails?.date}</h5>
 
                     {/* event time */}
                     <h5>{eventDetails?.duration}h</h5>
 
-                    {/* rating */}
-                    <h5>{20}</h5>
+                    {/* level */}
+                    <h5>{eventDetails?.level}</h5>
                   </div>
                 </div>
 

@@ -2,35 +2,50 @@
 
 import { useEffect, useState } from "react";
 import { useQueryState } from "nuqs";
+import { useQuery } from "@tanstack/react-query";
 
 // components
 import CourseCard from "@/components/CourseCard";
 import ScheduleView from "@/components/ScheduleView";
 import SearchBoxContainer from "@/components/SearchBoxContainer";
 
-// data
-import { events } from "@/constants/data";
+// api
+import { getEvents } from "@/lib/api/events";
+
+// types
+import { Event } from "@/app/types/types";
+import InProgressEventsSkeletone from "@/components/skeletons/InProgressEventsSkeletone";
 
 function Page() {
   const [filter, setFilter] = useQueryState("filter", { defaultValue: "" });
   const [search] = useQueryState("search", { defaultValue: "" });
 
-  const [controlledList, setControlledList] = useState(events);
+  const { data: eventsData, isLoading: isLoadingEvents } = useQuery({
+    queryKey: ["events"],
+    queryFn: getEvents,
+  });
+
+  const [controlledList, setControlledList] = useState<Event[]>([]);
 
   useEffect(() => {
-    setControlledList(
-      events.filter(
-        (eIP) => eIP.name.toLowerCase().includes(search.toLowerCase())
-        // eIP.status.includes(filter ? filter : "")
-      )
-    );
+    if (eventsData?.data.data.length > 0)
+      setControlledList(
+        eventsData?.data.data.filter(
+          (pIP: Event) =>
+            pIP.name.toLowerCase().includes(search.toLowerCase()) &&
+            pIP.subject.includes(filter ? filter : "")
+        )
+      );
   }, [search, filter]);
 
   useEffect(() => {
-    setControlledList(events);
-  }, []);
+    if (eventsData?.data.data.length > 0)
+      setControlledList(eventsData?.data.data);
+  }, [eventsData]);
 
-  return (
+  return isLoadingEvents ? (
+    <InProgressEventsSkeletone />
+  ) : (
     <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9">
       {/* schedule */}
       <div className="space-y-4">
@@ -50,15 +65,11 @@ function Page() {
           </h2>
 
           <div className="flex items-center gap-4 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth">
-            <div className="min-w-[267px]">
-              <CourseCard data={{ ...events[0], cardType: "EVENT" }} />
-            </div>
-            <div className="min-w-[267px]">
-              <CourseCard data={{ ...events[1], cardType: "EVENT" }} />
-            </div>
-            <div className="min-w-[267px]">
-              <CourseCard data={{ ...events[2], cardType: "EVENT" }} />
-            </div>
+            {eventsData?.data.data.slice(0, 3).map((ev: Event) => (
+              <div key={ev.id} className="min-w-[267px]">
+                <CourseCard data={{ ...ev, cardType: "EVENT" }} />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -101,7 +112,10 @@ function Page() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
               {controlledList.length > 0 ? (
                 controlledList.map((item) => (
-                  <CourseCard key={item.id} data={{ ...item, cardType: "EVENT" }} />
+                  <CourseCard
+                    key={item.id}
+                    data={{ ...item, cardType: "EVENT" }}
+                  />
                 ))
               ) : filter || search ? (
                 <h5 className="col-span-8 p-3 text-center">Event not found!</h5>

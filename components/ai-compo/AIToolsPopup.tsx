@@ -11,6 +11,7 @@ function AIToolsPopup() {
     y: number;
     text: string;
     isAnswer: boolean;
+    isSelfStudy: boolean;
   } | null>(null);
 
   useEffect(() => {
@@ -36,6 +37,11 @@ function AIToolsPopup() {
             range.commonAncestorContainer.parentElement?.closest(
               '[data-message-type="answer"]'
             ) !== null;
+
+          const isSelfStudy =
+            range.commonAncestorContainer.parentElement?.closest(
+              '[data-presentation-type="self-study"]'
+            ) !== null;
           clearPending();
           timeoutRef.current = window.setTimeout(() => {
             setPopup({
@@ -43,6 +49,7 @@ function AIToolsPopup() {
               y: rect.top + window.scrollY - 50,
               text: selection.toString(),
               isAnswer,
+              isSelfStudy,
             });
           }, 300);
         } catch {
@@ -60,6 +67,7 @@ function AIToolsPopup() {
       clearPending();
     };
   }, []);
+
   return (
     <AnimatePresence>
       {popup && (
@@ -68,7 +76,11 @@ function AIToolsPopup() {
           className="absolute z-60"
           style={{
             top: popup.y,
-            left: popup.isAnswer ? popup.x - 35 : popup.x - 150,
+            left: popup.isAnswer
+              ? popup.x - 35
+              : !popup.isSelfStudy
+              ? popup.x - 90
+              : popup.x - 150,
             transform: "translate(-50%, 0)",
           }}
           role="button"
@@ -105,39 +117,42 @@ function AIToolsPopup() {
                   size: "mobile-body-large md:body-small !text-primary-tints-90",
                   clickHandler: () => {
                     if (!popup) return;
+                    window.dispatchEvent(new Event("tuum:openChat"));
+
                     window.dispatchEvent(
                       new CustomEvent("tuum:setPrompt", {
-                        detail: { text: popup.text },
+                        detail: { text: popup.text, action: "ask" },
                       })
                     );
-                    window.dispatchEvent(new Event("tuum:openChat"));
                   },
                 }}
               />
             ) : (
               <>
-                <Button
-                  props={{
-                    value: "Summerize it",
-                    leftIcon: "add",
-                    rightIcon: "",
-                    type: "text",
-                    disabled: false,
-                    color: "red",
-                    width: 16,
-                    height: 16,
-                    size: "mobile-body-large md:body-small !text-primary-tints-90",
-                    clickHandler: () => {
-                      if (!popup) return;
-                      window.dispatchEvent(
-                        new CustomEvent("tuum:setPrompt", {
-                          detail: { text: popup.text },
-                        })
-                      );
-                      window.dispatchEvent(new Event("tuum:openChat"));
-                    },
-                  }}
-                />
+                {popup.isSelfStudy && (
+                  <Button
+                    props={{
+                      value: "Summerize it",
+                      leftIcon: "add",
+                      rightIcon: "",
+                      type: "text",
+                      disabled: false,
+                      color: "red",
+                      width: 16,
+                      height: 16,
+                      size: "mobile-body-large md:body-small !text-primary-tints-90",
+                      clickHandler: () => {
+                        if (!popup) return;
+                        window.dispatchEvent(new Event("tuum:openChat"));
+                        window.dispatchEvent(
+                          new CustomEvent("tuum:setPrompt", {
+                            detail: { text: popup.text, action: "summerize" },
+                          })
+                        );
+                      },
+                    }}
+                  />
+                )}
 
                 <Button
                   props={{
@@ -152,12 +167,12 @@ function AIToolsPopup() {
                     size: "mobile-body-large md:body-small !text-primary-tints-90",
                     clickHandler: () => {
                       if (!popup) return;
+                      window.dispatchEvent(new Event("tuum:openChat"));
                       window.dispatchEvent(
                         new CustomEvent("tuum:setPrompt", {
-                          detail: { text: popup.text },
+                          detail: { text: popup.text, action: "ask" },
                         })
                       );
-                      window.dispatchEvent(new Event("tuum:openChat"));
                     },
                   }}
                 />
@@ -175,12 +190,12 @@ function AIToolsPopup() {
                     size: "mobile-body-large md:body-small !text-primary-tints-90",
                     clickHandler: () => {
                       if (!popup) return;
+                      window.dispatchEvent(new Event("tuum:openChat"));
                       window.dispatchEvent(
                         new CustomEvent("tuum:setPrompt", {
-                          detail: { text: popup.text },
+                          detail: { text: popup.text, action: "explain-more" },
                         })
                       );
-                      window.dispatchEvent(new Event("tuum:openChat"));
                     },
                   }}
                 />

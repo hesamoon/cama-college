@@ -12,6 +12,10 @@ import DragScroll from "./DragScroll";
 
 // types
 import { ChatHistory, ChatMessage } from "@/app/types/types";
+import AILoader from "./loader/AILoader";
+import { useMutation } from "@tanstack/react-query";
+import { summarize } from "@/lib/api/ai";
+import { AxiosError } from "axios";
 
 // Fake data
 const history: ChatHistory[] = [
@@ -227,7 +231,43 @@ function ChatBox({
   const [newChatTitle, setNewChatTitle] = useState<string>("New Chat");
   const [lastAnswerAIID, setLastAnswerAIID] = useState<number | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+  const endRef = useRef<HTMLDivElement | null>(null);
   const [replyText, setReplyText] = useState("");
+  const [responseForAction, setResponseForAction] = useState<{
+    res: string;
+    action: string;
+  } | null>(null);
+
+  // POST
+  const { mutate: summerrizeMutation, isPending: isSummarizing } = useMutation({
+    mutationFn: summarize,
+    onSuccess: (data) => {
+      console.log(data);
+      setResponseForAction({
+        res: data.data.data.response,
+        action: "summerize",
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+
+      if (error instanceof AxiosError) {
+        if (error.response?.data?.errors) {
+          console.log(error.response.data.errors);
+          toast.error(error.response.data.errors.text[0], {
+            position: "top-center",
+          });
+        } else {
+          toast.error(error.response?.data?.message || error?.message, {
+            position: "top-center",
+          });
+        }
+      } else {
+        toast.error("An unknown error occurred.", { position: "top-center" });
+      }
+    },
+  });
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -252,16 +292,32 @@ function ChatBox({
         .reverse()
         .find((msg) => msg.type === "answer")?.id ?? null // fallback to null
     );
-  }, [selectedChat]);
+    const container = messagesContainerRef.current;
+    const end = endRef.current;
+    if (container && end) {
+      // scroll only inside the messages container
+      end.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [selectedChat, responseForAction]);
 
   // Listen for global prompt set events
   useEffect(() => {
     const handler = (e: Event) => {
       try {
-        const detail = (e as CustomEvent<{ text: string }>).detail;
+        const detail = (e as CustomEvent<{ text: string; action: string }>)
+          .detail;
         if (!detail || typeof detail.text !== "string") return;
-        setPromptValue(detail.text);
-        setReplyText(detail.text);
+
+        if (detail.action === "ask") {
+          // setPromptValue(detail.text);
+          setReplyText(detail.text);
+        } else {
+          if (detail.action === "summerize") {
+            summerrizeMutation(detail.text);
+          }
+
+          setReplyText("");
+        }
         if (inputRef.current) {
           inputRef.current.focus();
           requestAnimationFrame(() => {
@@ -369,19 +425,43 @@ function ChatBox({
         </div>
 
         {/* Chat Messages */}
-        <div className="flex-1 flex flex-col overflow-y-auto no-scrollbar">
+        <div
+          ref={messagesContainerRef}
+          className="flex-1 flex flex-col overflow-y-auto no-scrollbar"
+        >
           {selectedChat ? (
-            <div className="flex-1 space-y-3 pt-4">
-              {selectedChat.messages.map((message) => (
-                <Message
-                  key={message.id}
-                  msg={message}
-                  msgSize={onlyChatting ? "body-large" : "body-small"}
-                  setInputVal={setPromptValue}
-                  lastAnswerAIId={lastAnswerAIID}
-                />
-              ))}
-            </div>
+            <>
+              <div className="flex-1 space-y-3 pt-4">
+                {selectedChat.messages.map((message) => (
+                  <Message
+                    key={message.id}
+                    msg={message}
+                    msgSize={onlyChatting ? "body-large" : "body-small"}
+                    setInputVal={setPromptValue}
+                    lastAnswerAIId={lastAnswerAIID}
+                  />
+                ))}
+
+                {isSummarizing ? (
+                  <div className="px-4">
+                    <AILoader text="Summarizing" />
+                  </div>
+                ) : responseForAction?.res ? (
+                  <Message
+                    msg={{
+                      id: -2,
+                      type: "answer",
+                      content: responseForAction?.res || "",
+                      timestamp: "2025",
+                    }}
+                    msgSize={onlyChatting ? "body-large" : "body-small"}
+                    setInputVal={setPromptValue}
+                    lastAnswerAIId={-1}
+                  />
+                ) : null}
+              </div>
+              <div ref={endRef} />
+            </>
           ) : (
             <div className="flex-1 p-4 space-y-3">
               <p className="body-medium text-on_surface-light">

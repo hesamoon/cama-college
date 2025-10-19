@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useQuery } from "@tanstack/react-query";
 
@@ -14,13 +15,13 @@ import InProgressSkeletone from "@/components/skeletons/InProgressSkeletone";
 import { Program } from "@/app/types/types";
 
 // api
-import { getPrograms } from "@/lib/api/programs";
+import { getRegisteredPrograms } from "@/lib/api/programs";
 
 function Page() {
   // GET
   const { data: programsData, isLoading: isLoadingPrograms } = useQuery({
-    queryKey: ["programs"],
-    queryFn: getPrograms,
+    queryKey: ["reg-programs"],
+    queryFn: getRegisteredPrograms,
   });
 
   console.log(programsData);
@@ -65,13 +66,15 @@ function Page() {
       {/* progrmas */}
       <div className="space-y-9">
         {/* last program section */}
-        <div className="space-y-4">
-          <h2 className="mobile-title-large md:title-large text-on_surface-light">
-            Last Program
-          </h2>
+        {programsData?.data.data.length > 0 ? (
+          <div className="space-y-4">
+            <h2 className="mobile-title-large md:title-large text-on_surface-light">
+              Last Program
+            </h2>
 
-          <CourseInProgress courseDetails={programsData?.data.data[0]} />
-        </div>
+            <CourseInProgress courseDetails={programsData?.data.data[0]} />
+          </div>
+        ) : null}
 
         {/* all program section */}
         <div className="space-y-6">
@@ -119,9 +122,20 @@ function Page() {
                   Program not found!
                 </h5>
               ) : (
-                <h5 className="col-span-8 p-3 text-center">
-                  You don&#39;t have any program yet!
-                </h5>
+                <div className="col-span-8 flex flex-col items-center justify-center py-2 px-4">
+                  <h3 className="mobile-body-large md:body-large text-txt-on-surface-terriary-light mb-2">
+                    You don&#39;t have any program yet!
+                  </h3>
+                  <p className="mobile-body-medium md:body-medium text-txt-on-surface-terriary-light text-center">
+                    Add some programs to get started with your learning journey
+                  </p>
+                  <Link
+                    href="/programs"
+                    className="mobile-body-medium md:body-medium text-background-primary-light underline text-center max-w-sm"
+                  >
+                    Browse programs
+                  </Link>
+                </div>
               )}
             </div>
           </div>

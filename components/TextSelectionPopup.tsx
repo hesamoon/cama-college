@@ -1,12 +1,49 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { Skeleton } from "@mui/material";
 import { usePathname } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 
 // components
 import Button from "./Button";
 
+// apis
+import { translateText } from "@/lib/api/ai";
+
+const languages = ["english", "french", "persian"];
+
 export default function TextSelectionPopup() {
+  const [translatedText, setTranslatedText] = useState("");
+
+  // POST
+  const { mutate: translateMutation, isPending: isTranslating } = useMutation({
+    mutationFn: translateText,
+    onSuccess: (data) => {
+      setTranslatedText(data.data.data.response);
+    },
+    onError: (error) => {
+      console.log(error);
+
+      if (error instanceof AxiosError) {
+        if (error.response?.data?.errors) {
+          console.log(error.response.data.errors);
+          toast.error(error.response.data.errors.text[0], {
+            position: "top-center",
+          });
+        } else {
+          toast.error(error.response?.data?.message || error?.message, {
+            position: "top-center",
+          });
+        }
+      } else {
+        toast.error("An unknown error occurred.", { position: "top-center" });
+      }
+    },
+  });
+
   const pathname = usePathname();
   const timeoutRef = useRef<number | null>(null);
   const [popup, setPopup] = useState<{
@@ -15,19 +52,7 @@ export default function TextSelectionPopup() {
     text: string;
   } | null>(null);
   const [languageListOpen, setLanguageListOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("فارسی");
-  const languages = [
-    "English",
-    "Français",
-    "Español",
-    "Deutsch",
-    "فارسی",
-    "العربية",
-    "中文",
-    "日本語",
-    "한국어",
-    "Русский",
-  ];
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("persian");
 
   useEffect(() => {
     const clearPending = () => {
@@ -39,7 +64,7 @@ export default function TextSelectionPopup() {
 
     const handleSelectionChange = () => {
       if (pathname.includes("/in-progress")) {
-       return
+        return;
       } else {
         const selection = document.getSelection();
         if (
@@ -55,6 +80,10 @@ export default function TextSelectionPopup() {
               setPopup({
                 x: rect.left + rect.width / 2 + window.scrollX, // center X
                 y: rect.bottom + window.scrollY + 20, // below selection
+                text: selection.toString(),
+              });
+              translateMutation({
+                lang: selectedLanguage,
                 text: selection.toString(),
               });
             }, 300);
@@ -73,7 +102,17 @@ export default function TextSelectionPopup() {
       document.removeEventListener("selectionchange", handleSelectionChange);
       clearPending();
     };
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    const selection = document.getSelection();
+    if (
+      selection &&
+      !selection.isCollapsed &&
+      selection.toString().trim() !== ""
+    )
+      translateMutation({ lang: selectedLanguage, text: popup?.text || "" });
+  }, [selectedLanguage]);
 
   return (
     <>
@@ -154,13 +193,36 @@ export default function TextSelectionPopup() {
                     height: 20,
                     size: "mobile-body-large md:body-large",
                     padding: "p-2",
-                    clickHandler: () => alert(popup.text),
+                    // clickHandler: () => alert(popup.text),
                   }}
                 />
               </div>
             </div>
 
-            <h4 className="body-large text-white text-end">حادثه‌آفرین</h4>
+            {isTranslating ? (
+              <div
+                className={`flex items-center ${
+                  selectedLanguage === "persian"
+                    ? "justify-end"
+                    : "justify-start"
+                }`}
+              >
+                <Skeleton
+                  variant="text"
+                  width="50%"
+                  height={30}
+                  sx={{ bgcolor: "grey.600" }}
+                />
+              </div>
+            ) : (
+              <h4
+                className={`body-large text-white ${
+                  selectedLanguage === "persian" ? "text-end" : "text-start"
+                }`}
+              >
+                {translatedText}
+              </h4>
+            )}
 
             {languageListOpen && (
               <div

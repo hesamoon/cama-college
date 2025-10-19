@@ -13,8 +13,9 @@ import DashboardSkeleton from "@/components/skeletons/DashboardSkeleton";
 import { programsInProgress } from "@/constants/data";
 
 // api
-import { getPrograms } from "@/lib/api/programs";
+import { getExams } from "@/lib/api/exam/exams";
 import { myRequests } from "@/lib/api/work-request";
+import { getRegisteredPrograms } from "@/lib/api/programs";
 
 function Page() {
   // GET
@@ -25,8 +26,23 @@ function Page() {
     }
   );
   const { data: programsData, isLoading: isLoadingPrograms } = useQuery({
-    queryKey: ["programs"],
-    queryFn: getPrograms,
+    queryKey: ["reg-programs"],
+    queryFn: getRegisteredPrograms,
+  });
+  const {
+    data: examsData,
+    isLoading: isLoadingExams,
+    error: examError,
+  } = useQuery({
+    queryKey: ["exams"],
+    queryFn: getExams,
+    enabled: true,
+  });
+
+  console.log({
+    examsData,
+    isLoadingExams,
+    examError,
   });
 
   console.log(workRequestsData);
@@ -46,13 +62,15 @@ function Page() {
       </div>
 
       {/* last program section */}
-      <div className="space-y-4">
-        <h2 className="mobile-title-large md:title-large text-on_surface-light">
-          Last Program
-        </h2>
+      {programsData?.data.data.length > 0 ? (
+        <div className="space-y-4">
+          <h2 className="mobile-title-large md:title-large text-on_surface-light">
+            Last Program
+          </h2>
 
-        <CourseInProgress courseDetails={programsData?.data.data[0]} />
-      </div>
+          <CourseInProgress courseDetails={programsData?.data.data[0]} />
+        </div>
+      ) : null}
 
       {/* Certifications section */}
       <div className="space-y-4">

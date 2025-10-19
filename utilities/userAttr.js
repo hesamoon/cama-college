@@ -1,5 +1,7 @@
 "use client";
 
+import jwt from "jsonwebtoken";
+
 // utilities/userAttr.js
 import { getCookie } from "./cookie";
 
@@ -12,6 +14,5 @@ export const userAttr = () => {
     return { role: "UNSIGNED" };
   }
 
-  // You can decode the token here if needed
   return { role: "ADMIN" };
 };

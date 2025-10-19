@@ -23,6 +23,7 @@ import { parseStyledText } from "@/utilities/utils";
 // api
 import { getLessons } from "@/lib/api/lessons";
 import { getProgram } from "@/lib/api/programs";
+import { getExams } from "@/lib/api/exam/exams";
 
 // types
 import { Lesson, Subject } from "@/app/types/types";
@@ -34,6 +35,7 @@ function Page() {
     defaultValue: "",
   });
 
+  // const [getVideo, setGetVideo] = useState(false);
   const [getVideo] = useState(false);
   const [lessonDetails, setLessonsDetails] = useState<Lesson>(null);
 
@@ -44,7 +46,7 @@ function Page() {
     error,
   } = useQuery({
     queryKey: ["lessons", lessonId],
-    queryFn: () => getLessons(lessonId!),
+    queryFn: () => getLessons(lessonId),
     enabled: getVideo,
   });
   const { data: programDetails, isLoading: isLoadingProgramDetails } = useQuery(
@@ -54,9 +56,15 @@ function Page() {
       enabled: false,
     }
   );
-  console.log(courseId);
-  console.log(lessonsData);
-  console.log(programDetails);
+  const {
+    data: examsData,
+    isLoading: isLoadingExams,
+    error: examError,
+  } = useQuery({
+    queryKey: ["exams"],
+    queryFn: getExams,
+    enabled: true,
+  });
 
   const router = useRouter();
 
@@ -84,7 +92,18 @@ function Page() {
     }
   }, [programDetails, queryLesson, lessonId]);
 
+  // useEffect(() => {
+  //   setGetVideo(true);
+  // }, [lessonId]);
+
   console.log(lessonDetails);
+  console.log(programDetails);
+  console.log({
+    examsData,
+    isLoadingExams,
+    examError,
+  });
+  // console.log(lessonsData)
 
   return queryLesson === "Lesson Title 1-3" ? (
     <MeetPreview />
@@ -136,7 +155,12 @@ function Page() {
             </div>
 
             {/* descriptions */}
-            <div className="space-y-6">
+            <div
+              className="space-y-6"
+              data-presentation-type={
+                programDetails?.data.data.presentation_type
+              }
+            >
               {/* title / description 1 */}
               <div className="space-y-3">
                 <h4 className="mobile-title-medium md:title-medium text-on_surface-light">

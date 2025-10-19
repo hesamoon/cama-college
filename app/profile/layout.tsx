@@ -1,9 +1,29 @@
+"use client";
+
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 // components
 import ProfileNavs from "@/components/ProfileNavs";
 import UserProfile from "@/components/UserProfile";
 import MobileNavbar from "@/components/MobileNavbar";
 
+// utils
+import { userAttr } from "@/utilities/userAttr";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (userAttr().role === "UNSIGNED") {
+      toast.error("Unauthenticated", { position: "top-center" });
+      router.replace("/");
+    }
+  }, [router]);
+
+  if (userAttr().role === "UNSIGNED") return null;
+
   return (
     <div className="flex flex-col md:grid md:grid-cols-5 border border-outline-level0 divide-x divide-outline-level0 grid-system-level">
       {/* Top nav bar (mobile only) */}

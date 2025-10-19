@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 // components
 import ChatBox from "./ChatBox";
 import TUUMLanguageDetecter from "./modal/TUUMLanguageDetecter";
+
+// utils
 import { getLang } from "@/utilities/storeLanguage";
 // import TUUMNotification from "./TUUMNotification";
 

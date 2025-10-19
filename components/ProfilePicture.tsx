@@ -9,12 +9,16 @@ import { getMe } from "@/lib/api/auth";
 import Button from "./Button";
 import BluredImage from "./BluredImage";
 import { Skeleton } from "@mui/material";
+import { userAttr } from "@/utilities/userAttr";
 
 function ProfilePicture() {
   const { data: myData, isLoading: isLoadingMe } = useQuery({
     queryKey: ["me"],
     queryFn: () => getMe(),
   });
+
+  console.log(myData)
+  console.log(userAttr())
 
   const [image, setImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);

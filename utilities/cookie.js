@@ -5,7 +5,7 @@ const setCookie = (tokens) => {
 };
 
 const clearCookie = () => {
-  setCookie({ accessToken: "" });
+  document.cookie = "accessToken=; max-age=0;";
 };
 
 const getCookie = (cookieName) => {
@@ -27,8 +27,7 @@ const isLogged = () => {
   return !!document?.cookie
     .split(";")
     .find((token) => token.trim().split("=")[0] === "accessToken")
-    ?.split("=")[1]
-  
+    ?.split("=")[1];
 };
 
 export { setCookie, getCookie, clearCookie, isLogged };

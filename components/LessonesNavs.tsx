@@ -114,7 +114,7 @@ function LessonesNavs() {
     if (!queryLesson && programDetails?.data) {
       const lessonDetails = programDetails?.data.data.subjects.flatMap(
         (subject: Subject) =>
-          subject.lessons.filter((lesson: Lesson) => lesson?.is_free === 0)
+          subject.lessons.filter((lesson: Lesson) => lesson?.is_free === 1)
       );
       console.log(programDetails);
       console.log(lessonDetails);

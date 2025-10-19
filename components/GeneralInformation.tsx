@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
-  FormControl,
-  InputLabel,
-  MenuItem,
   Select,
+  MenuItem,
   TextField,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
 
 // components
@@ -38,7 +38,10 @@ function GeneralInformation() {
         firstName: myData?.data.data.name || "",
         lastName: myData?.data.data.family || "",
         number: myData?.data.data.mobile || "",
-        job: myData?.data.data?.job || "",
+        job:
+          myData?.data.data?.roles[0].name === "teacher"
+            ? "Teacher"
+            : "Student",
       });
     }
   }, [myData]);

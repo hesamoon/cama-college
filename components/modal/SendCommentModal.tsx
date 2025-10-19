@@ -38,6 +38,7 @@ function SendCommentModal({
         toast.success("Your comment submitted successfully!", {
           position: "top-center",
         });
+        setErrorTextArea("");
         handleClose();
       },
       onError: (error) => {
@@ -46,6 +47,7 @@ function SendCommentModal({
         if (error instanceof AxiosError) {
           if (error.response?.data?.errors) {
             console.log(error.response.data.errors);
+            setErrorTextArea(error.response.data.errors.text[0]);
             toast.error(error.response.data.errors.text[0], {
               position: "top-center",
             });
@@ -62,9 +64,11 @@ function SendCommentModal({
 
   const [selScore, setSelScore] = useState(score);
   const [commentValue, setCommentValue] = useState("");
+  const [errorTextArea, setErrorTextArea] = useState("");
 
   const handleClose = () => {
     setCommentValue("");
+    setErrorTextArea("");
     onClose();
   };
 
@@ -173,15 +177,22 @@ function SendCommentModal({
           What is your opinion about the {commentFor}?
         </h5>
 
-        <textarea
-          className="border body-large rounded-md resize-none outline-none border-outline-level1 p-3"
-          name="comment"
-          id="comment"
-          rows={6}
-          value={commentValue}
-          onChange={(e) => setCommentValue(e.target.value)}
-          placeholder="Write here..."
-        ></textarea>
+        <div className="w-full">
+          <textarea
+            className={`border body-large rounded-md w-full resize-none outline-none p-3 ${
+              !!errorTextArea ? "border-red-500" : "border-outline-level1"
+            }`}
+            name="comment"
+            id="comment"
+            rows={6}
+            value={commentValue}
+            onChange={(e) => setCommentValue(e.target.value)}
+            placeholder="Write here..."
+          ></textarea>
+          {!!errorTextArea && (
+            <p className="text-xs text-red-500">{errorTextArea}</p>
+          )}
+        </div>
       </div>
 
       <footer className="flex items-center justify-between gap-2 mt-6 md:mt-12">
