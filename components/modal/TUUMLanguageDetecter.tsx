@@ -74,10 +74,10 @@ function TUUMLanguageDetecter({
       try {
         const res = await fetch("/api/getUserIP");
         const data = await res.json();
-        console.log(data)
+        console.log(data);
         setInfo(data);
         setCurrentLang(
-          languages.find((l) => data.language.includes(l.code)) || {}
+          languages.find((l) => l.code.includes(data.language)) || {}
         );
       } catch (err) {
         console.log("Error fetching IP info:", err);
