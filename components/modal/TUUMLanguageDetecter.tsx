@@ -74,6 +74,7 @@ function TUUMLanguageDetecter({
       try {
         const res = await fetch("/api/getUserIP");
         const data = await res.json();
+        console.log(data)
         setInfo(data);
         setCurrentLang(
           languages.find((l) => data.language.includes(l.code)) || {}
