@@ -82,6 +82,8 @@ export default function TextSelectionPopup() {
                 y: rect.bottom + window.scrollY + 20, // below selection
                 text: selection.toString(),
               });
+              console.log(selectedLanguage);
+              console.log(selection.toString());
               translateMutation({
                 lang: selectedLanguage,
                 text: selection.toString(),
@@ -113,6 +115,9 @@ export default function TextSelectionPopup() {
     )
       translateMutation({ lang: selectedLanguage, text: popup?.text || "" });
   }, [selectedLanguage]);
+
+  console.log(selectedLanguage);
+  console.log(popup);
 
   return (
     <>

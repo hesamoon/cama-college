@@ -9,6 +9,7 @@ import Button from "../Button";
 
 // utils
 import { setLang } from "@/utilities/storeLanguage";
+import { Skeleton } from "@mui/material";
 
 const languages = [
   { code: "fa-IR", name: "فارسی", flag: "ir" },
@@ -61,6 +62,7 @@ function TUUMLanguageDetecter({
 }) {
   const [info, setInfo] = useState<UserInfo>({});
   const [currentLang, setCurrentLang] = useState<Lang>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClose = () => {
     onClose();
@@ -72,6 +74,7 @@ function TUUMLanguageDetecter({
     // Fetch IP & geo info from server API
     async function fetchIP() {
       try {
+        setIsLoading(true);
         const res = await fetch("/api/getUserIP");
         const data = await res.json();
         console.log(data);
@@ -79,8 +82,10 @@ function TUUMLanguageDetecter({
         setCurrentLang(
           languages.find((l) => l.code.includes(data.language)) || {}
         );
+        setIsLoading(false);
       } catch (err) {
         console.log("Error fetching IP info:", err);
+        setIsLoading(false);
       }
     }
 
@@ -200,14 +205,35 @@ function TUUMLanguageDetecter({
                   </h5>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <span
-                    className={`fi fi-${currentLang.flag} rounded-xs min-w-8 min-h-6`}
-                  />
-                  <span className="body-large text-on_surface-light">
-                    {currentLang.name}
-                  </span>
-                </div>
+                {isLoading ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    {/* Flag placeholder */}
+                    <Skeleton
+                      variant="rectangular"
+                      width={32}
+                      height={24}
+                      sx={{ borderRadius: "4px" }}
+                    />
+
+                    {/* Text placeholder */}
+                    <Skeleton variant="text" width={100} height={40} />
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`fi fi-${currentLang.flag} rounded-xs min-w-8 min-h-6`}
+                    />
+                    <span className="body-large text-on_surface-light">
+                      {currentLang.name}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-2">
