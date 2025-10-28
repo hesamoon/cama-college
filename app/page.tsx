@@ -3,6 +3,7 @@ import Link from "next/link";
 
 // components
 import Button from "@/components/Button";
+import Searchbox from "@/components/Searchbox";
 import CourseCard from "@/components/CourseCard";
 import TUUMLanding from "@/components/TUUMLanding";
 import ApplyBanner from "@/components/ApplyBanner";
@@ -23,7 +24,34 @@ export default function Home() {
       <TUUMLanding />
 
       {/* header */}
-      {userAttr()?.role === "ADMIN" ? <LoginBanner /> : null}
+      {userAttr()?.role === "ADMIN" ? (
+        <LoginBanner />
+      ) : (
+        <section className="mt-7 space-y-12 mobile-grid-system-level0 md:grid-system-level0">
+          <div className="space-y-6">
+            <h1 className="mobile-display-large md:display-large max-w-96 md:max-w-xl">
+              With CAMA college, shape your future!
+            </h1>
+            <p className="max-w-96 md:max-w-3xl body-large">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Egestas
+            </p>
+          </div>
+
+          <section className="space-y-3 mt-10 max-w-3xl md:pr-4">
+            {/* searchbox */}
+            <Searchbox />
+
+            <div className="flex items-center gap-1 ml-6">
+              <Image src="/star.svg" alt="star" width={16} height={16} />
+              <span className="mobile-label-medium-db md:label-medium-db text-on_surface-light">
+                12034 students enrolled
+              </span>
+            </div>
+          </section>
+        </section>
+      )}
 
       {/* new programs */}
       <CoursesSection courseType="programs" onlyThisSection={true} />

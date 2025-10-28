@@ -17,6 +17,7 @@ type Props = {
   clickHandler?: () => void;
   loading?: boolean;
   rotation?: string;
+  title?: string;
 };
 
 function Button({
@@ -35,6 +36,7 @@ function Button({
     clickHandler = () => {},
     loading = false,
     rotation = "",
+    title = "",
   },
 }: {
   props: Props;
@@ -75,6 +77,7 @@ function Button({
           clickHandler();
         }
       }}
+      title={title}
     >
       {loading ? (
         <svg

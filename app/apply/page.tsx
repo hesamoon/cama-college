@@ -2,6 +2,7 @@
 import ApplyScreen from "@/components/ApplyScreen";
 import BluredImage from "@/components/BluredImage";
 import LoginButtons from "@/components/LoginButtons";
+import { userAttr } from "@/utilities/serverUserAttr";
 
 function page() {
   return (
@@ -381,7 +382,9 @@ function page() {
           </p>
         </div>
 
-        <LoginButtons type="filled" color="red" icon="login-white" />
+        {userAttr().role === "UNSIGNED" && (
+          <LoginButtons type="filled" color="red" icon="login-white" />
+        )}
       </div>
 
       <ApplyScreen />
@@ -400,7 +403,9 @@ function page() {
           </p>
         </div>
 
-        <LoginButtons type="filled" color="red" icon="login-white" />
+        {userAttr().role === "UNSIGNED" && (
+          <LoginButtons type="filled" color="red" icon="login-white" />
+        )}
       </div>
     </div>
   );

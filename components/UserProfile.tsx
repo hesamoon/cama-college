@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 
 // components
+import Button from "./Button";
 import BluredImage from "./BluredImage";
 import UserProfileSkeleton from "./skeletons/UserProfileSkeleton";
 
@@ -39,6 +40,62 @@ function UserProfile() {
                 {`+${myData?.data.data.phone || "1 938 8838 383"}`}
               </h5>
             </div>
+          </div>
+
+          {/* tuum balance */}
+          <div className="relative overflow-hidden rounded bg-[#FF8D2814] py-2 px-3 flex items-center justify-between gap-2.5">
+            <div className="flex items-center gap-2">
+              <Image
+                src="/tuum/tuum-coin.svg"
+                alt="coin"
+                width={32}
+                height={32}
+              />
+
+              <h3 className="text-black text-sm">
+                {myData?.data.data.tuum_balance} Coins
+              </h3>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <Button
+                props={{
+                  value: "",
+                  type: "text",
+                  color: "red",
+                  disabled: false,
+                  leftIcon: "money-send",
+                  rightIcon: "",
+                  padding: "p-2",
+                  size: "body-large",
+                  height: 24,
+                  width: 24,
+                  title: "send coins",
+                  // clickHandler: searchClickHandler,
+                }}
+              />
+
+              <Button
+                props={{
+                  value: "",
+                  type: "text",
+                  color: "red",
+                  disabled: false,
+                  leftIcon: "add-black",
+                  rightIcon: "",
+                  padding: "p-2",
+                  size: "body-large",
+                  height: 24,
+                  width: 24,
+                  title: "receive coins",
+                  // clickHandler: searchClickHandler,
+                }}
+              />
+            </div>
+
+            <div className="absolute -top-[4.4rem] -left-20 opacity-10 rotate-[60deg] rounded-xs w-[97.2px] h-[97.2px] bg-[#FFCC00]" />
+            <div className="absolute -bottom-[5.5rem] -right-[0.8rem] opacity-10 rotate-[50deg] rounded-xs w-[97.2px] h-[97.2px] bg-[#FFCC00]" />
+            <div className="absolute -bottom-[5.5rem] -right-[2.5rem] opacity-10 rotate-[50deg] rounded-xs w-[97.2px] h-[97.2px] bg-[#FFCC00]" />
           </div>
 
           {/* apply banner */}

@@ -1,14 +1,8 @@
 import Image from "next/image";
 import toast from "react-hot-toast";
 
-type Transaction = {
-  program: string;
-  date: string;
-  amount: string;
-  payType: string;
-  status: string;
-  transactionId: string;
-};
+// types
+import { Transaction } from "@/app/types/types";
 
 function TransactionsTable({
   title,
@@ -79,7 +73,7 @@ function TransactionsTable({
                 className="border-t border-outline-level0 body-medium grid grid-cols-8 items-center"
               >
                 <td className="px-4 py-3 text-on_surface-light col-span-2">
-                  {tx.program}
+                  {tx.name}
                 </td>
                 <td className="px-4 py-3 text-txt-on-surface-secondary-light col-span-1">
                   {tx.date}
@@ -88,13 +82,15 @@ function TransactionsTable({
                   {tx.amount}
                 </td>
                 <td className="px-4 flex items-center gap-2 col-span-1">
-                  {tx.payType === "PayPal" && (
+                  {tx.payType === "PayPal" ? (
                     <Image
                       src="/paypal-logo.svg"
                       alt="paypal"
                       width={80}
                       height={20.8}
                     />
+                  ) : (
+                    "Net"
                   )}
                 </td>
                 <td className="px-4 py-3 text-green flex items-center gap-1 col-span-1">
@@ -169,7 +165,7 @@ function TransactionsTable({
             >
               <div className="flex items-start justify-between">
                 <div className="space-y-0">
-                  <h4 className="text-on_surface-light">{tx.program}</h4>
+                  <h4 className="text-on_surface-light">{tx.name}</h4>
                   <h4 className="text-txt-on-surface-secondary-light">
                     {tx.date}
                   </h4>

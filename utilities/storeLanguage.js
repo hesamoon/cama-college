@@ -3,7 +3,7 @@ const setLang = (lang) => {
 };
 
 const clearLang = () => {
-  setLang({ lang: "" });
+  document.cookie = "lang=; max-age=0;";
 };
 
 const getLang = () => {

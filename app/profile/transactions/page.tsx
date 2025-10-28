@@ -12,7 +12,7 @@ import FiltersModal from "@/components/modal/FiltersModal";
 import TransactionsTable from "@/components/TransactionsTable";
 
 // data
-import { transactions } from "@/constants/data";
+import { transactions, tuum_transactions } from "@/constants/data";
 
 // types
 import { Transaction } from "@/app/types/types";
@@ -39,48 +39,102 @@ function page() {
   };
 
   useEffect(() => {
-    setTransactionList(
-      transactions.filter((transaction) =>
-        transaction.program.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    if (activeTab === "TUUM") {
+      setTransactionList(
+        tuum_transactions.filter((transaction) =>
+          transaction.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else {
+      setTransactionList(
+        transactions.filter((transaction) =>
+          transaction.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
   }, [search]);
 
   useEffect(() => {
-    setTransactionList(
-      transactions
-        .sort((a, b) =>
-          sortVal === "Newest"
-            ? new Date(b.date ?? "").getTime() -
-              new Date(a.date ?? "").getTime()
-            : new Date(a.date ?? "").getTime() -
-              new Date(b.date ?? "").getTime()
-        )
-        .filter((transaction) =>
-          transaction.program.toLowerCase().includes(search.toLowerCase())
-        )
-    );
+    if (activeTab === "TUUM") {
+      setTransactionList(
+        tuum_transactions
+          .sort((a, b) =>
+            sortVal === "Newest"
+              ? new Date(b.date ?? "").getTime() -
+                new Date(a.date ?? "").getTime()
+              : new Date(a.date ?? "").getTime() -
+                new Date(b.date ?? "").getTime()
+          )
+          .filter((transaction) =>
+            transaction.name.toLowerCase().includes(search.toLowerCase())
+          )
+      );
+    } else {
+      setTransactionList(
+        transactions
+          .sort((a, b) =>
+            sortVal === "Newest"
+              ? new Date(b.date ?? "").getTime() -
+                new Date(a.date ?? "").getTime()
+              : new Date(a.date ?? "").getTime() -
+                new Date(b.date ?? "").getTime()
+          )
+          .filter((transaction) =>
+            transaction.name.toLowerCase().includes(search.toLowerCase())
+          )
+      );
+    }
   }, [sortVal]);
 
   useEffect(() => {
-    setTransactionList(
-      transactions.slice((currentPage - 1) * 7, currentPage * 7)
-    );
+    if (activeTab === "TUUM") {
+      setTransactionList(
+        tuum_transactions.slice((currentPage - 1) * 7, currentPage * 7)
+      );
+    } else {
+      setTransactionList(
+        transactions.slice((currentPage - 1) * 7, currentPage * 7)
+      );
+    }
   }, [currentPage]);
 
   useEffect(() => {
-    setTransactionList(
-      transactions.filter((transaction) =>
-        transaction.program.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    if (activeTab === "TUUM") {
+      setTransactionList(
+        tuum_transactions.filter((transaction) =>
+          transaction.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else {
+      setTransactionList(
+        transactions.filter((transaction) =>
+          transaction.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    if (activeTab === "TUUM") {
+      setTransactionList(
+        tuum_transactions.filter((transaction) =>
+          transaction.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else {
+      setTransactionList(
+        transactions.filter((transaction) =>
+          transaction.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
   }, []);
 
   return (
     <div className="w-full">
       {/* tabs */}
       <div className="bg-white md:grid-system-level0 !gap-0 grid grid-cols-2 text-center md:flex border-b border-outline-level0">
-        {["Programs", "Events"].map((tab) => (
+        {["Programs", "Events", "TUUM"].map((tab) => (
           <div
             key={tab}
             className={
