@@ -516,15 +516,6 @@ body {
   background-color: var(--color-primary-tints-30);
 }
 
-.hero::before {
-  content: "";
-  background-image: url("/ptrn2.png");
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-}
 
 .hero2 {
   position: relative;
