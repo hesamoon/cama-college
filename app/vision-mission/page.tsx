@@ -1,8 +1,3 @@
-import BluredImage from "@/components/BluredImage";
-
-// utils
-import { parseStyledText } from "@/utilities/utils";
-
 function page() {
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level3 space-y-6 md:space-y-10 py-5 md:py-10">
