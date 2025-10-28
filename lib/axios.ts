@@ -16,7 +16,7 @@ api.interceptors.request.use(
     // Set Content-Type based on data type
     if (request.data instanceof FormData) {
       // For FormData (file uploads), let the browser set the Content-Type with boundary
-      delete request.headers["Content-Type"];
+      delete request.headers["Content-Type"]; 
     } else {
       // For JSON data, set Content-Type to application/json
       request.headers["Content-Type"] = "application/json";
