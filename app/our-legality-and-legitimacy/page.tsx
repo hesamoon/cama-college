@@ -1,5 +1,3 @@
-import { parseStyledText } from "@/utilities/utils";
-
 function page() {
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level3 space-y-10 py-5 md:py-10">
