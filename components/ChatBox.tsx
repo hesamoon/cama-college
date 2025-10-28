@@ -2,20 +2,22 @@
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { AxiosError } from "axios";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 
 // components
 import Chips from "./Chips";
 import Button from "./Button";
 import DragScroll from "./DragScroll";
+import AILoader from "./loader/AILoader";
 
 // types
 import { ChatHistory, ChatMessage } from "@/app/types/types";
-import AILoader from "./loader/AILoader";
-import { useMutation } from "@tanstack/react-query";
-import { summarize } from "@/lib/api/ai";
-import { AxiosError } from "axios";
+
+// api
+import { question, summarize } from "@/lib/api/ai";
 
 // Fake data
 const history: ChatHistory[] = [
@@ -268,6 +270,35 @@ function ChatBox({
       }
     },
   });
+  const { mutate: questionMutation, isPending: isResponding } = useMutation({
+    mutationFn: question,
+    onSuccess: (data) => {
+      console.log(data);
+      setLoading?.(false);
+      setResponseForAction({
+        res: data.data.data.response,
+        action: "question",
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+      setLoading?.(false);
+      if (error instanceof AxiosError) {
+        if (error.response?.data?.errors) {
+          console.log(error.response.data.errors);
+          toast.error(error.response.data.errors.text[0], {
+            position: "top-center",
+          });
+        } else {
+          toast.error(error.response?.data?.message || error?.message, {
+            position: "top-center",
+          });
+        }
+      } else {
+        toast.error("An unknown error occurred.", { position: "top-center" });
+      }
+    },
+  });
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -442,9 +473,15 @@ function ChatBox({
                   />
                 ))}
 
-                {isSummarizing ? (
+                {isSummarizing || isResponding ? (
                   <div className="px-4">
-                    <AILoader text="Summarizing" />
+                    <AILoader
+                      text={
+                        responseForAction?.action === "summerize"
+                          ? "Summarizing"
+                          : "Responding"
+                      }
+                    />
                   </div>
                 ) : responseForAction?.res ? (
                   <Message
@@ -691,13 +728,19 @@ function ChatBox({
                   leftIcon: "send",
                   rightIcon: "",
                   type: "filled",
-                  disabled: false,
+                  disabled: isResponding,
                   color: "red",
                   width: 20,
                   height: 20,
                   size: "mobile-body-large md:body-large",
                   padding: "p-2.5",
-                  clickHandler: () => (setLoading ? setLoading(true) : null),
+                  clickHandler: () => {
+                    if (setLoading) {
+                      setLoading(true);
+                    }
+
+                    questionMutation(promptValue);
+                  },
                 }}
               />
             </div>
