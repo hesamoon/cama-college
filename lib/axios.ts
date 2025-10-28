@@ -20,6 +20,7 @@ api.interceptors.request.use(
     } else {
       // For JSON data, set Content-Type to application/json
       request.headers["Content-Type"] = "application/json";
+      // request.headers["OpenAI-Beta"] = "assistants=v2";
     }
 
     return request;
