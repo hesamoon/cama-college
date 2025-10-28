@@ -5,7 +5,6 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Searchbox from "@/components/Searchbox";
 import CourseCard from "@/components/CourseCard";
-import TUUMLanding from "@/components/TUUMLanding";
 import ApplyBanner from "@/components/ApplyBanner";
 import LoginBanner from "@/components/LoginBanner";
 import SectionTitle from "@/components/SectionTitle";
@@ -21,13 +20,13 @@ import { userAttr } from "../utilities/serverUserAttr.js";
 export default function Home() {
   return (
     <div className="space-y-7 md:space-y-14">
-      <TUUMLanding />
+      {/* <TUUMLanding /> */}
 
       {/* header */}
       {userAttr()?.role === "ADMIN" ? (
         <LoginBanner />
       ) : (
-        <section className="mt-7 space-y-12 mobile-grid-system-level0 md:grid-system-level0">
+        <section className="mt-6 space-y-12 mobile-grid-system-level0 md:grid-system-level0">
           <div className="space-y-6">
             <h1 className="mobile-display-large md:display-large max-w-96 md:max-w-xl">
               With CAMA college, shape your future!
@@ -54,7 +53,7 @@ export default function Home() {
       )}
 
       {/* new programs */}
-      <CoursesSection courseType="programs" onlyThisSection={true} />
+      <CoursesSection courseType="programs" />
 
       <section className="hero mobile-grid-system-level0 md:grid-system-level0">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6">
