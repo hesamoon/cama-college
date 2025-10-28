@@ -17,7 +17,7 @@ function Page() {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [question, setQuestion] = useState("");
-  const [department, setDepartment] = useState("");
+  const [department, setDepartment] = useState("Education");
 
   const [touched, setTouched] = useState(false);
 
@@ -50,7 +50,7 @@ function Page() {
 
         <div className="flex flex-col md:flex-row gap-6 md:gap-32">
           {/* location */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-1">
             <div
             // className="rounded-full bg-primary-tints-90 p-3"
             >
@@ -80,14 +80,24 @@ function Page() {
               <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
                 Address
               </h6>
-              <h4 className="mobile-body-large md:body-large text-on_surface-light">
+
+              <a
+                href="https://www.google.com/maps/place/Canada+Management+College+(CAMA+College)/@43.8439514,-79.3865362,118m/data=!3m1!1e3!4m15!1m8!3m7!1s0x882b2b4956f7bd77:0xa0533c82dec211ea!2s500+Hwy+7+Unit+305,+Richmond+Hill,+ON+L4B+1J1,+Canada!3b1!8m2!3d43.8441212!4d-79.3861586!16s%2Fg%2F11yffsjd7n!3m5!1s0x882ad5b42b7f6bf7:0x22479cf8a40d098a!8m2!3d43.8441212!4d-79.3861586!16s%2Fg%2F11w1lxz7v6?entry=ttu&g_ep=EgoyMDI1MTAyNi4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mobile-body-large md:body-large text-on_surface-light"
+              >
+                Unit 305, 500 Highway 7 East,
+                <br />
                 Richmond Hill, Ontario, CANADA
-              </h4>
+                <br />
+                L4B 1J1
+              </a>
             </div>
           </div>
 
           {/* phone */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-1">
             <div
             // className="rounded-full bg-primary-tints-90 p-3"
             >
@@ -114,16 +124,22 @@ function Page() {
                 Phone
               </h6>
               <h4 className="mobile-body-large md:body-large text-on_surface-light">
-                +1 647 720 2928 (10 Lines)
+                +1 647 720 2949
               </h4>
-              <h6 className="mobile-body-small md:body-small text-txt-on-surface-terriary-light">
-                Monday - Friday: 09:00 - 18:00
-              </h6>
+
+              <div className="">
+                <h6 className="mobile-body-small md:body-small text-txt-on-surface-terriary-light">
+                  Monday - Friday: 09:00 - 17:00
+                </h6>
+                <h6 className="mobile-body-small md:body-small text-txt-on-surface-terriary-light">
+                  Saturday: 10:00 - 14:00
+                </h6>
+              </div>
             </div>
           </div>
 
           {/* mail */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-1">
             <div
             // className="rounded-full bg-primary-tints-90 p-3"
             >
@@ -155,13 +171,36 @@ function Page() {
               </svg>
             </div>
 
-            <div className="space-y-1">
-              <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
-                Mail
-              </h6>
-              <h4 className="mobile-body-large md:body-large text-on_surface-light">
-                contact@camacollege.ca
-              </h4>
+            <div className="space-y-2">
+              <div>
+                <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
+                  Admissions & Aid
+                </h6>
+                <h4 className="mobile-body-large md:body-large text-on_surface-light">
+                  <a
+                    href="mailto:collegeadmissions@camacollege.ca"
+                    className=""
+                  >
+                    collegeadmissions@camacollege.ca
+                  </a>
+                </h4>
+                <h4 className="mobile-body-large md:body-large text-on_surface-light">
+                  <a href="mailto:gradadmissions@camacollege.ca" className="">
+                    gradadmissions@camacollege.ca
+                  </a>
+                </h4>
+              </div>
+
+              <div>
+                <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
+                  Visitor Information & Employment
+                </h6>
+                <h4 className="mobile-body-large md:body-large text-on_surface-light">
+                  <a href="mailto:infocenter@camacollege.ca" className="">
+                    infocenter@camacollege.ca
+                  </a>
+                </h4>
+              </div>
             </div>
           </div>
         </div>
@@ -226,9 +265,17 @@ function Page() {
                     <MenuItem value="">
                       <em>Select a Department</em>
                     </MenuItem>
-                    <MenuItem value="Finance">Finance</MenuItem>
-                    <MenuItem value="Marketing">Marketing</MenuItem>
-                    <MenuItem value="AI">AI</MenuItem>
+                    <MenuItem value="Education">Education</MenuItem>
+                    <MenuItem value="Student registration">
+                      Student registration
+                    </MenuItem>
+                    <MenuItem value="Teacher registration">
+                      Teacher registration
+                    </MenuItem>
+                    <MenuItem value="Teacher registration">
+                      Recruitment
+                    </MenuItem>
+                    <MenuItem value="Website support">Website support</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -273,7 +320,7 @@ function Page() {
             rightIcon: "",
             type: "filled",
             size: "body-large",
-            padding:"px-8 py-4",
+            padding: "px-8 py-4",
             clickHandler: () => (!showError ? submitClickHandler() : null),
           }}
         />
