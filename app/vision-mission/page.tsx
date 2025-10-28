@@ -7,9 +7,9 @@ function page() {
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level3 space-y-6 md:space-y-10 py-5 md:py-10">
       {/* title */}
-      {/* <h2 className="mobile-title-large md:title-large text-on_surface-light">
-        Total Title
-      </h2> */}
+      <h2 className="mobile-title-large md:title-large text-on_surface-light">
+        Vision & Mission
+      </h2>
 
       <div className="space-y-9">
         {/* title / description 1 */}
