@@ -5,9 +5,6 @@ import { useEffect, useRef, useState } from "react";
 // types
 import { Node } from "../types/types";
 
-// utils
-import { parseStyledText } from "@/utilities/utils";
-
 // data
 import { orgChart } from "@/constants/data";
 
