@@ -1,18 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
 // components
 import Button from "@/components/Button";
-import Searchbox from "@/components/Searchbox";
-import CourseCard from "@/components/CourseCard";
+import Typewriter from "@/components/Typewriter";
 import ApplyBanner from "@/components/ApplyBanner";
 import LoginBanner from "@/components/LoginBanner";
-import SectionTitle from "@/components/SectionTitle";
+import AISearchBox from "@/components/AISearchBox";
 import CoursesSection from "@/components/CoursesSection";
 import CredentialInquiry from "@/components/CredentialInquiry";
-
-// data
-import { news } from "../constants/data.js";
 
 // utils
 import { userAttr } from "../utilities/serverUserAttr.js";
@@ -26,35 +22,64 @@ export default function Home() {
       {userAttr()?.role === "ADMIN" ? (
         <LoginBanner />
       ) : (
-        <section className="mt-6 space-y-12 mobile-grid-system-level0 md:grid-system-level0">
-          <div className="space-y-6">
-            <h1 className="mobile-display-large md:display-large max-w-96 md:max-w-xl">
-              With CAMA college, shape your future!
-            </h1>
-            <p className="max-w-96 md:max-w-3xl body-large">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Egestas
-            </p>
-          </div>
+        <section className="mt-8 grid grid-cols-2 mobile-grid-system-level0 md:grid-system-level0">
+          <div className="space-y-12 col-span-1">
+            <div className="space-y-6">
+              {/* TUUM Professor AI */}
+              <div className="flex items-center gap-6">
+                <div className="relative">
+                  {/* glow effect */}
+                  <>
+                    <div className="absolute -top-[2px] -left-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
+                    <div className="absolute -top-[2px] -right-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
+                    <div className="absolute -bottom-[2px] -left-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
+                    <div className="absolute -bottom-[2px] -right-[2px] w-[57.55px] h-[57.55px] rounded-full bg-[#B76929] opacity-16 -z-5" />
+                  </>
 
-          <section className="space-y-3 mt-10 max-w-3xl md:pr-4">
-            {/* searchbox */}
-            <Searchbox />
+                  <div className="bg-[#320E0B] rounded-full flex items-center justify-center w-[47.63px] h-[47.63px]">
+                    <Image
+                      className="w-[40px] h-[39px]"
+                      src="/tuum/tuum-logo.svg"
+                      alt="tuum logo"
+                      width={40}
+                      height={39}
+                    />
+                  </div>
+                </div>
 
-            <div className="flex items-center gap-1 ml-6">
-              <Image src="/star.svg" alt="star" width={16} height={16} />
-              <span className="mobile-label-medium-db md:label-medium-db text-on_surface-light">
-                12034 students enrolled
-              </span>
+                <div className="space-y-0.5">
+                  <h5 className="label-medium-db bg-gradient-to-r from-[#F78B5D] to-[#CE6312] bg-clip-text text-transparent">
+                    TUUM Professor
+                  </h5>
+                  <h3 className="body-large text-on_surface-light">
+                    Hello, Im CAMA College AI assistant
+                  </h3>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 items-start justify-start">
+                <Typewriter
+                  text="With CAMA college, shape your future!"
+                  sx="mobile-display-large md:header-small max-w-96 md:max-w-xl"
+                />
+
+                <Typewriter
+                  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas"
+                  sx="mobile-body-large md:body-large max-w-96 md:max-w-xl"
+                />
+              </div>
             </div>
-          </section>
+
+            {/* searchbox */}
+            <AISearchBox />
+          </div>
         </section>
       )}
 
       {/* new programs */}
       <CoursesSection courseType="programs" />
 
+      {/* numbers */}
       <section className="hero mobile-grid-system-level0 md:grid-system-level0">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-black font-bold text-xl py-6">
           <div className="mobile-title-medium md:header-small">
@@ -90,20 +115,6 @@ export default function Home() {
       {/* admissions */}
       <section className="flex items-center justify-center mobile-grid-system-level0 md:grid-system-level1">
         <ApplyBanner />
-      </section>
-
-      {/* news and posts */}
-      <section className="space-y-4 mobile-grid-system-level0 md:grid-system-level0">
-        <SectionTitle title="News and Posts" path="/news" />
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {news.slice(0, 4).map((n) => (
-            <CourseCard
-              key={n.id}
-              data={{ ...n, cardType: "NEWS", status: "active" }}
-            />
-          ))}
-        </div>
       </section>
 
       {/* instructor */}
@@ -161,14 +172,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Credential inquiry */}
       <section className="hero2 mobile-grid-system-level0 md:grid-system-level0">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 text-white font-bold text-xl py-9">
           <div className="flex flex-col items-start gap-3 z-30">
-            <h3 className="title-medium text-primary-shades-90">
+            <h3 className="mobile-title-medium md:title-medium text-primary-shades-90">
               Credential inquiry
             </h3>
-            <p className="body-large text-primary-shades-90">
-              This is the description text
+            <p className="mobile-body-large md:body-large text-primary-shades-90 text-start">
+              To check the status of our global representatives, please enter
+              the representative code in the search bar next. The report
+              provided will display the representative’s status, start and end
+              dates of their partnership, region of representation, name, and
+              direct contact number.
             </p>
           </div>
 
