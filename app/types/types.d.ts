@@ -11,7 +11,7 @@ export interface Job {
 }
 
 export interface Transaction {
-  program: string;
+  name: string;
   date: string;
   amount: string;
   payType: string;

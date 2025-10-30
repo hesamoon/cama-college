@@ -33,6 +33,13 @@ export default function TextSelectionPopup() {
           toast.error(error.response.data.errors.text[0], {
             position: "top-center",
           });
+        } else if (
+          error.response?.data?.message ===
+          'Attempt to read property "id" on null'
+        ) {
+          toast.error("Please login first!!", {
+            position: "top-center",
+          });
         } else {
           toast.error(error.response?.data?.message || error?.message, {
             position: "top-center",

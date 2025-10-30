@@ -967,7 +967,7 @@ const newsGroups = [
 
 const transactions = [
   {
-    program: "Frontend Mastery",
+    name: "Frontend Mastery",
     date: "01/05/2025",
     amount: "$920 (CAD)",
     payType: "PayPal",
@@ -975,7 +975,7 @@ const transactions = [
     transactionId: "tx001a9zbc",
   },
   {
-    program: "Backend Bootcamp",
+    name: "Backend Bootcamp",
     date: "03/05/2025",
     amount: "$870 (CAD)",
     payType: "PayPal",
@@ -983,7 +983,7 @@ const transactions = [
     transactionId: "tx002bx7dp",
   },
   {
-    program: "Fullstack Pro",
+    name: "Fullstack Pro",
     date: "04/05/2025",
     amount: "$960 (CAD)",
     payType: "PayPal",
@@ -991,7 +991,7 @@ const transactions = [
     transactionId: "tx003cr8jf",
   },
   {
-    program: "AI Fundamentals",
+    name: "AI Fundamentals",
     date: "06/05/2025",
     amount: "$1050 (CAD)",
     payType: "PayPal",
@@ -999,7 +999,7 @@ const transactions = [
     transactionId: "tx004df2qw",
   },
   {
-    program: "UX/UI Essentials",
+    name: "UX/UI Essentials",
     date: "02/03/2025",
     amount: "$780 (CAD)",
     payType: "PayPal",
@@ -1007,7 +1007,7 @@ const transactions = [
     transactionId: "tx005ez3km",
   },
   {
-    program: "React Native Lab",
+    name: "React Native Lab",
     date: "05/05/2025",
     amount: "$890 (CAD)",
     payType: "PayPal",
@@ -1015,7 +1015,7 @@ const transactions = [
     transactionId: "tx006fj6bn",
   },
   {
-    program: "DevOps Workshop",
+    name: "DevOps Workshop",
     date: "02/04/2025",
     amount: "$830 (CAD)",
     payType: "PayPal",
@@ -1023,7 +1023,7 @@ const transactions = [
     transactionId: "tx007gs1re",
   },
   {
-    program: "Data Science Intro",
+    name: "Data Science Intro",
     date: "05/05/2021",
     amount: "$950 (CAD)",
     payType: "PayPal",
@@ -1031,7 +1031,7 @@ const transactions = [
     transactionId: "tx008hr5uy",
   },
   {
-    program: "Cybersecurity Basics",
+    name: "Cybersecurity Basics",
     date: "02/04/2020",
     amount: "$870 (CAD)",
     payType: "PayPal",
@@ -1039,7 +1039,7 @@ const transactions = [
     transactionId: "tx009id7lt",
   },
   {
-    program: "Cybersecurity Basics",
+    name: "Cybersecurity Basics",
     date: "02/04/2020",
     amount: "$870 (CAD)",
     payType: "PayPal",
@@ -1047,7 +1047,7 @@ const transactions = [
     transactionId: "tx009id7lt",
   },
   {
-    program: "Cybersecurity Basics",
+    name: "Cybersecurity Basics",
     date: "02/04/2020",
     amount: "$870 (CAD)",
     payType: "PayPal",
@@ -1055,7 +1055,7 @@ const transactions = [
     transactionId: "tx009id7lt",
   },
   {
-    program: "Cybersecurity Basics",
+    name: "Cybersecurity Basics",
     date: "02/04/2020",
     amount: "$870 (CAD)",
     payType: "PayPal",
@@ -1063,12 +1063,39 @@ const transactions = [
     transactionId: "tx009id7lt",
   },
   {
-    program: "Cybersecurity Basicsssssss",
+    name: "Cybersecurity Basicsssssss",
     date: "02/04/2020",
     amount: "$870 (CAD)",
     payType: "PayPal",
     status: "Success",
     transactionId: "tx009id7lt",
+  },
+];
+
+const tuum_transactions = [
+  {
+    name: "Transfer TUUM",
+    date: "01/05/2025",
+    amount: "20",
+    payType: "net",
+    status: "Success",
+    transactionId: "tx001a9zbc",
+  },
+  {
+    name: "Receive TUUM",
+    date: "03/10/2025",
+    amount: "10",
+    payType: "net",
+    status: "Success",
+    transactionId: "tx002bx7dp",
+  },
+  {
+    name: "Transfer TUUM",
+    date: "04/08/2025",
+    amount: "40",
+    payType: "net",
+    status: "Success",
+    transactionId: "tx003cr8jf",
   },
 ];
 
@@ -1208,7 +1235,7 @@ const comments = [
 const headerMenus = [
   {
     id: 1,
-    href: "/programs",
+    href: "/names",
     name: "Programs",
     subMenus: [
       {
@@ -3132,6 +3159,7 @@ export {
   headerMenus,
   policiesMenu,
   transactions,
+  tuum_transactions,
   LIMITOfLOADEDLIST,
   programsInProgress,
   LIMITNUMBEROFSCROLL,

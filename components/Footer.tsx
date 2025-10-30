@@ -58,7 +58,9 @@ function Footer() {
                   <Link href="/contact-us">Contact</Link>
                 </li>
                 <li>Tagline</li>
-                <li>Professor TUUM</li>
+                <li>
+                  <Link href="/professor-tuum">Professor TUUM</Link>
+                </li>
                 <li>
                   <Link href="/identity-chart">Identity Chart</Link>
                 </li>
@@ -91,7 +93,9 @@ function Footer() {
                 <li>
                   <Link href="/news">News & Blog</Link>
                 </li>
-                <li>Courses</li>
+                <li>
+                  <Link href="/programs">Programs</Link>
+                </li>
                 <li>
                   <Link href="/events">Events</Link>
                 </li>
@@ -147,14 +151,19 @@ function Footer() {
             <ul className="mobile-body-large md:body-large text-txt-on-surface-terriary-light space-y-3">
               <li>
                 Phone:{" "}
-                <span className="text-txt-on-surface-secondary-light">
-                  +1 9382 737
-                </span>
+                <a
+                  href="tel:+16477202949"
+                  className="text-txt-on-surface-secondary-light"
+                >
+                  +1 647 720 2949
+                </a>
               </li>
               <li>
                 Email:{" "}
                 <span className="text-txt-on-surface-secondary-light">
-                  cama@gmail.com
+                  <a href="mailto:contact@camacollege.ca" className="">
+                    contact@camacollege.ca
+                  </a>
                 </span>
               </li>
             </ul>

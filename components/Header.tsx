@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 
 // components
 import Navbar from "./Navbar";
@@ -23,7 +23,7 @@ function Header() {
   const [show] = useState(true);
   // const [lastScrollY, setLastScrollY] = useState(0);
   const [open, setOpen] = useState(false);
-  const [landingHeader, setLandingHeader] = useState(true);
+  const [landingHeader] = useState(false);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -69,22 +69,22 @@ function Header() {
   //   };
   // }, [open]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (pathname === "/") setLandingHeader(window.scrollY < 50);
-      else setLandingHeader(false);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (pathname === "/") setLandingHeader(window.scrollY < 50);
+  //     else setLandingHeader(false);
+  //   };
+  //   handleScroll();
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [pathname]);
 
   if (pathname.includes("/checkout")) return;
 
   return (
     <header
       id="site-header"
-      className={`${pathname === "/" ? "fixed" : "sticky"} top-0 w-full z-40 ${
+      className={`sticky top-0 w-full z-40 ${
         landingHeader
           ? "bg-transparent"
           : "bg-white border-b border-outline-level0"

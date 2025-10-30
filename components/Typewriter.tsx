@@ -19,7 +19,7 @@ const Typewriter = ({ text, sx }: { text: string; sx: string }) => {
 
   return (
     <div className={sx}>
-      <div className="flex items-center justify-center flex-wrap gap-1 overflow-hidden transition-all duration-500 ease-out">
+      <div className="flex flex-wrap gap-1 overflow-hidden transition-all duration-500 ease-out">
         {words.map((word, idx) => (
           <span
             key={idx}

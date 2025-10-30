@@ -1,7 +1,5 @@
 "use client";
 
-import jwt from "jsonwebtoken";
-
 // utilities/userAttr.js
 import { getCookie } from "./cookie";
 

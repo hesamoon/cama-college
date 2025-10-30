@@ -14,8 +14,8 @@ function AboutUs({ sx }: { sx: string }) {
   const [moreClicked, setMoreClicked] = useState(false);
   const isMobile = useIsMobile();
 
-  const desc =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisquerhoncus aenean vel elit scelerisquerhoncus aenean vel elit scelerisquerhoncus aenean vel elit scelerisque rhoncus aenean vel elit scelerisquerhoncus aenean vel elit scelerisquerhoncus aenean vel elit scelerisquerhoncus aenean vel elit scelerisquerhoncus aenean vel elit scelerisque. In";
+  const desc = `Canada Management College (CAMA College) is an academic and entrepreneurial training center. With a business name approval from Canada’s Ministry of Colleges and Universities, CAMA College is an institution with its administrative and in-person focus primarily on Ontario for the time being.
+  However, CAMA College welcomes students from all around the world in various practical disciplines for all facets of management as well as all kinds of managers and business owners, offering principles of Management and Leadership, Marketing, Branding, Advertising, Digital Marketing, IT, Artificial Intelligence, Organizational Structuring, Human Resources, and many more programs for you to hone your managerial skills. Utilizing the expertise of an internationally dynamic faculty, we offer both short-term and long-term practical courses, currently not only in English but also in Persian/Farsi.`;
 
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level0 space-y-6">
@@ -32,7 +32,9 @@ function AboutUs({ sx }: { sx: string }) {
             <p className="text-justify text-txt-secondary">{desc}</p>
           ) : (
             <div className="">
-              <p className={`inline text-justify text-txt-secondary`}>
+              <p
+                className={`inline text-justify text-txt-secondary whitespace-pre-line`}
+              >
                 {moreClicked
                   ? desc
                   : `${desc.slice(0, isMobile ? 150 : 350)}...`}

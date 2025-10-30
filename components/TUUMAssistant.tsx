@@ -7,17 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // components
 import ChatBox from "./ChatBox";
-import TUUMLanguageDetecter from "./modal/TUUMLanguageDetecter";
-
-// utils
-import { getLang } from "@/utilities/storeLanguage";
-// import TUUMNotification from "./TUUMNotification";
+import TUUMNotification from "./TUUMNotification";
 
 function TUUMAssistant() {
   const pathname = usePathname();
 
-  // const [close, setClose] = useState(false);
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
+  const [close, setClose] = useState(false);
   const [openChat, setOpenChat] = useState(false);
   const [thinking, setThinking] = useState(false);
   const [chatBoxHeight, setChatBoxHeight] = useState(window.innerHeight - 135);
@@ -127,11 +123,11 @@ function TUUMAssistant() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
 
-      {!getLang() && !pathname.includes("/checkout") && (
-        <TUUMLanguageDetecter open={open} onClose={() => setOpen(false)} />
-      )}
+        {!close && !pathname.includes("/checkout") && (
+          <TUUMNotification setClose={setClose} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
