@@ -37,7 +37,7 @@ function UserProfile() {
             <div className="space-y-0.5">
               <h4 className="body-large text-on_surface-light">{`${myData?.data.data.name} ${myData?.data.data.family}`}</h4>
               <h5 className="label-large text-txt-on-surface-secondary-light">
-                {`+${myData?.data.data.phone || "1 938 8838 383"}`}
+                {myData?.data.data.mobile ? myData?.data.data.mobile : null}
               </h5>
             </div>
           </div>
@@ -99,7 +99,7 @@ function UserProfile() {
           </div>
 
           {/* apply banner */}
-          <div className="relative overflow-hidden cursor-pointer rounded bg-shades-light-90 py-2 px-[13px] flex items-center justify-between gap-2.5">
+          {/* <div className="relative overflow-hidden cursor-pointer rounded bg-shades-light-90 py-2 px-[13px] flex items-center justify-between gap-2.5">
             <div className="space-y-1">
               <h5 className="label-medium text-on_surface-light">
                 Apply for growing faster
@@ -128,7 +128,7 @@ function UserProfile() {
                 }}
               />
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </div>
