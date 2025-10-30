@@ -26,13 +26,13 @@ function UserProfileSkeleton() {
       </div>
 
       {/* Apply banner skeleton */}
-      <div className="relative overflow-hidden rounded bg-shades-light-90 py-2 px-[13px] flex items-center justify-between gap-2.5">
+      {/* <div className="relative overflow-hidden rounded bg-shades-light-90 py-2 px-[13px] flex items-center justify-between gap-2.5">
         <div className="space-y-1">
           <Skeleton variant="text" width={180} height={20} />
           <Skeleton variant="text" width={220} height={16} />
         </div>
         <Skeleton variant="circular" width={20} height={20} />
-        {/* Background decorative elements skeleton */}
+        Background decorative elements skeleton
         <div>
           <Skeleton
             variant="rectangular"
@@ -59,7 +59,7 @@ function UserProfileSkeleton() {
             className="absolute top-0 left-0"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
