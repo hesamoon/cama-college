@@ -11,10 +11,10 @@ function ApplyBanner() {
           Apply for admissions
         </h2>
         <p className="mt-2 text-txt-on-surface-secondary-light mobile-body-large md:body-large text-justify">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas
-          purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris
-          rhoncus aenean vel elit scelerisque. In egestas erat
+          No matter your level, your experiences, who you are, where you are, or
+          when you have the time to start your journey, CAMA College is here for
+          you. We are an exclusive society of future-shapers, one that excludes
+          nobody!
         </p>
 
         <div className="py-10 md:pt-10 md:pb-20">
