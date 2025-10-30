@@ -123,9 +123,12 @@ function Page() {
               <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
                 Phone
               </h6>
-              <h4 className="mobile-body-large md:body-large text-on_surface-light">
+              <a
+                href="tel:+16477202949"
+                className="mobile-body-large md:body-large text-on_surface-light"
+              >
                 +1 647 720 2949
-              </h4>
+              </a>
 
               <div className="">
                 <h6 className="mobile-body-small md:body-small text-txt-on-surface-terriary-light">
