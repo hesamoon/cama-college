@@ -2,27 +2,22 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // components
 import Button from "./Button";
 
-const desc0 = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu
-                    cursus vitae congue mauris rhoncus aenean vel elit
-                    scelerisque. In egestas consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu
-                    cursus vitae congue mauris rhoncus aenean vel elit
-                    scelerisque. In egestas consectetur adipiscing elit, sed`;
-const desc1 = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu
-                    cursus vitae congue mauris rhoncus aenean vel elit
-                    scelerisque. In egestas consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt`;
-function ContentSection() {
+// types
+import { Subject } from "@/app/types/types";
+
+function ContentSection({
+  programDtl,
+  subjects,
+}: {
+  programDtl: { name: string; id: string };
+  subjects: Subject[];
+}) {
+  console.log(subjects);
   return (
     <div id="Content" className="space-y-4 pt-10">
       <div className="space-y-2">
@@ -42,24 +37,23 @@ function ContentSection() {
         </div>
 
         {/* subjects */}
-        <div className="md:hidden border border-outline-level1 rounded p-5 space-y-3">
-          <h3 className="mobile-title-medium md:title-medium text-on_surface-light">
-            Subjects
-          </h3>
+        {subjects.length > 0 && (
+          <div className=" border border-outline-level1 rounded p-5 space-y-3">
+            <h3 className="mobile-title-medium md:title-medium text-on_surface-light">
+              Subjects
+            </h3>
 
-          <div className="space-y-4">
-            {[
-              { id: 1, desc: desc0 },
-              { id: 2, desc: desc1 },
-            ].map((subject) => (
-              <SubjectBlock
-                key={subject.id}
-                id={subject.id}
-                desc={subject.desc}
-              />
-            ))}
+            <div className="space-y-4">
+              {subjects.map((subject) => (
+                <SubjectBlock
+                  key={subject.id}
+                  programDtl={programDtl}
+                  subject={subject}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Instructor */}
@@ -94,12 +88,16 @@ function ContentSection() {
 
       {/* credential */}
       <div className="border border-outline-level1 rounded space-y-3 p-4 md:p-6">
-        <h3 className="mobile-title-medium md:title-medium text-on_surface-light">Instructor</h3>
+        <h3 className="mobile-title-medium md:title-medium text-on_surface-light">
+          Instructor
+        </h3>
 
         <div className="space-y-2">
           <h3 className="mobile-body-medium md:body-medium text-on_surface-light space-x-1.5">
             <span>Name</span>
-            <span className="mobile-label-medium-db md:label-medium-db">Education</span>
+            <span className="mobile-label-medium-db md:label-medium-db">
+              Education
+            </span>
           </h3>
 
           <p className="mobile-body-medium md:body-medium text-txt-on-surface-secondary-light text-justify">
@@ -115,24 +113,44 @@ function ContentSection() {
 
 export default ContentSection;
 
-const SubjectBlock = ({ id, desc }: { id: number; desc: string }) => {
+const SubjectBlock = ({
+  programDtl,
+  subject,
+}: {
+  programDtl: { name: string; id: string };
+  subject: Subject;
+}) => {
+  const router = useRouter();
+
   const [moreClicked, setMoreClicked] = useState(false);
 
+  const desc = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu
+                    cursus vitae congue mauris rhoncus aenean vel elit
+                    scelerisque. In egestas consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu
+                    cursus vitae congue mauris rhoncus aenean vel elit
+                    scelerisque. In egestas consectetur adipiscing elit, sed`;
+
   return (
-    <div key={id} className="space-y-1">
+    <div key={subject.id} className="space-y-1">
       <div className="space-y-2">
         <h4 className="mobile-title-small md:title-small text-on_surface-light">
-          Subject {id}
+          {subject.name}
         </h4>
 
+        {/* lessons */}
         <div className="flex items-center gap-2">
-          {[1, 2, 3].map((item) => (
-            <div key={item} className="flex items-center gap-1">
+          {subject.lessons.map((lesson, index) => (
+            <div key={lesson?.id} className="flex items-center gap-1">
               <Image src="/book-grey.svg" alt="book" width={16} height={16} />
               <span className="mobile-label-small md:label-small text-txt-on-surface-terriary-light">
-                Lorem ipsum
+                {lesson?.title}
               </span>
-              {item !== 3 && (
+              {index < subject.lessons.length - 1 && (
                 <div className="w-1 h-1 rounded-full bg-[#D9D9D9]" />
               )}
             </div>
@@ -146,7 +164,8 @@ const SubjectBlock = ({ id, desc }: { id: number; desc: string }) => {
         ) : (
           <div className="">
             <p
-              className={`inline mobile-body-medium md:body-medium text-txt-on-surface-secondary-light text-justify`}
+              className={`inline mobile-body-medium md:body-medium text-txt-on-surface-secondary-light text-justify cursor-pointer`}
+              onClick={() => setMoreClicked((prev) => !prev)}
             >
               {moreClicked ? desc : `${desc.slice(0, 523)}...`}
             </p>
@@ -180,6 +199,10 @@ const SubjectBlock = ({ id, desc }: { id: number; desc: string }) => {
           height: 20,
           size: "body-small md:body-medium",
           padding: "py-1 px-3",
+          clickHandler: () =>
+            router.push(
+              `/programs/in-progress/?program=${programDtl.name}&courseId=${programDtl.id}`
+            ),
         }}
       />
     </div>
