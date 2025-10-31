@@ -11,7 +11,8 @@ import StaticMap from "./StaticMap";
 function Footer() {
   const pathname = usePathname();
 
-  if (pathname.includes("/checkout")) return;
+  if (pathname.includes("/checkout") || pathname.includes("/in-progress"))
+    return;
 
   return (
     <footer className="bg-shades-light-90">
