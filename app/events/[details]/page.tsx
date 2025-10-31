@@ -111,6 +111,8 @@ function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  console.log(eventDetails);
+
   return (
     <motion.div
       key="event-details"
@@ -347,6 +349,7 @@ function Page() {
                   prerequisites={eventDetails?.prerequisites || []}
                   audience={eventDetails?.audience || []}
                   what_you_learn={eventDetails?.what_you_learn || []}
+                  presentation_type={eventDetails?.presentation_type}
                   type="event"
                 />
 
@@ -367,6 +370,21 @@ function Page() {
                       1220 Students enrolled
                     </span>
                   </div>
+
+                  {!!eventDetails?.tuum_bonus && (
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src="/tuum/tuum-coin.svg"
+                        alt="coin"
+                        width={20}
+                        height={20}
+                      />
+
+                      <h3 className="text-[#FFCC00] label-medium-db">
+                        +{eventDetails.tuum_bonus} Coin by enroll Event
+                      </h3>
+                    </div>
+                  )}
 
                   {/* button */}
                   <div className="">
@@ -506,6 +524,21 @@ function Page() {
                       1220 Students enrolled
                     </span>
                   </div>
+
+                  {!!eventDetails?.tuum_bonus && (
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src="/tuum/tuum-coin.svg"
+                        alt="coin"
+                        width={20}
+                        height={20}
+                      />
+
+                      <h3 className="text-[#FFCC00] label-medium-db">
+                        +{eventDetails.tuum_bonus} Coin by enroll Event
+                      </h3>
+                    </div>
+                  )}
 
                   {/* button */}
                   <div className="">
