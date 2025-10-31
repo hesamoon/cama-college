@@ -83,6 +83,7 @@ function ExamPreview() {
 export default ExamPreview;
 
 const Questions = () => {
+  const [currentQuesNumber, setCurrentQuesNumber] = useState(0);
   const [userAnswer, setUserAnswer] = useState<
     {
       id: string;
@@ -91,71 +92,112 @@ const Questions = () => {
     }[]
   >([]);
 
-  const endExamClickHandler = () => {
+  const submitQuestionsClickHandler = () => {
     console.log(userAnswer);
   };
 
   return (
-    <div className="relative h-full w-full overflow-auto no-scrollbar">
-      <div className="border-b border-outline-level0 py-3 px-4 flex items-center justify-between">
-        <div className="flex items-center gap-1">
-          <h5 className="text-on_surface-light mobile-label-large-db md:label-large-db">
-            {exam.time}
-          </h5>
-          <span className="text-txt-on-surface-terriary-light mobile-label-small md:label-small">
-            to finish exam
-          </span>
-        </div>
-
-        <div>
-          <h5 className="text-txt-on-surface-secondary-light mobile-label-large-db md:label-large-db">
-            {userAnswer.length}/ {exam.num} Answered
-          </h5>
-        </div>
-      </div>
-
+    <div className="h-screen relative w-full flex flex-col justify-between">
+      {/* top */}
       <div>
-        <div className="mobile-grid-system-level0 !px-0 md:!px-16 md:grid-system-level0 md:py-10 w-full flex flex-col items-center !gap-4">
-          {exam.questions
-            .sort((a, b) => a.numOfQues - b.numOfQues)
-            .map((q) => (
-              <Question key={q.id} q={q} setCurrentAnswer={setUserAnswer} />
-            ))}
+        {/* header */}
+        <div className="border-b border-outline-level0 py-3 px-8 flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <h5 className="text-on_surface-light mobile-label-large-db md:label-large-db">
+              {exam.time}
+            </h5>
+            <span className="text-txt-on-surface-terriary-light mobile-label-small md:label-small">
+              to finish exam
+            </span>
+          </div>
+
+          <div>
+            <h5 className="text-txt-on-surface-secondary-light mobile-label-large-db md:label-large-db">
+              {userAnswer.length}/ {exam.num} Answered
+            </h5>
+          </div>
         </div>
 
-        <div className="pr-16 pb-5 flex items-center justify-end">
-          <Button
-            props={{
-              value: "End exam",
-              disabled: false,
-              leftIcon: "",
-              rightIcon: "",
-              type: "filled",
-              color: "red",
-              padding: "px-8 py-3 gap-2",
-              width: 24,
-              height: 24,
-              clickHandler: endExamClickHandler,
-            }}
+        {/* body -> question */}
+        <div className="py-3 px-8">
+          <Question
+            key={exam.questions[currentQuesNumber].id}
+            q={exam.questions[currentQuesNumber]}
+            currentAnswer={userAnswer}
+            setCurrentAnswer={setUserAnswer}
           />
         </div>
       </div>
 
-      <div className="fixed top-1/2 right-8 -translate-y-1/2 z-50 flex flex-col items-center gap-2">
-        {exam.questions.map((q) => {
-          const answered = userAnswer.some((ua) => ua.id === q.id);
-
-          return (
-            <div
-              key={q.id}
-              className={
-                answered
-                  ? "w-1 h-1 rounded-full bg-[#34C759]"
-                  : "w-1.5 h-0.5 rounded-full bg-[#FF383C]"
+      {/* footer */}
+      <div className="border-t border-outline-level0 py-3 px-8 flex items-center justify-between">
+        <Button
+          props={{
+            value: "Prev",
+            disabled: currentQuesNumber === 0,
+            leftIcon: "arrow-left",
+            rightIcon: "",
+            type: "outlined",
+            color: "red",
+            padding: "px-4 py-2 gap-2",
+            width: 24,
+            height: 24,
+            clickHandler: () => {
+              if (currentQuesNumber !== 0) {
+                setCurrentQuesNumber((prev) => prev - 1);
               }
-            />
-          );
-        })}
+            },
+          }}
+        />
+
+        {/* visual answered and unansweres ques */}
+        <div className="flex items-center gap-2">
+          {exam.questions.map((q, index) => {
+            const answered = userAnswer.some((ua) => ua.id === q.id);
+
+            return (
+              <div
+                key={q.id}
+                className={`transition-all ease-in-out duration-300 ${
+                  index > currentQuesNumber && !answered
+                    ? "w-0.5 h-2.5 rounded-full bg-[#AEACAD]"
+                    : currentQuesNumber === index
+                    ? "w-2 h-2 rounded-full bg-[#0088FF]"
+                    : answered
+                    ? "w-2 h-2 rounded-full bg-[#34C759]"
+                    : "w-0.5 h-2.5 rounded-full bg-[#FF383C]"
+                }`}
+              />
+            );
+          })}
+        </div>
+
+        <Button
+          props={{
+            value:
+              exam.questions.length - 1 === currentQuesNumber
+                ? "Submit Questions"
+                : "Next",
+            disabled: false,
+            leftIcon: "",
+            rightIcon:
+              exam.questions.length - 1 === currentQuesNumber
+                ? ""
+                : "arrow-right-white",
+            type: "filled",
+            color: "red",
+            padding: "px-4 py-2 gap-2",
+            width: 24,
+            height: 24,
+            clickHandler: () => {
+              if (exam.questions.length - 1 === currentQuesNumber) {
+                submitQuestionsClickHandler();
+              } else {
+                setCurrentQuesNumber((prev) => prev + 1);
+              }
+            },
+          }}
+        />
       </div>
     </div>
   );
@@ -163,6 +205,7 @@ const Questions = () => {
 
 const Question = ({
   q,
+  currentAnswer,
   setCurrentAnswer,
 }: {
   q: {
@@ -175,6 +218,11 @@ const Question = ({
       option: string;
     }[];
   };
+  currentAnswer: {
+    id: string;
+    numOfQues: number;
+    ans: string;
+  }[];
   setCurrentAnswer: Dispatch<
     SetStateAction<
       {
@@ -185,8 +233,9 @@ const Question = ({
     >
   >;
 }) => {
-  const [answer, setAnswer] = useState("");
-  const [selected, setSelected] = useState("");
+  const initialAns = currentAnswer.find((ua) => ua.id === q.id)?.ans || "";
+  const [answer, setAnswer] = useState(q.type === "test" ? "" : initialAns);
+  const [selected, setSelected] = useState(q.type === "test" ? initialAns : "");
   const [radioGroupWidth, setRadioGroupWidth] = useState<number>(100);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -233,8 +282,20 @@ const Question = ({
     });
   }, [selected, answer, q, setCurrentAnswer]);
 
+  // Keep local state in sync if currentAnswer updates for the same question
+  useEffect(() => {
+    const ans = currentAnswer.find((ua) => ua.id === q.id)?.ans || "";
+    if (q.type === "test") {
+      setSelected(ans);
+      setAnswer("");
+    } else {
+      setAnswer(ans);
+      setSelected("");
+    }
+  }, [q.id, q.type, currentAnswer]);
+
   return (
-    <div className="border border-outline-level0 rounded py-3 px-3.5 space-y-3 w-full">
+    <div className="space-y-3 w-full">
       <div className="space-y-1">
         <h6 className="text-txt-on-surface-terriary-light mobile-label-medium-db md:label-medium-db">
           Question {q.numOfQues}
