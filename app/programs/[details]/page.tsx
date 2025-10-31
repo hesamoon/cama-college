@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -105,7 +104,7 @@ function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  console.log(programDetails)
+  console.log(programDetails);
 
   return (
     <motion.div
@@ -338,11 +337,18 @@ function Page() {
                   prerequisites={programDetails?.prerequisites}
                   audience={programDetails?.audience}
                   what_you_learn={programDetails?.what_you_learn}
+                  presentation_type={programDetails?.presentation_type}
                   type="program"
                 />
 
                 {/* content */}
-                <ContentSection />
+                <ContentSection
+                  programDtl={{
+                    name: programDetails?.name,
+                    id: programDetails?.id,
+                  }}
+                  subjects={programDetails?.subjects}
+                />
               </div>
 
               <div className="md:hidden border-t border-t-outline-level0 pt-2">
@@ -488,6 +494,21 @@ function Page() {
                       1220 Students enrolled
                     </span>
                   </div>
+
+                  {!!programDetails?.tuum_bonus && (
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src="/tuum/tuum-coin.svg"
+                        alt="coin"
+                        width={20}
+                        height={20}
+                      />
+
+                      <h3 className="text-[#FFCC00] label-medium-db">
+                        +{programDetails.tuum_bonus} Coin by enroll Program
+                      </h3>
+                    </div>
+                  )}
 
                   {/* button */}
                   <div className="flex items-center gap-2">
