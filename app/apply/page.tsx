@@ -2,6 +2,8 @@
 import ApplyScreen from "@/components/ApplyScreen";
 import BluredImage from "@/components/BluredImage";
 import LoginButtons from "@/components/LoginButtons";
+
+// utils
 import { userAttr } from "@/utilities/serverUserAttr";
 
 function page() {
