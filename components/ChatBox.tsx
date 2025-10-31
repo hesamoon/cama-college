@@ -732,7 +732,7 @@ function ChatBox({
                   color: "red",
                   width: 20,
                   height: 20,
-                  size: "mobile-body-large md:body-large",
+                  size: "mobile-body-large md:body-large bg-gradient-to-b from-[#F78B5D] to-[#CE6312]",
                   padding: "p-2.5",
                   clickHandler: () => {
                     if (setLoading) {
