@@ -255,6 +255,19 @@ const Question = ({
     return () => window.removeEventListener("resize", measureWidth);
   }, []);
 
+  // Sync local state from currentAnswer only when question changes
+  useEffect(() => {
+    const ans = currentAnswer.find((ua) => ua.id === q.id)?.ans || "";
+    if (q.type === "test") {
+      setSelected(ans);
+      setAnswer("");
+    } else {
+      setAnswer(ans);
+      setSelected("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q.id, q.type]);
+
   useEffect(() => {
     const ansValue = q.type === "test" ? selected : answer;
 
@@ -280,19 +293,8 @@ const Question = ({
       }
       return [...prev, { id: q.id, numOfQues: q.numOfQues, ans: ansValue }];
     });
-  }, [selected, answer, q, setCurrentAnswer]);
-
-  // Keep local state in sync if currentAnswer updates for the same question
-  useEffect(() => {
-    const ans = currentAnswer.find((ua) => ua.id === q.id)?.ans || "";
-    if (q.type === "test") {
-      setSelected(ans);
-      setAnswer("");
-    } else {
-      setAnswer(ans);
-      setSelected("");
-    }
-  }, [q.id, q.type, currentAnswer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, answer, q.id, q.numOfQues]);
 
   return (
     <div className="space-y-3 w-full">
