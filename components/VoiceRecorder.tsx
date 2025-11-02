@@ -54,8 +54,7 @@ export default function VoiceRecorder({
     analyserRef.current = analyser;
 
     const bufferLength = analyser.frequencyBinCount;
-    const arrayBuffer = new ArrayBuffer(bufferLength);
-    const dataArray = new Uint8Array(arrayBuffer);
+    const dataArray = new Uint8Array(bufferLength);
     dataRef.current = dataArray;
     source.connect(analyser);
 
@@ -63,9 +62,7 @@ export default function VoiceRecorder({
     const animate = () => {
       if (!analyserRef.current || !dataRef.current) return;
 
-      // @ts-expect-error - TypeScript's Web Audio API types are overly strict about ArrayBuffer vs ArrayBufferLike
-      // In practice, getByteFrequencyData works correctly with any Uint8Array instance
-      analyserRef.current.getByteFrequencyData(dataRef.current);
+      analyserRef.current.getByteFrequencyData(dataRef.current as unknown as Uint8Array<ArrayBuffer>);
 
       const volume =
         dataRef.current.reduce((a, b) => a + b, 0) / dataRef.current.length;
