@@ -18,6 +18,7 @@ import { ChatHistory, ChatMessage } from "@/app/types/types";
 
 // api
 import { question, summarize } from "@/lib/api/ai";
+import VoiceRecorder from "./VoiceRecorder";
 
 // Fake data
 const history: ChatHistory[] = [
@@ -240,6 +241,7 @@ function ChatBox({
     res: string;
     action: string;
   } | null>(null);
+  const [showVoiceOverlay, setShowVoiceOverlay] = useState(false);
 
   // POST
   const { mutate: summerrizeMutation, isPending: isSummarizing } = useMutation({
@@ -366,7 +368,14 @@ function ChatBox({
   }, []);
 
   return (
-    <>
+    <div className="relative flex flex-col h-full">
+      {/* Voice Overlay */}
+      <AnimatePresence>
+        {showVoiceOverlay && (
+          <VoiceRecorder setShowVoiceOverlay={setShowVoiceOverlay} />
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       {!onlyChatting && (
         <div className="py-2 px-3 border-b border-outline-level0 flex items-center gap-3">
@@ -521,6 +530,8 @@ function ChatBox({
             </div>
           )}
         </div>
+
+        {/* <VoiceRecorder /> */}
       </div>
 
       {/* footer */}
@@ -676,7 +687,7 @@ function ChatBox({
             )}
 
             <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-2 w-full">
+              <div className="flex items-center gap-2 flex-1">
                 {/* Hidden File Input */}
                 <input
                   ref={fileInputRef}
@@ -722,27 +733,44 @@ function ChatBox({
                 />
               </div>
 
-              <Button
-                props={{
-                  value: "",
-                  leftIcon: "send",
-                  rightIcon: "",
-                  type: "filled",
-                  disabled: isResponding,
-                  color: "red",
-                  width: 20,
-                  height: 20,
-                  size: "mobile-body-large md:body-large bg-gradient-to-b from-[#F78B5D] to-[#CE6312]",
-                  padding: "p-2.5",
-                  clickHandler: () => {
-                    if (setLoading) {
-                      setLoading(true);
-                    }
+              <div className="flex items-center gap-2">
+                <Button
+                  props={{
+                    value: "",
+                    leftIcon: "voice-cricle",
+                    rightIcon: "",
+                    type: "filled",
+                    disabled: false,
+                    color: "red",
+                    width: 20,
+                    height: 20,
+                    size: "mobile-body-large md:body-large bg-gradient-to-b from-[#F78B5D] to-[#CE6312]",
+                    padding: "p-2.5",
+                    clickHandler: () => setShowVoiceOverlay(true),
+                  }}
+                />
+                <Button
+                  props={{
+                    value: "",
+                    leftIcon: "send",
+                    rightIcon: "",
+                    type: "filled",
+                    disabled: !!!promptValue || isResponding,
+                    color: "red",
+                    width: 20,
+                    height: 20,
+                    size: "mobile-body-large md:body-large bg-gradient-to-b from-[#F78B5D] to-[#CE6312]",
+                    padding: "p-2.5",
+                    clickHandler: () => {
+                      if (setLoading) {
+                        setLoading(true);
+                      }
 
-                    questionMutation(promptValue);
-                  },
-                }}
-              />
+                      questionMutation(promptValue);
+                    },
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -751,7 +779,7 @@ function ChatBox({
           Responses from AI
         </h6>
       </footer>
-    </>
+    </div>
   );
 }
 
