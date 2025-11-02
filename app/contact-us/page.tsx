@@ -35,10 +35,36 @@ function Page() {
     }
   };
 
-  const submitClickHandler = () =>
-    console.log(
-      `fullName: ${fullName}\nemail: ${email}\ndepartment: ${department}\nquestion: ${question}`
-    );
+  const submitClickHandler = () => {
+    // department: "Education" -> email: "gradadmissions@camacollege.ca"
+    // department: "Student registration" -> email: "collegeadmissions@camacollege.ca"
+    // department: "Teacher registration" -> email: "collegeadmissions@camacollege.ca"
+    // department: "Recruitment" -> email: "infocenter@camacollege.ca"
+    // department: "Website support" -> email: "infocenter@camacollege.ca"
+    if (department === "Education") {
+      console.log(
+        `fullName: ${fullName}\nemail: ${email}\ndepartment: ${department}\nemail: gradadmissions@camacollege.ca\nquestion: ${question}`
+      );
+    } else if (
+      department === "Student registration" ||
+      department === "Teacher registration"
+    ) {
+      console.log(
+        `fullName: ${fullName}\nemail: ${email}\ndepartment: ${department}\nemail: collegeadmissions@camacollege.ca\nquestion: ${question}`
+      );
+    } else if (
+      department === "Recruitment" ||
+      department === "Website support"
+    ) {
+      console.log(
+        `fullName: ${fullName}\nemail: ${email}\ndepartment: ${department}\nemail: infocenter@camacollege.ca\nquestion: ${question}`
+      );
+    } else {
+      console.log(
+        `fullName: ${fullName}\nemail: ${email}\ndepartment: ${department}\nemail: none\nquestion: ${question}`
+      );
+    }
+  };
 
   return (
     <div className="mobile-grid-system-level0 md:grid-system-level1 space-y-12 py-5 md:py-10">
@@ -174,36 +200,15 @@ function Page() {
               </svg>
             </div>
 
-            <div className="space-y-2">
-              <div>
-                <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
-                  Admissions & Aid
-                </h6>
-                <h4 className="mobile-body-large md:body-large text-on_surface-light">
-                  <a
-                    href="mailto:collegeadmissions@camacollege.ca"
-                    className=""
-                  >
-                    collegeadmissions@camacollege.ca
-                  </a>
-                </h4>
-                <h4 className="mobile-body-large md:body-large text-on_surface-light">
-                  <a href="mailto:gradadmissions@camacollege.ca" className="">
-                    gradadmissions@camacollege.ca
-                  </a>
-                </h4>
-              </div>
-
-              <div>
-                <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
-                  Visitor Information & Employment
-                </h6>
-                <h4 className="mobile-body-large md:body-large text-on_surface-light">
-                  <a href="mailto:infocenter@camacollege.ca" className="">
-                    infocenter@camacollege.ca
-                  </a>
-                </h4>
-              </div>
+            <div className="space-y-1">
+              <h6 className="mobile-label-large md:label-large text-txt-on-surface-terriary-light">
+                Mail
+              </h6>
+              <h4 className="mobile-body-large md:body-large text-on_surface-light">
+                <a href="mailto:contact@camacollege.ca" className="">
+                  contact@camacollege.ca
+                </a>
+              </h4>
             </div>
           </div>
         </div>
@@ -275,7 +280,7 @@ function Page() {
                     <MenuItem value="Teacher registration">
                       Teacher registration
                     </MenuItem>
-                    <MenuItem value="Teacher registration">
+                    <MenuItem value="Recruitment">
                       Recruitment
                     </MenuItem>
                     <MenuItem value="Website support">Website support</MenuItem>
