@@ -1,15 +1,14 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
+import { Skeleton } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 // api
 import { getMe } from "@/lib/api/auth";
 
 // components
 import Button from "./Button";
 import BluredImage from "./BluredImage";
-import { Skeleton } from "@mui/material";
-import { userAttr } from "@/utilities/userAttr";
 
 function ProfilePicture() {
   const { data: myData, isLoading: isLoadingMe } = useQuery({
@@ -17,8 +16,7 @@ function ProfilePicture() {
     queryFn: () => getMe(),
   });
 
-  console.log(myData)
-  console.log(userAttr())
+  console.log(myData);
 
   const [image, setImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);

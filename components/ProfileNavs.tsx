@@ -17,11 +17,11 @@ function ProfileNavs() {
   const pathname = usePathname();
   const router = useRouter();
   const [activeNav, setActiveNav] = useState(
-    navs.find((nav) => nav.path === pathname)?.id
+    navs.find((nav) => pathname.includes(nav.path))?.id
   );
 
   useEffect(() => {
-    setActiveNav(navs.find((nav) => nav.path === pathname)?.id);
+    setActiveNav(navs.find((nav) => pathname.includes(nav.path))?.id);
   }, [pathname]);
 
   return (

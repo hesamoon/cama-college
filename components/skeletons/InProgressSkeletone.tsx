@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 
 function InProgressSkeletone() {
   return (
-    <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9 py-5">
+    <div className="mobile-grid-system-level0 md:grid-system-level0 w-full space-y-9 py-0">
       {/* Schedule Section */}
       <div className="space-y-4">
         <Skeleton variant="text" width={180} height={32} />
